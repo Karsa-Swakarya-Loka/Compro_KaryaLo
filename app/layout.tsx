@@ -5,6 +5,7 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
+import Analytics from "@/components/analytics/Analytics";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { siteConfig } from "@/config/site";
 import { buildMetadata, routeSeo } from "@/lib/seo";
@@ -92,6 +93,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col bg-porcelain text-midnight">
         <JsonLd data={[organizationSchema, websiteSchema]} />
+        <Analytics />
         <SmoothScrollProvider>
           <a href="#main-content" className="skip-link">Langsung ke konten</a>
           <Navbar />

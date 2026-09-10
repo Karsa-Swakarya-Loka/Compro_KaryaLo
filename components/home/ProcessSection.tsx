@@ -131,32 +131,32 @@ export default function ProcessSection() {
                 <div
                   className={`process-card group h-full rounded-3xl p-7 border flex flex-col justify-between space-y-6 ${
                     idx === 4
-                      ? "bg-mist/25 border-mist shadow-sm hover:shadow-xl hover:shadow-midnight/5"
-                      : "bg-white border-slate-200/90 hover:border-accent/30 hover:shadow-xl hover:shadow-midnight/5"
+                      ? "bg-mist/25 border-mist shadow-sm hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25"
+                      : "bg-white border-slate-200/90 hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25"
                   }`}
                 >
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between border-b border-slate-200/60 pb-3">
-                      <span className="process-number font-headline text-3xl font-bold text-accent">
+                    <div className="flex items-center justify-between border-b border-slate-200/60 pb-3 transition-colors duration-[400ms] group-hover:border-white/20">
+                      <span className="process-number font-headline text-3xl font-bold text-accent transition-colors duration-[400ms] group-hover:text-white">
                         {step.step}
                       </span>
-                      <span className="font-meta text-[11px] font-bold uppercase tracking-wider text-slate-600 transition-colors duration-300 group-hover:text-accent">
+                      <span className="font-meta text-[11px] font-bold uppercase tracking-wider text-slate-600 transition-colors duration-[400ms] group-hover:text-mist">
                         Tahap
                       </span>
                     </div>
 
-                    <h3 className="font-story text-lg md:text-xl font-bold text-midnight leading-snug">
+                    <h3 className="font-story text-lg md:text-xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover:text-white">
                       {step.title}
                     </h3>
 
-                    <p className="font-story text-slate-600 text-sm leading-relaxed">
+                    <p className="font-story text-slate-600 text-sm leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                       {step.description}
                     </p>
                   </div>
 
                   {/* Deliverables Box */}
-                  <div className="pt-4 border-t border-slate-200/60 space-y-2">
-                    <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
+                  <div className="pt-4 border-t border-slate-200/60 space-y-2 transition-colors duration-[400ms] group-hover:border-white/20">
+                    <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block transition-colors duration-[400ms] group-hover:text-white/90">
                       Yang Anda terima:
                     </span>
                     <div className="space-y-1.5">
@@ -164,9 +164,9 @@ export default function ProcessSection() {
                         <div
                           key={i}
                           style={{ "--i": i } as CSSProperties}
-                          className="process-item flex items-start gap-2 text-xs font-story text-slate-700"
+                          className="process-item flex items-start gap-2 text-xs font-story text-slate-700 transition-colors duration-[400ms] group-hover:text-white/90"
                         >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5 transition-colors duration-[400ms] group-hover:text-mist" />
                           <span>{item}</span>
                         </div>
                       ))}

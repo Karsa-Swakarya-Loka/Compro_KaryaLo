@@ -1,3 +1,18 @@
+/**
+ * One phone number, written once.
+ * `wa.me` needs bare international digits — no "+", no spaces, no leading zero —
+ * while the page displays the readable form, so the two used to be typed out
+ * separately and drifted apart (both sat on a placeholder). Deriving the link
+ * from the displayed number makes disagreeing impossible.
+ *
+ * Keep this in +62 international form. A local "08..." would derive a wa.me
+ * number that silently fails to resolve.
+ */
+const phone = "+62 899-7475-888";
+const whatsappNumber = phone.replace(/[^0-9]/g, "");
+const defaultWhatsappMessage =
+  "Halo Tim KaryaLo, saya ingin berdiskusi soal kebutuhan software, desain, atau perangkat IoT untuk perusahaan kami.";
+
 export const siteConfig = {
   /** Canonical production origin. Used for metadataBase, sitemap, robots and JSON-LD @id. */
   url: "https://karyalo.id",
@@ -11,8 +26,8 @@ export const siteConfig = {
   address: "Jl. Al-Falah II, Jatiranggon, Kec. Jatisampurna, Kota Bekasi, Jawa Barat 17432",
   mapsUrl: "https://maps.app.goo.gl/3YrD56ctLmne1fGR8",
   email: "support@karyalo.com",
-  phone: "+62 812-3456-7890",
-  whatsappUrl: "https://wa.me/6281234567890?text=Halo%20Tim%20KaryaLo,%20saya%20ingin%20berdiskusi%20soal%20kebutuhan%20software,%20desain,%20atau%20perangkat%20IoT%20untuk%20perusahaan%20kami.",
+  phone,
+  whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultWhatsappMessage)}`,
   workingHours: "Senin – Jumat: 09.00 – 18.00 WIB | Sabtu & Minggu: dengan janji temu",
   /**
    * Public profiles that independently corroborate this entity, used for schema `sameAs`.

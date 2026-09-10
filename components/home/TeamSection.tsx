@@ -84,51 +84,51 @@ export default function TeamSection() {
           <RevealGroup className="lg:col-span-5 space-y-4" stagger={0.12} delayChildren={0.15}>
 
             <RevealItem direction="right">
-              <SpotlightCard className="p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2">
+              <SpotlightCard className="group/card p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2 hover:bg-midnight hover:border-mist/40 hover:shadow-xl hover:shadow-midnight/30 hover:-translate-y-1 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-accent/30 border border-accent/40 flex items-center justify-center text-porcelain">
+                  <div className="w-10 h-10 rounded-xl bg-accent/30 border border-accent/40 flex items-center justify-center text-porcelain transition-[background-color,border-color,color,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:bg-white/15 group-hover/card:border-white/30 group-hover/card:text-white group-hover/card:scale-110">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-story text-lg font-bold text-white">Dikerjakan Tim Sendiri</h3>
-                    <span className="font-meta text-[11px] text-midnight-muted uppercase">Tanpa dioper ke pihak lain</span>
+                    <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">Tanpa dioper ke pihak lain</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1">
+                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kode, rancangan sistem, dan desainnya dikerjakan tim internal kami. Isi repositorinya bisa Anda lihat kapan saja.
                 </p>
               </SpotlightCard>
             </RevealItem>
 
             <RevealItem direction="right">
-              <SpotlightCard className="p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2">
+              <SpotlightCard className="group/card p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2 hover:bg-midnight hover:border-mist/40 hover:shadow-xl hover:shadow-midnight/30 hover:-translate-y-1 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-mist/20 border border-mist/40 flex items-center justify-center text-mist">
+                  <div className="w-10 h-10 rounded-xl bg-mist/20 border border-mist/40 flex items-center justify-center text-mist transition-[background-color,border-color,color,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:bg-white/15 group-hover/card:border-white/30 group-hover/card:text-white group-hover/card:scale-110">
                     <Cpu className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-story text-lg font-bold text-white">Ada Bengkel Perangkatnya</h3>
-                    <span className="font-meta text-[11px] text-midnight-muted uppercase">Meja uji coba di studio</span>
+                    <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">Meja uji coba di studio</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1">
+                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kami punya meja kerja untuk merakit dan menguji alat, mulai dari pemasangan sensor sampai uji coba langsung di lokasi.
                 </p>
               </SpotlightCard>
             </RevealItem>
 
             <RevealItem direction="right">
-              <SpotlightCard className="p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2">
+              <SpotlightCard className="group/card p-6 rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 text-white space-y-2 hover:bg-midnight hover:border-mist/40 hover:shadow-xl hover:shadow-midnight/30 hover:-translate-y-1 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-matte0/20 border border-mist/40 flex items-center justify-center text-mist">
+                  <div className="w-10 h-10 rounded-xl bg-matte0/20 border border-mist/40 flex items-center justify-center text-mist transition-[background-color,border-color,color,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:bg-white/15 group-hover/card:border-white/30 group-hover/card:text-white group-hover/card:scale-110">
                     <Layers className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-story text-lg font-bold text-white">Berbadan Hukum Jelas</h3>
-                    <span className="font-meta text-[11px] text-midnight-muted uppercase">NIB: {siteConfig.nib}</span>
+                    <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">NIB: {siteConfig.nib}</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1">
+                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kerja sama berjalan di bawah PT yang terdaftar resmi, lengkap dengan serah terima hak cipta dan Faktur Pajak.
                 </p>
               </SpotlightCard>

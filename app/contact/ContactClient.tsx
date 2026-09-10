@@ -8,6 +8,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import { EASE_EXPO } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem, revealVariants } from "@/components/motion/Reveal";
+import { trackConversion } from "@/lib/analytics";
 
 /*
   The channels card enters from the right and cascades its three rows. The rows
@@ -70,6 +71,13 @@ export default function ContactClient() {
       }
     }
     const text = `Halo Tim KaryaLo,\n\nNama: ${formData.name.trim()}\nPerusahaan: ${formData.company.trim() || "-"}\nLayanan yang dibutuhkan: ${formData.service}\nPerkiraan anggaran: ${formData.budget}\n\nKebutuhan kami:\n${formData.description.trim()}`;
+    /*
+      The form cleared validation — that is the conversion. Only the fact is
+      reported: no name, company, budget or brief ever leaves the page, because
+      whatever consumes dataLayer later is a third-party processor.
+    */
+    trackConversion("lead_form_submit", { page: "/contact", location: "contact-form" });
+
     setIsPreparing(true);
     prepareTimer.current = window.setTimeout(() => {
       setPreparedMessage(text);
@@ -315,16 +323,16 @@ export default function ContactClient() {
                     href={siteConfig.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 hover:border-accent/40 hover:-translate-y-0.5 transition-[border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-sm group"
+                    className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 shadow-sm group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-matte text-midnight flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-matte text-midnight flex items-center justify-center shrink-0 transition-[background-color,color,scale] duration-[400ms] group-hover:bg-white/15 group-hover:text-mist group-hover:scale-110">
                       <MessageSquare className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="font-meta text-xs font-bold text-midnight block group-hover:text-accent transition-colors">
+                      <span className="font-meta text-xs font-bold text-midnight block group-hover:text-white transition-colors duration-[400ms]">
                         WhatsApp Bisnis Resmi
                       </span>
-                      <span className="text-xs text-slate-600">Kanal paling cepat dibalas</span>
+                      <span className="text-xs text-slate-600 transition-colors duration-[400ms] group-hover:text-porcelain/80">Kanal paling cepat dibalas</span>
                     </div>
                   </a>
                 </motion.div>
@@ -332,51 +340,51 @@ export default function ContactClient() {
                 <motion.div variants={channelItemVariants}>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 hover:border-accent/40 hover:-translate-y-0.5 transition-[border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-sm group"
+                    className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 shadow-sm group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0 transition-[background-color,color,scale] duration-[400ms] group-hover:bg-white/15 group-hover:text-mist group-hover:scale-110">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className="font-meta text-xs font-bold text-midnight block group-hover:text-accent transition-colors">
+                      <span className="font-meta text-xs font-bold text-midnight block group-hover:text-white transition-colors duration-[400ms]">
                         Email
                       </span>
-                      <span className="text-xs text-slate-600">{siteConfig.email}</span>
+                      <span className="text-xs text-slate-600 transition-colors duration-[400ms] group-hover:text-porcelain/80">{siteConfig.email}</span>
                     </div>
                   </a>
                 </motion.div>
 
-                <motion.div variants={channelItemVariants} className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 shadow-sm">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                <motion.div variants={channelItemVariants} className="p-4 rounded-2xl bg-porcelain border border-white flex items-center gap-3.5 shadow-sm group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 transition-[background-color,color,scale] duration-[400ms] group-hover:bg-white/15 group-hover:text-mist group-hover:scale-110">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-meta text-xs font-bold text-midnight block">
+                    <span className="font-meta text-xs font-bold text-midnight block transition-colors duration-[400ms] group-hover:text-white">
                       Jam Kerja
                     </span>
-                    <span className="text-xs text-slate-600">{siteConfig.workingHours}</span>
+                    <span className="text-xs text-slate-600 transition-colors duration-[400ms] group-hover:text-porcelain/80">{siteConfig.workingHours}</span>
                   </div>
                 </motion.div>
               </div>
             </motion.div>
 
             {/* Studio Location Card */}
-            <RevealItem distance={26} duration={0.65} className="p-7 rounded-3xl bg-midnight text-white space-y-4 shadow-xl border border-midnight-light">
+            <RevealItem distance={26} duration={0.65} className="group/loc p-7 rounded-3xl bg-midnight text-white space-y-4 shadow-xl border border-midnight-light hover:bg-midnight-light hover:border-mist/30 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
               <h2 className="font-story text-xl font-bold text-porcelain">
                 PT Karsa Swakarya Loka
               </h2>
 
-              <p className="font-story text-xs md:text-sm text-midnight-muted leading-relaxed">
+              <p className="font-story text-xs md:text-sm text-midnight-muted leading-relaxed transition-colors duration-[400ms] group-hover/loc:text-porcelain/90">
                 {siteConfig.address}
               </p>
 
               <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-                <span className="font-meta text-[11px] text-midnight-muted">NIB: {siteConfig.nib}</span>
+                <span className="font-meta text-[11px] text-midnight-muted transition-colors duration-[400ms] group-hover/loc:text-porcelain/80">NIB: {siteConfig.nib}</span>
                 <a
                   href={siteConfig.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-meta text-xs font-bold text-mist hover:text-white transition-colors inline-flex items-center gap-1"
+                  className="font-meta text-xs font-bold text-mist hover:text-white transition-colors duration-[400ms] group-hover/loc:text-white inline-flex items-center gap-1"
                 >
                   <span>Lihat di Maps</span>
                   <ArrowSwap className="w-3.5 h-3.5" />
@@ -402,39 +410,39 @@ export default function ContactClient() {
           </Reveal>
 
           <RevealGroup className="grid grid-cols-1 md:grid-cols-3 gap-5" stagger={0.1}>
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2">
-              <h3 className="font-story text-base font-bold text-midnight">Masalah yang mau diselesaikan</h3>
-              <p className="font-story text-sm text-slate-600 leading-relaxed">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Masalah yang mau diselesaikan</h3>
+              <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Cukup ceritakan kondisi sekarang dan bagian mana yang paling merepotkan. Dari situ kami bantu petakan sistem seperti apa yang sebenarnya Anda butuhkan.
               </p>
             </motion.article>
 
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2">
-              <h3 className="font-story text-base font-bold text-midnight">Target waktu pemakaian</h3>
-              <p className="font-story text-sm text-slate-600 leading-relaxed">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Target waktu pemakaian</h3>
+              <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Kapan sistemnya diharapkan sudah bisa dipakai. Tanggal perkiraan pun cukup, karena angka ini yang menentukan urutan pengerjaan dan tahapannya.
               </p>
             </motion.article>
 
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2">
-              <h3 className="font-story text-base font-bold text-midnight">Sistem yang sudah dipakai</h3>
-              <p className="font-story text-sm text-slate-600 leading-relaxed">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Sistem yang sudah dipakai</h3>
+              <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Aplikasi kasir, spreadsheet, atau alat lain yang sedang berjalan. Sebisa mungkin kami sambungkan, bukan diganti semua dari awal.
               </p>
             </motion.article>
           </RevealGroup>
 
           <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-5" stagger={0.1}>
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2">
-              <h3 className="font-story text-base font-bold text-midnight">Kami melayani dari mana saja</h3>
-              <p className="font-story text-sm text-slate-600 leading-relaxed">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-2 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Kami melayani dari mana saja</h3>
+              <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Studio dan bengkel perangkat kami ada di Jatisampurna, Kota Bekasi, dan kami biasa bertemu langsung dengan klien di Jabodetabek. Untuk kota lain, seluruh prosesnya berjalan daring; kami hanya datang ke lokasi saat pemasangan perangkat IoT.
               </p>
             </motion.article>
 
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-3">
-              <h3 className="font-story text-base font-bold text-midnight">Ingin lihat dulu sebelum bertanya</h3>
-              <p className="font-story text-sm text-slate-600 leading-relaxed">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-3 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Ingin lihat dulu sebelum bertanya</h3>
+              <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Wajar saja. Halaman layanan menjelaskan apa saja yang kami kerjakan, dan halaman portofolio memuat proyek yang sudah berjalan beserta hasilnya.
               </p>
               <div className="flex flex-wrap gap-4 pt-1">

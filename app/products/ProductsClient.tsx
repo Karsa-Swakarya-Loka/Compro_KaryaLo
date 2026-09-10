@@ -98,10 +98,10 @@ export default function ProductsClient() {
 
       {/* Product 1: Executive Analytics BI on #F7F6F5 */}
       <section id={product1.id} className="py-20 md:py-24 px-4 md:px-12 max-w-6xl mx-auto w-full">
-        <RevealGroup className="rounded-3xl bg-white border border-slate-200/90 p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center hover:border-accent/30 hover:shadow-2xl transition-all duration-300" stagger={0.12}>
+        <RevealGroup className="group/product hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] rounded-3xl bg-white border border-slate-200/90 p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" stagger={0.12}>
           {/* Mockup with Anti-Bleed Dark Frame */}
           <motion.div variants={mockupVariants("left")} style={{ transformPerspective: 1200 }} data-reveal="" className="lg:col-span-6">
-            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl">
+            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl transition-shadow duration-[400ms] group-hover/product:ring-1 group-hover/product:ring-white/20">
               <div className="h-8 bg-midnight px-3.5 flex items-center justify-between border-b border-midnight-light">
                 <div className="flex items-center gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-mist" />
@@ -131,33 +131,33 @@ export default function ProductsClient() {
           {/* Details */}
           <motion.div variants={detailVariants("right")} data-reveal="" className="lg:col-span-6 space-y-6">
             <div className="space-y-2">
-              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug">
+              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover/product:text-white">
                 {product1.title}
               </h2>
 
-              <p className="font-story text-sm font-medium text-slate-700">
+              <p className="font-story text-sm font-medium text-slate-700 transition-colors duration-[400ms] group-hover/product:text-mist">
                 {product1.tagline}
               </p>
 
               <div className="pt-1">
-                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block">
+                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block transition-[background-color,border-color,color] duration-[400ms] group-hover/product:bg-white/10 group-hover/product:border-white/25 group-hover/product:text-porcelain">
                   {product1.status}
                 </span>
               </div>
             </div>
 
-            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed">
+            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed transition-colors duration-[400ms] group-hover/product:text-porcelain/80">
               {product1.summary}
             </p>
 
-            <div className="space-y-2 pt-2 border-t border-slate-200/60">
-              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
+            <div className="space-y-2 pt-2 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover/product:border-white/15">
+              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
                 Fitur utamanya:
               </span>
               <div className="space-y-1.5">
                 {product1.features.map((feat, i) => (
-                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700 transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5 transition-colors duration-[400ms] group-hover/product:text-mist" />
                     <span>{feat}</span>
                   </motion.div>
                 ))}
@@ -169,7 +169,7 @@ export default function ProductsClient() {
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product1.title}`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors shadow-md"
+                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover/product:bg-porcelain group-hover/product:text-midnight transition-[background-color,color,filter] duration-[400ms] shadow-md"
               >
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -181,37 +181,37 @@ export default function ProductsClient() {
 
       {/* Product 2: SaaS Storefront on Dedicated #C9D6DF Band (50% Rhythm) */}
       <section id={product2.id} className="bg-mist py-20 md:py-24 px-4 md:px-12 border-y border-mist-border">
-        <RevealGroup className="max-w-6xl mx-auto rounded-3xl bg-porcelain border border-white p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-xl" stagger={0.12}>
+        <RevealGroup className="max-w-6xl mx-auto group/product hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] rounded-3xl bg-porcelain border border-white p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-xl" stagger={0.12}>
           {/* Details Column First (Alternating) */}
           <motion.div variants={detailVariants("left")} data-reveal="" className="lg:col-span-6 space-y-6 lg:order-1">
             <div className="space-y-2">
-              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug">
+              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover/product:text-white">
                 {product2.title}
               </h2>
 
-              <p className="font-story text-sm font-medium text-slate-700">
+              <p className="font-story text-sm font-medium text-slate-700 transition-colors duration-[400ms] group-hover/product:text-mist">
                 {product2.tagline}
               </p>
 
               <div className="pt-1">
-                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block">
+                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block transition-[background-color,border-color,color] duration-[400ms] group-hover/product:bg-white/10 group-hover/product:border-white/25 group-hover/product:text-porcelain">
                   {product2.status}
                 </span>
               </div>
             </div>
 
-            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed">
+            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed transition-colors duration-[400ms] group-hover/product:text-porcelain/80">
               {product2.summary}
             </p>
 
-            <div className="space-y-2 pt-2 border-t border-slate-200/60">
-              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
+            <div className="space-y-2 pt-2 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover/product:border-white/15">
+              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
                 Fitur utamanya:
               </span>
               <div className="space-y-1.5">
                 {product2.features.map((feat, i) => (
-                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700 transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5 transition-colors duration-[400ms] group-hover/product:text-mist" />
                     <span>{feat}</span>
                   </motion.div>
                 ))}
@@ -223,7 +223,7 @@ export default function ProductsClient() {
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product2.title}`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors shadow-md"
+                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover/product:bg-porcelain group-hover/product:text-midnight transition-[background-color,color,filter] duration-[400ms] shadow-md"
               >
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -233,7 +233,7 @@ export default function ProductsClient() {
 
           {/* Mockup with Anti-Bleed Dark Frame (Order 2) */}
           <motion.div variants={mockupVariants("right")} style={{ transformPerspective: 1200 }} data-reveal="" className="lg:col-span-6 lg:order-2">
-            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl">
+            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl transition-shadow duration-[400ms] group-hover/product:ring-1 group-hover/product:ring-white/20">
               <div className="h-8 bg-midnight px-3.5 flex items-center justify-between border-b border-midnight-light">
                 <div className="flex items-center gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-mist" />
@@ -264,10 +264,10 @@ export default function ProductsClient() {
 
       {/* Product 3: Top-Up Engine on #F7F6F5 */}
       <section id={product3.id} className="py-20 md:py-24 px-4 md:px-12 max-w-6xl mx-auto w-full">
-        <RevealGroup className="rounded-3xl bg-white border border-slate-200/90 p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center hover:border-accent/30 hover:shadow-2xl transition-all duration-300" stagger={0.12}>
+        <RevealGroup className="group/product hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] rounded-3xl bg-white border border-slate-200/90 p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" stagger={0.12}>
           {/* Mockup with Anti-Bleed Dark Frame */}
           <motion.div variants={mockupVariants("left")} style={{ transformPerspective: 1200 }} data-reveal="" className="lg:col-span-6">
-            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl">
+            <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl transition-shadow duration-[400ms] group-hover/product:ring-1 group-hover/product:ring-white/20">
               <div className="h-8 bg-midnight px-3.5 flex items-center justify-between border-b border-midnight-light">
                 <div className="flex items-center gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-mist" />
@@ -297,33 +297,33 @@ export default function ProductsClient() {
           {/* Details */}
           <motion.div variants={detailVariants("right")} data-reveal="" className="lg:col-span-6 space-y-6">
             <div className="space-y-2">
-              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug">
+              <h2 className="font-story text-2xl md:text-3xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover/product:text-white">
                 {product3.title}
               </h2>
 
-              <p className="font-story text-sm font-medium text-slate-700">
+              <p className="font-story text-sm font-medium text-slate-700 transition-colors duration-[400ms] group-hover/product:text-mist">
                 {product3.tagline}
               </p>
 
               <div className="pt-1">
-                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block">
+                <span className="font-meta text-[11px] font-semibold text-midnight bg-matte border border-mist-border px-2.5 py-0.5 rounded-full inline-block transition-[background-color,border-color,color] duration-[400ms] group-hover/product:bg-white/10 group-hover/product:border-white/25 group-hover/product:text-porcelain">
                   {product3.status}
                 </span>
               </div>
             </div>
 
-            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed">
+            <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed transition-colors duration-[400ms] group-hover/product:text-porcelain/80">
               {product3.summary}
             </p>
 
-            <div className="space-y-2 pt-2 border-t border-slate-200/60">
-              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
+            <div className="space-y-2 pt-2 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover/product:border-white/15">
+              <span className="font-meta text-[11px] font-bold text-slate-600 uppercase tracking-wider block transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
                 Fitur utamanya:
               </span>
               <div className="space-y-1.5">
                 {product3.features.map((feat, i) => (
-                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                  <motion.div key={i} variants={featureVariants} className="flex items-start gap-2 text-xs font-story text-slate-700 transition-colors duration-[400ms] group-hover/product:text-porcelain/90">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5 transition-colors duration-[400ms] group-hover/product:text-mist" />
                     <span>{feat}</span>
                   </motion.div>
                 ))}
@@ -335,7 +335,7 @@ export default function ProductsClient() {
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product3.title}`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors shadow-md"
+                className="group inline-flex items-center gap-2 font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover/product:bg-porcelain group-hover/product:text-midnight transition-[background-color,color,filter] duration-[400ms] shadow-md"
               >
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -347,12 +347,15 @@ export default function ProductsClient() {
 
       {/* Enterprise Licensing & Customization Callout on #1F2E5A */}
       <section className="bg-midnight py-20 px-4 md:px-12 border-t border-midnight-light text-white">
-        <Reveal scaleFrom={0.98} distance={28} duration={0.8} className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
+        {/* Given a real surface so it can respond: a ring rather than a border, so
+           the resting layout is unchanged. It already sits on midnight, so hover
+           lifts to the lighter navy instead of darkening further. */}
+        <Reveal scaleFrom={0.98} distance={28} duration={0.8} className="group max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 rounded-3xl p-6 md:p-10 ring-1 ring-white/10 hover:bg-midnight-light hover:ring-mist/30 transition-[background-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
           <div className="space-y-4 max-w-2xl text-center lg:text-left">
             <h3 className="font-story text-3xl md:text-4xl font-bold text-white leading-tight">
               Mau Menjalankan Platform Ini dengan Nama Perusahaan Anda?
             </h3>
-            <p className="font-story text-midnight-muted text-base leading-relaxed">
+            <p className="font-story text-midnight-muted text-base leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/85">
               Platform ini bisa dipakai dengan nama dan tampilan perusahaan Anda, dipasang di server sendiri, dan disesuaikan dengan alur kerja yang sudah berjalan.
             </p>
           </div>
@@ -361,7 +364,7 @@ export default function ProductsClient() {
               href={getWhatsAppUrl(`Halo KaryaLo, kami ingin menanyakan opsi lisensi platform`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group font-meta px-8 py-4 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors shadow-xl flex items-center gap-2 shrink-0"
+              className="group font-meta px-8 py-4 rounded-full bg-mist text-midnight text-xs font-bold uppercase tracking-wider hover:bg-porcelain transition-colors shadow-xl flex items-center gap-2 shrink-0"
             >
               <span>Tanya Soal Lisensi</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

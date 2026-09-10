@@ -19,7 +19,11 @@ import Reveal, { REVEAL_VIEWPORT } from "@/components/motion/Reveal";
 const cardVariants = (index: number): Variants => ({
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_EXPO, delay: index * 0.12 } },
-  hover: { y: -6, transition: SPRING_INTERACTIVE },
+  /* The lift stays in motion rather than a Tailwind `hover:-translate-y-*`.
+     Tailwind v4 emits the standalone `translate` / `scale` properties, so a
+     Tailwind lift would compose with motion's `transform` instead of replacing
+     it — the card would travel twice. One owner, spring-driven like the rest. */
+  hover: { y: -8, scale: 1.01, transition: SPRING_INTERACTIVE },
 });
 
 const imageVariants: Variants = {
@@ -84,7 +88,7 @@ export default function ServicesSection() {
               viewport={REVEAL_VIEWPORT}
               whileHover="hover"
               data-reveal=""
-              className="bg-white rounded-3xl p-6 md:p-7 border border-slate-200/90 hover:border-mist transition-[border-color,box-shadow] duration-500 hover:shadow-xl hover:shadow-midnight/5 group flex flex-col justify-between space-y-6"
+              className="bg-white rounded-3xl p-6 md:p-7 border border-slate-200/90 hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 transition-[background-color,border-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group flex flex-col justify-between space-y-6"
             >
               {/* Image Preview Container — multi-layer depth reveal */}
               <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 shadow-sm relative">
@@ -114,29 +118,29 @@ export default function ServicesSection() {
               {/* Text & Content */}
               <div className="space-y-4 flex-1">
                 <div className="flex flex-wrap gap-2 items-center justify-between">
-                  <span className="font-meta text-xs font-bold text-accent uppercase tracking-wider">
+                  <span className="font-meta text-xs font-bold text-accent uppercase tracking-wider transition-colors duration-[400ms] group-hover:text-mist">
                     Bidang {pillar.pillarNumber}
                   </span>
                 </div>
 
-                <h3 className="font-story text-xl md:text-2xl font-bold text-midnight leading-snug">
+                <h3 className="font-story text-xl md:text-2xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover:text-white">
                   {pillar.name}
                 </h3>
 
-                <p className="font-story text-slate-600 text-sm leading-relaxed">
+                <p className="font-story text-slate-600 text-sm leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                   {pillar.focus}
                 </p>
 
                 {/* Sub-services Pills — cascading precision check */}
-                <div className="pt-2 space-y-2 border-t border-slate-200/60">
+                <div className="pt-2 space-y-2 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover:border-white/20">
                   {pillar.subServices.map((sub, index) => (
                     <motion.div
                       key={sub.code}
                       variants={checkRowVariants(index)}
-                      className="flex items-start gap-2 text-xs text-slate-700 font-story"
+                      className="flex items-start gap-2 text-xs text-slate-700 font-story transition-colors duration-[400ms] group-hover:text-white"
                     >
                       <motion.span variants={checkIconVariants(index)} className="flex shrink-0 mt-0.5 origin-center">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-accent transition-[color,transform] duration-[400ms] group-hover:text-white group-hover:scale-110" />
                       </motion.span>
                       <span className="font-medium">{sub.name}</span>
                     </motion.div>
@@ -145,13 +149,13 @@ export default function ServicesSection() {
               </div>
 
               {/* Bottom Action Link */}
-              <div className="pt-4 border-t border-slate-200/60">
+              <div className="pt-4 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover:border-white/20">
                 <Link
                   href={`/services#${pillar.id}`}
-                  className="min-h-11 font-meta text-xs font-bold uppercase tracking-wider text-midnight group-hover:text-accent flex flex-wrap gap-2 items-center justify-between transition-colors"
+                  className="min-h-11 font-meta text-xs font-bold uppercase tracking-wider text-midnight group-hover:text-white flex flex-wrap gap-2 items-center justify-between transition-colors duration-[400ms]"
                 >
                   <span>Lihat Detail Layanan</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
+                  <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
                 </Link>
               </div>
             </motion.article>

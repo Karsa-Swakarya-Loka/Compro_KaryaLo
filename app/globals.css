@@ -302,11 +302,16 @@ a:hover .arrow-swap__b, button:hover .arrow-swap__b, a:focus-visible .arrow-swap
 .spotlight-card:hover::before, .spotlight-card:hover::after { opacity: 1; }
 
 /* Process timeline card micro-states */
-.process-card { transition: transform 500ms var(--ease-expo), border-color 300ms, box-shadow 500ms var(--ease-expo); }
-.process-card:hover { transform: translate3d(0, -4px, 0); }
+.process-card { transition: transform 400ms var(--ease-expo), background-color 400ms var(--ease-expo), border-color 400ms, box-shadow 400ms var(--ease-expo); }
+/* The lift lives here rather than in a Tailwind `hover:-translate-y-2`: this
+   rule already owns the element's `transform`, and Tailwind v4's separate
+   `translate` property would stack on top of it rather than replace it. */
+.process-card:hover { transform: translate3d(0, -8px, 0) scale(1.01); }
 .process-number { display: inline-block; position: relative; transition: transform 550ms var(--ease-expo), text-shadow 550ms var(--ease-expo); transform-origin: left bottom; }
-.process-card:hover .process-number { transform: scale(1.1); text-shadow: 0 0 22px rgba(31, 46, 90, 0.45), 0 0 2px rgba(31, 46, 90, 0.35); }
-.process-number::after { content: ""; position: absolute; left: -0.3em; top: 50%; width: 1.6em; height: 1.6em; border-radius: 50%; background: radial-gradient(circle, rgba(31, 46, 90, 0.28), transparent 70%); transform: translate(-0.2em, -50%) scale(0.4); opacity: 0; transition: transform 550ms var(--ease-expo), opacity 550ms var(--ease-expo); z-index: -1; }
+/* White glow, not navy: on hover the card flips to a midnight surface, where a
+   navy halo would disappear entirely. */
+.process-card:hover .process-number { transform: scale(1.08); text-shadow: 0 0 22px rgba(255, 255, 255, 0.5), 0 0 2px rgba(255, 255, 255, 0.4); }
+.process-number::after { content: ""; position: absolute; left: -0.3em; top: 50%; width: 1.6em; height: 1.6em; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.32), transparent 70%); transform: translate(-0.2em, -50%) scale(0.4); opacity: 0; transition: transform 550ms var(--ease-expo), opacity 550ms var(--ease-expo); z-index: -1; }
 .process-card:hover .process-number::after { opacity: 1; transform: translate(-0.2em, -50%) scale(1); }
 .process-item { transition: transform 450ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 45ms); }
 .process-card:hover .process-item { transform: translate3d(0.25rem, 0, 0); }

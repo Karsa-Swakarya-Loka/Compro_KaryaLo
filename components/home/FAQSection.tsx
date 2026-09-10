@@ -36,11 +36,19 @@ export default function FAQSection() {
             const isOpen = openId === item.id;
             return (
               <RevealItem key={item.id} distance={18} duration={0.55}>
+                {/*
+                  Named group: the trigger button below carries its own plain
+                  `group` for the chevron, and an unnamed group here would fire
+                  that chevron whenever the row was hovered anywhere.
+                  This row stays deliberately lighter than the other cards — a
+                  full surface flip on an open accordion would recolour the
+                  answer text mid-read.
+                */}
                 <div
-                  className={`rounded-2xl border transition-[border-color,background-color,box-shadow] duration-500 overflow-hidden ${
+                  className={`group/faq rounded-2xl border transition-[border-color,background-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
                     isOpen
-                      ? "bg-white border-accent/40 shadow-sm"
-                      : "bg-white/80 border-slate-200/80 hover:border-slate-300"
+                      ? "bg-white border-accent/40 shadow-sm hover:border-accent/60"
+                      : "bg-white/80 border-slate-200/80 hover:border-accent/40 hover:bg-mist/15 hover:shadow-sm"
                   }`}
                 >
                   <button
@@ -50,7 +58,7 @@ export default function FAQSection() {
                     aria-controls={`${item.id}-answer`}
                     aria-expanded={isOpen}
                   >
-                    <span className="font-story text-base md:text-lg font-bold text-midnight leading-snug">
+                    <span className="font-story text-base md:text-lg font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover/faq:text-midnight-light">
                       {item.question}
                     </span>
                     {/* Chevron flips with a micro spring overshoot instead of a rigid rotation */}
