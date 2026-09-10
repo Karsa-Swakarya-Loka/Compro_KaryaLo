@@ -48,7 +48,7 @@ export default function ProductsClient() {
           {/* CSS entrance, not motion: the h1 is the LCP element on this route. */}
           <div className="max-w-3xl space-y-6 pt-4">
             <h1 className="enter-up font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] text-midnight font-normal leading-[1.08] tracking-tight">
-              Platform Siap Pakai <span className="italic font-light text-accent">dari KaryaLo</span>
+              Platform Siap Pakai <span className="text-accent">dari KaryaLo</span>
             </h1>
 
             <p style={{ "--i": 1 } as CSSProperties} className="enter-up font-story text-mist-ink text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
@@ -87,9 +87,6 @@ export default function ProductsClient() {
               </span>
               <span className="font-meta text-xs font-semibold px-3.5 py-1.5 rounded-full bg-porcelain text-mist-ink shadow-sm">
                 Pakai brand & server sendiri
-              </span>
-              <span className="font-meta text-xs font-semibold px-3.5 py-1.5 rounded-full bg-porcelain text-mist-ink shadow-sm">
-                Source code bisa jadi milik Anda
               </span>
             </div>
           </div>

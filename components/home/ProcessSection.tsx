@@ -69,8 +69,8 @@ export default function ProcessSection() {
               className="object-cover"
             />
           </div>
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-3">
+          <div className="relative z-10">
+            <div className="mx-auto max-w-3xl space-y-3 text-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-mist font-meta text-xs font-bold uppercase tracking-wider">
                 <Terminal className="w-3.5 h-3.5" />
                 <span>Rancangan dulu, baru koding</span>
@@ -81,17 +81,6 @@ export default function ProcessSection() {
               <p className="font-story text-midnight-muted text-sm md:text-base leading-relaxed">
                 Dalam 7–14 hari kerja pertama, Anda sudah bisa mengklik simulasi sistemnya. Kalau ada yang kurang pas, perbaikannya masih murah dan cepat di tahap ini.
               </p>
-            </div>
-            <div className="lg:col-span-4 flex lg:justify-end">
-              <div className="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-center w-full max-w-xs space-y-1">
-                <span className="font-meta text-3xl md:text-4xl font-bold text-mist block">100%</span>
-                <span className="font-meta text-xs text-porcelain uppercase tracking-wider font-semibold">
-                  Source code jadi milik Anda
-                </span>
-                <p className="font-story text-[11px] text-midnight-muted pt-1">
-                  Tanpa biaya lisensi lanjutan dan tanpa terikat ke kami.
-                </p>
-              </div>
             </div>
           </div>
         </Reveal>
@@ -122,13 +111,26 @@ export default function ProcessSection() {
             lifts on hover with a CSS transform, and an inline transform left
             behind by motion would outrank that rule and kill the hover.
           */}
-          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
+          {/*
+            Six columns at lg, not three, so each card spans two of them. Five
+            cards into three columns leaves the last row hugging the left with a
+            whole empty column on the right, and two cards cannot be centred on a
+            three-column track — centring them needs half a column of dead space
+            per side. On a six-column track that is exactly one column, so card 4
+            starts at column 2 and the pair sits centred with matching gutters.
+          */}
+          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6" stagger={0.1}>
             {processSteps.map((step, idx) => (
               <RevealItem
                 key={step.step}
                 distance={28}
                 duration={0.65}
-                className={idx === 4 ? "md:col-span-2 lg:col-span-1" : undefined}
+                className={[
+                  "lg:col-span-2",
+                  idx === 3 ? "lg:col-start-2" : "",
+                  // md keeps two columns, where the fifth card runs full width.
+                  idx === 4 ? "md:col-span-2" : "",
+                ].filter(Boolean).join(" ")}
               >
                 <div
                   className={`process-card group h-full rounded-3xl p-7 border flex flex-col justify-between space-y-6 ${

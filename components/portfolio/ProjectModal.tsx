@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ProjectItem } from "@/data/portfolio";
-import { X, CheckCircle2, ShieldCheck } from "lucide-react";
+import { X, CheckCircle2 } from "lucide-react";
 import { getWhatsAppUrl } from "@/config/site";
 import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
@@ -281,11 +281,7 @@ function ModalBody({ project, onClose }: { project: ProjectItem; onClose: () => 
       </div>
 
       {/* Modal Footer CTA */}
-      <div className="px-5 py-4 shrink-0 border-t border-slate-200 bg-white flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2 font-meta text-xs text-slate-600 font-medium">
-          <ShieldCheck className="w-4 h-4 text-accent" />
-          <span>Source code dan dokumentasinya jadi milik klien</span>
-        </div>
+      <div className="px-5 py-4 shrink-0 border-t border-slate-200 bg-white flex flex-wrap items-center justify-end gap-4">
         <a
           href={getWhatsAppUrl(`Halo KaryaLo, saya tertarik membangun sistem seperti ${project.title}`)}
           target="_blank"

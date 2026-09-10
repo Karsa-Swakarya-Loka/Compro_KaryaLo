@@ -97,7 +97,7 @@ export default function ContactClient() {
           {/* CSS entrance, not motion: the h1 is the LCP element on this route. */}
           <div className="max-w-3xl space-y-6 pt-4">
             <h1 className="enter-up font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] text-midnight font-normal leading-[1.08] tracking-tight">
-              Ceritakan Kebutuhan <span className="italic font-light text-accent">Proyek Anda</span>
+              Ceritakan Kebutuhan <span className="text-accent">Proyek Anda</span>
             </h1>
 
             <p style={{ "--i": 1 } as CSSProperties} className="enter-up font-story text-mist-ink text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
@@ -440,7 +440,7 @@ export default function ContactClient() {
               </p>
             </motion.article>
 
-            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-3 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+            <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="on-dark-hover p-6 rounded-2xl bg-porcelain border border-white shadow-sm space-y-3 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1.5 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
               <h3 className="font-story text-base font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">Ingin lihat dulu sebelum bertanya</h3>
               <p className="font-story text-sm text-slate-600 leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                 Wajar saja. Halaman layanan menjelaskan apa saja yang kami kerjakan, dan halaman portofolio memuat proyek yang sudah berjalan beserta hasilnya.

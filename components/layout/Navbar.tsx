@@ -92,23 +92,30 @@ export default function Navbar() {
           if (!event.currentTarget.contains(event.relatedTarget)) setMobileMenuOpen(false);
         }}>
           <div className="site-nav">
-            {/* The accessible name has to contain the visible text in full, or
-                voice control cannot target the link by what is on screen. */}
-            <Link href="/" aria-label="KaryaLo Digital Solution — beranda" className="brand-link">
+            {/*
+              The mark is decorative — the wordmark beside it carries the name,
+              so the link's accessible name comes from that text.
+            */}
+            <Link href="/" className="brand-link">
               <Image
-                src="/images/icon-mark.png"
+                src="/images/icon-karyalo.png"
                 alt=""
-                width={62}
-                height={87}
-                sizes="36px"
+                width={2390}
+                height={3354}
+                preload
+                sizes="28px"
                 className="h-9 w-auto shrink-0"
               />
-              <span>
-                {/* Explicit space: both spans are block-level and sit adjacent in the
-                    DOM, so without it the accessible text reads "KaryaLoDigital
-                    Solution" and no longer matches the aria-label. Renders identically. */}
-                <span className="block font-meta text-base font-bold leading-tight">KaryaLo</span>{" "}
-                <span className="block text-xs text-mist-ink">Digital Solution</span>
+              {/* Measured against the mark, the two-line block's ink sat 2.9px
+                  below the icon's optical centre — `leading-none` leaves more
+                  room above the caps than below the baseline here. The pull is
+                  double the correction because `align-items: center` splits a
+                  margin change across both sides of the box. */}
+              <span className="-mt-[6px]">
+                {/* Explicit space so the name is announced as "KaryaLo Digital
+                    Solution" rather than running together. */}
+                <span className="block font-story text-lg font-bold leading-none text-midnight">KaryaLo</span>{" "}
+                <span className="-mt-[5px] block font-story text-[13px] leading-none text-mist-ink">Digital Solution</span>
               </span>
             </Link>
 

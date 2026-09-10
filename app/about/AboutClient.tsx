@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { processSteps } from "@/data/process";
 import { siteConfig } from "@/config/site";
-import { ArrowUpRight, Building2, Layers, MapPin, ShieldCheck, Users } from "lucide-react";
+import { ArrowUpRight, Building2, Layers, MapPin, Users } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 import { EASE_EXPO, SPRING_INTERACTIVE } from "@/components/motion/tokens";
 import Reveal, { RevealGroup, RevealItem, revealVariants } from "@/components/motion/Reveal";
@@ -35,7 +35,6 @@ const principleIconVariants: Variants = {
 /* Lifted out of the markup so the grid can stagger them by index. */
 const principles = [
   { icon: Users, title: "Dikerjakan Tim Sendiri", description: "Proyek Anda tidak dioper diam-diam ke pihak lain. Anda bicara langsung dengan developer dan desainer yang mengerjakannya." },
-  { icon: ShieldCheck, title: "Hasil Kerja Jadi Milik Anda", description: "Source code, file desain Figma, dan dokumentasinya kami serahkan seluruhnya begitu dokumen serah terima ditandatangani." },
   { icon: Layers, title: "Progres Terlihat Tiap Minggu", description: "Setiap satu target mingguan selesai, Anda dapat akses ke server uji coba untuk mencoba sendiri fitur yang baru jadi. Tidak ada yang kami sembunyikan." },
   { icon: Building2, title: "Terikat Kontrak yang Jelas", description: "Semua kerja sama diikat SPK dan NDA resmi atas nama PT Karsa Swakarya Loka, lengkap dengan penerbitan e-Faktur Pajak." },
 ];
@@ -50,7 +49,7 @@ export default function AboutClient() {
           {/* CSS entrance, not motion: the h1 is the LCP element on this route. */}
           <div className="max-w-3xl space-y-6 pt-4">
             <h1 className="enter-up font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] text-midnight font-normal leading-[1.08] tracking-tight">
-              Studio Teknologi Kecil dengan <span className="italic font-light text-accent">Cara Kerja Terbuka</span>
+              Studio Teknologi Kecil dengan <span className="text-accent">Cara Kerja Terbuka</span>
             </h1>
 
             <p style={{ "--i": 1 } as CSSProperties} className="enter-up font-story text-mist-ink text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
@@ -135,7 +134,7 @@ export default function AboutClient() {
             </h2>
           </Reveal>
 
-          <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-6" stagger={0.1}>
+          <RevealGroup className="grid grid-cols-1 md:grid-cols-3 gap-6" stagger={0.1}>
             {principles.map(({ icon: Icon, title, description }) => (
               <motion.div
                 key={title}

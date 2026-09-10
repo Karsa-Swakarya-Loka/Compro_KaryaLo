@@ -18,24 +18,24 @@ export default function Footer() {
           {/* Kolom 1: Profil Legal & Alamat */}
           <RevealItem distance={20} className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 shrink-0 rounded-xl bg-porcelain flex items-center justify-center shadow-sm">
-                <Image src="/images/icon-mark.png" alt="" width={62} height={87} sizes="20px" className="h-5 w-auto" />
-              </div>
-              <div>
-                <span className="font-meta text-base font-bold tracking-tight text-porcelain block leading-none">
-                  KaryaLo Digital Solution
-                </span>
-                <span className="font-story text-xs text-midnight-muted block mt-0.5">
-                  by PT Karsa Swakarya Loka
-                </span>
-              </div>
+              <Image
+                src="/images/icon.svg"
+                alt=""
+                width={1040}
+                height={1040}
+                unoptimized
+                className="h-9 w-auto shrink-0 rounded-xl"
+              />
+              <span className="font-story text-lg font-bold tracking-tight text-porcelain block leading-none">
+                KaryaLo Digital Solution
+              </span>
             </div>
 
             <p className="text-midnight-muted text-sm leading-relaxed max-w-sm pt-2">
               Studio teknologi dan desain di Kota Bekasi. Kami membangun website, aplikasi, dan perangkat IoT untuk kebutuhan bisnis.
             </p>
 
-            <div className="space-y-2.5 pt-2 text-xs font-meta text-midnight-muted">
+            <div className="space-y-2.5 pt-2 text-xs font-story text-midnight-muted">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-mist shrink-0 mt-0.5" />
                 <span>
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Kolom 2: Disiplin Layanan */}
           <RevealItem distance={20} className="md:col-span-4 space-y-4">
-            <span className="font-meta text-xs font-bold text-mist uppercase tracking-wider block">
+            <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
               Layanan Kami
             </span>
             <ul className="space-y-2.5 text-sm text-midnight-muted font-story">
@@ -88,7 +88,7 @@ export default function Footer() {
 
             {/* Every route needs a contextual link, not only the navbar. */}
             <div className="pt-2 space-y-2.5">
-              <span className="font-meta text-xs font-bold text-mist uppercase tracking-wider block">
+              <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
                 Jelajahi
               </span>
               <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-midnight-muted font-story">
@@ -112,10 +112,10 @@ export default function Footer() {
 
           {/* Kolom 3: Legalitas & Kepatuhan */}
           <RevealItem distance={20} className="md:col-span-3 space-y-4">
-            <span className="font-meta text-xs font-bold text-mist uppercase tracking-wider block">
+            <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
               Legalitas
             </span>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 text-xs font-meta">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 text-xs font-story">
               <div className="flex items-center gap-1.5 text-mist font-bold">
                 <ShieldCheck className="w-4 h-4 text-mist" />
                 <span>Terdaftar Resmi</span>
@@ -139,11 +139,10 @@ export default function Footer() {
           <div>
             © 2026 PT Karsa Swakarya Loka (KaryaLo Digital Solution). Seluruh hak cipta dilindungi undang-undang.
           </div>
-          <div className="font-meta flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-wider text-midnight-muted">
+          <div className="font-story flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-wider text-midnight-muted">
             <Link href="/privacy" className="hover:text-mist transition-colors">Kebijakan Privasi</Link>
             <Link href="/terms" className="hover:text-mist transition-colors">Syarat &amp; Ketentuan</Link>
             <span>Kota Bekasi, Jawa Barat</span>
-            <span>Source code milik klien</span>
           </div>
         </Reveal>
 

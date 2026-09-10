@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Instrument_Serif } from "next/font/google";
+import { Archivo, Bebas_Neue } from "next/font/google";
 import localFont from "next/font/local";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import Navbar from "@/components/layout/Navbar";
@@ -11,18 +11,26 @@ import { siteConfig } from "@/config/site";
 import { buildMetadata, routeSeo } from "@/lib/seo";
 import "./globals.css";
 
+/**
+ * Bebas Neue is the display face only — headlines and other large type.
+ *
+ * It ships one weight (400) with no lowercase or italic glyphs, so `globals.css`
+ * pins weight 400 and `font-synthesis: none` on `.font-headline`: a faked bold
+ * or oblique on a condensed face smears the stems. Everything smaller keeps a
+ * face with real weights — Archivo for meta labels, Satoshi for body copy.
+ */
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+/** Meta labels, buttons and small caps — a real weight range, unlike Bebas. */
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-aestera-fallback",
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -89,7 +97,7 @@ export default function RootLayout({
     <html
       lang="id"
       data-scroll-behavior="smooth"
-      className={`${archivo.variable} ${instrumentSerif.variable} ${satoshi.variable} antialiased`}
+      className={`${bebasNeue.variable} ${archivo.variable} ${satoshi.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-porcelain text-midnight">
         <JsonLd data={[organizationSchema, websiteSchema]} />

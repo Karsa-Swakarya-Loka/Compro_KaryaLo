@@ -4,7 +4,7 @@ import { Fragment, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
 import { EASE_EXPO } from "@/components/motion/tokens";
@@ -103,7 +103,7 @@ export default function HeroSection() {
               <Fragment key={`${word.text}-${index}`}>
                 <span className="hero-word">
                   <span
-                    className={`hero-word__inner${word.accent ? " hero-accent italic font-light text-mist" : ""}`}
+                    className={`hero-word__inner${word.accent ? " hero-accent text-mist" : ""}`}
                     style={{ "--i": index } as CSSProperties}
                   >
                     {word.text}
@@ -162,17 +162,6 @@ export default function HeroSection() {
           </motion.div>
 
         </div>
-
-        {/* Closing reassurance line — lands after the CTAs have settled. */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE_EXPO, delay: 0.95 }}
-          className="flex items-center gap-2.5 font-meta text-[11px] text-mist"
-        >
-          <ShieldCheck aria-hidden="true" className="w-4 h-4 shrink-0" />
-          <span className="font-bold tracking-wider uppercase">Source Code Sepenuhnya Milik Anda</span>
-        </motion.div>
 
       </div>
     </section>

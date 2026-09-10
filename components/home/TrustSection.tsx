@@ -34,10 +34,10 @@ export default function TrustSection() {
     },
     {
       icon: Lock,
-      badge: "HAK CIPTA",
-      title: "Hak Cipta & NDA",
-      detail: "Tanpa dikunci ke vendor",
-      description: "Source code sepenuhnya jadi milik Anda setelah serah terima, dan data proyek kami jaga kerahasiaannya."
+      badge: "KERAHASIAAN",
+      title: "Perjanjian Kerahasiaan",
+      detail: "NDA sebelum diskusi teknis",
+      description: "Dokumen, data, dan rencana bisnis yang Anda bagikan kami perlakukan sebagai informasi rahasia, diikat NDA resmi."
     }
   ];
 

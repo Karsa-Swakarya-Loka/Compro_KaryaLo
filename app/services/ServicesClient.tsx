@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { servicesData } from "@/data/services";
 import { getWhatsAppUrl } from "@/config/site";
-import { ArrowUpRight, Check, Layers, ShieldCheck, Terminal } from "lucide-react";
+import { ArrowUpRight, Check, Layers, Terminal } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 import { EASE_EXPO } from "@/components/motion/tokens";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -40,11 +40,6 @@ const subCheckVariants: Variants = {
 
 const guarantees = [
   {
-    icon: ShieldCheck,
-    title: "Source Code Milik Anda",
-    description: "Repositori Git, struktur database, dan akses servernya kami serahkan seluruhnya. Tidak ada yang kami tahan.",
-  },
-  {
     icon: Terminal,
     title: "Siap Tumbuh Bareng Bisnis",
     description: "Dibangun dengan teknologi yang sudah teruji dan banyak dipakai, jadi mudah dikembangkan dan dirawat siapa pun.",
@@ -68,7 +63,7 @@ export default function ServicesClient() {
         <div className="mx-auto max-w-[66rem] space-y-5">
           <div className="max-w-3xl space-y-3">
             <h1 className="enter-up font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] font-normal leading-[1.08] tracking-tight text-midnight">
-              Tiga Bidang Layanan, <span className="font-light italic text-accent">Satu Tim yang Sama</span>
+              Tiga Bidang Layanan, <span className="text-accent">Satu Tim yang Sama</span>
             </h1>
             <p style={{ "--i": 1 } as CSSProperties} className="enter-up max-w-2xl font-story text-base leading-relaxed text-mist-ink md:text-lg">
               Software, desain, dan perangkat IoT dikerjakan orang-orang yang sama. Hasilnya nyambung satu sama lain, dan Anda tidak perlu jadi penerjemah antar vendor.
@@ -88,7 +83,7 @@ export default function ServicesClient() {
             ))}
           </nav>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 font-story text-sm text-mist-ink">
-            {["Dikerjakan tim sendiri", "Source code diserahkan penuh", "Ada masa garansi"].map((promise, index) => (
+            {["Dikerjakan tim sendiri", "Ada masa garansi"].map((promise, index) => (
               <li
                 key={promise}
                 style={{ "--i": 5 + index } as CSSProperties}
@@ -198,7 +193,7 @@ export default function ServicesClient() {
       })}
 
       <section aria-label="Jaminan layanan" className="border-t border-midnight-light bg-midnight px-4 py-8 text-white md:px-12 md:py-10">
-        <RevealGroup className="mx-auto grid max-w-[66rem] gap-6 md:grid-cols-3" stagger={0.12}>
+        <RevealGroup className="mx-auto grid max-w-[66rem] gap-6 md:grid-cols-2" stagger={0.12}>
           {guarantees.map(({ icon: Icon, title, description }) => (
             <RevealItem key={title} direction="none" scaleFrom={0.94} duration={0.6} className="flex items-start gap-3">
               <Icon aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-mist" />

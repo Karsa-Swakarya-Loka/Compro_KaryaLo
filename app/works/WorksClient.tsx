@@ -33,7 +33,7 @@ export default function WorksClient() {
         <div className={styles.container}>
           {/* CSS entrance, not motion: the h1 is the LCP element here. */}
           <h1 className="enter-up font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] font-normal leading-[1.08] tracking-tight text-midnight">
-            Proyek yang <span className="font-light italic text-accent">Sudah Berjalan</span>
+            Proyek yang <span className="text-accent">Sudah Berjalan</span>
           </h1>
           <p style={{ "--i": 1 } as CSSProperties} className={`${styles.intro} enter-up`}>
             Sistem yang kami bangun untuk klien, ditambah purwarupa internal yang kami pakai untuk menguji pendekatan baru sebelum dipakai di proyek berbayar.

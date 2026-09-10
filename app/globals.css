@@ -20,7 +20,7 @@
   --color-matte: #E3EAF0;
 
   /* ── Tri-Font System ── */
-  --font-headline: var(--font-aestera-fallback), 'Aestera', 'Instrument Serif', 'Newsreader', serif;
+  --font-headline: var(--font-bebas), 'Bebas Neue', 'Oswald', 'Archivo Narrow', sans-serif;
   --font-story: var(--font-satoshi), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-meta: var(--font-archivo), 'Archivo', sans-serif;
 }
@@ -114,9 +114,30 @@ select {
    Tri-Font System Utilities
    ══════════════════════════════════════════════ */
 
+/*
+  Bebas Neue is the display face, and only the headline role uses it. Three of
+  its properties are handled here rather than in every markup file:
+
+  1. One weight, no italic. `font-synthesis: none` stops the browser faking
+     either — a synthesised bold on a condensed face just smears the stems. Any
+     `font-bold` left on a headline therefore has no visual effect, which is
+     intended: headline hierarchy comes from size, colour and tracking.
+  2. No lowercase glyphs, so it renders as capitals whatever the source case.
+     `text-transform: uppercase` makes that explicit, so the swap fallback is
+     already uppercase and the type does not visibly change case when the
+     webfont lands. Screen readers still read the underlying text.
+  3. It is condensed, so the old -0.02em tracking crowded it.
+
+  Meta labels stay on Archivo and body copy on Satoshi — both have real weight
+  ranges, which is what buttons and small type need.
+*/
 .font-headline {
   font-family: var(--font-headline);
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .font-story {
@@ -160,7 +181,7 @@ main:focus { outline: none; }
 .site-header { position: relative; }
 .site-nav { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.65rem 1.25rem; border-radius: 2rem; border: 1px solid transparent; background: var(--color-porcelain); box-shadow: 0 4px 16px #1F2E5A08; transition: background-color 450ms var(--ease-expo), box-shadow 450ms var(--ease-expo), border-color 450ms var(--ease-expo), backdrop-filter 450ms var(--ease-expo); }
 .nav-surface[data-scrolled] .site-nav { background: rgba(247, 246, 245, 0.85); border-color: rgba(31, 46, 90, 0.10); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 10px 30px -8px rgba(31, 46, 90, 0.12), 0 4px 16px rgba(31, 46, 90, 0.05); }
-.brand-link { display: flex; align-items: center; gap: 0.65rem; flex-shrink: 0; }
+.brand-link { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 .nav-link { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: 44px; padding: 0.65rem 0.85rem; border-radius: 1.5rem; color: var(--color-mist-ink); font-size: 0.875rem; font-weight: 600; transition: color 200ms; }
 .nav-link:hover, .nav-link[aria-current="page"] { color: var(--color-midnight); }
 .nav-link[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 0.4em; }
@@ -222,8 +243,23 @@ footer .text-accent { color: var(--color-mist); }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
-.section-link { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.65rem 1rem; border: 1px solid var(--color-mist-ink); border-radius: 2rem; color: var(--color-midnight); font-size: 0.875rem; font-weight: 600; }
+.section-link { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.65rem 1rem; border: 1px solid var(--color-mist-ink); border-radius: 2rem; color: var(--color-midnight); font-size: 0.875rem; font-weight: 600; transition: background-color 400ms var(--ease-expo), color 400ms var(--ease-expo), border-color 400ms var(--ease-expo); }
 .section-link:hover { background: var(--color-porcelain); }
+
+/*
+   `.section-link` sets its own colour here, unlayered, so it outranks every
+   Tailwind `group-hover:` utility — a card cannot recolour the link from the
+   markup. Its resting ink is `--color-midnight`, the exact colour a card flips
+   to on hover, which made the label and arrow vanish into the surface.
+
+   Cards that flip to a dark surface carry `.on-dark-hover`; these rules give the
+   link a readable palette while that card is hovered, and restore the normal
+   inverted look when the link itself is hovered on top of it.
+*/
+.on-dark-hover:hover .section-link { color: var(--color-porcelain); border-color: rgba(255, 255, 255, 0.35); }
+.on-dark-hover:hover .section-link svg { color: var(--color-mist); }
+.on-dark-hover:hover .section-link:hover { background: var(--color-porcelain); color: var(--color-midnight); }
+.on-dark-hover:hover .section-link:hover svg { color: var(--color-accent); }
 section[id] { scroll-margin-top: 1rem; }
 [aria-controls="project-results"] { min-height: 44px; }
 
