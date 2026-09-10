@@ -92,7 +92,9 @@ export default function Navbar() {
           if (!event.currentTarget.contains(event.relatedTarget)) setMobileMenuOpen(false);
         }}>
           <div className="site-nav">
-            <Link href="/" aria-label="KaryaLo — beranda" className="brand-link">
+            {/* The accessible name has to contain the visible text in full, or
+                voice control cannot target the link by what is on screen. */}
+            <Link href="/" aria-label="KaryaLo Digital Solution — beranda" className="brand-link">
               <Image
                 src="/images/icon-mark.png"
                 alt=""
@@ -102,7 +104,10 @@ export default function Navbar() {
                 className="h-9 w-auto shrink-0"
               />
               <span>
-                <span className="block font-meta text-base font-bold leading-tight">KaryaLo</span>
+                {/* Explicit space: both spans are block-level and sit adjacent in the
+                    DOM, so without it the accessible text reads "KaryaLoDigital
+                    Solution" and no longer matches the aria-label. Renders identically. */}
+                <span className="block font-meta text-base font-bold leading-tight">KaryaLo</span>{" "}
                 <span className="block text-xs text-mist-ink">Digital Solution</span>
               </span>
             </Link>

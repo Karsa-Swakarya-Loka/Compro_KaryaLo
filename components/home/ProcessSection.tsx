@@ -13,7 +13,9 @@ function RailTick({ progress, threshold, label }: { progress: MotionValue<number
   const from = Math.max(0, threshold - 0.05);
   const backgroundColor = useTransform(progress, [from, threshold], ["#C9D6DF", "#1F2E5A"]);
   const scale = useTransform(progress, [from, threshold], [1, 1.4]);
-  const labelColor = useTransform(progress, [from, threshold], ["#6B7C99", "#1F2E5A"]);
+  // #6B7C99 only reached 3.92:1 on porcelain, under the 4.5 a 10px bold label
+  // needs. #5B6C8C clears it at 4.90:1 and still reads as the un-passed state.
+  const labelColor = useTransform(progress, [from, threshold], ["#5B6C8C", "#1F2E5A"]);
 
   return (
     <span className="flex flex-col items-center gap-2.5">
