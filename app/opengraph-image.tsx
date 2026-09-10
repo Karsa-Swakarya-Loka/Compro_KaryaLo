@@ -104,7 +104,7 @@ export default function OpengraphImage() {
             {siteConfig.companyName}
           </div>
           <div style={{ display: "flex", fontSize: 24, fontWeight: 700, color: PORCELAIN }}>
-            karyalo.id
+            {siteConfig.url.replace(/^https?:\/\//, "")}
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ const defaultWhatsappMessage =
 
 export const siteConfig = {
   /** Canonical production origin. Used for metadataBase, sitemap, robots and JSON-LD @id. */
-  url: "https://karyalo.id",
+  url: "https://karyalo.com",
   companyName: "PT Karsa Swakarya Loka",
   brandName: "KaryaLo Digital Solution",
   tagline: "Website, aplikasi, dan perangkat IoT yang dibangun untuk dipakai sehari-hari.",
