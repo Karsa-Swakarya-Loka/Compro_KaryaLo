@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata("privacy");
 const sections = [
   {
     heading: "Data yang Kami Kumpulkan",
-    body: "Kami hanya menyimpan data yang Anda kirim sendiri lewat formulir proyek atau kanal komunikasi resmi kami: nama, nama perusahaan atau organisasi, layanan yang dibutuhkan, perkiraan anggaran, dan ringkasan kebutuhan proyek. Situs ini tidak memakai cookie pelacak pihak ketiga dan tidak menjalankan skrip iklan.",
+    body: "Kami hanya menyimpan data yang Anda kirim sendiri lewat formulir proyek atau kanal komunikasi resmi kami: nama, nama perusahaan atau organisasi, layanan yang dibutuhkan, perkiraan anggaran, dan ringkasan kebutuhan proyek. Kami juga mencatat cara situs ini dipakai, misalnya halaman mana yang dibuka dan tombol mana yang diklik. Catatan itu tidak memuat nama Anda maupun isi formulir.",
   },
   {
     heading: "Bagaimana Formulir Proyek Bekerja",
@@ -40,7 +40,7 @@ const sections = [
   },
   {
     heading: "Layanan Pihak Ketiga",
-    body: "Situs ini memuat tautan ke WhatsApp dan Google Maps. Begitu Anda membuka tautan itu, yang berlaku adalah kebijakan privasi masing-masing layanan tersebut, dan kami tidak mengendalikan pemrosesan data yang terjadi di sana.",
+    body: "Situs ini memuat tautan ke WhatsApp dan Google Maps. Begitu Anda membuka tautan itu, yang berlaku adalah kebijakan privasi masing-masing layanan tersebut, dan kami tidak mengendalikan pemrosesan data yang terjadi di sana. Untuk mengukur kunjungan, kami memakai Google Tag Manager dan Google Analytics. Keduanya menyimpan cookie di browser Anda, dan datanya diproses oleh Google. Anda bisa menolaknya dengan memblokir cookie lewat pengaturan browser.",
   },
 ];
 

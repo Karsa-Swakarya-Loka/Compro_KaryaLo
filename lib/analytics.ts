@@ -3,9 +3,9 @@
  *
  * Events are pushed to `window.dataLayer` — the shape every major tag manager
  * and ad pixel already reads. Nothing in this file loads a third-party script or
- * sets a cookie, so instrumenting the site does not, on its own, make the
- * privacy policy's "no third-party tracking cookies, no ad scripts" claim false.
- * Choosing a channel later is then a configuration step, not a code change.
+ * sets a cookie; that happens only when components/analytics/Analytics.tsx
+ * loads Google Tag Manager. Choosing a channel is then a configuration step,
+ * not a code change.
  *
  * Never route personal data through these events. The contact form reports only
  * that a submission happened — never who submitted it or what they wrote. Ad

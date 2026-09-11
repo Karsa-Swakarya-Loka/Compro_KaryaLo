@@ -25,9 +25,10 @@ function eventForHref(href: string): ConversionEvent | null {
  * next month is measured without anyone remembering to wire it up.
  *
  * IMPORTANT: setting NEXT_PUBLIC_GTM_ID loads Google Tag Manager, which sets
- * cookies and hands data to a third party. `app/privacy/page.tsx` currently
- * tells visitors the opposite. Update that page in the same change that sets
- * the variable, or the site is making a false privacy claim.
+ * cookies and hands data to a third party. `app/privacy/page.tsx` discloses
+ * GTM and Google Analytics only. Adding a tag for any other vendor in the
+ * container (an ad pixel, say) means updating that page in the same change,
+ * or the site is making a false privacy claim.
  */
 export default function Analytics() {
   const pathname = usePathname();
