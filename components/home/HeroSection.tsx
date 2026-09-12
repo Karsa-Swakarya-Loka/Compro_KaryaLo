@@ -108,13 +108,15 @@ export default function HeroSection() {
                   >
                     {word.text}
                     {word.accent && (
+                      /* The sweep's copy of the word rides on `data-text` and is
+                         painted by CSS generated content. As a text node it made the
+                         headline read "yangyang SedangSedang" to text extractors. */
                       <span
                         className="hero-shimmer"
                         aria-hidden="true"
+                        data-text={word.text}
                         style={{ "--i": index - ACCENT_INDEX } as CSSProperties}
-                      >
-                        {word.text}
-                      </span>
+                      />
                     )}
                   </span>
                 </span>
@@ -125,7 +127,7 @@ export default function HeroSection() {
 
           <div className="overflow-hidden">
             <p className="hero-lede font-story text-mist text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
-              Kami merancang dan membangun sistem yang dipakai tim Anda setiap hari: web dan aplikasi yang stabil, tampilan yang mudah dimengerti, dan perangkat lapangan yang terpantau dari satu dashboard.
+              Kami merancang dan membangun sistem yang dipakai tim Anda setiap hari: web dan aplikasi yang stabil, tampilan yang mudah dimengerti, dan perangkat lapangan yang terpantau dari satu dashboard. Semuanya dikerjakan dari studio kami di Jatisampurna, Kota Bekasi.
             </p>
           </div>
 

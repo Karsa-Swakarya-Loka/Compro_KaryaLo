@@ -27,6 +27,13 @@ export interface ProjectItem {
   impact?: string;
 }
 
+/**
+ * The date the case-study copy below last changed, for the sitemap's `lastmod`.
+ * Update it when a project's text changes — not on every deploy, or the hint
+ * becomes noise Google learns to ignore.
+ */
+export const portfolioUpdatedAt = "2026-09-10";
+
 export const portfolioData: ProjectItem[] = [
   {
     id: "alina-omnichannel",

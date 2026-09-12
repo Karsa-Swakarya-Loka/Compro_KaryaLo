@@ -120,6 +120,26 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
   },
 };
 
+/**
+ * The date each route's content last actually changed.
+ *
+ * `app/sitemap.ts` used to stamp `new Date()` on every URL, so all thirteen
+ * pages claimed to have changed the moment a crawler fetched the sitemap. Google
+ * stops trusting `lastmod` once it reads like that, and the recrawl hint is
+ * worth more than the convenience. Seeded from the git history of each route's
+ * own files; update by hand when the copy on a route really changes.
+ */
+export const routeUpdatedAt: Record<RouteKey, string> = {
+  home: "2026-09-11",
+  services: "2026-09-11",
+  works: "2026-09-11",
+  products: "2026-09-11",
+  about: "2026-09-11",
+  contact: "2026-09-11",
+  privacy: "2026-09-11",
+  terms: "2026-09-10",
+};
+
 /** Absolute URL for a site-relative path. */
 export function absoluteUrl(path: string): string {
   return new URL(path, siteConfig.url).toString();

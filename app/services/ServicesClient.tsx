@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { servicesData } from "@/data/services";
+import { portfolioData } from "@/data/portfolio";
 import { getWhatsAppUrl } from "@/config/site";
 import { ArrowUpRight, Check, Layers, Terminal } from "lucide-react";
 import { motion, type Variants } from "motion/react";
@@ -104,6 +105,19 @@ export default function ServicesClient() {
         const copyFrom = reversed ? "right" : "left";
         const visualFrom = reversed ? "left" : "right";
 
+        /* Case studies already link back here; nothing linked the other way, so a
+           buyer reading about a service had no route to the proof. Matched the same
+           way the case study page does it — a project's `serviceCode` against this
+           pillar's sub-service codes — rather than a second hand-kept list. IoT has
+           no published project yet, and the block simply stays absent. */
+        const pillarCodes = pillar.subServices.map((sub) => sub.code);
+        const proof = portfolioData.filter((project) =>
+          project.serviceCode
+            .split("//")
+            .map((code) => code.trim())
+            .some((code) => pillarCodes.includes(code)),
+        );
+
         return (
         <section
           key={pillar.id}
@@ -187,6 +201,42 @@ export default function ServicesClient() {
                 </motion.article>
               ))}
             </RevealGroup>
+
+            {proof.length > 0 && (
+              <RevealGroup className="space-y-3 border-t border-mist-border pt-6" stagger={0.08}>
+                <RevealItem direction="none" distance={16}>
+                  <h3 className="font-meta text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                    Contoh proyeknya
+                  </h3>
+                </RevealItem>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {proof.map((project) => (
+                    <RevealItem key={project.slug} direction="none" distance={18}>
+                      <Link
+                        href={`/works/${project.slug}`}
+                        className={`group/proof flex h-full flex-col gap-2 rounded-2xl border border-mist-border p-4 transition-shadow hover:shadow-lg ${
+                          reversed ? "bg-porcelain" : "bg-white"
+                        }`}
+                      >
+                        <span className="font-meta text-[11px] font-bold uppercase tracking-wider text-accent">
+                          {project.serviceTags.join(" · ")}
+                        </span>
+                        <span className="font-story text-base font-bold leading-snug text-midnight transition-colors group-hover/proof:text-accent">
+                          {project.title}
+                        </span>
+                        <span className="font-story text-sm leading-relaxed text-mist-ink">
+                          {project.summary}
+                        </span>
+                        <span className="mt-auto inline-flex items-center gap-1 font-meta text-xs font-semibold text-accent">
+                          {project.type === "client" ? "Proyek klien" : "Purwarupa internal"} · {project.year}
+                          <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+                        </span>
+                      </Link>
+                    </RevealItem>
+                  ))}
+                </div>
+              </RevealGroup>
+            )}
           </div>
         </section>
         );

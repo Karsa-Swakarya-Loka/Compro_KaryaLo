@@ -161,7 +161,7 @@ export default function ProductsClient() {
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2">
               <a
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product1.title}`)}
                 target="_blank"
@@ -171,6 +171,15 @@ export default function ProductsClient() {
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
+              {/* Each platform has a case study of its own; nothing linked to it, so
+                 the only way on from here was WhatsApp. */}
+              <Link
+                href="/works/karyalo-executive-analytics"
+                className="inline-flex items-center gap-1.5 font-meta text-xs font-semibold text-accent transition-colors duration-[400ms] hover:underline group-hover/product:text-mist"
+              >
+                Lihat studi kasusnya
+                <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+              </Link>
             </div>
           </motion.div>
         </RevealGroup>
@@ -215,7 +224,7 @@ export default function ProductsClient() {
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2">
               <a
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product2.title}`)}
                 target="_blank"
@@ -225,6 +234,13 @@ export default function ProductsClient() {
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
+              <Link
+                href="/works/karyalo-saas-storefront"
+                className="inline-flex items-center gap-1.5 font-meta text-xs font-semibold text-accent transition-colors duration-[400ms] hover:underline group-hover/product:text-mist"
+              >
+                Lihat studi kasusnya
+                <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+              </Link>
             </div>
           </motion.div>
 
@@ -327,7 +343,7 @@ export default function ProductsClient() {
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2">
               <a
                 href={getWhatsAppUrl(`Halo KaryaLo, kami ingin melihat demo atau menanyakan lisensi untuk ${product3.title}`)}
                 target="_blank"
@@ -337,6 +353,13 @@ export default function ProductsClient() {
                 <span>Minta Demo</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
+              <Link
+                href="/works/karyalo-digital-topup"
+                className="inline-flex items-center gap-1.5 font-meta text-xs font-semibold text-accent transition-colors duration-[400ms] hover:underline group-hover/product:text-mist"
+              >
+                Lihat studi kasusnya
+                <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+              </Link>
             </div>
           </motion.div>
         </RevealGroup>

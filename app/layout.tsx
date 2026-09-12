@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import JsonLd from "@/components/seo/JsonLd";
 import Analytics from "@/components/analytics/Analytics";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -107,6 +108,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <WhatsAppFab />
         </SmoothScrollProvider>
       </body>
     </html>

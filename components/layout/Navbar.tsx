@@ -154,6 +154,11 @@ export default function Navbar() {
               Konsultasi WhatsApp <ArrowUpRight aria-hidden="true" size={16} />
             </a>
 
+            {/* Below `lg` the contact button lives outside the bar entirely, as the
+                floating WhatsApp button in components/layout/WhatsAppFab.tsx: the
+                brand lockup does not shrink, so a second control here crowded the
+                menu toggle at phone widths. */}
+
             <button
               ref={toggleRef}
               type="button"

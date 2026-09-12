@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { portfolioData } from "@/data/portfolio";
+import { portfolioData, portfolioUpdatedAt } from "@/data/portfolio";
 import { productsData } from "@/data/products";
 import { siteFeatures } from "@/config/site";
-import { absoluteUrl, routeSeo } from "@/lib/seo";
+import { absoluteUrl, routeSeo, routeUpdatedAt } from "@/lib/seo";
 
 /**
  * Every indexable URL, including one entry per case study.
@@ -26,8 +26,6 @@ const routeImages: Partial<Record<RouteKey, string[]>> = {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   const pages = (Object.keys(routeSeo) as RouteKey[])
     .filter((key) => key !== "products" || siteFeatures.enableProductsSection)
     .map((key) => {
@@ -36,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return {
         url: absoluteUrl(route.path),
-        lastModified,
+        lastModified: new Date(routeUpdatedAt[key]),
         changeFrequency: route.changeFrequency,
         priority: route.priority,
         ...(images?.length ? { images } : {}),
@@ -47,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const gallery = project.galleryImages.length ? project.galleryImages : [project.coverImage];
     return {
       url: absoluteUrl(`/works/${project.slug}`),
-      lastModified,
+      lastModified: new Date(portfolioUpdatedAt),
       changeFrequency: "yearly" as const,
       priority: 0.7,
       images: gallery.map(absoluteUrl),

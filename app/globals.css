@@ -190,6 +190,28 @@ main:focus { outline: none; }
 .mobile-nav .nav-link:hover { background: var(--color-matte); }
 .nav-cta { align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px; padding: 0.75rem 1.1rem; border-radius: 2rem; background: var(--color-midnight); color: white; font-size: 0.8125rem; font-weight: 700; transition: background-color 160ms; }
 .nav-cta:hover { background: var(--color-accent-hover); }
+/*
+   Floating WhatsApp button. Sits in the thumb's reach at the bottom right on
+   every page, which is where the contact button was missing on phones. Kept in
+   WhatsApp's own green rather than the site navy: the point of an unlabelled
+   button is being recognised without reading, and the mark only reads as
+   WhatsApp in its own colour. Bottom and right insets clear the iOS home bar.
+*/
+.wa-fab {
+  position: fixed;
+  z-index: 40;
+  right: calc(1rem + env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; color: white;
+  box-shadow: 0 8px 24px -6px rgba(31, 46, 90, 0.45), 0 2px 6px rgba(31, 46, 90, 0.2);
+  transition: transform 220ms var(--ease-expo), background-color 220ms;
+}
+.wa-fab:hover { background: #1EBE5B; transform: translateY(-2px); }
+.wa-fab:active { transform: translateY(0); }
+.wa-fab:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 767px) { .wa-fab { width: 52px; height: 52px; } }
 .nav-toggle { align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; place-items: center; }
 .nav-toggle > * { grid-area: 1 / 1; }
 .nav-toggle:hover { background: var(--color-matte); }
@@ -280,8 +302,17 @@ section[id] { scroll-margin-top: 1rem; }
   animation-delay: calc(0.05s + var(--i, 0) * 0.04s);
 }
 .hero-accent { position: relative; display: inline-block; }
-.hero-shimmer {
-  position: absolute; inset: 0; pointer-events: none; color: transparent;
+/*
+   The sweep needs its own copy of the word to clip the gradient to. As a real
+   text node that copy doubled every accent word for anything that extracts text
+   instead of rendering it: the H1 read "yangyang SedangSedang Tumbuh.Tumbuh." to
+   Google and to AI crawlers. `aria-hidden` covered screen readers but not them.
+   The copy now arrives through `data-text` as generated content, which paints
+   identically and never enters the document's text.
+*/
+.hero-shimmer { position: absolute; inset: 0; pointer-events: none; }
+.hero-shimmer::after {
+  content: attr(data-text); color: transparent;
   background-image: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.85) 50%, transparent 68%);
   background-size: 220% 100%; background-repeat: no-repeat;
   -webkit-background-clip: text; background-clip: text;
