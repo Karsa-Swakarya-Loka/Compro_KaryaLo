@@ -8,8 +8,14 @@ import { siteConfig } from "@/config/site";
  * prompt and several search previews a canonical name, language and colour for
  * the site instead of letting each one guess from the title tag.
  *
- * `purpose: "maskable"` is deliberately not declared — the icon has no safe-zone
- * padding, so Android would crop into the mark.
+ * The icons now carry the mark's own dark plate (#08172C, from the brand SVG)
+ * bled to every edge. They used to ship on transparency, so Google — which crops
+ * favicons into a circle in search results — composited them on white and left a
+ * white ring around a square mark.
+ *
+ * `/icons/maskable-512.png` is the same plate with the mark held inside Android's
+ * safe zone (62% of the canvas), which is what makes an adaptive icon croppable
+ * to a circle, squircle or rounded square without cutting into the mark.
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -29,6 +35,7 @@ export default function manifest(): MetadataRoute.Manifest {
       { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },
       { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "any" },
       { src: "/apple-icon.png", sizes: "180x180", type: "image/png", purpose: "any" },
+      { src: "/icons/maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }
