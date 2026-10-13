@@ -49,7 +49,7 @@ export default function TeamSection() {
           <RevealGroup className="lg:col-span-7 space-y-6" stagger={0.12}>
             <RevealItem direction="left">
               <h2 className="font-headline text-4xl md:text-6xl text-porcelain font-normal leading-[1.1] tracking-tight">
-                Developer, Desainer, dan Teknisi Perangkat dalam Satu Tim.
+                Anda Bicara Langsung dengan yang Mengerjakan.
               </h2>
             </RevealItem>
 

@@ -1,4 +1,5 @@
 import HeroSection from "@/components/home/HeroSection";
+import ProblemsSection from "@/components/home/ProblemsSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import TeamSection from "@/components/home/TeamSection";
 import PortfolioSection from "@/components/home/PortfolioSection";
@@ -21,25 +22,28 @@ export default function Home() {
       {/* 1. Hero Section (Full-width Image with Navy Overlay) */}
       <HeroSection />
 
-      {/* 2. Services Section (Pure Porcelain Canvas with 3 Pillar Cards) */}
+      {/* 2. Problems Section (#C9D6DF Mist Canvas: the visitor's situation → what we build → proof) */}
+      <ProblemsSection />
+
+      {/* 3. Services Section (Pure Porcelain Canvas with 3 Pillar Cards) */}
       <ServicesSection />
 
-      {/* 3. Team & Studio Section (Image Background with Hover Zoom & Transparent Overlay) */}
+      {/* 4. Team & Studio Section (Image Background with Hover Zoom & Transparent Overlay) */}
       <TeamSection />
 
-      {/* 4. Portfolio Section (#C9D6DF Mist Canvas with Anti-Bleed Browser Frames & Modal) */}
+      {/* 5. Portfolio Section (#C9D6DF Mist Canvas with Anti-Bleed Browser Frames & Modal) */}
       <PortfolioSection />
 
-      {/* 5. Process Section (Pure Porcelain Canvas with 5-Stage Value Engineering Timeline) */}
+      {/* 6. Process Section (Pure Porcelain Canvas with 5-Stage Value Engineering Timeline) */}
       <ProcessSection />
 
-      {/* 6. Legal & Trust Section (#C9D6DF Mist Canvas with 4 Corporate Standing Cards) */}
+      {/* 7. Legal & Trust Section (#C9D6DF Mist Canvas with 4 Corporate Standing Cards) */}
       <TrustSection />
 
-      {/* 7. FAQ Section (Pure Porcelain Canvas with B2B Procurement Accordion) */}
+      {/* 8. FAQ Section (Pure Porcelain Canvas with B2B Procurement Accordion) */}
       <FAQSection />
 
-      {/* 8. Contact CTA Section (#C9D6DF Canvas with Midnight Conversion Card) */}
+      {/* 9. Contact CTA Section (#C9D6DF Canvas with Midnight Conversion Card) */}
       <ContactCTA />
     </main>
   );

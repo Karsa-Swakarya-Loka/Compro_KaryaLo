@@ -4,7 +4,7 @@ import { Fragment, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileCode2, MousePointerClick, ShieldCheck } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
 import { EASE_EXPO } from "@/components/motion/tokens";
@@ -13,19 +13,24 @@ import ArrowSwap from "@/components/motion/ArrowSwap";
 
 /**
  * Headline tokens — one word per token so the curtain reveal can stagger them.
- * Reads as: "Website, Aplikasi, dan Perangkat IoT untuk Bisnis yang Sedang Tumbuh."
+ * Reads as: "Software, Desain & IoT dalam Satu Tim." Short enough to take in at a glance;
+ * the lede below says what gets built.
  */
 const HEADLINE: Array<{ text: string; accent?: boolean }> = [
-  { text: "Website," },
-  { text: "Aplikasi," },
-  { text: "dan" },
-  { text: "Perangkat" },
+  { text: "Software," },
+  { text: "Desain" },
+  { text: "&" },
   { text: "IoT" },
-  { text: "untuk" },
-  { text: "Bisnis" },
-  { text: "yang", accent: true },
-  { text: "Sedang", accent: true },
-  { text: "Tumbuh.", accent: true },
+  { text: "dalam", accent: true },
+  { text: "Satu", accent: true },
+  { text: "Tim.", accent: true },
+];
+
+/** Commitments a visitor can hold us to, taken from the process and FAQ — not vanity metrics. */
+const PROOF = [
+  { icon: MousePointerClick, text: "Purwarupa bisa diklik dalam 7–14 hari kerja" },
+  { icon: FileCode2, text: "Source code jadi milik Anda setelah serah terima" },
+  { icon: ShieldCheck, text: "Kontrak resmi PT: SPK, NDA, dan e-Faktur" },
 ];
 
 /* Index of the first accent word; CSS reads it to time the shimmer. */
@@ -98,7 +103,7 @@ export default function HeroSection() {
             applies, which takes the largest paint off the hydration path
             entirely. The reduced-motion block in globals.css neutralises it.
           */}
-          <h1 className="font-headline text-[clamp(2.5rem,5.5vw,4.5rem)] text-white font-normal leading-[1.08] tracking-tight">
+          <h1 className="font-headline text-[clamp(2.75rem,6.5vw,5.25rem)] text-white font-normal leading-[1.04] tracking-tight">
             {HEADLINE.map((word, index) => (
               <Fragment key={`${word.text}-${index}`}>
                 <span className="hero-word">
@@ -127,7 +132,7 @@ export default function HeroSection() {
 
           <div className="overflow-hidden">
             <p className="hero-lede font-story text-mist text-lg md:text-xl font-normal leading-relaxed max-w-2xl">
-              Kami merancang dan membangun sistem yang dipakai tim Anda setiap hari: web dan aplikasi yang stabil, tampilan yang mudah dimengerti, dan perangkat lapangan yang terpantau dari satu dashboard. Semuanya dikerjakan dari studio kami di Jatisampurna, Kota Bekasi.
+              Kami merancang dan membangun website, aplikasi, dan perangkat pemantau yang dipakai tim Anda setiap hari, dari rancangan pertama sampai serah terima. Tanpa perlu mengoordinasi tiga vendor yang saling menunggu.
             </p>
           </div>
 
@@ -153,15 +158,29 @@ export default function HeroSection() {
 
             <motion.div variants={ctaItemVariants} className="flex sm:inline-flex">
               <Magnetic className="flex w-full sm:w-auto">
-                <Link href="/about"
+                <Link href="/works"
                   className="font-meta w-full px-8 py-4 rounded-full text-white border border-white/60 text-xs font-bold uppercase tracking-wider hover:bg-white/10 focus-visible:outline-white transition-colors flex items-center justify-center gap-2 group"
                 >
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  <span>Kenali KaryaLo</span>
+                  <span>Lihat Hasil Kerja</span>
                 </Link>
               </Magnetic>
             </motion.div>
           </motion.div>
+
+          <motion.ul
+            variants={ctaGroupVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-3 border-t border-white/15 pt-6 max-w-3xl"
+          >
+            {PROOF.map(({ icon: Icon, text }) => (
+              <motion.li key={text} variants={ctaItemVariants} className="flex items-start gap-2.5 font-story text-sm leading-snug text-porcelain/85">
+                <Icon aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-mist" />
+                <span>{text}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
 
         </div>
 

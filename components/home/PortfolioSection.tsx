@@ -227,6 +227,13 @@ export default function PortfolioSection() {
                 <p className="font-story text-slate-600 text-sm leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
                   {project.summary}
                 </p>
+
+                {project.impact && (
+                  <p className="flex items-start gap-2 font-story text-sm text-slate-800 font-medium leading-snug transition-colors duration-[400ms] group-hover:text-porcelain">
+                    <CheckCircle2 aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-midnight transition-colors duration-[400ms] group-hover:text-mist" />
+                    <span><span className="sr-only">Hasilnya: </span>{project.impact}</span>
+                  </p>
+                )}
               </div>
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between transition-colors duration-[400ms] group-hover:border-white/15">
                 <button type="button" onClick={() => setSelectedProject(project)} aria-haspopup="dialog" aria-label={`Lihat studi kasus ${project.title}`} className="stretched-link font-meta text-xs font-bold text-accent transition-colors duration-[400ms] group-hover:text-mist">Lihat studi kasus</button>

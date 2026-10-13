@@ -73,7 +73,7 @@ export default function ServicesSection() {
             </h2>
           </div>
           <p className="font-story text-slate-600 text-sm md:text-base max-w-md leading-relaxed">
-            Software, desain, dan perangkat IoT kami tangani di satu tempat. Anda tidak perlu repot mengoordinasi tiga vendor yang saling menunggu.
+            Tiap bidang bisa dipesan sendiri, atau digabung dalam satu proyek kalau sistem Anda membutuhkan ketiganya.
           </p>
         </Reveal>
 
