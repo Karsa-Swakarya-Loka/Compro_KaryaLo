@@ -42,13 +42,13 @@ export default function TeamSection() {
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 max-w-[66rem] mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
           {/* Left Column: Storytelling & Headings — unmasks in from the left */}
           <RevealGroup className="lg:col-span-7 space-y-6" stagger={0.12}>
             <RevealItem direction="left">
-              <h2 className="font-headline text-4xl md:text-6xl text-porcelain font-normal leading-[1.1] tracking-tight">
+              <h2 className="font-headline text-4xl md:text-5xl text-porcelain font-normal leading-[1.1] tracking-tight">
                 Anda Bicara Langsung dengan yang Mengerjakan.
               </h2>
             </RevealItem>
@@ -61,22 +61,11 @@ export default function TeamSection() {
 
             {/* Quick Action Links */}
             <RevealItem direction="left" className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                href="/about"
-                className="font-meta px-7 py-3.5 rounded-full bg-porcelain text-midnight text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors shadow-lg shadow-black/10 flex items-center gap-2"
-              >
-                <span>Lihat Profil Studio</span>
-                <ArrowSwap className="w-4 h-4 text-accent" />
+              {/* One quiet action: this band supports the proof around it, it does not ask for the sale. */}
+              <Link href="/about" className="btn btn-secondary-light group">
+                <span>Lihat profil studio</span>
+                <ArrowSwap className="w-4 h-4" />
               </Link>
-
-              <a
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-meta px-7 py-3.5 rounded-full bg-midnight-light/80 hover:bg-midnight-light border border-midnight-muted/30 text-white text-xs font-bold uppercase tracking-wider transition-colors"
-              >
-                Bicara dengan Tim Teknis
-              </a>
             </RevealItem>
           </RevealGroup>
 
@@ -94,7 +83,7 @@ export default function TeamSection() {
                     <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">Tanpa dioper ke pihak lain</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
+                <p className="font-story text-sm text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kode, rancangan sistem, dan desainnya dikerjakan tim internal kami. Isi repositorinya bisa Anda lihat kapan saja.
                 </p>
               </SpotlightCard>
@@ -111,7 +100,7 @@ export default function TeamSection() {
                     <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">Meja uji coba di studio</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
+                <p className="font-story text-sm text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kami punya meja kerja untuk merakit dan menguji alat, mulai dari pemasangan sensor sampai uji coba langsung di lokasi.
                 </p>
               </SpotlightCard>
@@ -128,7 +117,7 @@ export default function TeamSection() {
                     <span className="font-meta text-[11px] text-midnight-muted uppercase transition-colors duration-[400ms] group-hover/card:text-mist">NIB: {siteConfig.nib}</span>
                   </div>
                 </div>
-                <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
+                <p className="font-story text-sm text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
                   Kerja sama berjalan di bawah PT yang terdaftar resmi, lengkap dengan SPK, invoice resmi, dan serah terima hak cipta.
                 </p>
               </SpotlightCard>

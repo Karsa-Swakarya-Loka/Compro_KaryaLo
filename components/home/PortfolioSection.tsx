@@ -54,10 +54,10 @@ export default function PortfolioSection() {
             </p>
             <Link
               href="/works"
-              className="font-meta px-6 py-3 rounded-full bg-porcelain text-midnight text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors shadow-sm inline-flex items-center gap-2 shrink-0 self-start sm:self-auto group"
+              className="btn btn-secondary shrink-0 self-start sm:self-auto group"
             >
-              <span>Semua Portofolio</span>
-              <ArrowRight className="w-3.5 h-3.5 text-accent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
+              <span>Semua portofolio</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
             </Link>
           </div>
         </Reveal>
@@ -127,9 +127,9 @@ export default function PortfolioSection() {
             <Magnetic className="inline-flex">
               <button
                 onClick={() => setSelectedProject(alinaProject)}
-                className="font-meta px-7 py-3.5 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover/feature:bg-porcelain group-hover/feature:text-midnight transition-[background-color,color,filter] duration-[400ms] shadow-lg shadow-midnight/10 flex items-center gap-2 cursor-pointer group"
+                className="btn btn-primary cursor-pointer group group-hover/feature:bg-porcelain group-hover/feature:text-midnight"
               >
-                <span>Lihat Studi Kasus Alina</span>
+                <span>Lihat studi kasus Alina</span>
                 <ArrowSwap />
               </button>
             </Magnetic>

@@ -14,7 +14,7 @@ export default function ContactCTA() {
 
   return (
     <section className="bg-mist py-20 md:py-28 px-4 md:px-12 border-b border-mist-border">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[66rem] mx-auto">
 
         {/* Main CTA Canvas */}
         <Reveal scaleFrom={0.98} duration={0.8} distance={28} className="rounded-3xl bg-midnight border border-midnight-light p-6 sm:p-8 md:p-16 text-white shadow-2xl shadow-midnight/20 relative overflow-hidden">
@@ -35,7 +35,7 @@ export default function ContactCTA() {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
             {/* Left Narrative */}
-            <RevealGroup className="lg:col-span-7 space-y-6" stagger={0.1} delayChildren={0.15}>
+            <RevealGroup className="lg:col-span-8 space-y-6" stagger={0.1} delayChildren={0.15}>
               <RevealItem>
                 <h2 className="font-headline text-4xl md:text-6xl text-porcelain font-normal leading-[1.1] tracking-tight">
                   Ceritakan Kebutuhan Anda, Kami Bantu Petakan.
@@ -55,24 +55,22 @@ export default function ContactCTA() {
                     href={siteConfig.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-meta w-full px-8 py-4 rounded-full bg-mist text-midnight text-xs font-bold uppercase tracking-wider hover:bg-mist-border transition-all shadow-lg shadow-midnight/25 flex items-center justify-center gap-2 group"
+                    className="btn btn-lg btn-primary-light w-full group"
                   >
-                    <span>Mulai Diskusi via WhatsApp</span>
+                    <span>Diskusi via WhatsApp</span>
                     <ArrowSwap />
                   </a>
                 </Magnetic>
 
-                <Link href="/about"
-                  className="group font-meta px-8 py-4 rounded-full bg-midnight-light/80 hover:bg-midnight-light border border-midnight-muted/30 text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <ArrowUpRight className="w-4 h-4 text-mist transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <Link href="/about" className="btn btn-lg btn-secondary-light group">
                   <span>Kenali KaryaLo</span>
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </RevealItem>
             </RevealGroup>
 
             {/* Right Information Card */}
-            <RevealItem direction="right" delay={0.1} className="lg:col-span-5">
+            <RevealItem direction="right" delay={0.1} className="lg:col-span-4">
               <div className="rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 p-6 md:p-8 space-y-6">
                 <div>
                   <span className="font-meta text-xs font-bold uppercase tracking-wider text-mist block">

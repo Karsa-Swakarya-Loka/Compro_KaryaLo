@@ -212,6 +212,29 @@ main:focus { outline: none; }
 .wa-fab:active { transform: translateY(0); }
 .wa-fab:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 @media (max-width: 767px) { .wa-fab { width: 52px; height: 52px; } }
+/* From lg the navbar's WhatsApp button is on screen at all times, so the floating one only added a
+   third WhatsApp entry to the first view. It stays where it was needed: below lg. */
+@media (min-width: 1024px) { #wa-fab { display: none; } }
+
+/*
+  Buttons. One solid primary per section, an outline secondary of the same height. Sentence case at
+  15-16px so an action reads before the small uppercase Archivo labels around it (those stay for
+  metadata and in-card text links). In the components layer so a card's group-hover utilities can
+  still recolour a button.
+*/
+@layer components {
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3.25rem; padding: 0 1.5rem; border: 1.5px solid transparent; border-radius: 999px; font-family: var(--font-story); font-size: 0.9375rem; font-weight: 700; line-height: 1.2; letter-spacing: 0; text-align: center; transition: background-color 300ms var(--ease-expo), color 300ms var(--ease-expo), border-color 300ms var(--ease-expo); }
+  .btn-lg { min-height: 3.5rem; padding: 0 1.75rem; font-size: 1rem; }
+  .btn-primary { background: var(--color-midnight); color: #fff; box-shadow: 0 10px 24px -12px rgb(31 46 90 / 0.55); }
+  .btn-primary:hover { background: var(--color-midnight-light); }
+  .btn-secondary { border-color: rgb(31 46 90 / 0.35); color: var(--color-midnight); }
+  .btn-secondary:hover { border-color: var(--color-midnight); background: rgb(31 46 90 / 0.06); }
+  /* On navy surfaces the primary turns light and the secondary outline white. */
+  .btn-primary-light { background: var(--color-porcelain); color: var(--color-midnight); box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.45); }
+  .btn-primary-light:hover { background: #fff; }
+  .btn-secondary-light { border-color: rgb(255 255 255 / 0.45); color: #fff; }
+  .btn-secondary-light:hover { border-color: #fff; background: rgb(255 255 255 / 0.08); }
+}
 .nav-toggle { align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; place-items: center; }
 .nav-toggle > * { grid-area: 1 / 1; }
 .nav-toggle:hover { background: var(--color-matte); }

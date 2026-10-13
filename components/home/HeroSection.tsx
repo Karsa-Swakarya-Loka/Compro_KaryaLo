@@ -148,9 +148,9 @@ export default function HeroSection() {
                   href={siteConfig.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-meta w-full px-8 py-4 rounded-full bg-porcelain text-midnight text-xs font-bold uppercase tracking-wider hover:bg-white focus-visible:outline-white transition-colors flex items-center justify-center gap-2 group"
+                  className="btn btn-lg btn-primary-light w-full group"
                 >
-                  <span>Mulai Diskusi Proyek</span>
+                  <span>Diskusi via WhatsApp</span>
                   <ArrowSwap />
                 </a>
               </Magnetic>
@@ -159,10 +159,10 @@ export default function HeroSection() {
             <motion.div variants={ctaItemVariants} className="flex sm:inline-flex">
               <Magnetic className="flex w-full sm:w-auto">
                 <Link href="/works"
-                  className="font-meta w-full px-8 py-4 rounded-full text-white border border-white/60 text-xs font-bold uppercase tracking-wider hover:bg-white/10 focus-visible:outline-white transition-colors flex items-center justify-center gap-2 group"
+                  className="btn btn-lg btn-secondary-light w-full group"
                 >
+                  <span>Lihat hasil kerja</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  <span>Lihat Hasil Kerja</span>
                 </Link>
               </Magnetic>
             </motion.div>

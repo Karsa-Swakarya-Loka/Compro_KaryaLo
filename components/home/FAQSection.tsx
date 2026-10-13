@@ -3,11 +3,26 @@
 import { useState } from "react";
 import { faqData } from "@/data/faq";
 import { siteConfig } from "@/config/site";
-import { ChevronDown, MessageSquareQuote } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { EASE_EXPO, SPRING_OVERSHOOT } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+
+/** The exit for a question the list does not answer. */
+function AskPrompt({ className = "" }: { className?: string }) {
+  return (
+    <Reveal className={`space-y-4 pt-6 border-t border-slate-200/80 ${className}`}>
+      <p className="font-story text-sm text-slate-700 leading-relaxed">
+        <span className="font-bold text-midnight">Pertanyaan Anda tidak ada di sini?</span> Kami sediakan sesi online 30 menit untuk membahas kebutuhan Anda lebih detail.
+      </p>
+      <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary group">
+        <span>Tanya via WhatsApp</span>
+        <ArrowSwap className="w-3.5 h-3.5" />
+      </a>
+    </Reveal>
+  );
+}
 
 export default function FAQSection() {
   const [openId, setOpenId] = useState<string | null>(faqData[0]?.id || null);
@@ -18,20 +33,24 @@ export default function FAQSection() {
 
   return (
     <section className="bg-porcelain py-20 md:py-28 px-4 md:px-12 border-b border-slate-200/80" id="faq">
-      <div className="max-w-4xl mx-auto space-y-16">
+      <div className="max-w-[66rem] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 
-        {/* Section Header */}
-        <Reveal className="text-center space-y-4">
-          <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">
-            Pertanyaan yang Sering Masuk
-          </h2>
-          <p className="font-story text-slate-600 text-base max-w-xl mx-auto leading-relaxed">
-            Soal kepemilikan kode, cara pembayaran, garansi, dan legalitas kontrak. Kami jawab apa adanya di sini.
-          </p>
-        </Reveal>
+        {/* Left: the question this section answers and the way out when an answer is missing.
+            Sticks beside the answers on desktop so the exit stays in reach while reading. */}
+        <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-8">
+          <Reveal className="space-y-4">
+            <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">
+              Pertanyaan yang Sering Masuk
+            </h2>
+            <p className="font-story text-slate-600 text-base leading-relaxed">
+              Soal kepemilikan kode, cara pembayaran, garansi, dan legalitas kontrak. Kami jawab apa adanya di sini.
+            </p>
+          </Reveal>
+          <AskPrompt className="hidden lg:block" />
+        </div>
 
         {/* Accordion List */}
-        <RevealGroup className="space-y-4" stagger={0.07}>
+        <RevealGroup className="lg:col-span-8 space-y-4" stagger={0.07}>
           {faqData.map((item) => {
             const isOpen = openId === item.id;
             return (
@@ -104,31 +123,8 @@ export default function FAQSection() {
           })}
         </RevealGroup>
 
-        {/* Prompt Card */}
-        <Reveal distance={28} className="p-6 rounded-2xl bg-mist/25 border border-mist flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center shrink-0">
-              <MessageSquareQuote className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-story text-base md:text-lg font-bold text-midnight">
-                Ada pertanyaan yang belum terjawab di sini?
-              </h3>
-              <p className="font-story text-xs text-slate-700 mt-0.5">
-                Kami sediakan sesi online 30 menit untuk membahas kebutuhan Anda lebih detail.
-              </p>
-            </div>
-          </div>
-          <a
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-meta px-6 py-2.5 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors flex items-center gap-1.5 shrink-0 shadow-md shadow-midnight/10"
-          >
-            <span>Hubungi Kami</span>
-            <ArrowSwap className="w-3.5 h-3.5" />
-          </a>
-        </Reveal>
+        {/* On one column the way out belongs after the answers, not before them. */}
+        <AskPrompt className="lg:hidden" />
 
       </div>
     </section>

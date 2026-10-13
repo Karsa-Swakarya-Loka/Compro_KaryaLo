@@ -141,9 +141,9 @@ export default function TrustSection() {
             href={getWhatsAppUrl(`Halo KaryaLo, kami butuh dokumen legal dan NIB PT Karsa Swakarya Loka untuk proses pendaftaran vendor.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover:bg-porcelain group-hover:text-midnight transition-[background-color,color,filter] duration-[400ms] shrink-0 shadow-md"
+            className="btn btn-primary shrink-0 group-hover:bg-porcelain group-hover:text-midnight"
           >
-            Minta Dokumen Legal
+            Minta dokumen legal
           </a>
         </Reveal>
 

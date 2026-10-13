@@ -79,7 +79,7 @@ export default function ProblemsSection() {
           <p className="font-story text-sm md:text-base text-midnight">
             Kondisi Anda tidak ada di daftar ini? Ceritakan saja, kami bantu tentukan mulai dari mana.
           </p>
-          <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="section-link shrink-0 self-start sm:self-auto">
+          <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary shrink-0 self-start sm:self-auto">
             <span>Konsultasi WhatsApp</span>
             <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
           </a>
