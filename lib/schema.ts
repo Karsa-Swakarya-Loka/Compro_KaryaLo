@@ -48,8 +48,8 @@ export const organizationSchema = {
   telephone: siteConfig.phone.replace(/\s/g, "-"),
   address: postalAddress,
   hasMap: siteConfig.mapsUrl,
-  // Legal entity established by the 2024 SK Kemenkumham listed under `identifier`.
-  foundingDate: "2024",
+  // Legal entity established by the SK Kementerian Hukum listed under `identifier`.
+  foundingDate: siteConfig.foundingDate,
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -80,7 +80,7 @@ export const organizationSchema = {
   identifier: [
     { "@type": "PropertyValue", name: "NIB", value: siteConfig.nib },
     { "@type": "PropertyValue", name: "KBLI", value: siteConfig.kbli },
-    { "@type": "PropertyValue", name: "SK Kemenkumham RI", value: "AHU-0038927.AH.01.01.TAHUN 2024" },
+    { "@type": "PropertyValue", name: "SK Kementerian Hukum RI", value: siteConfig.skAhu },
   ],
   // Populated once the Google Business Profile and LinkedIn page exist.
   ...(siteConfig.sameAs.length > 0 ? { sameAs: siteConfig.sameAs } : {}),

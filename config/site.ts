@@ -22,7 +22,13 @@ export const siteConfig = {
   description: "Studio teknologi dan desain di Kota Bekasi. Kami membangun website, aplikasi, dan perangkat IoT untuk kebutuhan bisnis, dari perencanaan sampai serah terima.",
   nib: "3005260047228",
   kbli: "62019 — Aktivitas Pemrograman Komputer Lainnya",
-  legalEntity: "Perseroan Perorangan (SK Kemenkumham RI)",
+  legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
+  /**
+   * Pengesahan badan hukum: Keputusan Menteri Hukum RI, ditetapkan 30 Mei 2026.
+   * Source: Projects/10_LEGAL_COMPANY/01_AKTA_DAN_AHU/Surat Keputusan Kementrian Hukum & HAM.pdf
+   */
+  skAhu: "AHU-A092678.AH.01.30.Tahun 2026",
+  foundingDate: "2026-05-30",
   address: "Jl. Al-Falah II, Jatiranggon, Kec. Jatisampurna, Kota Bekasi, Jawa Barat 17432",
   mapsUrl: "https://maps.app.goo.gl/3YrD56ctLmne1fGR8",
   email: "support@karyalo.com",

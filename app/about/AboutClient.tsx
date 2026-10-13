@@ -58,7 +58,7 @@ export default function AboutClient() {
 
             <div style={{ "--i": 2 } as CSSProperties} className="enter-up flex flex-wrap items-center gap-3 pt-2">
               <span className="font-meta text-xs font-semibold px-3.5 py-1.5 rounded-full bg-porcelain text-mist-ink shadow-sm">
-                Terdaftar di Kemenkumham RI
+                Terdaftar di Kementerian Hukum RI
               </span>
               <span className="font-meta text-xs font-semibold px-3.5 py-1.5 rounded-full bg-porcelain text-mist-ink shadow-sm">
                 NIB: {siteConfig.nib}

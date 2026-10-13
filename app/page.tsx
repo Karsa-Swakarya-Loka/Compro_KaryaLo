@@ -3,6 +3,7 @@ import ProblemsSection from "@/components/home/ProblemsSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import TeamSection from "@/components/home/TeamSection";
 import PortfolioSection from "@/components/home/PortfolioSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ProcessSection from "@/components/home/ProcessSection";
 import TrustSection from "@/components/home/TrustSection";
 import FAQSection from "@/components/home/FAQSection";
@@ -33,6 +34,9 @@ export default function Home() {
 
       {/* 5. Portfolio Section (#C9D6DF Mist Canvas with Anti-Bleed Browser Frames & Modal) */}
       <PortfolioSection />
+
+      {/* 5b. Testimonials (continues the Mist canvas; renders only client-approved quotes) */}
+      <TestimonialsSection />
 
       {/* 6. Process Section (Pure Porcelain Canvas with 5-Stage Value Engineering Timeline) */}
       <ProcessSection />

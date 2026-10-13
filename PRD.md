@@ -14,7 +14,7 @@
 * **Brand Komersial:** KaryaLo Digital Solution
 * **Nomor Induk Berusaha (NIB):** `3005260047228` (OSS Republik Indonesia, terdaftar 30 Mei 2026)
 * **KBLI Utama:** `62019` — Aktivitas Pemrograman Komputer Lainnya
-* **Pengesahan Legal:** Surat Keputusan (SK) Pengesahan Kementerian Hukum dan HAM Republik Indonesia
+* **Pengesahan Legal:** Keputusan Menteri Hukum RI `AHU-A092678.AH.01.30.Tahun 2026`, ditetapkan 30 Mei 2026 (Perseroan Perorangan, Usaha Mikro)
 * **Alamat Terdaftar & Operasional:** Jl. Al-Falah II, Jatiranggon, Kec. Jatisampurna, Kota Bekasi, Jawa Barat 17432
 * **Google Maps Resmi:** [Karsa Swakarya Loka di Google Maps](https://maps.app.goo.gl/3YrD56ctLmne1fGR8)
 * **Email Resmi:** `support@karyalo.com`
@@ -148,7 +148,7 @@ Screenshot dashboard yang berlatar belakang putih (seperti Alina dan KaryaLo) **
 4. **Tim & Budaya Studio (Culture):** Latar foto studio lab `about-studio.webp` dengan efek *slow zoom hover* dan gradasi transparan biru navy.
 5. **Showcase Portofolio:** Latar kanvas `#C9D6DF`, studi kasus Alina Retail dengan bingkai browser anti-bleed dan modal detail (`layoutId`).
 6. **Alur Kerja 5 Tahap (*Value Engineering Framework*):** Timeline interaktif vertikal.
-7. **Legalitas & Kredibilitas (*Corporate Trust*):** 4 Kartu Trust (SK Kemenkumham, NIB, Invoice & Rekening Perusahaan, NDA).
+7. **Legalitas & Kredibilitas (*Corporate Trust*):** 4 Kartu Trust (SK Kementerian Hukum, NIB, Invoice & Rekening Perusahaan, NDA).
 8. **Testimoni Klien Mendalam:** 2 ulasan berdampak bisnis dari Alina Retail dan PT HIJ.
 9. **FAQ Korporat:** Accordion seputar hak cipta (100% IP Handover), garansi, dan skema termin.
 10. **CTA Banner & Footer Resmi:** Ajakan konsultasi langsung ke WhatsApp Business + legalitas copyright.

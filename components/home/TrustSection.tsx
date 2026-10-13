@@ -13,10 +13,10 @@ export default function TrustSection() {
   const trustCards = [
     {
       icon: Building2,
-      badge: "KEMENKUMHAM RI",
+      badge: "KEMENTERIAN HUKUM RI",
       title: "PT Karsa Swakarya Loka",
-      detail: "SK: AHU-0038927.AH.01.01.TAHUN 2024",
-      description: "Badan usaha yang terdaftar resmi di Kementerian Hukum dan HAM, jadi kerja samanya diikat kontrak perusahaan, bukan kesepakatan personal."
+      detail: `SK: ${siteConfig.skAhu}`,
+      description: "Badan hukum yang disahkan Kementerian Hukum RI pada 30 Mei 2026, jadi kerja samanya diikat kontrak perusahaan, bukan kesepakatan personal."
     },
     {
       icon: FileCheck,
@@ -133,7 +133,7 @@ export default function TrustSection() {
                 Butuh Dokumen Legal untuk Pendaftaran Vendor?
               </h3>
               <p className="font-story text-mist-ink text-xs md:text-sm mt-0.5 transition-colors duration-[400ms] group-hover:text-porcelain/80">
-                Kami kirimkan salinan SK Kemenkumham, NPWP, NIB, dan company profile dalam bentuk PDF.
+                Kami kirimkan salinan SK Kementerian Hukum, NPWP, NIB, dan company profile dalam bentuk PDF.
               </p>
             </div>
           </div>
