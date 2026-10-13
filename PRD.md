@@ -27,7 +27,7 @@ KaryaLo memposisikan diri sebagai **Boutique Full-Cycle Technology & Creative Pa
 
 ## 2. Arsitektur 3 Pilar Layanan & Kode Referensi Proyek
 
-Setiap layanan memiliki kode referensi penawaran formal (*Project/Quotation Code*) untuk mempermudah penerbitan SPK, Quotation, BAST, dan Faktur Resmi:
+Setiap layanan memiliki kode referensi penawaran formal (*Project/Quotation Code*) untuk mempermudah penerbitan SPK, Quotation, BAST, dan Invoice Resmi:
 
 ```
 [PILAR 1: DEV] Digital Engineering & Software Solutions
@@ -148,7 +148,7 @@ Screenshot dashboard yang berlatar belakang putih (seperti Alina dan KaryaLo) **
 4. **Tim & Budaya Studio (Culture):** Latar foto studio lab `about-studio.webp` dengan efek *slow zoom hover* dan gradasi transparan biru navy.
 5. **Showcase Portofolio:** Latar kanvas `#C9D6DF`, studi kasus Alina Retail dengan bingkai browser anti-bleed dan modal detail (`layoutId`).
 6. **Alur Kerja 5 Tahap (*Value Engineering Framework*):** Timeline interaktif vertikal.
-7. **Legalitas & Kredibilitas (*Corporate Trust*):** 4 Kartu Trust (SK Kemenkumham, NIB, NPWP/Faktur, SPK/NDA).
+7. **Legalitas & Kredibilitas (*Corporate Trust*):** 4 Kartu Trust (SK Kemenkumham, NIB, Invoice & Rekening Perusahaan, NDA).
 8. **Testimoni Klien Mendalam:** 2 ulasan berdampak bisnis dari Alina Retail dan PT HIJ.
 9. **FAQ Korporat:** Accordion seputar hak cipta (100% IP Handover), garansi, dan skema termin.
 10. **CTA Banner & Footer Resmi:** Ajakan konsultasi langsung ke WhatsApp Business + legalitas copyright.
@@ -172,7 +172,7 @@ Screenshot dashboard yang berlatar belakang putih (seperti Alina dan KaryaLo) **
 ## 7. Kebijakan Legalitas & FAQ Kemitraan
 * **100% Intellectual Property Handover:** Tidak ada biaya lisensi tersembunyi (*no vendor lock-in*). Seluruh hak cipta menjadi milik klien setelah BAST.
 * **Perjanjian Resmi:** Pengikatan kerja sama melalui Surat Perjanjian Kerja (SPK) dan Non-Disclosure Agreement (NDA) resmi PT Karsa Swakarya Loka.
-* **Perpajakan & Faktur:** Penerbitan Invoice resmi ber-NPWP dan Faktur Pajak.
+* **Perpajakan:** Invoice resmi ber-NPWP perusahaan. Status **belum PKP** (dikonfirmasi 14 Okt 2026): tagihan tanpa PPN dan tanpa Faktur Pajak. Jangan klaim e-Faktur di materi apa pun sampai status PKP terbit.
 * **Termin Bertahap:** Pembayaran berbasis *milestone* yang diverifikasi bersama.
 
 ---

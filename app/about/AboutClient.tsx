@@ -36,7 +36,7 @@ const principleIconVariants: Variants = {
 const principles = [
   { icon: Users, title: "Dikerjakan Tim Sendiri", description: "Proyek Anda tidak dioper diam-diam ke pihak lain. Anda bicara langsung dengan developer dan desainer yang mengerjakannya." },
   { icon: Layers, title: "Progres Terlihat Tiap Minggu", description: "Setiap satu target mingguan selesai, Anda dapat akses ke server uji coba untuk mencoba sendiri fitur yang baru jadi. Tidak ada yang kami sembunyikan." },
-  { icon: Building2, title: "Terikat Kontrak yang Jelas", description: "Semua kerja sama diikat SPK dan NDA resmi atas nama PT Karsa Swakarya Loka, lengkap dengan penerbitan e-Faktur Pajak." },
+  { icon: Building2, title: "Terikat Kontrak yang Jelas", description: "Semua kerja sama diikat SPK dan NDA resmi atas nama PT Karsa Swakarya Loka, dengan invoice resmi untuk setiap termin." },
 ];
 
 export default function AboutClient() {
@@ -216,7 +216,7 @@ export default function AboutClient() {
           <motion.article variants={revealVariants({ distance: 22 })} data-reveal="" className="p-6 rounded-2xl bg-mist/30 border border-mist space-y-3 group hover:bg-midnight hover:border-midnight-light hover:shadow-xl hover:shadow-midnight/25 hover:-translate-y-1 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
             <h2 className="font-headline text-2xl text-midnight font-normal transition-colors duration-[400ms] group-hover:text-white">Model Kerja Sama</h2>
             <p className="font-story text-slate-700 text-sm md:text-base leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
-              Kerja sama diikat lewat SPK resmi dengan pembayaran bertahap, bukan lunas di depan. Tiap termin disertai invoice ber-NPWP dan Faktur Pajak. NDA bisa ditandatangani sebelum pembahasan teknis dimulai, dan seluruh hak cipta berpindah ke Anda setelah serah terima.
+              Kerja sama diikat lewat SPK resmi dengan pembayaran bertahap, bukan lunas di depan. Tiap termin disertai invoice resmi ber-NPWP perusahaan. NDA bisa ditandatangani sebelum pembahasan teknis dimulai, dan seluruh hak cipta berpindah ke Anda setelah serah terima.
             </p>
           </motion.article>
         </RevealGroup>

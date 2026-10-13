@@ -17,8 +17,8 @@ export const faqData: FAQItem[] = [
   },
   {
     id: "faq-legal-contracts",
-    question: "Bisa menerbitkan faktur resmi dan menandatangani NDA?",
-    answer: "Bisa. Semua kerja sama berjalan atas nama PT Karsa Swakarya Loka (NIB 3005260047228, bidang usaha pemrograman komputer). Kami menerbitkan Surat Perjanjian Kerja (SPK), NDA untuk menjaga kerahasiaan data proyek, berita acara serah terima, dan Faktur Pajak resmi."
+    question: "Bisa menerbitkan invoice resmi dan menandatangani NDA?",
+    answer: "Bisa. Semua kerja sama berjalan atas nama PT Karsa Swakarya Loka (NIB 3005260047228, bidang usaha pemrograman komputer). Kami menerbitkan Surat Perjanjian Kerja (SPK), NDA untuk menjaga kerahasiaan data proyek, invoice resmi untuk setiap termin, dan berita acara serah terima. Saat ini kami belum berstatus Pengusaha Kena Pajak (PKP), jadi belum menerbitkan Faktur Pajak dan tagihan kami tidak dikenai PPN."
   },
   {
     id: "faq-payment-terms",

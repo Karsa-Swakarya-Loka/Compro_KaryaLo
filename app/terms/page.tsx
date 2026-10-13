@@ -25,7 +25,7 @@ const sections = [
   },
   {
     heading: "Termin Pembayaran",
-    body: "Pembayaran dilakukan bertahap mengikuti termin yang dicek bersama, bukan lunas di muka. Setiap termin disertai invoice resmi ber-NPWP dan Faktur Pajak sesuai ketentuan perpajakan yang berlaku di Indonesia.",
+    body: "Pembayaran dilakukan bertahap mengikuti termin yang dicek bersama, bukan lunas di muka. Setiap termin disertai invoice resmi ber-NPWP perusahaan. Selama PT Karsa Swakarya Loka belum berstatus Pengusaha Kena Pajak (PKP), tagihan tidak dikenai PPN dan tidak disertai Faktur Pajak. Bila status ini berubah, ketentuan barunya kami sampaikan sebelum termin berikutnya ditagih.",
   },
   {
     heading: "Hak Kekayaan Intelektual",

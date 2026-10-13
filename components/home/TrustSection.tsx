@@ -27,10 +27,10 @@ export default function TrustSection() {
     },
     {
       icon: FileSpreadsheet,
-      badge: "ADMINISTRASI & PAJAK",
-      title: "Faktur Pajak & Rekening Perusahaan",
-      detail: "Siap untuk proses pengadaan",
-      description: "Kami menerbitkan e-Faktur dan SPK resmi. Pembayaran masuk ke rekening perusahaan, bukan rekening pribadi."
+      badge: "ADMINISTRASI",
+      title: "Invoice Resmi & Rekening Perusahaan",
+      detail: "Belum PKP: tagihan tanpa PPN",
+      description: "Setiap termin ditagih lewat invoice resmi atas nama PT, dan pembayaran masuk ke rekening perusahaan, bukan rekening pribadi."
     },
     {
       icon: Lock,

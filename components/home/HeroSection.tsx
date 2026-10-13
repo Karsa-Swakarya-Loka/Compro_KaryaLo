@@ -30,7 +30,7 @@ const HEADLINE: Array<{ text: string; accent?: boolean }> = [
 const PROOF = [
   { icon: MousePointerClick, text: "Purwarupa bisa diklik dalam 7–14 hari kerja" },
   { icon: FileCode2, text: "Source code jadi milik Anda setelah serah terima" },
-  { icon: ShieldCheck, text: "Kontrak resmi PT: SPK, NDA, dan e-Faktur" },
+  { icon: ShieldCheck, text: "Kontrak resmi atas nama PT: SPK, NDA, dan BAST" },
 ];
 
 /* Index of the first accent word; CSS reads it to time the shimmer. */

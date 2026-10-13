@@ -129,7 +129,7 @@ export default function TeamSection() {
                   </div>
                 </div>
                 <p className="font-story text-xs text-midnight-muted leading-relaxed pt-1 transition-colors duration-[400ms] group-hover/card:text-porcelain/85">
-                  Kerja sama berjalan di bawah PT yang terdaftar resmi, lengkap dengan serah terima hak cipta dan Faktur Pajak.
+                  Kerja sama berjalan di bawah PT yang terdaftar resmi, lengkap dengan SPK, invoice resmi, dan serah terima hak cipta.
                 </p>
               </SpotlightCard>
             </RevealItem>
