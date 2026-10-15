@@ -1,3 +1,5 @@
+import type { Locale, Localized } from "@/lib/i18n";
+
 /**
  * One phone number, written once.
  * `wa.me` needs bare international digits — no "+", no spaces, no leading zero —
@@ -10,19 +12,15 @@
  */
 const phone = "+62 899-7475-888";
 const whatsappNumber = phone.replace(/[^0-9]/g, "");
-const defaultWhatsappMessage =
-  "Halo Tim KaryaLo, saya ingin berdiskusi soal kebutuhan software, desain, atau perangkat IoT untuk perusahaan kami.";
 
+/** Facts that read the same in every language. */
 export const siteConfig = {
   /** Canonical production origin. Used for metadataBase, sitemap, robots and JSON-LD @id. */
   url: "https://karyalo.com",
   companyName: "PT Karsa Swakarya Loka",
   brandName: "KaryaLo Digital Solution",
-  tagline: "Website, aplikasi, dan perangkat IoT yang dibangun untuk dipakai sehari-hari.",
-  description: "Studio teknologi dan desain di Kota Bekasi. Kami membangun website, aplikasi, dan perangkat IoT untuk kebutuhan bisnis, dari perencanaan sampai serah terima.",
   nib: "3005260047228",
-  kbli: "62019 — Aktivitas Pemrograman Komputer Lainnya",
-  legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
+  kbliCode: "62019",
   /**
    * Pengesahan badan hukum: Keputusan Menteri Hukum RI, ditetapkan 30 Mei 2026.
    * Source: Projects/10_LEGAL_COMPANY/01_AKTA_DAN_AHU/Surat Keputusan Kementrian Hukum & HAM.pdf
@@ -33,8 +31,6 @@ export const siteConfig = {
   mapsUrl: "https://maps.app.goo.gl/3YrD56ctLmne1fGR8",
   email: "support@karyalo.com",
   phone,
-  whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultWhatsappMessage)}`,
-  workingHours: "Senin – Jumat: 09.00 – 18.00 WIB | Sabtu & Minggu: dengan janji temu",
   /**
    * Public profiles that independently corroborate this entity, used for schema `sameAs`.
    * Intentionally empty: no verified profiles exist yet. Add the real URLs once the
@@ -43,16 +39,66 @@ export const siteConfig = {
   sameAs: [] as string[],
 };
 
+/**
+ * The same facts, in words that change with the language.
+ *
+ * `positioning` is the category the brand claims (decided by the founder on
+ * 2026-10-15, recorded in 02_COMPANY_PROFILE_BRAND). `tagline` is the slogan
+ * that closes the brand; it replaced "Bukan yang paling canggih. Yang paling
+ * terpakai." on the same date. Change either here and every page, the schema
+ * and llms.txt follow.
+ */
+export const siteText: Localized<{
+  positioning: string;
+  tagline: string;
+  description: string;
+  workingHours: string;
+  legalEntity: string;
+  kbli: string;
+  location: string;
+  defaultWhatsappMessage: string;
+}> = {
+  id: {
+    positioning: "Extended IT Partner",
+    tagline: "Satu mitra, dari ide hingga implementasi.",
+    description:
+      "Mitra teknologi dari Kota Bekasi untuk pengembangan software, desain, dan IoT. Kami mendampingi bisnis Anda dari perencanaan hingga implementasi dan pemeliharaan.",
+    workingHours: "Senin – Jumat: 09.00 – 18.00 WIB | Sabtu & Minggu: dengan janji temu",
+    legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
+    kbli: "62019 — Aktivitas Pemrograman Komputer Lainnya",
+    location: "Kota Bekasi, Jawa Barat",
+    defaultWhatsappMessage:
+      "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai kebutuhan software, desain, atau perangkat IoT untuk perusahaan kami.",
+  },
+  en: {
+    positioning: "Extended IT Partner",
+    tagline: "One partner, from idea to implementation.",
+    description:
+      "A technology partner based in Bekasi, Indonesia, for software, design, and IoT. We support your business from planning through implementation and maintenance.",
+    workingHours: "Monday – Friday: 09:00 – 18:00 WIB (UTC+7) | Saturday & Sunday: by appointment",
+    legalEntity: "Sole-owner limited company (Perseroan Perorangan), ratified by the Indonesian Ministry of Law",
+    kbli: "62019 — Other Computer Programming Activities",
+    location: "Bekasi, West Java, Indonesia",
+    defaultWhatsappMessage:
+      "Hello KaryaLo team, I'd like to discuss our software, design, or IoT needs.",
+  },
+};
+
 export const siteFeatures = {
-  // Single switch for the /products route AND its navbar entry. Set to false to
-  // remove the page from routing, the navbar and the sitemap in one place.
+  // Single switch for the /products route. The page stays out of the navbar
+  // (the navbar is fixed at six entries) and is reached from the home page and
+  // the footer; set this to false to remove it from routing, those links and
+  // the sitemap in one place.
   enableProductsSection: true,
-  showProductsInNavbar: true,   // Only applies while enableProductsSection is true.
   enableClientLogosBar: false,  // Di-hold sesuai keputusan PRD
 };
 
+/** A wa.me link that opens with `message` already typed. */
 export function getWhatsAppUrl(message: string) {
-  const url = new URL(siteConfig.whatsappUrl);
-  url.searchParams.set("text", message);
-  return url.toString();
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+/** The general-purpose WhatsApp link, opening with the default greeting in `lang`. */
+export function whatsappUrl(lang: Locale) {
+  return getWhatsAppUrl(siteText[lang].defaultWhatsappMessage);
 }

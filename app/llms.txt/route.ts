@@ -1,8 +1,10 @@
-import { siteConfig, siteFeatures } from "@/config/site";
-import { servicesData } from "@/data/services";
-import { portfolioData } from "@/data/portfolio";
-import { productsData } from "@/data/products";
-import { faqData } from "@/data/faq";
+import { siteConfig, siteFeatures, siteText } from "@/config/site";
+import { getServices, supportServicesData } from "@/data/services";
+import { getPortfolio } from "@/data/portfolio";
+import { getProducts } from "@/data/products";
+import { getIndustries } from "@/data/industries";
+import { getFaq } from "@/data/faq";
+import { localePath } from "@/lib/i18n";
 import { absoluteUrl, routeSeo } from "@/lib/seo";
 
 /**
@@ -12,37 +14,41 @@ import { absoluteUrl, routeSeo } from "@/lib/seo";
  * Assistants routinely quote a business incorrectly because they had to infer
  * the facts from marketing copy. This states them once, in the same words the
  * site already uses, and is generated from the same data files the pages read
- * so it cannot drift out of date.
+ * so it cannot drift out of date. It is written in Indonesian, the site's main
+ * language, and points to the English pages under /en.
  *
  * It is a convention, not a standard: Google does not use it, and nothing here
  * changes normal search behaviour.
  */
 
 function buildLlmsTxt(): string {
+  const text = siteText.id;
   const lines: string[] = [];
 
   lines.push(`# ${siteConfig.brandName}`);
   lines.push("");
-  lines.push(`> ${siteConfig.description}`);
+  lines.push(`> ${text.description}`);
   lines.push("");
   lines.push("## Tentang perusahaan");
   lines.push("");
+  lines.push(`- Posisi: ${text.positioning} untuk software, desain, dan perangkat IoT`);
+  lines.push(`- Slogan: ${text.tagline}`);
   lines.push(`- Nama badan hukum: ${siteConfig.companyName}`);
-  lines.push(`- Bentuk badan usaha: ${siteConfig.legalEntity}`);
+  lines.push(`- Bentuk badan usaha: ${text.legalEntity}`);
   lines.push(`- Merek dagang: ${siteConfig.brandName}`);
   lines.push(`- NIB: ${siteConfig.nib}`);
-  lines.push(`- Bidang usaha (KBLI): ${siteConfig.kbli}`);
+  lines.push(`- Bidang usaha (KBLI): ${text.kbli}`);
   lines.push(`- Alamat: ${siteConfig.address}`);
-  lines.push(`- Jam kerja: ${siteConfig.workingHours}`);
+  lines.push(`- Jam kerja: ${text.workingHours}`);
   lines.push(`- Email: ${siteConfig.email}`);
   lines.push(`- Telepon/WhatsApp: ${siteConfig.phone}`);
   lines.push("- Wilayah layanan: Kota Bekasi dan Jabodetabek untuk pertemuan langsung, seluruh Indonesia secara daring.");
-  lines.push("- Bahasa: Indonesia (utama), Inggris.");
+  lines.push(`- Bahasa: Indonesia (utama), Inggris (${absoluteUrl(localePath("en", "/"))}).`);
   lines.push("");
 
   lines.push("## Layanan");
   lines.push("");
-  for (const pillar of servicesData) {
+  for (const pillar of getServices("id")) {
     lines.push(`### ${pillar.name}`);
     lines.push("");
     lines.push(pillar.focus);
@@ -52,11 +58,26 @@ function buildLlmsTxt(): string {
     }
     lines.push("");
   }
+  lines.push("### Layanan pendamping");
+  lines.push("");
+  for (const support of supportServicesData.id) {
+    lines.push(`- **${support.name}**: ${support.description}`);
+  }
+  lines.push("");
+
+  lines.push("## Contoh penerapan per industri");
+  lines.push("");
+  lines.push("Contoh apa yang bisa dibangun, bukan daftar klien. Studi kasus hanya disebut bila proyeknya memang ada di portofolio.");
+  lines.push("");
+  for (const industry of getIndustries("id")) {
+    lines.push(`- **${industry.name}**: ${industry.problem} Yang bisa dibangun: ${industry.build.join("; ")}.`);
+  }
+  lines.push("");
 
   if (siteFeatures.enableProductsSection) {
     lines.push("## Platform siap pakai");
     lines.push("");
-    for (const product of productsData) {
+    for (const product of getProducts("id")) {
       lines.push(`- **${product.title}** (${product.category}, ${product.status}): ${product.summary}`);
     }
     lines.push("");
@@ -64,15 +85,16 @@ function buildLlmsTxt(): string {
 
   lines.push("## Portofolio");
   lines.push("");
-  for (const project of portfolioData) {
-    const kind = project.type === "client" ? "proyek klien" : "purwarupa internal";
-    lines.push(`- [${project.title}](${absoluteUrl(`/works/${project.slug}`)}) — ${kind}, ${project.year}. ${project.summary}`);
+  for (const project of getPortfolio("id")) {
+    const kind = project.type === "client" ? "proyek klien" : project.type === "product" ? "produk KaryaLo (live)" : "purwarupa internal";
+    lines.push(`- [${project.title}](${absoluteUrl(`/portfolio/${project.slug}`)}) — ${kind}, ${project.year}. ${project.summary}`);
   }
+  lines.push("- Belum ada proyek perangkat IoT yang dipublikasikan; layanan IoT dimulai dari satu alat contoh yang diuji di lokasi klien.");
   lines.push("");
 
   lines.push("## Pertanyaan yang sering diajukan");
   lines.push("");
-  for (const item of faqData) {
+  for (const item of getFaq("id")) {
     lines.push(`### ${item.question}`);
     lines.push("");
     lines.push(item.answer);
@@ -83,7 +105,7 @@ function buildLlmsTxt(): string {
   lines.push("");
   for (const [key, route] of Object.entries(routeSeo)) {
     if (key === "products" && !siteFeatures.enableProductsSection) continue;
-    lines.push(`- [${route.breadcrumb ?? "Beranda"}](${absoluteUrl(route.path)}): ${route.description}`);
+    lines.push(`- [${route.text.id.breadcrumb ?? "Beranda"}](${absoluteUrl(route.path)}): ${route.text.id.description}`);
   }
   lines.push("");
 

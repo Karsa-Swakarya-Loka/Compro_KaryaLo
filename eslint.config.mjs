@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Google Drive sync conflict copies ("page (1).tsx"); never part of the build.
+    "**/* (1).*",
   ]),
 ]);
 

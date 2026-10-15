@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
+import { siteConfig, siteText } from "@/config/site";
 
 /**
  * Web app manifest.
@@ -21,7 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${siteConfig.brandName} — ${siteConfig.companyName}`,
     short_name: "KaryaLo",
-    description: siteConfig.description,
+    description: siteText.id.description,
     lang: "id-ID",
     dir: "ltr",
     start_url: "/",

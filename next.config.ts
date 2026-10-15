@@ -20,6 +20,24 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Do not advertise the framework version.
   poweredByHeader: false,
+  experimental: {
+    // Two root layouts (one per language) leave no single layout to render an
+    // unmatched URL in; app/global-not-found.tsx covers that case.
+    globalNotFound: true,
+  },
+  /*
+    The portfolio moved from /works to /portfolio when the navbar was aligned
+    on 2026-10-15. Permanent redirects keep every indexed and shared link
+    working, case studies included.
+  */
+  async redirects() {
+    return [
+      { source: "/works", destination: "/portfolio", permanent: true },
+      { source: "/works/:slug", destination: "/portfolio/:slug", permanent: true },
+      { source: "/en/works", destination: "/en/portfolio", permanent: true },
+      { source: "/en/works/:slug", destination: "/en/portfolio/:slug", permanent: true },
+    ];
+  },
   images: {
     // AVIF first, WebP as the fallback for older clients.
     formats: ["image/avif", "image/webp"],

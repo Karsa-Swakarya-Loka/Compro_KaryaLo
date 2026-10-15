@@ -1,167 +1,125 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { servicesData } from "@/data/services";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { motion, type Variants } from "motion/react";
-import { EASE_EXPO, SPRING_INTERACTIVE } from "@/components/motion/tokens";
-import Reveal, { REVEAL_VIEWPORT } from "@/components/motion/Reveal";
+import { ArrowRight, Check, Code2, Cpu, LifeBuoy, Palette } from "lucide-react";
+import { getServices, supportServicesData } from "@/data/services";
+import { homeCopy } from "@/content/home";
+import { siteFeatures } from "@/config/site";
+import { type Locale, localePath } from "@/lib/i18n";
+import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-/*
-  Entry and hover share one variant tree, and `visible` doubles as the rest
-  state. That is what lets a card be scroll-revealed and hover-lifted at once:
-  hovering out returns it to exactly where the reveal left it, instead of
-  fighting a separate `rest` pose. Every child repeats its resting values under
-  both `hidden` and `visible` so variant propagation never leaves one
-  un-posed — an overlay with no `visible` entry would sit fully opaque.
-*/
-const cardVariants = (index: number): Variants => ({
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_EXPO, delay: index * 0.12 } },
-  /* The lift stays in motion rather than a Tailwind `hover:-translate-y-*`.
-     Tailwind v4 emits the standalone `translate` / `scale` properties, so a
-     Tailwind lift would compose with motion's `transform` instead of replacing
-     it — the card would travel twice. One owner, spring-driven like the rest. */
-  hover: { y: -8, scale: 1.01, transition: SPRING_INTERACTIVE },
-});
+const ICONS = { "digital-engineering": Code2, "creative-design": Palette, "iot-hardware": Cpu, support: LifeBuoy } as const;
 
-const imageVariants: Variants = {
-  hidden: { scale: 1, rotate: 0 },
-  visible: { scale: 1, rotate: 0, transition: { duration: 0.9, ease: EASE_EXPO } },
-  hover: { scale: 1.06, rotate: -1.2, transition: { duration: 0.9, ease: EASE_EXPO } },
-};
+/**
+ * Cargon's service row: photo cards side by side, one of them open as a blue
+ * panel with its details. Hovering or focusing a card opens it, and the others
+ * narrow to their photograph. The fourth card is the support that keeps an
+ * extended IT partner around after launch. On phones every card is open, as a
+ * photo over its blue panel.
+ */
+export default function ServicesSection({ lang }: { lang: Locale }) {
+  const copy = homeCopy[lang];
+  const services = copy.services;
+  const maintenance = supportServicesData[lang].find((item) => item.id === "maintenance")!;
+  const cards = [
+    ...getServices(lang).map((pillar) => ({
+      key: pillar.id as keyof typeof ICONS,
+      title: pillar.name,
+      short: pillar.shortName,
+      body: pillar.focus,
+      items: pillar.subServices.map((sub) => sub.name),
+      image: pillar.image,
+      href: `/services#${pillar.id}`,
+    })),
+    {
+      key: "support" as const,
+      title: maintenance.name,
+      short: services.supportTitle,
+      body: maintenance.description,
+      items: maintenance.items,
+      image: "/images/process-blueprint.webp",
+      href: "/services#support",
+    },
+  ];
+  const [active, setActive] = useState(0);
 
-const overlayVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 0, transition: { duration: 0.6, ease: EASE_EXPO } },
-  hover: { opacity: 1, transition: { duration: 0.6, ease: EASE_EXPO } },
-};
-
-const codeChipVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 0, y: 10, transition: { duration: 0.4, ease: EASE_EXPO } },
-  hover: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_EXPO, delay: 0.08 } },
-};
-
-const checkRowVariants = (index: number): Variants => ({
-  hidden: { x: 0 },
-  visible: { x: 0, transition: { duration: 0.45, ease: EASE_EXPO } },
-  hover: { x: 3, transition: { duration: 0.5, ease: EASE_EXPO, delay: index * 0.05 } },
-});
-
-const checkIconVariants = (index: number): Variants => ({
-  hidden: { rotate: 0, scale: 1 },
-  visible: { rotate: 0, scale: 1, transition: { duration: 0.3 } },
-  hover: {
-    rotate: [0, -28, 8, 0],
-    scale: [1, 1.32, 0.96, 1],
-    transition: { duration: 0.6, ease: EASE_EXPO, delay: index * 0.06 },
-  },
-});
-
-export default function ServicesSection() {
   return (
-    <section className="bg-porcelain py-20 md:py-28 px-4 md:px-12 border-b border-slate-200/80" id="services">
-      <div className="max-w-[66rem] mx-auto space-y-16">
+    <section className="bg-surface section-anchor px-4 md:px-12" id="services">
+      <div className="mx-auto max-w-[72rem]">
+        <SectionHeading badge={copy.badges.services} title={services.title} intro={services.intro} className="mb-10 md:mb-12" />
 
-        {/* Section Header */}
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200/80 pb-8">
-          <div>
-            <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">
-              Tiga Bidang yang Kami Kerjakan
-            </h2>
-          </div>
-          <p className="font-story text-slate-600 text-sm md:text-base max-w-md leading-relaxed">
-            Tiap bidang bisa dipesan sendiri, atau digabung dalam satu proyek kalau sistem Anda membutuhkan ketiganya.
-          </p>
-        </Reveal>
-
-        {/* 3 Sculptural Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {servicesData.map((pillar, index) => (
-            <motion.article
-              key={pillar.id}
-              variants={cardVariants(index)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={REVEAL_VIEWPORT}
-              whileHover="hover"
-              data-reveal=""
-              className="bg-white rounded-3xl p-6 md:p-7 border border-slate-200/90 hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 transition-[background-color,border-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group flex flex-col justify-between space-y-6"
-            >
-              {/* Image Preview Container — multi-layer depth reveal */}
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 shadow-sm relative">
-                <motion.div variants={imageVariants} className="absolute inset-0 will-change-transform">
-                  <Image
-                    src={pillar.image}
-                    alt={pillar.imageAlt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </motion.div>
-                <motion.div
-                  variants={overlayVariants}
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-midnight/45 via-midnight/5 to-transparent pointer-events-none"
-                />
-                <motion.span
-                  variants={codeChipVariants}
-                  aria-hidden="true"
-                  className="absolute left-3 bottom-3 font-meta text-[10px] font-bold uppercase tracking-[0.2em] text-porcelain bg-midnight/70 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/15"
+        <RevealGroup className="rail-mobile flex flex-col gap-5 lg:h-[32rem] lg:flex-row" stagger={0.1}>
+          {cards.map((card, i) => {
+            const Icon = ICONS[card.key];
+            const open = i === active;
+            return (
+              <RevealItem
+                key={card.key}
+                className="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-card lg:basis-0 lg:transition-[flex-grow] lg:duration-700 lg:ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{ flexGrow: open ? 3.2 : 1 }}
+              >
+                <div
+                  className="flex flex-1 flex-col lg:h-full"
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
                 >
-                  {pillar.shortName}
-                </motion.span>
-              </div>
+                  <div className="img-zoom relative h-40 lg:absolute lg:inset-0 lg:h-auto">
+                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/10 to-transparent" aria-hidden="true" />
+                  </div>
 
-              {/* Text & Content */}
-              <div className="space-y-4 flex-1">
-                <div className="flex flex-wrap gap-2 items-center justify-between">
-                  <span className="font-meta text-xs font-bold text-accent uppercase tracking-wider transition-colors duration-[400ms] group-hover:text-mist">
-                    Bidang {pillar.pillarNumber}
-                  </span>
+                  {/* Closed state on desktop: just the field's short name over the photo. */}
+                  <div
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 hidden p-5 transition-opacity duration-500 lg:block ${open ? "opacity-0" : "opacity-100"}`}
+                    aria-hidden="true"
+                  >
+                    <span className="type-card-title text-white">{card.short}</span>
+                  </div>
+
+                  {/* The blue panel: always shown on phones, the open card's face on desktop. */}
+                  <div
+                    className={`relative flex flex-1 flex-col justify-end gap-4 bg-brand p-7 text-white lg:absolute lg:inset-x-0 lg:bottom-0 lg:flex-none lg:transition-opacity lg:duration-500 ${
+                      open ? "lg:opacity-100" : "lg:pointer-events-none lg:opacity-0"
+                    }`}
+                  >
+                    <span className="grid h-14 w-14 place-items-center rounded-full bg-white/15">
+                      <Icon aria-hidden="true" className="h-6 w-6 text-white" />
+                    </span>
+                    <h3 className="type-card-title-lg text-white">{card.title}</h3>
+                    <p className="type-body-card text-white max-w-[46ch]">{card.body}</p>
+                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+                      {card.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2 type-small text-white">
+                          <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link href={localePath(lang, card.href)} className="text-link self-start text-white">
+                      {services.detailLink}
+                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
+              </RevealItem>
+            );
+          })}
+        </RevealGroup>
 
-                <h3 className="font-story text-xl md:text-2xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover:text-white">
-                  {pillar.name}
-                </h3>
-
-                <p className="font-story text-slate-600 text-sm leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
-                  {pillar.focus}
-                </p>
-
-                {/* Sub-services Pills — cascading precision check */}
-                <div className="pt-2 space-y-2 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover:border-white/20">
-                  {pillar.subServices.map((sub, index) => (
-                    <motion.div
-                      key={sub.code}
-                      variants={checkRowVariants(index)}
-                      className="flex items-start gap-2 text-xs text-slate-700 font-story transition-colors duration-[400ms] group-hover:text-white"
-                    >
-                      <motion.span variants={checkIconVariants(index)} className="flex shrink-0 mt-0.5 origin-center">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent transition-[color,transform] duration-[400ms] group-hover:text-white group-hover:scale-110" />
-                      </motion.span>
-                      <span className="font-medium">{sub.name}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bottom Action Link */}
-              <div className="pt-4 border-t border-slate-200/60 transition-colors duration-[400ms] group-hover:border-white/20">
-                <Link
-                  href={`/services#${pillar.id}`}
-                  className="min-h-11 font-meta text-xs font-bold uppercase tracking-wider text-midnight group-hover:text-white flex flex-wrap gap-2 items-center justify-between transition-colors duration-[400ms]"
-                >
-                  <span>Lihat Detail Layanan</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
-                </Link>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-
+        {siteFeatures.enableProductsSection && (
+          <Reveal className="mt-12 flex flex-col items-center gap-3 text-center">
+            <p className="type-intro text-body">
+              <span className="font-semibold text-ink">{services.productsTitle}</span> {services.productsBody}
+            </p>
+            <Link href={localePath(lang, "/products")} className="text-link text-brand">
+              {services.productsLink}
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </Reveal>
+        )}
       </div>
     </section>
   );

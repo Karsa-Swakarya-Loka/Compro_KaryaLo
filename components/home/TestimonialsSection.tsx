@@ -1,21 +1,24 @@
 import Link from "next/link";
 import { ArrowRight, Quote } from "lucide-react";
-import { testimonialsData } from "@/data/testimonials";
+import { getTestimonials } from "@/data/testimonials";
+import { homeCopy } from "@/content/home";
+import { type Locale, localePath } from "@/lib/i18n";
 import Reveal from "@/components/motion/Reveal";
 
 /**
  * Server component on purpose: only client-approved testimonials leave the server, so drafts
  * waiting for approval are never shipped to the browser. Renders nothing until one is approved.
  */
-export default function TestimonialsSection() {
-  const testimonials = testimonialsData.filter((t) => t.approved && t.name);
+export default function TestimonialsSection({ lang }: { lang: Locale }) {
+  const copy = homeCopy[lang].testimonials;
+  const testimonials = getTestimonials(lang).filter((t) => t.approved && t.name);
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="bg-mist pt-14 md:pt-20 pb-20 md:pb-28 px-4 md:px-12 border-b border-mist-border" id="testimoni">
-      <div className="max-w-[66rem] mx-auto space-y-10">
+    <section className="bg-white section-band px-4 md:px-12" id="testimoni">
+      <div className="max-w-[72rem] mx-auto space-y-10">
         <Reveal>
-          <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">Kata Klien Kami</h2>
+          <h2 className="type-section-title text-midnight">{copy.title}</h2>
         </Reveal>
 
         <div className={`grid grid-cols-1 gap-6 ${testimonials.length > 1 ? "lg:grid-cols-2" : ""}`}>
@@ -29,11 +32,11 @@ export default function TestimonialsSection() {
                 <figcaption className="pt-5 border-t border-slate-200/70 flex flex-wrap items-end justify-between gap-3">
                   <span>
                     <span className="block font-story font-bold text-midnight">{t.name}</span>
-                    <span className="block font-meta text-xs text-slate-600">{t.role}, {t.company}</span>
+                    <span className="block type-small text-slate-600">{t.role}, {t.company}</span>
                   </span>
                   {t.projectSlug && (
-                    <Link href={`/works/${t.projectSlug}`} className="font-meta text-xs font-bold uppercase tracking-wider text-midnight inline-flex items-center gap-2 min-h-11">
-                      Lihat proyeknya <ArrowRight aria-hidden="true" className="w-4 h-4" />
+                    <Link href={localePath(lang, `/portfolio/${t.projectSlug}`)} className="text-link">
+                      {copy.projectLink} <ArrowRight aria-hidden="true" className="w-4 h-4" />
                     </Link>
                   )}
                 </figcaption>

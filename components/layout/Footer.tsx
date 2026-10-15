@@ -1,150 +1,132 @@
 import Link from "next/link";
 import Image from "next/image";
-import { siteConfig, siteFeatures } from "@/config/site";
+import { siteConfig, siteFeatures, siteText } from "@/config/site";
+import { commonCopy } from "@/content/common";
+import { getServices, supportServicesData } from "@/data/services";
+import { type Locale, localePath } from "@/lib/i18n";
 import { MapPin, Mail, Clock, ArrowUpRight, ShieldCheck } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
-export default function Footer() {
+/**
+ * The Cargon footer: a band in the brand blue holding one white card, with the
+ * brand and contact column, the navbar repeated as links, the services, and the
+ * legal standing. No newsletter or social icons: there is no list to subscribe
+ * to and no verified profile to link yet (see `siteConfig.sameAs`).
+ */
+export default function Footer({ lang }: { lang: Locale }) {
+  const copy = commonCopy[lang];
+  const text = siteText[lang];
+  const href = (path: string) => localePath(lang, path);
+  // Every route but the home page, in navbar order.
+  const companyLinks = copy.nav.filter((link) => link.href !== "/");
+  const maintenance = supportServicesData[lang].find((item) => item.id === "maintenance");
+  const linkClass = "text-body hover:text-brand transition-colors";
+
   return (
-    <footer className="bg-midnight border-t border-midnight-light text-midnight-muted font-story text-sm">
-      <div className="max-w-6xl mx-auto px-4 md:px-12 py-16 md:py-20">
-        
-        {/*
-          The columns settle in as the page bottoms out. Only these wrappers are
-          client components — everything inside stays server-rendered.
-        */}
-        <RevealGroup className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-white/10" stagger={0.1}>
+    <footer className="bg-brand px-4 md:px-12 pt-14 pb-10 md:pt-16 md:pb-12">
+      <div className="max-w-[72rem] mx-auto">
 
-          {/* Kolom 1: Profil Legal & Alamat */}
-          <RevealItem distance={20} className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/images/icon.svg"
-                alt=""
-                width={1040}
-                height={1040}
-                unoptimized
-                className="h-9 w-auto shrink-0 rounded-xl"
-              />
-              <span className="font-story text-lg font-bold tracking-tight text-porcelain block leading-none">
-                KaryaLo Digital Solution
-              </span>
-            </div>
+        {/* The slogan over the card, white on blue: the brand's last word on every page. */}
+        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 mb-10 border-b border-white/20">
+          <p className="type-section-title text-white max-w-[22ch]">{text.tagline}</p>
+          <p className="type-intro text-white max-w-[44ch]">{text.description}</p>
+        </Reveal>
 
-            <p className="text-midnight-muted text-sm leading-relaxed max-w-sm pt-2">
-              Studio teknologi dan desain di Kota Bekasi. Kami membangun website, aplikasi, dan perangkat IoT untuk kebutuhan bisnis.
-            </p>
+        <div className="rounded-3xl bg-white p-7 md:p-12 shadow-lift">
+          <RevealGroup className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-10 border-b border-line" stagger={0.08}>
 
-            <div className="space-y-2.5 pt-2 text-xs font-story text-midnight-muted">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-mist shrink-0 mt-0.5" />
-                <span>
-                  {siteConfig.address} •{" "}
-                  <a
-                    href={siteConfig.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-mist hover:underline font-bold inline-flex items-center gap-0.5"
-                  >
-                    Google Maps <ArrowUpRight className="w-3 h-3" />
-                  </a>
+            {/* Brand & contact */}
+            <RevealItem distance={20} className="md:col-span-4 space-y-5">
+              <Link href={href("/")} className="inline-flex items-center gap-3">
+                <Image src="/images/icon.svg" alt="" width={1040} height={1040} unoptimized className="h-10 w-auto shrink-0 rounded-lg" />
+                <span className="text-xl font-bold tracking-tight text-ink">
+                  Karya<span className="text-brand">Lo</span> <span className="font-medium text-body text-base">Digital Solution</span>
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-mist shrink-0" />
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-mist transition-colors font-medium">
-                  {siteConfig.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-mist shrink-0" />
-                <span>{siteConfig.workingHours}</span>
-              </div>
-            </div>
-          </RevealItem>
+              </Link>
+              <ul className="space-y-3 type-small text-body">
+                <li className="flex items-start gap-2.5">
+                  <MapPin aria-hidden="true" className="w-4 h-4 text-brand shrink-0 mt-1" />
+                  <span>
+                    {siteConfig.address}{" "}
+                    <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand inline-flex items-center gap-0.5 hover:underline">
+                      Google Maps <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5" />
+                    </a>
+                  </span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <Mail aria-hidden="true" className="w-4 h-4 text-brand shrink-0" />
+                  <a href={`mailto:${siteConfig.email}`} className={linkClass}>{siteConfig.email}</a>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <Clock aria-hidden="true" className="w-4 h-4 text-brand shrink-0 mt-1" />
+                  <span>{text.workingHours}</span>
+                </li>
+              </ul>
+            </RevealItem>
 
-          {/* Kolom 2: Disiplin Layanan */}
-          <RevealItem distance={20} className="md:col-span-4 space-y-4">
-            <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
-              Layanan Kami
-            </span>
-            <ul className="space-y-2.5 text-sm text-midnight-muted font-story">
-              <li>
-                <Link href="/services#digital-engineering" className="hover:text-mist transition-colors block">
-                  Software, Web & Aplikasi Mobile
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#creative-design" className="hover:text-mist transition-colors block">
-                  Desain UI/UX & Identitas Merek
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#iot-hardware" className="hover:text-mist transition-colors block">
-                  Perangkat IoT & Sistem Pemantauan
-                </Link>
-              </li>
-            </ul>
-
-            {/* Every route needs a contextual link, not only the navbar. */}
-            <div className="pt-2 space-y-2.5">
-              <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
-                Jelajahi
-              </span>
-              <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-midnight-muted font-story">
-                {[
-                  { href: "/works", label: "Portofolio" },
-                  // Same switch the navbar and sitemap read, so turning the
-                  // section off never leaves a footer link pointing at a 404.
-                  ...(siteFeatures.enableProductsSection ? [{ href: "/products", label: "Produk" }] : []),
-                  { href: "/about", label: "Tentang" },
-                  { href: "/contact", label: "Kontak" },
-                ].map((link) => (
+            {/* Company */}
+            <RevealItem distance={20} className="md:col-span-2 space-y-4">
+              <h2 className="type-card-title text-ink">{copy.footer.companyHeading}</h2>
+              <ul className="space-y-3 type-small">
+                {companyLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="hover:text-mist transition-colors">
-                      {link.label}
-                    </Link>
+                    <Link href={href(link.href)} className={linkClass}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
+            </RevealItem>
+
+            {/* Services & platforms */}
+            <RevealItem distance={20} className="md:col-span-3 space-y-4">
+              <h2 className="type-card-title text-ink">{copy.footer.servicesHeading}</h2>
+              <ul className="space-y-3 type-small">
+                {getServices(lang).map((pillar) => (
+                  <li key={pillar.id}>
+                    <Link href={href(`/services#${pillar.id}`)} className={linkClass}>{pillar.name}</Link>
+                  </li>
+                ))}
+                {maintenance && (
+                  <li>
+                    <Link href={href("/services#support")} className={linkClass}>{maintenance.name}</Link>
+                  </li>
+                )}
+                {siteFeatures.enableProductsSection && (
+                  <li>
+                    <Link href={href("/products")} className={`${linkClass} inline-flex items-center gap-1`}>
+                      {copy.footer.productsLink} <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5" />
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </RevealItem>
+
+            {/* Legal standing */}
+            <RevealItem distance={20} className="md:col-span-3 space-y-4">
+              <h2 className="type-card-title text-ink">{copy.footer.legalHeading}</h2>
+              <div className="rounded-2xl bg-surface p-5 space-y-2">
+                <div className="flex items-center gap-2 type-label text-brand">
+                  <ShieldCheck aria-hidden="true" className="w-4 h-4" />
+                  <span>{copy.footer.registered}</span>
+                </div>
+                <p className="type-small text-body">{text.legalEntity}, {copy.footer.registeredBody}</p>
+                <p className="type-meta text-ink pt-1">NIB: {siteConfig.nib}</p>
+                <p className="type-meta text-body">KBLI: {siteConfig.kbliCode}</p>
+              </div>
+            </RevealItem>
+
+          </RevealGroup>
+
+          <div className="pt-7 flex flex-col md:flex-row md:items-center justify-between gap-4 type-small text-body">
+            <p>{copy.footer.copyright}</p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link href={href("/terms")} className={linkClass}>{copy.footer.terms}</Link>
+              <span aria-hidden="true" className="h-4 w-px bg-line" />
+              <Link href={href("/privacy")} className={linkClass}>{copy.footer.privacy}</Link>
+              <span aria-hidden="true" className="h-4 w-px bg-line" />
+              <span>{text.location}</span>
             </div>
-          </RevealItem>
-
-          {/* Kolom 3: Legalitas & Kepatuhan */}
-          <RevealItem distance={20} className="md:col-span-3 space-y-4">
-            <span className="font-story text-sm font-bold text-mist uppercase tracking-wider block">
-              Legalitas
-            </span>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 text-xs font-story">
-              <div className="flex items-center gap-1.5 text-mist font-bold">
-                <ShieldCheck className="w-4 h-4 text-mist" />
-                <span>Terdaftar Resmi</span>
-              </div>
-              <p className="font-story text-midnight-muted leading-relaxed text-[11px]">
-                {siteConfig.legalEntity}, terdaftar di sistem OSS Republik Indonesia.
-              </p>
-              <div className="pt-1 text-[11px] text-porcelain font-semibold border-t border-white/10">
-                NIB: {siteConfig.nib}
-              </div>
-              <div className="text-[11px] text-midnight-muted">
-                KBLI: 62019
-              </div>
-            </div>
-          </RevealItem>
-
-        </RevealGroup>
-
-        {/* Bottom Bar: Copyright & Compliance */}
-        <Reveal distance={16} duration={0.55} className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-story text-midnight-muted">
-          <div>
-            © 2026 PT Karsa Swakarya Loka (KaryaLo Digital Solution). Seluruh hak cipta dilindungi undang-undang.
           </div>
-          <div className="font-story flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-wider text-midnight-muted">
-            <Link href="/privacy" className="hover:text-mist transition-colors">Kebijakan Privasi</Link>
-            <Link href="/terms" className="hover:text-mist transition-colors">Syarat &amp; Ketentuan</Link>
-            <span>Kota Bekasi, Jawa Barat</span>
-          </div>
-        </Reveal>
+        </div>
 
       </div>
     </footer>

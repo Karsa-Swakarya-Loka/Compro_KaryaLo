@@ -1,90 +1,79 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, CornerDownRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Quote } from "lucide-react";
 import { motion } from "motion/react";
-import { problemsData } from "@/data/problems";
-import { servicesData } from "@/data/services";
-import { getWhatsAppUrl, siteConfig } from "@/config/site";
+import { getProblems } from "@/data/problems";
+import { getServices } from "@/data/services";
+import { homeCopy } from "@/content/home";
+import { getWhatsAppUrl, whatsappUrl } from "@/config/site";
+import { type Locale, localePath } from "@/lib/i18n";
 import Reveal, { RevealGroup, revealVariants } from "@/components/motion/Reveal";
-
-const pillarLabel = (pillarId: string) => {
-  const pillar = servicesData.find((p) => p.id === pillarId);
-  return pillar ? `Bidang ${pillar.pillarNumber} · ${pillar.shortName}` : "";
-};
-
-const linkClass =
-  "stretched-link font-meta text-xs font-bold uppercase tracking-wider text-midnight flex items-center justify-between gap-2 min-h-11";
+import ArrowSwap from "@/components/motion/ArrowSwap";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 /**
- * Entry by situation rather than by service name: a visitor who recognises their own problem
- * sees what we build for it, which field handles it, and the proof or a WhatsApp opener.
+ * The situations we fix, in the shape of Cargon's testimonial cards: a quote
+ * mark, the problem in the client's own words, then what we build for it.
+ * These are not testimonials and carry no star ratings or names — real client
+ * quotes live in TestimonialsSection and only render once approved.
+ *
+ * Each card is one link (the proof, or a WhatsApp opener). The section ends on
+ * its solid WhatsApp button: right after a visitor recognises their problem.
  */
-export default function ProblemsSection() {
+export default function ProblemsSection({ lang }: { lang: Locale }) {
+  const copy = homeCopy[lang];
+  const problems = copy.problems;
+  const services = getServices(lang);
+  const fieldName = (pillarId: string) => services.find((p) => p.id === pillarId)?.shortName ?? "";
+
   return (
-    <section className="bg-mist py-20 md:py-28 px-4 md:px-12 border-b border-mist-border" id="masalah">
-      <div className="max-w-[66rem] mx-auto space-y-14">
+    <section className="bg-surface section-anchor px-4 md:px-12" id="masalah">
+      <div className="mx-auto max-w-[72rem]">
+        <SectionHeading badge={copy.badges.problems} title={problems.title} intro={problems.intro} className="mb-10 md:mb-12" />
 
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-mist-border pb-8">
-          <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal max-w-xl">
-            Masalah yang Sering Kami Bereskan
-          </h2>
-          <p className="font-story text-mist-ink text-sm md:text-base max-w-md leading-relaxed">
-            Pilih yang paling mirip dengan kondisi Anda. Di tiap kartu ada yang kami bangun untuk mengatasinya, dan contoh hasilnya bila sudah ada.
-          </p>
-        </Reveal>
-
-        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" stagger={0.07}>
-          {problemsData.map((item) => (
+        <RevealGroup className="rail-mobile grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          {getProblems(lang).map((item) => (
             <motion.article
               key={item.id}
               variants={revealVariants()}
               data-reveal=""
-              className="relative bg-white rounded-3xl p-6 md:p-7 border border-white flex flex-col gap-5 shadow-sm shadow-midnight/5 hover:border-midnight/30 hover:shadow-xl hover:shadow-midnight/10 transition-[border-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group"
+              className="project-card group relative flex flex-col gap-5 rounded-xl bg-white p-7 shadow-card transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-lift"
             >
-              <span className="font-meta text-[11px] font-bold uppercase tracking-wider text-mist-ink">
-                {pillarLabel(item.pillarId)}
-              </span>
-
-              <h3 className="font-story text-lg md:text-xl font-bold text-midnight leading-snug">
-                “{item.problem}”
-              </h3>
-
-              <div className="flex gap-3 flex-1">
-                <CornerDownRight aria-hidden="true" className="w-4 h-4 mt-1 shrink-0 text-mist-border" />
-                <div className="space-y-1.5">
-                  <p className="font-meta text-[11px] font-bold uppercase tracking-wider text-slate-500">Yang kami bangun</p>
-                  <p className="font-story text-sm text-slate-600 leading-relaxed">{item.solution}</p>
-                </div>
+              <div className="flex items-center justify-between gap-3">
+                <Quote aria-hidden="true" className="h-8 w-8 fill-brand-soft text-brand" />
+                <span className="type-meta rounded-full bg-surface px-3 py-1 text-body">{fieldName(item.pillarId)}</span>
               </div>
 
-              <div className="pt-4 border-t border-slate-200/70">
-                {item.proof ? (
-                  <Link href={`/works/${item.proof.slug}`} className={linkClass}>
-                    <span>{item.proof.label}</span>
-                    <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1" />
-                  </Link>
-                ) : (
-                  <a href={getWhatsAppUrl(item.whatsappMessage)} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                    <span>Bahas kebutuhan ini</span>
-                    <ArrowUpRight aria-hidden="true" className="w-4 h-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                )}
+              <h3 className="type-card-title text-ink">“{item.problem}”</h3>
+
+              <div className="flex-1 space-y-1.5 border-t border-line pt-4">
+                <p className="type-label text-brand">{problems.builds}</p>
+                <p className="type-body-card text-body">{item.solution}</p>
               </div>
+
+              {item.proof ? (
+                <Link href={localePath(lang, `/portfolio/${item.proof.slug}`)} className="stretched-link text-link self-start text-brand">
+                  {item.proof.label}
+                  <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </Link>
+              ) : (
+                <a href={getWhatsAppUrl(item.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="stretched-link text-link self-start text-brand">
+                  {problems.discuss}
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                </a>
+              )}
             </motion.article>
           ))}
         </RevealGroup>
 
-        <Reveal className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl border border-mist-border px-6 py-5">
-          <p className="font-story text-sm md:text-base text-midnight">
-            Kondisi Anda tidak ada di daftar ini? Ceritakan saja, kami bantu tentukan mulai dari mana.
-          </p>
-          <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary shrink-0 self-start sm:self-auto">
-            <span>Konsultasi WhatsApp</span>
-            <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
+        <Reveal className="mt-10 flex flex-col items-center gap-5 text-center">
+          <p className="type-intro text-ink max-w-[56ch]">{problems.notListed}</p>
+          <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" data-wa-primary="" className="btn btn-primary group">
+            <span>{problems.whatsapp}</span>
+            <ArrowSwap />
           </a>
         </Reveal>
-
       </div>
     </section>
   );
