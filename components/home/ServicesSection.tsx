@@ -51,7 +51,8 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={copy.badges.services} title={services.title} intro={services.intro} className="mb-10 md:mb-12" />
 
-        <RevealGroup className="rail-mobile flex flex-col gap-5 lg:h-[32rem] lg:flex-row" stagger={0.1}>
+        {/* Tablet: two by two, every card open; desktop: the accordion row. */}
+        <RevealGroup className="rail-mobile flex flex-col gap-5 md:grid md:grid-cols-2 lg:flex lg:h-[32rem] lg:flex-row" stagger={0.1}>
           {cards.map((card, i) => {
             const Icon = ICONS[card.key];
             const open = i === active;
@@ -90,7 +91,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
                     </span>
                     <h3 className="type-card-title-lg text-white">{card.title}</h3>
                     <p className="type-body-card text-white max-w-[46ch]">{card.body}</p>
-                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                       {card.items.map((item) => (
                         <li key={item} className="flex items-start gap-2 type-small text-white">
                           <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />

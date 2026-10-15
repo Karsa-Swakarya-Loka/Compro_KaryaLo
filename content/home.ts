@@ -16,13 +16,23 @@ export interface HomeCopy {
   /** The small pill over each section title (Cargon's section badge). */
   badges: { why: string; services: string; portfolio: string; studio: string; problems: string; process: string; trust: string; faq: string };
   /**
-   * Hero slider, problem first (owner's choice, 2026-10-15): one everyday client
-   * problem per slide. No pause button (owner's call); autoplay holds while the
-   * hero is hovered or focused and stops once a visitor picks a slide.
+   * Hero slider (owner's calls, 2026-10-15 evening): one project per slide,
+   * each shown as the same 3D laptop mockup, with a caption centred under it
+   * that explains the mockup: project type and field, then the title, then one
+   * line on what it is. The problem-first hook lives on in the "Solutions"
+   * section further down. No pause button; the slider keeps moving under the
+   * pointer, only slower (15s a slide instead of 6.5s), and holds while a
+   * keyboard user is on its controls.
    */
   slider: {
     label: string;
     goTo: (n: number, total: number) => string;
+    /** Alt text for a slide, from the project's title. */
+    slideAlt: (title: string) => string;
+    /** Accessible name of the link from a slide to its case study. */
+    openProject: (title: string) => string;
+    /** One line per project slug, condensed from its portfolio summary. No claims beyond it. */
+    captions: Record<string, string>;
   };
   /** The commitments box over the studio photo. Figures the site already promises, not metrics. */
   studio: {
@@ -32,8 +42,8 @@ export interface HomeCopy {
   /**
    * Above the fold, in reading order: what KaryaLo is (pill + H1), who it is
    * for and what it does (`audience`), why it matters (`reasons`), and what to
-   * do next (the two buttons and `reassurance`). The problem slides sit in the
-   * right-hand panel as worked examples.
+   * do next (the two buttons and `reassurance`). The project slider sits in
+   * the right-hand panel as the proof.
    */
   hero: {
     category: string;
@@ -43,16 +53,6 @@ export interface HomeCopy {
     primaryCta: string;
     secondaryCta: string;
     reassurance: string;
-    problemLabel: string;
-    builds: string;
-    proofLink: string;
-    slides: {
-      /** Problem id in data/problems.ts: supplies the solution line, proof and WhatsApp opener. */
-      problemId: string;
-      /** The problem as the visitor would say it, set at display size. */
-      headline: string;
-      imageAlt: string;
-    }[];
   };
   principles: {
     title: string;
@@ -140,8 +140,18 @@ export const homeCopy: Localized<HomeCopy> = {
       faq: "FAQ",
     },
     slider: {
-      label: "Solusi untuk kebutuhan operasional Anda",
-      goTo: (n, total) => `Tampilkan slide ${n} dari ${total}`,
+      label: "Contoh proyek KaryaLo",
+      goTo: (n, total) => `Tampilkan proyek ${n} dari ${total}`,
+      slideAlt: (title) => `${title}, ditampilkan pada laptop`,
+      openProject: (title) => `Lihat studi kasus: ${title}`,
+      captions: {
+        "alina-omnichannel-retail": "Toko online yang tersambung ke pengelolaan pesanan dan stok gudang.",
+        "deliastore-topup": "Top up game dan produk digital dengan pembayaran DOKU dan pengiriman otomatis.",
+        "hij-garment-erp": "ERP web dari pesanan, SPK, dan produksi hingga logistik dan keuangan.",
+        "affirmate-company-profile": "Website dua bahasa untuk layanan korporat, perizinan, dan visa.",
+        "apegale-company-profile": "Website dua bahasa untuk perizinan ekspatriat dan tenaga kerja asing.",
+        "hij-corporate-profile": "Website profil yang menyampaikan kapabilitas perusahaan secara terstruktur.",
+      },
     },
     studio: {
       imageAlt: "Ruang studio KaryaLo dengan meja kerja pengembangan software",
@@ -164,31 +174,6 @@ export const homeCopy: Localized<HomeCopy> = {
       primaryCta: "Diskusikan kebutuhan Anda",
       secondaryCta: "Lihat contoh proyek",
       reassurance: "Konsultasi awal via WhatsApp · dilayani pada jam kerja · tanpa kewajiban melanjutkan",
-      problemLabel: "Solusi untuk kebutuhan operasional Anda",
-      builds: "Yang kami bangun",
-      proofLink: "Pelajari solusinya",
-      slides: [
-        {
-          problemId: "stok-tidak-cocok",
-          headline: "Stok gudang belum selaras dengan pesanan online?",
-          imageAlt: "Tangkapan layar toko online Alina yang tersambung ke sistem gudang",
-        },
-        {
-          problemId: "laporan-manual",
-          headline: "Laporan mingguan masih bergantung pada rekap manual?",
-          imageAlt: "Tangkapan layar dashboard laporan internal KaryaLo",
-        },
-        {
-          problemId: "website-belum-meyakinkan",
-          headline: "Website perusahaan belum meyakinkan calon mitra?",
-          imageAlt: "Tangkapan layar website korporat HIJ",
-        },
-        {
-          problemId: "alat-tidak-terpantau",
-          headline: "Kondisi mesin sulit dipantau sebelum terjadi gangguan?",
-          imageAlt: "Meja kerja dengan papan rangkaian kecil tersambung ke perangkat pemantau, dengan diagram alur data di layar",
-        },
-      ],
     },
     principles: {
       title: "Cara Kami Bermitra",
@@ -359,8 +344,18 @@ export const homeCopy: Localized<HomeCopy> = {
       faq: "FAQ",
     },
     slider: {
-      label: "Solutions for your operations",
-      goTo: (n, total) => `Show slide ${n} of ${total}`,
+      label: "KaryaLo project examples",
+      goTo: (n, total) => `Show project ${n} of ${total}`,
+      slideAlt: (title) => `${title}, shown on a laptop`,
+      openProject: (title) => `View case study: ${title}`,
+      captions: {
+        "alina-omnichannel-retail": "An online store connected to order management and warehouse stock.",
+        "deliastore-topup": "Game top-ups and digital products, with DOKU payments and automatic delivery.",
+        "hij-garment-erp": "A web ERP from orders, work orders and production to logistics and finance.",
+        "affirmate-company-profile": "A bilingual website for corporate services, licensing and visas.",
+        "apegale-company-profile": "A bilingual website for expatriate and foreign worker licensing.",
+        "hij-corporate-profile": "A company profile website that presents its capabilities in a clear structure.",
+      },
     },
     studio: {
       imageAlt: "The KaryaLo studio with software development workstations",
@@ -383,31 +378,6 @@ export const homeCopy: Localized<HomeCopy> = {
       primaryCta: "Discuss your project",
       secondaryCta: "See example projects",
       reassurance: "Initial consultation via WhatsApp · available during business hours · no obligation",
-      problemLabel: "Solutions for your operations",
-      builds: "What we build",
-      proofLink: "Explore the solution",
-      slides: [
-        {
-          problemId: "stok-tidak-cocok",
-          headline: "Warehouse stock out of sync with online orders?",
-          imageAlt: "Screenshot of the Alina online store connected to its warehouse system",
-        },
-        {
-          problemId: "laporan-manual",
-          headline: "Weekly reports still depend on manual spreadsheets?",
-          imageAlt: "Screenshot of the KaryaLo internal reporting dashboard",
-        },
-        {
-          problemId: "website-belum-meyakinkan",
-          headline: "Does your website reflect your company's capabilities?",
-          imageAlt: "Screenshot of the HIJ corporate website",
-        },
-        {
-          problemId: "alat-tidak-terpantau",
-          headline: "Struggling to monitor equipment before a fault occurs?",
-          imageAlt: "A workbench with a small circuit board wired to a monitoring device, and a data-flow diagram on screen",
-        },
-      ],
     },
     principles: {
       title: "How We Partner",

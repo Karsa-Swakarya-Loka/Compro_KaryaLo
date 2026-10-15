@@ -32,7 +32,7 @@ export default function ProblemsSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={copy.badges.problems} title={problems.title} intro={problems.intro} className="mb-10 md:mb-12" />
 
-        <RevealGroup className="rail-mobile grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+        <RevealGroup className="rail-mobile md-orphan-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
           {getProblems(lang).map((item) => (
             <motion.article
               key={item.id}

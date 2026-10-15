@@ -130,7 +130,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.badges.team} title={copy.team.title} intro={copy.team.intro} />
 
-          <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          <RevealGroup className="sm-orphan-center grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {copy.team.units.map((unit) => {
               const Icon = UNIT_ICONS[unit.icon];
               return (
@@ -154,7 +154,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.badges.process} title={<span id="cara-kerja">{copy.process.title}</span>} intro={copy.process.intro} />
 
-          <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          <RevealGroup className="md-orphan-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
             {processSteps.map((step) => (
               <RevealItem key={step.step} className="h-full">
                 <article className="relative flex h-full flex-col gap-3 overflow-hidden rounded-3xl bg-white p-7 shadow-card">
@@ -219,7 +219,8 @@ export default function AboutClient({ lang }: { lang: Locale }) {
               </a>
             </div>
 
-            <dl className="grid grid-cols-1 gap-6 pt-6 md:grid-cols-3">
+            {/* Two across on tablets with the address underneath; three across from 1024px. */}
+            <dl className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2 lg:grid-cols-3">
               <div className="space-y-1">
                 <dt className="type-meta text-white/80">{copy.legal.nibLabel}</dt>
                 <dd className="type-card-title-lg text-white tabular-nums">{siteConfig.nib}</dd>
@@ -230,7 +231,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
                 <dd className="type-card-title-lg text-white tabular-nums">{siteConfig.kbliCode}</dd>
                 <dd className="type-small text-white/80">{siteText[lang].kbli.split("— ")[1]}</dd>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 sm:col-span-2 lg:col-span-1">
                 <dt className="type-meta text-white/80">{copy.legal.addressLabel}</dt>
                 <dd className="type-body-card text-white">{siteConfig.address}</dd>
               </div>

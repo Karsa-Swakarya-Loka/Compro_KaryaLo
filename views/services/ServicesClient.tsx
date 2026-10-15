@@ -310,7 +310,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                 <Reveal>
                   <h3 className="type-subhead text-center text-ink">{copy.includedLabel}</h3>
                 </Reveal>
-                <RevealGroup className="rail-mobile grid gap-6 lg:grid-cols-3" stagger={0.1}>
+                <RevealGroup className="rail-mobile md-orphan-center grid gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
                   {pillar.subServices.map((sub) => {
                     const SubIcon = SUB_ICONS[sub.code] ?? CheckCircle2;
                     return (
@@ -343,7 +343,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                   <Reveal>
                     <h3 className="type-subhead text-center text-ink">{copy.proofHeading}</h3>
                   </Reveal>
-                  <RevealGroup className="rail-mobile grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
+                  <RevealGroup className="rail-mobile md-orphan-center grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
                     {proof.map((project) => (
                       <RevealItem key={project.slug} className="h-full">
                         <Link

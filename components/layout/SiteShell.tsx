@@ -81,7 +81,7 @@ export default function SiteShell({ lang, children }: { lang: Locale; children: 
     // suppressHydrationWarning: PRELOAD_SCRIPT may add `data-preload` to <html> before React hydrates.
     <html lang={htmlLang[lang]} data-scroll-behavior="smooth" className={`${fontVariables} antialiased`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-white text-ink">
-        {/* Decides before first paint whether this view gets the logo loader (first page of a visit). */}
+        {/* Decides before first paint whether this view gets the logo loader (every full load: first visit or refresh). */}
         <script dangerouslySetInnerHTML={{ __html: PRELOAD_SCRIPT }} />
         <Preloader />
         <JsonLd data={[organizationSchema(lang), websiteSchema]} />

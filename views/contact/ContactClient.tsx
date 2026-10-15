@@ -400,7 +400,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.before.badge} title={copy.before.heading} intro={copy.before.intro} />
 
-          <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-3" stagger={0.1}>
+          <RevealGroup className="md-orphan-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
             {copy.before.cards.map((card, index) => {
               const Icon = BEFORE_ICONS[index % BEFORE_ICONS.length];
               return (

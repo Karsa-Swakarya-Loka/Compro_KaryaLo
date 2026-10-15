@@ -286,7 +286,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         <section className={`section-standard px-4 md:px-12 ${moreImages.length > 0 ? "bg-white" : "bg-surface"}`}>
           <div className="max-w-[72rem] mx-auto">
             <SectionHeading badge={copy.caseStudy.relatedBadge} title={copy.caseStudy.relatedHeading} intro={copy.caseStudy.relatedIntro} />
-            <RevealGroup className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
+            <RevealGroup className="md-orphan-center mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
               {related.map((item) => (
                 <RevealItem key={item.slug} className="h-full">
                   <Link

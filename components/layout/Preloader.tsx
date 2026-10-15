@@ -2,16 +2,15 @@
 
 import { useEffect, useRef, type CSSProperties } from "react";
 
-/** sessionStorage key: set once the loader has played in this visit. */
-export const PRELOAD_KEY = "kl-preloaded";
-
 /**
  * Runs inline at the top of <body>, before the page paints. It decides whether
- * this page view gets the loader: only the first page of a session, and never
- * when the visitor asked for reduced motion. The decision is a single
- * attribute on <html>; CSS does the rest, so nothing flashes.
+ * this page view gets the loader: every full page load, so a first visit and a
+ * refresh look the same (owner's call, 2026-10-15), but never when the visitor
+ * asked for reduced motion. Moving between pages inside the site is a
+ * client-side navigation, which does not run this script again. The decision
+ * is a single attribute on <html>; CSS does the rest, so nothing flashes.
  */
-export const PRELOAD_SCRIPT = `(function(){try{var d=document.documentElement;if(sessionStorage.getItem('${PRELOAD_KEY}'))return;if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){sessionStorage.setItem('${PRELOAD_KEY}','1');return;}d.setAttribute('data-preload','');}catch(e){}})();`;
+export const PRELOAD_SCRIPT = `(function(){try{if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.setAttribute('data-preload','');}catch(e){}})();`;
 
 /** How long the mark gets to assemble before the page is revealed. */
 const MIN_SHOW_MS = 1500;
@@ -40,10 +39,7 @@ export default function Preloader() {
       const wait = Math.max(0, MIN_SHOW_MS - (performance.now() - started));
       leaveTimer = window.setTimeout(() => {
         ref.current?.setAttribute("data-leaving", "");
-        doneTimer = window.setTimeout(() => {
-          root.removeAttribute("data-preload");
-          try { sessionStorage.setItem(PRELOAD_KEY, "1"); } catch { /* storage off: the loader may show again, harmless */ }
-        }, LEAVE_MS);
+        doneTimer = window.setTimeout(() => root.removeAttribute("data-preload"), LEAVE_MS);
       }, wait);
     };
 

@@ -86,7 +86,7 @@ export default function PortfolioClient({ lang }: { lang: Locale }) {
         </p>
       </Reveal>
 
-      <RevealGroup id="project-results" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7" stagger={0.1}>
+      <RevealGroup id="project-results" className="md-orphan-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7" stagger={0.1}>
         {filteredProjects.map((project, index) => {
           const featured = index === 0;
           return (

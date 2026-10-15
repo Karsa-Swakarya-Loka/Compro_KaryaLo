@@ -288,18 +288,38 @@ main:focus { outline: none; }
 /* ══════════════════════════════════════════════
    Navigation — a white floating pill over every page
    ══════════════════════════════════════════════ */
-.nav-surface { position: fixed; inset-inline: 0; top: 0; z-index: 40; pointer-events: none; }
+.nav-surface {
+  position: fixed; inset-inline: 0; top: 0; z-index: 40; pointer-events: none;
+  /* The pill's side gutter and corner, shared by the container and the fill below. */
+  --nav-pad-x: 2rem; --nav-radius: 2rem;
+}
 .nav-surface .site-header { pointer-events: auto; }
-.nav-container { max-width: 76rem; margin-inline: auto; padding: 1.25rem 2rem; transition: padding 450ms var(--ease-expo); }
-.nav-surface[data-scrolled] .nav-container { padding-block: 0.75rem; }
+.nav-container { position: relative; max-width: 76rem; margin-inline: auto; padding: 1.25rem var(--nav-pad-x); }
+/*
+  Cargon's sticky header, filling sideways (owner's call): once the page
+  scrolls, the white of the pill spreads out to the left and right edges and
+  becomes a full-width bar with Cargon's shadow. `.nav-fill` is that white: it
+  starts clipped to exactly the pill's shape and opens to the whole bar. The
+  shadow sits on its parent (drop-shadow), so it follows the shape as it grows.
+  Scrolling back to the top folds it into the pill again.
+*/
+.nav-fill { position: absolute; inset: 0; pointer-events: none; filter: drop-shadow(0 8px 24px rgb(149 157 165 / 0.22)); }
+.nav-fill::before {
+  content: ""; position: absolute; inset: 0; background: #fff; opacity: 0;
+  --nav-gutter: calc(max(0px, (100% - 76rem) / 2) + var(--nav-pad-x));
+  clip-path: inset(0.375rem var(--nav-gutter) round var(--nav-radius));
+  transition: clip-path 750ms cubic-bezier(0.7, 0, 0.2, 1), opacity 0s linear 750ms;
+}
+.nav-surface[data-scrolled] { pointer-events: auto; }
+.nav-surface[data-scrolled] .nav-fill::before { clip-path: inset(0 0 round 0); opacity: 1; transition: clip-path 750ms cubic-bezier(0.7, 0, 0.2, 1), opacity 0s; }
+.nav-surface[data-scrolled] .nav-container { padding-block: 0.375rem; }
+.nav-surface[data-scrolled] .site-nav { background: transparent; border-color: transparent; box-shadow: none; }
 .site-header { position: relative; }
 .site-nav {
   position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: 0.625rem 0.625rem 0.625rem 1.75rem; border-radius: 999px; border: 1px solid transparent;
   background: #fff; box-shadow: 0 16px 40px -22px rgb(14 26 46 / 0.35);
-  transition: box-shadow 450ms var(--ease-expo), border-color 450ms var(--ease-expo);
 }
-.nav-surface[data-scrolled] .site-nav { border-color: var(--color-line); box-shadow: 0 18px 44px -20px rgb(14 26 46 / 0.4); }
 .brand-link { display: flex; align-items: center; gap: 0.625rem; flex-shrink: 0; }
 .nav-link {
   position: relative; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
@@ -316,6 +336,8 @@ main:focus { outline: none; }
 .nav-toggle:hover { background: var(--color-brand-deep); }
 .mobile-nav { position: absolute; inset: calc(100% + 0.5rem) 0 auto; max-height: calc(100dvh - 7rem); overflow-y: auto; overscroll-behavior: contain; padding: 1rem; border: 1px solid var(--color-line); border-radius: 1rem; background: #fff; box-shadow: 0 24px 48px -20px rgb(14 26 46 / 0.3); }
 .mobile-nav .nav-link { border-radius: 0.5rem; }
+/* Tablets: the menu is a compact card under the menu button, not a sheet as wide as the bar. */
+@media (min-width: 768px) { .mobile-nav { left: auto; width: 20rem; } }
 
 /* ID | EN switch */
 .lang-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--color-surface); }
@@ -343,26 +365,28 @@ a.lang-switch__item:focus-visible { outline: 2px solid var(--color-brand); outli
 .wa-fab[data-hidden] { opacity: 0; transform: translateY(12px) scale(0.9); pointer-events: none; }
 @media (max-width: 767px) { .wa-fab { width: 52px; height: 52px; } }
 @media (min-width: 1280px) { #wa-fab { display: none; } }
+/* Tablets carry the WhatsApp button in the navigation bar (Navbar.tsx), so the floating one would repeat it. */
+@media (min-width: 768px) and (max-width: 1023.98px) { #wa-fab { display: none; } }
 
 /* ══════════════════════════════════════════════
-   Preloader — the KaryaLo mark assembling, once per visit
+   Preloader — the KaryaLo mark assembling, on every full page load
    Hidden unless an inline script in <body> set `data-preload` on <html>
-   before first paint (first page of a session, motion allowed). Without
+   before first paint (a first visit or a refresh, motion allowed). Without
    JavaScript it never shows.
    ══════════════════════════════════════════════ */
 #site-preloader { display: none; }
 html[data-preload] #site-preloader {
   display: flex; position: fixed; inset: 0; z-index: 100;
-  flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+  flex-direction: column; align-items: center; justify-content: center; gap: 1.75rem;
   background: #fff;
 }
 html[data-preload] body { overflow: hidden; }
 #site-preloader[data-leaving] { animation: preloader-out 650ms var(--ease-expo) forwards; }
-.preloader-tile { width: 5.5rem; height: 5.5rem; filter: drop-shadow(0 18px 30px rgb(29 70 157 / 0.28)); animation: preloader-tile-in 700ms var(--ease-expo) both; }
+.preloader-tile { width: 7.25rem; height: 7.25rem; filter: drop-shadow(0 22px 36px rgb(29 70 157 / 0.3)); animation: preloader-tile-in 700ms var(--ease-expo) both; }
 .preloader-piece { transform-box: fill-box; transform-origin: center; animation: preloader-piece-in 650ms var(--ease-expo) both; animation-delay: calc(180ms + var(--i, 0) * 85ms); }
-.preloader-word { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-ink); animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 650ms; }
+.preloader-word { font-size: 1.875rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-ink); animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 650ms; }
 .preloader-word span { color: var(--color-brand); }
-.preloader-bar { width: 9rem; height: 3px; border-radius: 3px; background: var(--color-brand-soft); overflow: hidden; animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 750ms; }
+.preloader-bar { width: 12rem; height: 4px; border-radius: 4px; background: var(--color-brand-soft); overflow: hidden; animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 750ms; }
 .preloader-bar::after { content: ""; display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-brand), var(--color-cyan)); transform-origin: left; animation: preloader-fill 1000ms var(--ease-expo) both; animation-delay: 750ms; }
 @keyframes preloader-tile-in { from { opacity: 0; transform: scale(0.82) rotate(-6deg); } to { opacity: 1; transform: none; } }
 @keyframes preloader-piece-in { from { opacity: 0; transform: translate(-14%, 10%) scale(0.55); } to { opacity: 1; transform: none; } }
@@ -373,11 +397,100 @@ html[data-preload] body { overflow: hidden; }
 /* ══════════════════════════════════════════════
    Hero slider and page banner
    ══════════════════════════════════════════════ */
-/* The slanted photograph: a straight right edge, a leaning left one. */
-.hero-media { clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); }
-.hero-media-frame { position: absolute; inset: 0; clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); background: var(--color-brand); transform: translate(-10px, 10px); }
-.hero-dot { width: 10px; height: 10px; border-radius: 999px; background: #C3CDDC; transition: background-color 300ms, transform 300ms, box-shadow 300ms; }
-.hero-dot[aria-current] { background: var(--color-brand); box-shadow: 0 0 0 5px var(--color-brand-soft); }
+/*
+  The home stage, after Cargon: a slanted, blue-toned photograph, and a 3D
+  object (the laptop) standing in front of it, with a caption centred under it.
+
+  One shape serves the panel and its offset frame: a leaning left edge, a
+  rounded foot, and a foot that rises gently to the right, as in Cargon. It is
+  stretched to the box (preserveAspectRatio none), so it holds at every width.
+*/
+.hero-stage {
+  /* Under the copy on phones and tablets (its height follows the showcase); beside it, full height, from 1024px. */
+  position: relative;
+  --hero-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M16 0H100V92L8.5 99.4Q1.2 100.4 2.2 93.4Z'/%3E%3C/svg%3E");
+}
+.hero-panel, .hero-panel-frame {
+  position: absolute; inset: 0;
+  -webkit-mask: var(--hero-shape) 0 0 / 100% 100% no-repeat;
+  mask: var(--hero-shape) 0 0 / 100% 100% no-repeat;
+}
+.hero-panel { overflow: hidden; background: var(--color-brand-deep); }
+.hero-panel-frame { background: var(--color-brand); transform: translate(-8px, 8px); }
+/* A floor of light lines in perspective, fading up into the photograph. */
+.hero-floor {
+  position: absolute; inset: auto -40% 0; height: 48%;
+  background-image: linear-gradient(rgb(255 255 255 / 0.1) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.1) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  transform: perspective(32rem) rotateX(64deg); transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 15%, transparent 90%);
+  mask-image: linear-gradient(to top, #000 15%, transparent 90%);
+}
+/* The light the laptop stands in. */
+.hero-spotlight { position: absolute; inset: 0 -15% 25% 5%; background: radial-gradient(closest-side, rgb(58 187 206 / 0.32), rgb(29 70 157 / 0.14) 55%, transparent); }
+
+/* The laptop over its caption, one centred column. */
+.hero-showcase { position: relative; z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.25rem 1rem 3.5rem 2rem; }
+.hero-device-box { position: relative; width: min(92%, 32rem); aspect-ratio: 1600 / 1240; }
+.hero-device-enter { position: absolute; inset: 0; animation: hero-device-in 1500ms var(--ease-expo) 250ms both; }
+.hero-device { position: absolute; inset: 0; transform-origin: 50% 80%; opacity: 0; visibility: hidden; transform: perspective(1400px) translate3d(30%, 0, 0) rotateY(-32deg) scale(0.88); }
+.hero-device[data-state="active"] { opacity: 1; visibility: visible; transform: perspective(1400px) translate3d(0, 0, 0) rotateY(0deg) scale(1); transition: transform 1400ms var(--ease-expo), opacity 800ms ease-out, visibility 0s; }
+.hero-device[data-state="leaving"] { transform: perspective(1400px) translate3d(-14%, 3%, 0) rotateY(22deg) scale(0.9); transition: transform 900ms var(--ease-expo), opacity 500ms ease-in, visibility 0s linear 900ms; }
+.hero-float { position: relative; animation: hero-float 7s ease-in-out infinite; will-change: transform; }
+.hero-device-img { filter: drop-shadow(0 28px 30px rgb(7 20 48 / 0.35)); }
+.hero-device-shadow { position: absolute; left: 14%; right: 10%; bottom: 2.5%; height: 9%; border-radius: 50%; background: radial-gradient(closest-side, rgb(7 20 48 / 0.6), transparent); filter: blur(6px); animation: hero-shadow 7s ease-in-out infinite; }
+@keyframes hero-device-in { from { opacity: 0; transform: translate3d(18%, 0, 0); } }
+@keyframes hero-float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -2.2%, 0); } }
+@keyframes hero-shadow { 0%, 100% { transform: scaleX(1); opacity: 0.9; } 50% { transform: scaleX(0.86); opacity: 0.55; } }
+
+/*
+  The caption: a glass card on the photograph. Reading order follows the
+  hierarchy: type and field (small, cyan), the title, one line on what it is,
+  then the slide bars and count. Two lines are kept for the title and two for
+  the line, so the card never changes height between slides.
+*/
+.hero-caption { width: min(100%, 24rem); padding: 1rem 1.25rem 0.375rem; border-radius: 1.25rem; text-align: center; background: rgb(7 20 48 / 0.5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14), 0 24px 40px -24px rgb(0 0 0 / 0.6); }
+.hero-caption-text { display: flex; min-height: 8rem; flex-direction: column; justify-content: center; animation: hero-caption-in 700ms var(--ease-expo) both; }
+.hero-caption-text > :nth-child(2), .hero-caption-text > :nth-child(3) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.hero-caption-nav { display: flex; align-items: center; justify-content: center; gap: 0.625rem; margin-top: 0.375rem; border-top: 1px solid rgb(255 255 255 / 0.12); padding-top: 0.125rem; }
+.hero-caption :focus-visible { outline-color: var(--color-cyan); outline-offset: 0; }
+@keyframes hero-caption-in { from { opacity: 0; transform: translateY(8px); } }
+.hero-bar { position: relative; display: block; width: 1.25rem; height: 3px; border-radius: 3px; background: rgb(255 255 255 / 0.35); overflow: hidden; transition: width 500ms var(--ease-expo), background-color 300ms; }
+.hero-bar[data-active] { width: 2.5rem; background: rgb(255 255 255 / 0.3); }
+button:hover > .hero-bar:not([data-active]) { background: rgb(255 255 255 / 0.75); }
+.hero-bar-fill { position: absolute; inset: 0; border-radius: inherit; background: #fff; transform-origin: left center; }
+.hero-bar-fill[data-run] { animation: hero-bar-fill var(--hero-ms, 6500ms) linear both; }
+@keyframes hero-bar-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (min-width: 768px) {
+  .hero-showcase { padding: 1.75rem 2rem 4rem 3rem; }
+}
+/*
+  Beside the copy: the laptop is sized from the stage's height (container
+  units), leaving room above for the navigation and below for the caption, and
+  never wider than the panel. The column sits low and centred on the panel's
+  visible face (54%, since the left edge leans in).
+*/
+@media (min-width: 1024px) {
+  .hero-stage { position: absolute; inset-block: 0; right: 0; width: 46%; container-type: size; }
+  .hero-panel-frame { transform: translate(-12px, 12px); }
+  .hero-showcase { position: absolute; top: 7rem; bottom: 3.75rem; left: 54%; transform: translateX(-50%); justify-content: flex-end; padding: 0; }
+  .hero-device-box { width: auto; height: min(calc(100cqh - 24rem), 76cqw); }
+}
+
+/*
+  Tablet grids. Between 768px and 1023px most card grids run two across, so an
+  odd last card would hang on the left with an empty slot beside it; it sits
+  centred at the same width instead. `sm-orphan-center` is for grids that turn
+  two-across at 640px. (Grids that used to jump from one column straight to
+  three at 1024px now run two across in between, 2026-10-15.)
+*/
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .md-orphan-center > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 1.5rem) / 2); }
+}
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .sm-orphan-center > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 1.5rem) / 2); }
+}
 /* Cargon's thin decorative curves, drawn once on load. */
 .decor-curve path { stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: curve-draw 2.4s var(--ease-expo) 0.3s forwards; }
 @keyframes curve-draw { to { stroke-dashoffset: 0; } }
@@ -408,15 +521,16 @@ footer a:hover { color: var(--color-brand); }
 
 @media (max-width: 1023px) {
   .nav-toggle { display: grid; }
-  .nav-container { padding: 1rem 1.25rem; }
+  .nav-surface { --nav-pad-x: 1.25rem; }
+  .nav-container { padding-block: 1rem; }
   .site-nav { padding-left: 1.25rem; }
 }
 @media (max-width: 767px) {
-  .nav-container { padding: 0.75rem 0.75rem; }
+  .nav-surface { --nav-pad-x: 0.75rem; --nav-radius: 1.25rem; }
+  .nav-container { padding-block: 0.75rem; }
   .site-nav { border-radius: 1.25rem; padding: 0.5rem 0.5rem 0.5rem 1rem; }
   .project-dialog { width: calc(100% - 1rem); max-height: calc(100dvh - 1rem); }
   input, textarea, select { font-size: 1rem; }
-  .hero-media, .hero-media-frame { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
