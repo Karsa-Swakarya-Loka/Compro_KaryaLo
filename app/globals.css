@@ -1,45 +1,165 @@
 @import "tailwindcss";
 
+/*
+  KaryaLo × Cargon (redesign, 2026-10-15)
+
+  The founder chose the Cargon template (unifato.com/cargon) as the visual
+  reference for every page: one Outfit family, a white-and-blue world with light
+  grey alternate sections, pill buttons with a round arrow, centred section
+  headings under a small pill badge, slanted hero photography, and AOS-style
+  scroll entrances. The blue is not Cargon's: it is the KaryaLo logo's own
+  (#1D469D, cyan accent #3ABBCE), so the mark and the site speak one colour.
+
+  Nothing here is copied from the template's files; the look is rebuilt on the
+  site's own components and photography.
+*/
 @theme {
-  /* ── Core palette ──
-     Dominant pair: #1F2E5A midnight · #C9D6DF mist
-     Accent: #1F2E5A navy; #C9D6DF mist for content on dark surfaces
-     Canvas: #F7F6F5 porcelain
-     Tints and shades below are derived from the core palette so text keeps
-     WCAG AA contrast on every surface the palette actually produces. */
-  --color-porcelain: #F7F6F5;
-  --color-mist: #C9D6DF;
-  --color-mist-border: #A8BCCB;
-  --color-mist-ink: #33456F;
-  --color-midnight: #1F2E5A;
-  --color-midnight-light: #2C4076;
-  --color-midnight-muted: #A9BBD8;
-  --color-accent: #1F2E5A;
-  --color-accent-hover: #2C4076;
-  --color-accent-strong: #1F2E5A;
-  --color-matte: #E3EAF0;
+  /* ── Brand, from the logo ── */
+  --color-brand: #1D469D;
+  --color-brand-deep: #163A85;
+  --color-brand-soft: #E9EFF9;
+  --color-cyan: #3ABBCE;
 
-  /* ── Tri-Font System ── */
-  --font-headline: var(--font-bebas), 'Bebas Neue', 'Oswald', 'Archivo Narrow', sans-serif;
-  --font-story: var(--font-satoshi), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-meta: var(--font-archivo), 'Archivo', sans-serif;
-}
+  /* ── Neutrals ── */
+  --color-ink: #0E1A2E;        /* headings */
+  --color-body: #5A6578;       /* paragraphs: 5.9:1 on white, 5.5:1 on surface */
+  --color-surface: #F5F7FB;    /* alternate sections, page banners */
+  --color-line: #E3E8F0;
+  --color-night: #071430;      /* the one dark band per page */
 
-:root {
-  --background: #F7F6F5;
-  --foreground: #1F2E5A;
-  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /*
+    Legacy names, remapped. Components written for the earlier navy/mist world
+    keep working and land in the new palette: `midnight` is now the heading ink
+    and dark surface, `mist` the light alternate section, `porcelain` white.
+  */
+  --color-porcelain: #FFFFFF;
+  --color-mist: #F5F7FB;
+  --color-mist-border: #E3E8F0;
+  --color-mist-ink: #5A6578;
+  --color-midnight: #0E1A2E;
+  --color-midnight-light: #16264A;
+  --color-midnight-muted: #AEB9CF;
+  --color-accent: #1D469D;
+  --color-accent-hover: #163A85;
+  --color-accent-strong: #1D469D;
+  --color-matte: #E9EFF9;
+
+  /* ── One family ── */
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-headline: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-story: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-meta: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  /*
+    Cargon's corners are tighter than the old world's: photos ~8px, cards
+    ~12px. The radius scale is redefined so every `rounded-*` on the site
+    follows without touching each component. Pills stay pills.
+  */
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+  --radius-3xl: 0.75rem;
+
+  --shadow-card: 0 18px 44px -22px rgb(14 26 46 / 0.22);
+  --shadow-lift: 0 28px 60px -28px rgb(14 26 46 / 0.32);
 }
 
 /* ══════════════════════════════════════════════
-   Base & Browser Surface Theming
-   (craft floor: "the parts you did not draw
-   still carry the design")
+   Type roles — one role per job, now in Outfit.
+   Hierarchy comes from size and weight: 600 for every heading role, 400 for
+   reading text. Sentence case everywhere; nothing a person reads under 14px.
+   They are Tailwind utilities, so variants (`md:`, `group-hover:`) work.
+   Sizes run 390px → 1440px.
+   ══════════════════════════════════════════════ */
+/* The home H1 only: the one line a visitor should read first, so it is the
+   largest and heaviest type on the site. */
+@utility type-display-hero {
+  font-family: var(--font-outfit), sans-serif; font-weight: 700; font-style: normal; text-transform: none;
+  font-size: clamp(2.375rem, 1.55rem + 2.6vw, 4rem); line-height: 1.08; letter-spacing: -0.03em;
+}
+@utility type-display-page {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-style: normal; text-transform: none;
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem); line-height: 1.12; letter-spacing: -0.02em;
+}
+/* The one size every page-section H2 uses, on every page. */
+@utility type-section-title {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-style: normal; text-transform: none;
+  font-size: clamp(1.75rem, 1.35rem + 1.3vw, 2.5rem); line-height: 1.2; letter-spacing: -0.02em;
+}
+/* The closing call to action. */
+@utility type-section-title-lg {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-style: normal; text-transform: none;
+  font-size: clamp(2rem, 1.4rem + 1.9vw, 3rem); line-height: 1.14; letter-spacing: -0.02em;
+}
+@utility type-subhead {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-style: normal; text-transform: none;
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem); line-height: 1.25; letter-spacing: -0.01em;
+}
+@utility type-card-title-lg {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem); line-height: 1.3; letter-spacing: -0.01em;
+}
+@utility type-card-title {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); line-height: 1.35; letter-spacing: -0.005em;
+}
+@utility type-statement {
+  font-family: var(--font-outfit), sans-serif; font-weight: 500;
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem); line-height: 1.4; letter-spacing: -0.01em;
+}
+@utility type-lede {
+  font-family: var(--font-outfit), sans-serif; font-weight: 400;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); line-height: 1.7; letter-spacing: 0;
+}
+@utility type-intro {
+  font-family: var(--font-outfit), sans-serif; font-weight: 400;
+  font-size: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem); line-height: 1.7; letter-spacing: 0;
+}
+@utility type-body {
+  font-family: var(--font-outfit), sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.75; letter-spacing: 0;
+}
+@utility type-body-card {
+  font-family: var(--font-outfit), sans-serif; font-weight: 400; font-size: 0.9375rem; line-height: 1.7; letter-spacing: 0;
+}
+@utility type-small {
+  font-family: var(--font-outfit), sans-serif; font-weight: 400; font-size: 0.875rem; line-height: 1.6; letter-spacing: 0;
+}
+/* Tags, categories, counts. */
+@utility type-meta {
+  font-family: var(--font-outfit), sans-serif; font-weight: 500; font-size: 0.8125rem; line-height: 1.35; letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums; text-transform: none;
+}
+/* A group label over a list ("Yang Anda terima"). */
+@utility type-label {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.3; letter-spacing: 0; text-transform: none;
+}
+@utility type-numeral {
+  font-family: var(--font-outfit), sans-serif; font-weight: 600;
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem); line-height: 1; letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+/* In-card links: words plus an arrow. */
+@utility text-link {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.75rem;
+  font-family: var(--font-outfit), sans-serif; font-weight: 600; font-size: 0.9375rem; line-height: 1.3; letter-spacing: 0;
+  /* No colour of its own: it takes the surface's ink (or a `text-*` utility). */
+  text-decoration-line: underline; text-decoration-color: transparent; text-decoration-thickness: 1.5px; text-underline-offset: 0.3em;
+  transition: text-decoration-color 250ms var(--ease-expo), color 250ms var(--ease-expo);
+  &:hover { text-decoration-color: currentColor; }
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #0E1A2E;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Cargon's AOS entrances: ~0.9s, easing out. */
+  --ease-out-aos: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ══════════════════════════════════════════════
+   Base & browser surfaces
    ══════════════════════════════════════════════ */
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; scroll-padding-top: 7.5rem; }
 
 /* Lenis (smooth scroll) — hands scroll easing to the JS loop when mounted. */
 html.lenis, html.lenis body { height: auto; }
@@ -51,262 +171,300 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-story);
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Text selection — accent accent */
-::selection {
-  background: #1F2E5A;
-  color: white;
-}
+::selection { background: var(--color-brand); color: #fff; }
+input, textarea, select { caret-color: var(--color-brand); }
 
-/* Caret color — accent */
-input,
-textarea,
-select {
-  caret-color: #1F2E5A;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-surface); }
+::-webkit-scrollbar-thumb { background: #C3CDDC; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand); }
+* { scrollbar-width: thin; scrollbar-color: #C3CDDC var(--color-surface); }
 
-/* Focus ring — accent with offset */
-:focus-visible {
-  outline: 2px solid #1F2E5A;
-  outline-offset: 2px;
-}
-
-/* Custom scrollbar — mist on porcelain */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #F7F6F5;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #A8BCCB;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7E97AC;
-}
-
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #A8BCCB #F7F6F5;
-}
-
-/* Placeholder text — tinted from surface, never gray */
-::placeholder {
-  color: #A9BBD8;
-  opacity: 0.7;
-}
-
-/* Tabular numerals for data */
-.tabular-nums {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ══════════════════════════════════════════════
-   Tri-Font System Utilities
-   ══════════════════════════════════════════════ */
+::placeholder { color: #7D879A; opacity: 1; }
+.tabular-nums { font-variant-numeric: tabular-nums; }
 
 /*
-  Bebas Neue is the display face, and only the headline role uses it. Three of
-  its properties are handled here rather than in every markup file:
-
-  1. One weight, no italic. `font-synthesis: none` stops the browser faking
-     either — a synthesised bold on a condensed face just smears the stems. Any
-     `font-bold` left on a headline therefore has no visual effect, which is
-     intended: headline hierarchy comes from size, colour and tracking.
-  2. No lowercase glyphs, so it renders as capitals whatever the source case.
-     `text-transform: uppercase` makes that explicit, so the swap fallback is
-     already uppercase and the type does not visibly change case when the
-     webfont lands. Screen readers still read the underlying text.
-  3. It is condensed, so the old -0.02em tracking crowded it.
-
-  Meta labels stay on Archivo and body copy on Satoshi — both have real weight
-  ranges, which is what buttons and small type need.
+  The old family helpers, kept as layered defaults so any markup still naming
+  them renders in Outfit at a sensible weight; roles and utilities override.
 */
-.font-headline {
-  font-family: var(--font-headline);
-  font-weight: 400;
-  font-style: normal;
-  font-synthesis: none;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
+@layer base {
+  .font-headline { font-family: var(--font-outfit), sans-serif; font-weight: 600; font-style: normal; letter-spacing: -0.02em; text-transform: none; }
+  .font-story { font-family: var(--font-outfit), sans-serif; line-height: 1.7; }
+  .font-meta { font-family: var(--font-outfit), sans-serif; letter-spacing: 0.01em; }
+  h1, h2, h3, h4 { color: var(--color-ink); }
+  button:disabled { cursor: not-allowed; opacity: 0.55; }
 }
 
-.font-story {
-  font-family: var(--font-story);
-  line-height: 1.7;
-}
-
-.font-meta {
-  font-family: var(--font-meta);
-  letter-spacing: 0.04em;
-}
-
-
-
-/* Shared navigation, readable controls, and responsive page rhythm. */
-html { scroll-padding-top: 7rem; }
-body { overflow-x: clip; }
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 a { text-underline-offset: 0.2em; }
 button, select { cursor: pointer; }
 button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
-button:disabled { cursor: not-allowed; opacity: 0.55; }
 input, select, textarea { min-width: 0; max-width: 100%; }
-::placeholder { color: #5B6B87; opacity: 1; }
-:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; }
+:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 4px; }
 main:focus { outline: none; }
-/* Mist keeps focus indicators visible on navy surfaces. */
 .bg-midnight :focus-visible,
-.bg-midnight-light :focus-visible,
-[data-surface="dark"] :focus-visible { outline-color: var(--color-mist); }
+.bg-night :focus-visible,
+.bg-brand :focus-visible,
+[data-surface="dark"] :focus-visible { outline-color: var(--color-cyan); }
 .grid > *, .flex > * { min-width: 0; }
 
-.nav-surface { position: sticky; top: 0; z-index: 40; background: var(--color-mist); transition: background-color 450ms var(--ease-expo); }
-/* Home navigation floats over the hero image, including at the page top. */
-.nav-surface[data-overlay] { position: fixed; inset-inline: 0; background: transparent; pointer-events: none; }
-.nav-surface[data-overlay] .site-header { pointer-events: auto; }
-.nav-surface[data-scrolled] { background: transparent; pointer-events: none; }
-.nav-surface[data-scrolled] .site-header { pointer-events: auto; }
-.nav-container { max-width: 72rem; margin-inline: auto; padding: 1rem 3rem; }
+/* ══════════════════════════════════════════════
+   Section badge — the small pill over every section title
+   ══════════════════════════════════════════════ */
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.3125rem 0.875rem; border-radius: 999px;
+  background: var(--color-brand-soft); color: var(--color-brand);
+  font-family: var(--font-outfit), sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.3;
+}
+.badge-pill::before { content: ""; width: 2px; height: 0.875rem; border-radius: 2px; background: currentColor; }
+.badge-pill[data-tone="dark"] { background: rgb(255 255 255 / 0.1); color: #fff; }
+
+/* ══════════════════════════════════════════════
+   Buttons — Cargon pills with a round arrow
+   ══════════════════════════════════════════════ */
+@layer components {
+  /* The solid button (`btn-primary` / `btn-primary-light`) is reserved for starting a conversation
+     (WhatsApp, or the form that hands off to it). Everything else is `btn-secondary` or a `text-link`. */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+    min-height: 3.25rem; padding: 0 1.625rem; border: 1px solid transparent; border-radius: 999px;
+    font-family: var(--font-outfit), sans-serif; font-size: 1rem; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-align: center;
+    transition: background-color 300ms var(--ease-expo), color 300ms var(--ease-expo), border-color 300ms var(--ease-expo), box-shadow 300ms var(--ease-expo), transform 300ms var(--ease-expo);
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-lg { min-height: 3.5rem; padding: 0 1.875rem; font-size: 1.0625rem; }
+  .btn-sm { min-height: 2.75rem; padding: 0 1.25rem; font-size: 0.9375rem; }
+  .btn-primary { background: var(--color-brand); color: #fff; box-shadow: 0 14px 28px -14px rgb(29 70 157 / 0.65); }
+  .btn-primary:hover { background: var(--color-brand-deep); }
+  .btn-secondary { background: #fff; border-color: var(--color-line); color: var(--color-ink); }
+  .btn-secondary:hover { border-color: var(--color-brand); color: var(--color-brand); }
+  /* On dark or blue surfaces the primary turns white and the secondary outline white. */
+  .btn-primary-light { background: #fff; color: var(--color-brand); box-shadow: 0 14px 28px -14px rgb(0 0 0 / 0.45); }
+  .btn-primary-light:hover { background: var(--color-brand-soft); }
+  .btn-secondary-light { border-color: rgb(255 255 255 / 0.5); color: #fff; }
+  .btn-secondary-light:hover { border-color: #fff; background: rgb(255 255 255 / 0.1); }
+
+  /* Section rhythm, in four tiers. */
+  /* Tightened 2026-10-15: two adjacent sections now sit ~9rem apart on
+     desktop (was ~15rem), close enough to read as one page. */
+  .section-anchor { padding-block: 3.5rem; }
+  .section-standard { padding-block: 3rem; }
+  .section-support { padding-block: 2.5rem; }
+  .section-band { padding-block: 1.75rem; }
+  @media (min-width: 768px) {
+    .section-anchor { padding-block: 4.5rem; }
+    .section-standard { padding-block: 4rem; }
+    .section-support { padding-block: 3.5rem; }
+    .section-band { padding-block: 2rem; }
+  }
+}
+/*
+  The trailing icon of a button sits in its own circle, Cargon's signature.
+  Unlayered on purpose: it must win over the `w-4 h-4` sizing utilities the
+  icons carry in markup. Leading icons (a chat glyph before the label) stay bare.
+*/
+.btn:has(> :is(svg, .arrow-swap):last-child) { padding-right: 0.4375rem; }
+.btn > :is(svg, .arrow-swap):last-child {
+  box-sizing: border-box; width: 2.375rem; height: 2.375rem; padding: 0.6875rem; flex-shrink: 0;
+  border-radius: 999px; background: rgb(255 255 255 / 0.18);
+  transition: transform 350ms var(--ease-expo), background-color 300ms;
+}
+.btn > .arrow-swap:last-child { display: inline-grid; place-items: center; overflow: hidden; }
+.btn > .arrow-swap:last-child svg { width: 1rem; height: 1rem; }
+.btn-secondary > :is(svg, .arrow-swap):last-child { background: var(--color-brand-soft); color: var(--color-brand); }
+.btn-primary-light > :is(svg, .arrow-swap):last-child { background: var(--color-brand); color: #fff; }
+.btn-secondary-light > :is(svg, .arrow-swap):last-child { background: rgb(255 255 255 / 0.15); }
+.btn-sm:has(> :is(svg, .arrow-swap):last-child) { padding-right: 0.3125rem; }
+.btn-sm > :is(svg, .arrow-swap):last-child { width: 2.125rem; height: 2.125rem; padding: 0.5625rem; }
+.btn:hover > svg:last-child { transform: translateX(2px); }
+
+/* ══════════════════════════════════════════════
+   Navigation — a white floating pill over every page
+   ══════════════════════════════════════════════ */
+.nav-surface { position: fixed; inset-inline: 0; top: 0; z-index: 40; pointer-events: none; }
+.nav-surface .site-header { pointer-events: auto; }
+.nav-container { max-width: 76rem; margin-inline: auto; padding: 1.25rem 2rem; transition: padding 450ms var(--ease-expo); }
+.nav-surface[data-scrolled] .nav-container { padding-block: 0.75rem; }
 .site-header { position: relative; }
-.site-nav { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.65rem 1.25rem; border-radius: 2rem; border: 1px solid transparent; background: var(--color-porcelain); box-shadow: 0 4px 16px #1F2E5A08; transition: background-color 450ms var(--ease-expo), box-shadow 450ms var(--ease-expo), border-color 450ms var(--ease-expo), backdrop-filter 450ms var(--ease-expo); }
-.nav-surface[data-scrolled] .site-nav { background: rgba(247, 246, 245, 0.85); border-color: rgba(31, 46, 90, 0.10); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 10px 30px -8px rgba(31, 46, 90, 0.12), 0 4px 16px rgba(31, 46, 90, 0.05); }
-.brand-link { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
-.nav-link { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: 44px; padding: 0.65rem 0.85rem; border-radius: 1.5rem; color: var(--color-mist-ink); font-size: 0.875rem; font-weight: 600; transition: color 200ms; }
-.nav-link:hover, .nav-link[aria-current="page"] { color: var(--color-midnight); }
-.nav-link[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 0.4em; }
-.nav-pill { position: absolute; inset: 0; border-radius: 1.5rem; background: var(--color-matte); }
-.nav-backdrop { position: fixed; inset: 0; z-index: -1; background: rgba(31, 46, 90, 0.28); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.mobile-nav .nav-link:hover { background: var(--color-matte); }
-.nav-cta { align-items: center; justify-content: center; gap: 0.5rem; min-height: 44px; padding: 0.75rem 1.1rem; border-radius: 2rem; background: var(--color-midnight); color: white; font-size: 0.8125rem; font-weight: 700; transition: background-color 160ms; }
-.nav-cta:hover { background: var(--color-accent-hover); }
-.nav-toggle { align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; place-items: center; }
+.site-nav {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.625rem 0.625rem 0.625rem 1.75rem; border-radius: 999px; border: 1px solid transparent;
+  background: #fff; box-shadow: 0 16px 40px -22px rgb(14 26 46 / 0.35);
+  transition: box-shadow 450ms var(--ease-expo), border-color 450ms var(--ease-expo);
+}
+.nav-surface[data-scrolled] .site-nav { border-color: var(--color-line); box-shadow: 0 18px 44px -20px rgb(14 26 46 / 0.4); }
+.brand-link { display: flex; align-items: center; gap: 0.625rem; flex-shrink: 0; }
+.nav-link {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+  min-height: 44px; padding: 0.625rem 0.875rem; border-radius: 999px;
+  color: var(--color-ink); font-size: 0.9375rem; font-weight: 400; transition: color 200ms;
+}
+.nav-link:hover, .nav-link[aria-current="page"] { color: var(--color-brand); }
+.nav-link[aria-current="page"] { font-weight: 500; }
+.nav-pill { position: absolute; inset: 0; border-radius: 999px; background: var(--color-brand-soft); }
+.nav-backdrop { position: fixed; inset: 0; z-index: -1; background: rgb(14 26 46 / 0.3); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.mobile-nav .nav-link:hover { background: var(--color-brand-soft); }
+.nav-toggle { align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; place-items: center; background: var(--color-brand); color: #fff; }
 .nav-toggle > * { grid-area: 1 / 1; }
-.nav-toggle:hover { background: var(--color-matte); }
-.mobile-nav { position: absolute; inset: calc(100% + 0.5rem) 0 auto; max-height: calc(100dvh - 7rem); overflow-y: auto; overscroll-behavior: contain; padding: 1rem; border: 1px solid var(--color-mist-border); border-radius: 1rem; background: var(--color-porcelain); box-shadow: 0 16px 32px #1F2E5A1a; }
+.nav-toggle:hover { background: var(--color-brand-deep); }
+.mobile-nav { position: absolute; inset: calc(100% + 0.5rem) 0 auto; max-height: calc(100dvh - 7rem); overflow-y: auto; overscroll-behavior: contain; padding: 1rem; border: 1px solid var(--color-line); border-radius: 1rem; background: #fff; box-shadow: 0 24px 48px -20px rgb(14 26 46 / 0.3); }
 .mobile-nav .nav-link { border-radius: 0.5rem; }
-.mobile-nav .nav-cta { display: flex; }
-.skip-link { position: fixed; top: -6rem; left: 1rem; z-index: 60; padding: 0.75rem 1rem; background: var(--color-midnight); color: white; border-radius: 0.5rem; }
+
+/* ID | EN switch */
+.lang-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: var(--color-surface); }
+.lang-switch__item { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 34px; padding: 0 0.6rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.04em; color: var(--color-body); transition: background-color 200ms, color 200ms; }
+.lang-switch__item[aria-current] { background: #fff; color: var(--color-brand); box-shadow: 0 2px 8px -2px rgb(14 26 46 / 0.15); }
+a.lang-switch__item:hover { color: var(--color-brand); }
+a.lang-switch__item:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+
+/* ══════════════════════════════════════════════
+   Floating WhatsApp button (below xl; steps aside for in-page primaries)
+   ══════════════════════════════════════════════ */
+.wa-fab {
+  position: fixed; z-index: 40;
+  right: calc(1rem + env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; color: white;
+  box-shadow: 0 8px 24px -6px rgb(14 26 46 / 0.45), 0 2px 6px rgb(14 26 46 / 0.2);
+  transition: transform 220ms var(--ease-expo), background-color 220ms, opacity 220ms;
+}
+.wa-fab:hover { background: #1EBE5B; transform: translateY(-2px); }
+.wa-fab:active { transform: translateY(0); }
+.wa-fab:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; }
+.wa-fab[data-hidden] { opacity: 0; transform: translateY(12px) scale(0.9); pointer-events: none; }
+@media (max-width: 767px) { .wa-fab { width: 52px; height: 52px; } }
+@media (min-width: 1280px) { #wa-fab { display: none; } }
+
+/* ══════════════════════════════════════════════
+   Preloader — the KaryaLo mark assembling, once per visit
+   Hidden unless an inline script in <body> set `data-preload` on <html>
+   before first paint (first page of a session, motion allowed). Without
+   JavaScript it never shows.
+   ══════════════════════════════════════════════ */
+#site-preloader { display: none; }
+html[data-preload] #site-preloader {
+  display: flex; position: fixed; inset: 0; z-index: 100;
+  flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+  background: #fff;
+}
+html[data-preload] body { overflow: hidden; }
+#site-preloader[data-leaving] { animation: preloader-out 650ms var(--ease-expo) forwards; }
+.preloader-tile { width: 5.5rem; height: 5.5rem; filter: drop-shadow(0 18px 30px rgb(29 70 157 / 0.28)); animation: preloader-tile-in 700ms var(--ease-expo) both; }
+.preloader-piece { transform-box: fill-box; transform-origin: center; animation: preloader-piece-in 650ms var(--ease-expo) both; animation-delay: calc(180ms + var(--i, 0) * 85ms); }
+.preloader-word { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-ink); animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 650ms; }
+.preloader-word span { color: var(--color-brand); }
+.preloader-bar { width: 9rem; height: 3px; border-radius: 3px; background: var(--color-brand-soft); overflow: hidden; animation: preloader-rise 600ms var(--ease-expo) both; animation-delay: 750ms; }
+.preloader-bar::after { content: ""; display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-brand), var(--color-cyan)); transform-origin: left; animation: preloader-fill 1000ms var(--ease-expo) both; animation-delay: 750ms; }
+@keyframes preloader-tile-in { from { opacity: 0; transform: scale(0.82) rotate(-6deg); } to { opacity: 1; transform: none; } }
+@keyframes preloader-piece-in { from { opacity: 0; transform: translate(-14%, 10%) scale(0.55); } to { opacity: 1; transform: none; } }
+@keyframes preloader-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes preloader-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes preloader-out { to { opacity: 0; visibility: hidden; transform: scale(1.02); } }
+
+/* ══════════════════════════════════════════════
+   Hero slider and page banner
+   ══════════════════════════════════════════════ */
+/* The slanted photograph: a straight right edge, a leaning left one. */
+.hero-media { clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); }
+.hero-media-frame { position: absolute; inset: 0; clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%); background: var(--color-brand); transform: translate(-10px, 10px); }
+.hero-dot { width: 10px; height: 10px; border-radius: 999px; background: #C3CDDC; transition: background-color 300ms, transform 300ms, box-shadow 300ms; }
+.hero-dot[aria-current] { background: var(--color-brand); box-shadow: 0 0 0 5px var(--color-brand-soft); }
+/* Cargon's thin decorative curves, drawn once on load. */
+.decor-curve path { stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: curve-draw 2.4s var(--ease-expo) 0.3s forwards; }
+@keyframes curve-draw { to { stroke-dashoffset: 0; } }
+
+/* ══════════════════════════════════════════════
+   Cards and media
+   ══════════════════════════════════════════════ */
+.img-zoom { overflow: hidden; }
+.img-zoom img { transition: transform 900ms var(--ease-expo); }
+.group:hover .img-zoom img, .img-zoom:hover img { transform: scale(1.06); }
+
+.skip-link { position: fixed; top: -6rem; left: 1rem; z-index: 60; padding: 0.75rem 1rem; background: var(--color-brand); color: white; border-radius: 0.5rem; }
 .skip-link:focus { top: 1rem; }
-.project-card { transition: border-color 180ms, box-shadow 180ms; }
+.project-card { transition: border-color 180ms, box-shadow 300ms var(--ease-expo); }
 .stretched-link { min-height: 44px; text-align: left; }
-.stretched-link::after { content: ""; position: absolute; inset: 0; border-radius: 1.5rem; }
-.project-card:focus-within { outline: 3px solid var(--color-accent); outline-offset: 4px; }
-.project-dialog { position: fixed; inset: 0; width: min(56rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 0; border: 1px solid var(--color-mist-border); border-radius: 1rem; background: var(--color-porcelain); color: var(--color-midnight); overflow: hidden; box-shadow: 0 24px 64px #1F2E5A40; }
-.project-dialog::backdrop { background: #1F2E5Ab8; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.stretched-link::after { content: ""; position: absolute; inset: 0; border-radius: 0.75rem; }
+.project-card:focus-within { outline: 3px solid var(--color-brand); outline-offset: 4px; }
+.project-dialog { position: fixed; inset: 0; width: min(56rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 0; border: 1px solid var(--color-line); border-radius: 0.75rem; background: #fff; color: var(--color-ink); overflow: hidden; box-shadow: 0 30px 70px -20px rgb(14 26 46 / 0.4); }
+.project-dialog::backdrop { background: rgb(7 20 48 / 0.72); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .project-dialog[data-state="open"]::backdrop { animation: dialog-backdrop-in 480ms var(--ease-expo) both; }
 .project-dialog[data-state="closing"]::backdrop { animation: dialog-backdrop-out 260ms ease-out both; }
-@keyframes dialog-backdrop-in { from { opacity: 0; -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px); } to { opacity: 1; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); } }
-@keyframes dialog-backdrop-out { from { opacity: 1; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); } to { opacity: 0; -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px); } }
+@keyframes dialog-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dialog-backdrop-out { from { opacity: 1; } to { opacity: 0; } }
 .project-dialog .h-8 { gap: 0.5rem; }
 .project-dialog .h-8 > div { overflow: hidden; }
 .project-dialog .h-8 span:last-child { flex-shrink: 0; }
-.bg-mist .text-accent { color: var(--color-accent-strong); }
-footer a:hover { color: var(--color-mist); }
-footer .text-accent { color: var(--color-mist); }
+footer a:hover { color: var(--color-brand); }
 
 @media (max-width: 1023px) {
   .nav-toggle { display: grid; }
-  .nav-container { padding-block: 0.75rem; }
+  .nav-container { padding: 1rem 1.25rem; }
+  .site-nav { padding-left: 1.25rem; }
 }
 @media (max-width: 767px) {
-  .nav-container { padding-inline: 1rem; }
-  .site-nav { border-radius: 1rem; padding: 0.5rem 0.75rem; }
-  main > section.py-20, main > section > section.py-20 { padding-block: 3.5rem; }
-  .font-headline.text-4xl { font-size: clamp(2rem, 7.5vw, 2.5rem); }
+  .nav-container { padding: 0.75rem 0.75rem; }
+  .site-nav { border-radius: 1.25rem; padding: 0.5rem 0.5rem 0.5rem 1rem; }
   .project-dialog { width: calc(100% - 1rem); max-height: calc(100dvh - 1rem); }
   input, textarea, select { font-size: 1rem; }
+  .hero-media, .hero-media-frame { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .decor-curve path { stroke-dashoffset: 0; }
 }
 
 /*
    Scroll reveals render their hidden state into the server HTML, so without a
    script to run the entrance the copy would stay at opacity 0. Every revealed
-   block is tagged data-reveal and force-shown when scripting is unavailable,
-   which keeps the page readable for text-mode clients and any crawler that
-   fetches the markup without executing it.
+   block is tagged data-reveal and force-shown when scripting is unavailable.
 */
 @media (scripting: none) {
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
-.section-link { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.65rem 1rem; border: 1px solid var(--color-mist-ink); border-radius: 2rem; color: var(--color-midnight); font-size: 0.875rem; font-weight: 600; transition: background-color 400ms var(--ease-expo), color 400ms var(--ease-expo), border-color 400ms var(--ease-expo); }
-.section-link:hover { background: var(--color-porcelain); }
+section[id] { scroll-margin-top: 6rem; }
 
 /*
-   `.section-link` sets its own colour here, unlayered, so it outranks every
-   Tailwind `group-hover:` utility — a card cannot recolour the link from the
-   markup. Its resting ink is `--color-midnight`, the exact colour a card flips
-   to on hover, which made the label and arrow vanish into the surface.
-
-   Cards that flip to a dark surface carry `.on-dark-hover`; these rules give the
-   link a readable palette while that card is hovered, and restore the normal
-   inverted look when the link itself is hovered on top of it.
+  Phones: a list of peer cards (problems, stages, projects, sub-services)
+  becomes one swipeable row instead of a stack several screens tall. The next
+  card peeks in at the edge, which is the cue to swipe. From md up the
+  element's own grid takes over again. Unlayered so it wins over the grid
+  utilities at this width.
 */
-.on-dark-hover:hover .section-link { color: var(--color-porcelain); border-color: rgba(255, 255, 255, 0.35); }
-.on-dark-hover:hover .section-link svg { color: var(--color-mist); }
-.on-dark-hover:hover .section-link:hover { background: var(--color-porcelain); color: var(--color-midnight); }
-.on-dark-hover:hover .section-link:hover svg { color: var(--color-accent); }
-section[id] { scroll-margin-top: 1rem; }
+@media (max-width: 767px) {
+  .rail-mobile {
+    display: grid !important;
+    grid-auto-flow: column;
+    grid-auto-columns: 84%;
+    grid-template-columns: none !important;
+    gap: 1rem !important;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    margin-inline: -1rem;
+    padding: 0.25rem 1rem 1.5rem;
+    scroll-padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+  .rail-mobile::-webkit-scrollbar { display: none; }
+  .rail-mobile > * { scroll-snap-align: start; }
+}
 [aria-controls="project-results"] { min-height: 44px; }
 
-
 /* ══════════════════════════════════════════════
-   Kinetic craft layer — micro-interactions
-   (transform / opacity only; the reduced-motion block above neutralises all)
+   Micro-interactions (transform / opacity only)
    ══════════════════════════════════════════════ */
-
-/* Hero — word-by-word curtain mask.
-   Pure CSS on purpose: this is the LCP element, so its paint must not wait for
-   React to hydrate. Each word reads its index from --i to stagger itself. */
-.hero-word { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 0.06em 0.14em; margin: 0 -0.06em -0.14em; }
-.hero-word__inner {
-  display: inline-block;
-  will-change: transform;
-  animation: hero-word-rise 0.8s var(--ease-expo) both;
-  animation-delay: calc(0.05s + var(--i, 0) * 0.04s);
-}
-.hero-accent { position: relative; display: inline-block; }
-.hero-shimmer {
-  position: absolute; inset: 0; pointer-events: none; color: transparent;
-  background-image: linear-gradient(110deg, transparent 32%, rgba(255, 255, 255, 0.85) 50%, transparent 68%);
-  background-size: 220% 100%; background-repeat: no-repeat;
-  -webkit-background-clip: text; background-clip: text;
-  background-position: 180% 0;
-  animation: hero-shimmer-sweep 0.9s ease-in-out both;
-  animation-delay: calc(1.05s + var(--i, 0) * 0.09s);
-}
-.hero-lede { animation: hero-lede-rise 0.9s var(--ease-expo) both; animation-delay: 0.3s; }
-@keyframes hero-word-rise { from { transform: translate3d(0, 110%, 0); } to { transform: translate3d(0, 0, 0); } }
-@keyframes hero-shimmer-sweep { from { background-position: 180% 0; } to { background-position: -80% 0; } }
-@keyframes hero-lede-rise { from { transform: translate3d(0, 45%, 0); opacity: 0; } to { transform: translate3d(0, 0, 0); opacity: 1; } }
-
-/*
-   Hero centrepiece settle + ambient drift.
-   Deliberately CSS rather than motion, for the same reason the headline is:
-   the photograph is the LCP element, so fading or scaling it from React would
-   hold the largest paint back until hydration. As CSS it runs off the
-   stylesheet, and it never touches opacity, so LCP is recorded on first paint.
-   Two nested layers because one element cannot run two transform animations.
-*/
-.hero-canvas { animation: hero-canvas-settle 1.7s var(--ease-expo) both; }
-.hero-drift { animation: hero-drift 22s ease-in-out 1.7s infinite both; }
-@keyframes hero-canvas-settle { from { transform: scale(1.07); } to { transform: scale(1); } }
-@keyframes hero-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(0, -1.2%, 0) scale(1.025); } }
-
 /* Diagonal arrow swap (exit top-right, twin enters from bottom-left) */
 .arrow-swap { position: relative; display: inline-grid; overflow: hidden; flex-shrink: 0; }
 .arrow-swap > * { grid-area: 1 / 1; transition: transform 550ms var(--ease-expo); }
@@ -314,15 +472,11 @@ section[id] { scroll-margin-top: 1rem; }
 a:hover .arrow-swap__a, button:hover .arrow-swap__a, a:focus-visible .arrow-swap__a, button:focus-visible .arrow-swap__a, .group:hover .arrow-swap__a { transform: translate(120%, -120%); }
 a:hover .arrow-swap__b, button:hover .arrow-swap__b, a:focus-visible .arrow-swap__b, button:focus-visible .arrow-swap__b, .group:hover .arrow-swap__b { transform: translate(0, 0); }
 
-/*
-   Above-the-fold entrance.
-   Page heroes use this instead of a motion `whileInView`, for the same reason
-   the home headline does: the hero heading is usually the LCP element, and a
-   React-driven fade would hold the largest paint until hydration finishes.
-   Stagger by setting --i on each child.
-*/
-.enter-up { animation: enter-up 0.85s var(--ease-expo) both; animation-delay: calc(var(--i, 0) * 0.09s); }
-@keyframes enter-up { from { opacity: 0; transform: translate3d(0, 20px, 0); } to { opacity: 1; transform: none; } }
+/* Above-the-fold entrance, CSS so the LCP element never waits for hydration. */
+.enter-up { animation: enter-up 0.9s var(--ease-out-aos) both; animation-delay: calc(var(--i, 0) * 0.1s); }
+@keyframes enter-up { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+.enter-right { animation: enter-right 1.1s var(--ease-out-aos) both; animation-delay: calc(var(--i, 0) * 0.1s); }
+@keyframes enter-right { from { opacity: 0; transform: translate3d(48px, 0, 0); } to { opacity: 1; transform: none; } }
 
 /* Browser mockup glass glare */
 .glare-host { position: relative; }
@@ -333,30 +487,15 @@ a:hover .arrow-swap__b, button:hover .arrow-swap__b, a:focus-visible .arrow-swap
 /* Cursor-tracking spotlight border */
 .spotlight-card { position: relative; --spot-x: 50%; --spot-y: 50%; isolation: isolate; }
 .spotlight-card::before, .spotlight-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 450ms var(--ease-expo); }
-.spotlight-card::before { padding: 1px; background: radial-gradient(240px circle at var(--spot-x) var(--spot-y), rgba(31, 46, 90, 0.95), rgba(31, 46, 90, 0.25) 40%, transparent 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; z-index: 2; }
-.spotlight-card::after { background: radial-gradient(360px circle at var(--spot-x) var(--spot-y), rgba(31, 46, 90, 0.09), transparent 65%); z-index: -1; }
+.spotlight-card::before { padding: 1px; background: radial-gradient(240px circle at var(--spot-x) var(--spot-y), rgba(29, 70, 157, 0.9), rgba(29, 70, 157, 0.25) 40%, transparent 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; z-index: 2; }
+.spotlight-card::after { background: radial-gradient(360px circle at var(--spot-x) var(--spot-y), rgba(29, 70, 157, 0.08), transparent 65%); z-index: -1; }
 .spotlight-card:hover::before, .spotlight-card:hover::after { opacity: 1; }
-
-/* Process timeline card micro-states */
-.process-card { transition: transform 400ms var(--ease-expo), background-color 400ms var(--ease-expo), border-color 400ms, box-shadow 400ms var(--ease-expo); }
-/* The lift lives here rather than in a Tailwind `hover:-translate-y-2`: this
-   rule already owns the element's `transform`, and Tailwind v4's separate
-   `translate` property would stack on top of it rather than replace it. */
-.process-card:hover { transform: translate3d(0, -8px, 0) scale(1.01); }
-.process-number { display: inline-block; position: relative; transition: transform 550ms var(--ease-expo), text-shadow 550ms var(--ease-expo); transform-origin: left bottom; }
-/* White glow, not navy: on hover the card flips to a midnight surface, where a
-   navy halo would disappear entirely. */
-.process-card:hover .process-number { transform: scale(1.08); text-shadow: 0 0 22px rgba(255, 255, 255, 0.5), 0 0 2px rgba(255, 255, 255, 0.4); }
-.process-number::after { content: ""; position: absolute; left: -0.3em; top: 50%; width: 1.6em; height: 1.6em; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.32), transparent 70%); transform: translate(-0.2em, -50%) scale(0.4); opacity: 0; transition: transform 550ms var(--ease-expo), opacity 550ms var(--ease-expo); z-index: -1; }
-.process-card:hover .process-number::after { opacity: 1; transform: translate(-0.2em, -50%) scale(1); }
-.process-item { transition: transform 450ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 45ms); }
-.process-card:hover .process-item { transform: translate3d(0.25rem, 0, 0); }
 
 /* Contact form field: label tint + underline draw on focus */
 .field { position: relative; }
-.field-line { position: absolute; left: 1rem; right: 1rem; bottom: 0; height: 2px; border-radius: 2px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform 550ms var(--ease-expo); pointer-events: none; }
+.field-line { position: absolute; left: 1rem; right: 1rem; bottom: 0; height: 2px; border-radius: 2px; background: var(--color-brand); transform: scaleX(0); transform-origin: left; transition: transform 550ms var(--ease-expo); pointer-events: none; }
 .field:focus-within .field-line { transform: scaleX(1); }
 .field label { transition: color 250ms, transform 450ms var(--ease-expo); transform-origin: left; display: inline-block; }
-.field:focus-within label { color: var(--color-accent); transform: translate3d(2px, 0, 0); }
+.field:focus-within label { color: var(--color-brand); transform: translate3d(2px, 0, 0); }
 .field input, .field select, .field textarea { transition: border-color 300ms, box-shadow 450ms var(--ease-expo), background-color 300ms; }
 .field:focus-within input, .field:focus-within select, .field:focus-within textarea { background: #fff; }

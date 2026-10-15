@@ -13,13 +13,16 @@ import { siteConfig } from "@/config/site";
  * and woff, and the brand faces ship as woff2.
  */
 
-export const alt = `${siteConfig.brandName} — ${siteConfig.tagline}`;
+/* One card serves both languages, so it carries the positioning, which reads
+   the same in Indonesian and English, rather than a sentence in either one. */
+export const alt = `${siteConfig.brandName} — Extended IT Partner: Software, UI/UX & IoT`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const MIDNIGHT = "#1F2E5A";
-const MIST = "#C9D6DF";
-const PORCELAIN = "#F7F6F5";
+// The logo blue, its cyan, and white: the Cargon-style palette (2026-10-15).
+const MIDNIGHT = "#1D469D";
+const MIST = "#9FE3EC";
+const PORCELAIN = "#FFFFFF";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -45,7 +48,7 @@ export default function OpengraphImage() {
             width: 620,
             height: 620,
             borderRadius: 620,
-            background: "#2C4076",
+            background: "#163A85",
             display: "flex",
           }}
         />
@@ -78,16 +81,16 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 62,
+              fontSize: 84,
               fontWeight: 700,
               lineHeight: 1.15,
               color: PORCELAIN,
             }}
           >
-            Website, aplikasi, dan perangkat IoT yang dipakai sehari-hari.
+            Extended IT Partner
           </div>
           <div style={{ display: "flex", fontSize: 30, color: MIST, lineHeight: 1.4 }}>
-            Studio teknologi dan desain di Kota Bekasi.
+            Software · UI/UX · IoT — Bekasi, Indonesia
           </div>
         </div>
 
@@ -96,7 +99,7 @@ export default function OpengraphImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: `2px solid #33456F`,
+            borderTop: `2px solid #4A6CB5`,
             paddingTop: 28,
           }}
         >
@@ -112,3 +115,4 @@ export default function OpengraphImage() {
     size,
   );
 }
+

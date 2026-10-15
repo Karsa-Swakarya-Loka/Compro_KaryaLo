@@ -1,117 +1,78 @@
 "use client";
 
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { motion } from "motion/react";
-import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
+import { siteConfig, whatsappUrl } from "@/config/site";
+import { homeCopy } from "@/content/home";
+import { type Locale, localePath } from "@/lib/i18n";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import Magnetic from "@/components/motion/Magnetic";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import DecorCurves from "@/components/ui/DecorCurves";
 
-export default function ContactCTA() {
-  const reduceMotion = useReducedMotionSafe();
+/**
+ * The closing ask on every page that ends in a conversation — Cargon's blue
+ * call-to-action band, held as one card on white so it does not run into the
+ * blue footer below it. Largest title on the page, the page's last solid
+ * button (white on blue), and the office details beside it as plain text.
+ */
+export default function ContactCTA({ lang }: { lang: Locale }) {
+  const copy = homeCopy[lang].cta;
 
   return (
-    <section className="bg-mist py-20 md:py-28 px-4 md:px-12 border-b border-mist-border">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-white px-4 pb-16 pt-4 md:px-12 md:pb-20">
+      <div className="mx-auto max-w-[72rem]">
+        <Reveal scaleFrom={0.97} className="relative overflow-hidden rounded-3xl bg-brand px-7 py-12 text-white shadow-lift sm:px-10 md:px-14 md:py-16" >
+          {/* White curves, the same gesture as the hero's, closing the page. */}
+          <div className="pointer-events-none absolute inset-0 opacity-40 [&_path]:stroke-white" aria-hidden="true">
+            <DecorCurves className="-right-10 -top-16 h-[30rem] w-auto rotate-180" />
+          </div>
 
-        {/* Main CTA Canvas */}
-        <Reveal scaleFrom={0.98} duration={0.8} distance={28} className="rounded-3xl bg-midnight border border-midnight-light p-6 sm:p-8 md:p-16 text-white shadow-2xl shadow-midnight/20 relative overflow-hidden">
-          {/* Pulsing Ambient Halo — two glows breathe and drift on an 8s cycle */}
-          <motion.div
-            aria-hidden="true"
-            className="absolute -right-24 -top-24 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none will-change-transform"
-            animate={reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.4, 0.65, 0.4], x: [0, -18, 0], y: [0, 14, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div
-            aria-hidden="true"
-            className="absolute -left-24 -bottom-24 w-96 h-96 bg-mist/15 rounded-full blur-3xl pointer-events-none will-change-transform"
-            animate={reduceMotion ? undefined : { scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4], x: [0, 16, 0], y: [0, -12, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
-          />
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            {/* Left Narrative */}
-            <RevealGroup className="lg:col-span-7 space-y-6" stagger={0.1} delayChildren={0.15}>
+          <div className="relative z-10 grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-14">
+            <RevealGroup className="space-y-6 lg:col-span-8" stagger={0.1} delayChildren={0.1}>
               <RevealItem>
-                <h2 className="font-headline text-4xl md:text-6xl text-porcelain font-normal leading-[1.1] tracking-tight">
-                  Ceritakan Kebutuhan Anda, Kami Bantu Petakan.
-                </h2>
+                <h2 className="type-section-title-lg text-white max-w-[20ch]">{copy.title}</h2>
               </RevealItem>
-
               <RevealItem>
-                <p className="font-story text-midnight-muted text-base md:text-lg leading-relaxed max-w-xl">
-                  Mau bikin sistem baru, merapikan yang sudah ada, atau memasang perangkat pemantau? Ceritakan saja dulu. Kami beri masukan awal dan perkiraan ruang lingkupnya tanpa keharusan lanjut.
-                </p>
+                <p className="type-intro text-white max-w-[56ch]">{copy.body}</p>
               </RevealItem>
-
-              {/* Action Buttons */}
-              <RevealItem className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-2">
-                <Magnetic className="flex sm:inline-flex w-full sm:w-auto">
-                  <a
-                    href={siteConfig.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-meta w-full px-8 py-4 rounded-full bg-mist text-midnight text-xs font-bold uppercase tracking-wider hover:bg-mist-border transition-all shadow-lg shadow-midnight/25 flex items-center justify-center gap-2 group"
-                  >
-                    <span>Mulai Diskusi via WhatsApp</span>
+              <RevealItem className="flex flex-col items-start gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center">
+                <Magnetic className="inline-flex">
+                  <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" data-wa-primary="" className="btn btn-lg btn-primary-light group">
+                    <span>{copy.primary}</span>
                     <ArrowSwap />
                   </a>
                 </Magnetic>
-
-                <Link href="/about"
-                  className="group font-meta px-8 py-4 rounded-full bg-midnight-light/80 hover:bg-midnight-light border border-midnight-muted/30 text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <ArrowUpRight className="w-4 h-4 text-mist transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  <span>Kenali KaryaLo</span>
+                <Link href={localePath(lang, "/about")} className="btn btn-lg btn-secondary-light group">
+                  <span>{copy.secondary}</span>
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </RevealItem>
             </RevealGroup>
 
-            {/* Right Information Card */}
-            <RevealItem direction="right" delay={0.1} className="lg:col-span-5">
-              <div className="rounded-2xl bg-midnight-light/80 border border-midnight-muted/20 p-6 md:p-8 space-y-6">
-                <div>
-                  <span className="font-meta text-xs font-bold uppercase tracking-wider text-mist block">
-                    Kantor & Studio
-                  </span>
-                  <h3 className="font-story text-xl md:text-2xl font-bold text-white mt-1">
-                    PT Karsa Swakarya Loka
-                  </h3>
-                </div>
-
-                <div className="space-y-4 text-xs md:text-sm font-story text-porcelain/80">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-4 h-4 text-mist shrink-0 mt-1" />
-                    <span>{siteConfig.address}</span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-4 h-4 text-mist shrink-0" />
-                    <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">
-                      {siteConfig.email}
-                    </a>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-4 h-4 text-mist shrink-0" />
-                    <a href={`tel:${siteConfig.phone.replace(/[^+0-9]/g, "")}`} className="hover:text-white">{siteConfig.phone}</a>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-midnight-muted/20 flex flex-wrap gap-3 items-center justify-between font-meta text-[11px] text-midnight-muted">
-                  <span>NIB: {siteConfig.nib}</span>
-                  <span className="text-mist font-semibold">Senin - Jumat (09:00 - 18:00)</span>
-                </div>
+            <RevealItem direction="right" className="space-y-4 border-t border-white/25 pt-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <div className="space-y-1">
+                <p className="type-label text-cyan">{copy.officeLabel}</p>
+                <p className="type-card-title text-white">{siteConfig.companyName}</p>
               </div>
+              <ul className="space-y-3 type-small text-white">
+                <li className="flex items-start gap-3">
+                  <MapPin aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
+                  <span>{siteConfig.address}</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+                  <a href={`mailto:${siteConfig.email}`} className="hover:underline">{siteConfig.email}</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+                  <a href={`tel:${siteConfig.phone.replace(/[^+0-9]/g, "")}`} className="hover:underline">{siteConfig.phone}</a>
+                </li>
+              </ul>
+              <p className="type-meta text-white">{copy.hours}</p>
             </RevealItem>
-
           </div>
         </Reveal>
-
       </div>
     </section>
   );

@@ -1,152 +1,82 @@
 "use client";
 
-import Image from "next/image";
-import { siteConfig, getWhatsAppUrl } from "@/config/site";
-import { Building2, FileCheck, FileSpreadsheet, Lock, ShieldCheck } from "lucide-react";
-import { motion } from "motion/react";
-import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
+import { siteConfig, siteText, getWhatsAppUrl } from "@/config/site";
+import { homeCopy } from "@/content/home";
+import type { Locale } from "@/lib/i18n";
+import { ArrowUpRight, Building2, FileCheck, FileSpreadsheet, Lock } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-export default function TrustSection() {
-  const reduceMotion = useReducedMotionSafe();
+const ICONS = [Building2, FileCheck, FileSpreadsheet, Lock];
 
-  const trustCards = [
-    {
-      icon: Building2,
-      badge: "KEMENKUMHAM RI",
-      title: "PT Karsa Swakarya Loka",
-      detail: "SK: AHU-0038927.AH.01.01.TAHUN 2024",
-      description: "Badan usaha yang terdaftar resmi di Kementerian Hukum dan HAM, jadi kerja samanya diikat kontrak perusahaan, bukan kesepakatan personal."
-    },
-    {
-      icon: FileCheck,
-      badge: "SISTEM OSS",
-      title: "NIB: 3005260047228",
-      detail: `KBLI: ${siteConfig.kbli}`,
-      description: "Izin usaha aktif dan tercatat di sistem OSS pemerintah, dengan bidang usaha pemrograman komputer."
-    },
-    {
-      icon: FileSpreadsheet,
-      badge: "ADMINISTRASI & PAJAK",
-      title: "Faktur Pajak & Rekening Perusahaan",
-      detail: "Siap untuk proses pengadaan",
-      description: "Kami menerbitkan e-Faktur dan SPK resmi. Pembayaran masuk ke rekening perusahaan, bukan rekening pribadi."
-    },
-    {
-      icon: Lock,
-      badge: "KERAHASIAAN",
-      title: "Perjanjian Kerahasiaan",
-      detail: "NDA sebelum diskusi teknis",
-      description: "Dokumen, data, dan rencana bisnis yang Anda bagikan kami perlakukan sebagai informasi rahasia, diikat NDA resmi."
-    }
+/**
+ * Legal standing, in the shape of Cargon's contact-info cards: an icon in a
+ * soft blue circle (solid blue on hover), the fact, its registration detail and
+ * one line on why it matters. The request for documents is a secondary
+ * button: the solid one stays reserved for starting a conversation.
+ */
+export default function TrustSection({ lang }: { lang: Locale }) {
+  const copy = homeCopy[lang];
+  const trust = copy.trust;
+  const [entity, oss, admin, nda] = trust.cards;
+
+  /*
+    Wording from content/home.ts; the registration numbers stay in config/site.ts.
+    A registration number is set on its own line under its short label, so a
+    code like AHU-A092678… is never broken at its hyphen mid-card.
+  */
+  const facts: { title: string; description: string; label?: string; detail: string; code?: boolean }[] = [
+    { ...entity, label: entity.detail, detail: siteConfig.skAhu, code: true },
+    { ...oss, title: `${oss.title}: ${siteConfig.nib}`, label: oss.detail, detail: siteText[lang].kbli },
+    admin,
+    nda,
   ];
 
   return (
-    <section className="bg-mist py-20 md:py-28 px-4 md:px-12 border-b border-mist-border" id="trust">
-      <div className="max-w-[66rem] mx-auto space-y-16">
-        
-        {/* Section Header */}
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-mist-border pb-8">
-          <div>
-            <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">
-              Legalitas yang Bisa Dicek
-            </h2>
-          </div>
-          <p className="font-story text-mist-ink text-sm md:text-base max-w-md leading-relaxed">
-            Dokumen yang biasanya diminta tim pengadaan dan legal sudah kami siapkan dari awal.
-          </p>
-        </Reveal>
+    <section className="bg-surface section-support px-4 md:px-12" id="trust">
+      <div className="mx-auto max-w-[72rem]">
+        <SectionHeading badge={copy.badges.trust} title={trust.title} intro={trust.intro} className="mb-10" />
 
-        {/*
-          4 Trust Cards Grid — each card pops in from 95%.
-          The scale rides a wrapper because the card itself carries
-          `transition-all`, and a CSS transition on `transform` would smear
-          every frame motion writes.
-        */}
-        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.1}>
-          {trustCards.map((card, index) => {
-            const Icon = card.icon;
+        <RevealGroup className="rail-mobile grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4" stagger={0.08}>
+          {facts.map((fact, index) => {
+            const Icon = ICONS[index];
             return (
-              <RevealItem key={card.badge} direction="none" scaleFrom={0.95} duration={0.55}>
-                <div
-                  className="group bg-porcelain rounded-3xl p-6 md:p-7 border border-white shadow-xl shadow-midnight/5 hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 hover:-translate-y-2 hover:scale-[1.01] transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col justify-between space-y-6"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-10 h-10 rounded-xl bg-mist/30 border border-mist-border/60 flex items-center justify-center text-midnight transition-[background-color,border-color,color,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-white/10 group-hover:border-white/25 group-hover:text-mist group-hover:rotate-3 group-hover:scale-110">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      {/* `ring` rather than `border` so the hover outline costs no layout. */}
-                      <span className="font-meta text-[11px] font-bold uppercase tracking-wider text-mist-ink bg-slate-100 px-2 py-0.5 rounded-full ring-1 ring-transparent transition-[background-color,color,box-shadow] duration-[400ms] group-hover:bg-white/10 group-hover:text-porcelain group-hover:ring-white/20">
-                        {card.badge}
-                      </span>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="font-story text-lg md:text-xl font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover:text-white">
-                        {card.title}
-                      </h3>
-                      <p className="font-meta text-xs font-bold text-accent transition-colors duration-[400ms] group-hover:text-mist">
-                        {card.detail}
-                      </p>
-                    </div>
-
-                    <p className="font-story text-mist-ink text-xs md:text-sm leading-relaxed transition-colors duration-[400ms] group-hover:text-porcelain/80">
-                      {card.description}
+              <RevealItem key={fact.title}>
+                <article className="group h-full space-y-3 rounded-xl bg-white p-7 shadow-card transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-lift">
+                  <span className="grid h-14 w-14 place-items-center rounded-full bg-brand-soft text-brand transition-colors duration-500 group-hover:bg-brand group-hover:text-white">
+                    <Icon aria-hidden="true" className="h-6 w-6" />
+                  </span>
+                  <h3 className="type-card-title break-words text-ink">{fact.title}</h3>
+                  {fact.label ? (
+                    <p className="space-y-0.5">
+                      <span className="block type-meta text-body">{fact.label}</span>
+                      <span className={`block type-meta text-brand ${fact.code ? "whitespace-nowrap" : ""}`}>{fact.detail}</span>
                     </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-mist-ink font-meta text-[11px] font-medium transition-colors duration-[400ms] group-hover:border-white/15 group-hover:text-porcelain/80">
-                    <ShieldCheck className="w-3.5 h-3.5 text-midnight transition-colors duration-[400ms] group-hover:text-mist" />
-                    <span>Terdaftar & aktif</span>
-                    {/* Live status tell — the four dots breathe out of phase. */}
-                    <motion.span
-                      aria-hidden="true"
-                      className="ml-auto w-1.5 h-1.5 rounded-full bg-accent transition-colors duration-[400ms] group-hover:bg-mist"
-                      animate={reduceMotion ? undefined : { scale: [1, 1.7, 1], opacity: [1, 0.45, 1] }}
-                      transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: index * 0.28 }}
-                    />
-                  </div>
-                </div>
+                  ) : (
+                    <p className="type-meta text-brand">{fact.detail}</p>
+                  )}
+                  <p className="type-small text-body">{fact.description}</p>
+                </article>
               </RevealItem>
             );
           })}
         </RevealGroup>
 
-        {/* Legal Badge Banner */}
-        {/* The lift is safe on a motion-driven element here: Tailwind v4's
-           `translate` is its own property, so it stacks with the `transform`
-           Reveal leaves behind instead of being overridden by it. */}
-        <Reveal distance={28} duration={0.7} className="group bg-porcelain rounded-3xl p-6 md:p-8 border border-white shadow-xl shadow-midnight/5 hover:bg-midnight hover:border-midnight-light hover:shadow-2xl hover:shadow-midnight/25 hover:-translate-y-1 transition-[background-color,border-color,box-shadow,translate] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 transition-colors duration-[400ms] group-hover:border-white/20">
-              <Image
-                src="/images/legal-trust.webp"
-                alt=""
-                sizes="64px"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h3 className="font-story text-lg md:text-xl font-bold text-midnight transition-colors duration-[400ms] group-hover:text-white">
-                Butuh Dokumen Legal untuk Pendaftaran Vendor?
-              </h3>
-              <p className="font-story text-mist-ink text-xs md:text-sm mt-0.5 transition-colors duration-[400ms] group-hover:text-porcelain/80">
-                Kami kirimkan salinan SK Kemenkumham, NPWP, NIB, dan company profile dalam bentuk PDF.
-              </p>
-            </div>
+        <Reveal className="mt-8 flex flex-col justify-between gap-5 rounded-xl bg-white p-7 shadow-card md:flex-row md:items-center">
+          <div className="max-w-[60ch] space-y-1">
+            <h3 className="type-card-title text-ink">{trust.bannerTitle}</h3>
+            <p className="type-small text-body">{trust.bannerBody}</p>
           </div>
           <a
-            href={getWhatsAppUrl(`Halo KaryaLo, kami butuh dokumen legal dan NIB PT Karsa Swakarya Loka untuk proses pendaftaran vendor.`)}
+            href={getWhatsAppUrl(trust.bannerMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-meta px-6 py-3 rounded-full bg-midnight text-white text-xs font-bold uppercase tracking-wider hover:brightness-125 group-hover:bg-porcelain group-hover:text-midnight transition-[background-color,color,filter] duration-[400ms] shrink-0 shadow-md"
+            className="btn btn-secondary shrink-0 self-start md:self-auto group"
           >
-            Minta Dokumen Legal
+            <span>{trust.bannerCta}</span>
+            <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
           </a>
         </Reveal>
-
       </div>
     </section>
   );

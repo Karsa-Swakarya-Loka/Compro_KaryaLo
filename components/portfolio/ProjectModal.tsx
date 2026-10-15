@@ -2,15 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ProjectItem } from "@/data/portfolio";
+import type { ProjectItem } from "@/data/portfolio";
 import { X, CheckCircle2 } from "lucide-react";
 import { getWhatsAppUrl } from "@/config/site";
+import { portfolioCopy } from "@/content/portfolio-page";
+import type { Locale } from "@/lib/i18n";
 import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { EASE_EXPO, SPRING_INTERACTIVE, SPRING_MODAL } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 
 interface ProjectModalProps {
+  lang: Locale;
   project: ProjectItem | null;
   onClose: () => void;
 }
@@ -20,7 +23,7 @@ interface ProjectModalProps {
  * zoom in/out of the panel while CSS animates ::backdrop (0 → 12px blur).
  * The dialog stays mounted so the exit animation can finish before `close()`.
  */
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+export default function ProjectModal({ lang, project, onClose }: ProjectModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const previousOverflow = useRef("");
@@ -82,7 +85,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             exit={{ opacity: 0, scale: 0.96, y: 8, transition: { duration: 0.22, ease: EASE_EXPO } }}
             transition={SPRING_MODAL}
           >
-            <ModalBody project={project} onClose={onClose} />
+            <ModalBody lang={lang} project={project} onClose={onClose} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -90,31 +93,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   );
 }
 
-function ModalBody({ project, onClose }: { project: ProjectItem; onClose: () => void }) {
+function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectItem; onClose: () => void }) {
+  const copy = portfolioCopy[lang];
   const images = project.galleryImages.length > 0 ? project.galleryImages : [project.coverImage];
   const [activeImage, setActiveImage] = useState(0);
   const currentImage = images[activeImage] ?? images[0];
 
   return (
     <>
-      {/* Modal Header */}
-      <div className="flex shrink-0 items-center justify-between gap-3 px-5 py-4 border-b border-slate-200 bg-white">
-        <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
-          <span className="font-meta text-xs font-bold text-accent uppercase tracking-wider">
-            {project.serviceTags.join(" · ")}
-          </span>
-          <span className="text-slate-300">•</span>
-          <span className="font-meta text-xs font-semibold text-slate-600 uppercase">
-            {project.client} ({project.year})
-          </span>
-        </div>
+      {/* Modal Header: metadata only, sentence case */}
+      <div className="flex shrink-0 items-center justify-between gap-3 px-5 md:px-8 py-3 border-b border-line bg-white">
+        <p className="min-w-0 type-meta text-body">
+          {project.serviceTags.join(" · ")} <span aria-hidden="true" className="text-line">•</span> {project.client} ({project.year})
+        </p>
         <motion.button
           onClick={onClose}
           whileHover={{ rotate: 90 }}
           whileTap={{ scale: 0.92 }}
           transition={SPRING_INTERACTIVE}
-          className="w-11 h-11 shrink-0 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-sm cursor-pointer"
-          aria-label="Tutup Detail Proyek"
+          className="w-11 h-11 shrink-0 rounded-full bg-surface hover:bg-brand flex items-center justify-center text-ink hover:text-white transition-colors cursor-pointer"
+          aria-label={copy.closeDetails}
         >
           <X className="w-5 h-5" />
         </motion.button>
@@ -123,118 +121,82 @@ function ModalBody({ project, onClose }: { project: ProjectItem; onClose: () => 
       {/* Modal Scrollable Body — data-lenis-prevent keeps wheel events local while the page is frozen */}
       <div data-lenis-prevent className="min-h-0 overflow-y-auto overscroll-contain p-5 md:p-8 space-y-8">
 
-        {/* Title & Category */}
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mist/25 border border-mist font-meta text-[11px] font-bold text-midnight uppercase tracking-wider">
-            {project.type === "client" ? "Studi Kasus Klien" : "Purwarupa Internal"}
-          </div>
-          <h2 id="project-title" tabIndex={-1} className="font-story text-2xl md:text-3xl font-bold text-midnight leading-tight">
+        {/* Title leads; the client/prototype badge follows it rather than sitting above it. */}
+        <div className="space-y-3">
+          <h2 id="project-title" tabIndex={-1} className="type-subhead text-ink max-w-[40ch]">
             {project.title}
           </h2>
-          <p className="font-story text-slate-600 text-base md:text-lg leading-relaxed pt-1">
+          <p className="badge-pill">
+            {project.type === "client" ? copy.modal.badgeClient : project.type === "product" ? copy.caseStudy.badgeProduct : copy.caseStudy.badgePrototype}
+          </p>
+          <p className="type-intro text-body max-w-[60ch]">
             {project.summary}
           </p>
         </div>
 
-        {/* Anti-Bleed macOS Browser Frame with Matte Stage */}
-        <div className="rounded-2xl border border-slate-300/80 overflow-hidden bg-midnight shadow-xl">
-          <div className="h-8 bg-midnight px-4 flex items-center justify-between border-b border-midnight-light">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-mist" />
-              <div className="w-2.5 h-2.5 rounded-full bg-mist" />
-              <div className="w-2.5 h-2.5 rounded-full bg-midnight-muted" />
-              <span className="font-meta text-[11px] text-midnight-muted truncate pl-3">
-                {project.client}
-              </span>
-            </div>
-            <span className="font-meta text-[11px] text-mist uppercase font-semibold tracking-wider">
-              Pratinjau
-            </span>
-          </div>
-          {/* Matte Contrast Stage: Soft mist-tinted matte prevents light screenshots from washing out */}
-          <div className="relative aspect-[16/10] w-full bg-matte p-2.5 md:p-4">
-            <div className="relative w-full h-full rounded-xl overflow-hidden shadow-sm border border-slate-300/80 bg-white ring-1 ring-black/5">
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={currentImage}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.55, ease: EASE_EXPO }}
-                >
-                  <Image
-                    src={currentImage}
-                    alt={activeImage === 0 ? project.title : `${project.title} — tampilan ${activeImage + 1}`}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 900px"
-                    className="object-contain p-2 md:p-3"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
+        {/* The screenshot on the light surface, one frame, Cargon's 12px corners. */}
+        <div className="rounded-3xl bg-surface p-2.5 md:p-3 shadow-card">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-white">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={currentImage}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.55, ease: EASE_EXPO }}
+              >
+                <Image
+                  src={currentImage}
+                  alt={copy.imageAlt(project.title, activeImage + 1, images.length)}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 900px"
+                  className="object-contain p-3 md:p-4"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
-        {/* Challenge & Solution Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-          <div className="p-6 rounded-2xl bg-white border border-slate-200/80 space-y-2">
-            <span className="font-meta text-xs font-bold text-amber-800 uppercase tracking-wider">
-              Masalah yang Dihadapi
-            </span>
-            <p className="font-story text-slate-700 text-sm md:text-base leading-relaxed">
-              {project.challenge}
-            </p>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-mist/20 border border-mist space-y-2">
-            <span className="font-meta text-xs font-bold text-midnight uppercase tracking-wider">
-              Cara Kami Menyelesaikannya
-            </span>
-            <p className="font-story text-slate-700 text-sm md:text-base leading-relaxed">
-              {project.solution}
-            </p>
-          </div>
+        {/* Challenge & solution: two plain columns under a rule, not two boxes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <section className="border-t border-line pt-4 space-y-2">
+            <h3 className="type-card-title text-ink">{copy.challenge}</h3>
+            <p className="type-body-card text-body max-w-[60ch]">{project.challenge}</p>
+          </section>
+          <section className="border-t border-line pt-4 space-y-2">
+            <h3 className="type-card-title text-ink">{copy.solution}</h3>
+            <p className="type-body-card text-body max-w-[60ch]">{project.solution}</p>
+          </section>
         </div>
 
-        {/* Impact / Key Outcome */}
+        {/* Impact / Key Outcome: the one tinted callout in the dialog */}
         {project.impact && (
-          <div className="p-5 rounded-2xl bg-mist/80 border border-mist-border flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-midnight shrink-0 mt-0.5" />
-            <div>
-              <span className="font-meta text-xs font-bold text-midnight uppercase tracking-wider block">
-                Hasilnya
-              </span>
-              <p className="font-story text-midnight text-sm md:text-base font-medium mt-1">
-                {project.impact}
-              </p>
+          <section className="p-5 rounded-2xl bg-brand-soft flex items-start gap-3">
+            <CheckCircle2 aria-hidden="true" className="w-5 h-5 text-brand shrink-0 mt-1" />
+            <div className="space-y-1">
+              <h3 className="type-card-title text-ink">{copy.impact}</h3>
+              <p className="type-body-card font-medium text-ink max-w-[60ch]">{project.impact}</p>
             </div>
-          </div>
+          </section>
         )}
 
         {/* Tech Stack Tags */}
-        <div className="space-y-3 pt-2">
-          <span className="font-meta text-xs font-bold text-slate-600 uppercase tracking-wider">
-            Teknologi yang Dipakai
-          </span>
-          <div className="flex flex-wrap gap-2">
+        <div className="space-y-3">
+          <h3 className="type-label text-ink">{copy.technologies}</h3>
+          <ul className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="font-meta px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-semibold text-slate-700"
-              >
+              <li key={tag} className="type-meta px-3 py-1.5 rounded-full bg-brand-soft text-brand">
                 {tag}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* Gallery thumbnails — select to swap the main preview */}
         {images.length > 1 && (
-          <div className="space-y-3 pt-4 border-t border-slate-200">
-            <span className="font-meta text-xs font-bold text-slate-600 uppercase tracking-wider">
-              Tampilan Lainnya
-            </span>
+          <div className="space-y-3 pt-4 border-t border-line">
+            <h3 className="type-label text-ink">{copy.modal.otherViews}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {images.map((img, i) => {
                 const isActive = i === activeImage;
@@ -244,31 +206,29 @@ function ModalBody({ project, onClose }: { project: ProjectItem; onClose: () => 
                     type="button"
                     onClick={() => setActiveImage(i)}
                     aria-pressed={isActive}
-                    aria-label={`Tampilkan pratinjau ${i + 1} dari ${images.length}`}
+                    aria-label={copy.modal.showPreview(i + 1, images.length)}
                     whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.97, y: -2 }}
                     transition={SPRING_INTERACTIVE}
-                    className={`relative rounded-xl border overflow-hidden bg-matte p-2 aspect-[16/10] cursor-pointer transition-[border-color,box-shadow] duration-300 ${
+                    className={`relative rounded-xl border overflow-hidden bg-surface aspect-[16/10] cursor-pointer transition-[border-color,box-shadow] duration-300 ${
                       isActive
-                        ? "border-accent/70 shadow-md shadow-accent/10"
-                        : "border-slate-300/80 hover:border-slate-400 shadow-sm"
+                        ? "border-brand/60 shadow-card"
+                        : "border-line hover:border-brand/40"
                     }`}
                   >
-                    <div className="relative w-full h-full rounded-lg overflow-hidden bg-white border border-slate-200/90 shadow-xs">
-                      <Image
-                        src={img}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 50vw, 33vw"
-                        className="object-contain p-1.5"
-                      />
-                    </div>
+                    <Image
+                      src={img}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      className="object-contain p-2"
+                    />
                     {isActive && (
                       <motion.span
                         layoutId="gallery-active-ring"
                         aria-hidden="true"
                         transition={SPRING_INTERACTIVE}
-                        className="absolute inset-0 rounded-xl ring-2 ring-inset ring-accent pointer-events-none"
+                        className="absolute inset-0 rounded-xl ring-2 ring-inset ring-brand pointer-events-none"
                       />
                     )}
                   </motion.button>
@@ -280,18 +240,19 @@ function ModalBody({ project, onClose }: { project: ProjectItem; onClose: () => 
 
       </div>
 
-      {/* Modal Footer CTA */}
-      <div className="px-5 py-4 shrink-0 border-t border-slate-200 bg-white flex flex-wrap items-center justify-end gap-4">
+      {/* Modal Footer CTA: the dialog's one solid button, on the content's left edge */}
+      <div className="px-5 md:px-8 py-4 shrink-0 border-t border-line bg-white flex flex-wrap items-center gap-4">
         <a
-          href={getWhatsAppUrl(`Halo KaryaLo, saya tertarik membangun sistem seperti ${project.title}`)}
+          href={getWhatsAppUrl(copy.whatsappSimilar(project.title))}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-meta px-6 py-2.5 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors flex items-center gap-1.5 shadow-md shadow-midnight/10"
+          className="btn btn-primary group"
         >
-          <span>Diskusikan Proyek Serupa</span>
-          <ArrowSwap className="w-3.5 h-3.5" />
+          <span>{copy.discussSimilar}</span>
+          <ArrowSwap className="w-4 h-4" />
         </a>
       </div>
     </>
   );
 }
+

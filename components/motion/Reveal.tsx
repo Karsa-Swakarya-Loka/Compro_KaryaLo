@@ -13,8 +13,13 @@ export const REVEAL_VIEWPORT = { once: true, margin: "-60px" } as const;
 
 export type RevealDirection = "up" | "down" | "left" | "right" | "none";
 
-/** Default travel distance in px. Small on purpose: this is a settle, not a slide show. */
-const DISTANCE = 24;
+/**
+ * Default travel distance in px and duration in s, tuned to the Cargon
+ * reference's AOS entrances (fade-up / fade-left / fade-right): a visible glide
+ * that settles, not a snap. Every reveal on the site inherits these.
+ */
+const DISTANCE = 40;
+const DURATION = 0.9;
 
 function offsetFor(direction: RevealDirection, distance: number): { x?: number; y?: number } {
   switch (direction) {
@@ -95,7 +100,7 @@ export default function Reveal({
   id,
   direction = "up",
   distance = DISTANCE,
-  duration = 0.6,
+  duration = DURATION,
   delay = 0,
   scaleFrom,
 }: RevealProps) {
@@ -167,7 +172,7 @@ export function RevealItem({
   style,
   direction = "up",
   distance = DISTANCE,
-  duration = 0.6,
+  duration = DURATION,
   delay = 0,
   scaleFrom,
 }: RevealItemProps) {
@@ -189,6 +194,6 @@ export function RevealItem({
  * `motion.*` element that already sits inside a `RevealGroup`.
  */
 export function revealVariants(config: VariantPropsBase = {}): Variants {
-  const { direction = "up", distance = DISTANCE, duration = 0.6, delay = 0, scaleFrom } = config;
+  const { direction = "up", distance = DISTANCE, duration = DURATION, delay = 0, scaleFrom } = config;
   return buildVariants({ direction, distance, duration, delay, scaleFrom });
 }

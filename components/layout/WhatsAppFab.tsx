@@ -1,0 +1,77 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { whatsappUrl } from "@/config/site";
+import { commonCopy } from "@/content/common";
+import { type Locale, splitLocale } from "@/lib/i18n";
+
+/**
+ * Floating WhatsApp button, bottom right, below `xl` (from `xl` the navbar
+ * carries the WhatsApp button; see globals.css).
+ *
+ * It steps aside while an in-page primary WhatsApp button — any element marked
+ * `data-wa-primary`, such as the hero's and the closing section's — is on
+ * screen: two identical asks side by side split attention, and on a phone the
+ * floating one sat on top of the real button. When no primary is visible it
+ * comes back, so a way to start the conversation is always within reach.
+ *
+ * It is left off /contact entirely: that page is itself the hand-off to
+ * WhatsApp (a solid button in its banner, then the form), and on a phone the
+ * floating button sat on the form's textarea and its character counter.
+ *
+ * It is a plain anchor to `wa.me`, so the delegated listener in
+ * components/analytics/Analytics.tsx reports it as `whatsapp_click` like every
+ * other WhatsApp link, with `location` reading "wa-fab".
+ */
+export default function WhatsAppFab({ lang }: { lang: Locale }) {
+  const copy = commonCopy[lang].fab;
+  const pathname = usePathname();
+  const [primaryInView, setPrimaryInView] = useState(false);
+
+  useEffect(() => {
+    const visible = new Set<Element>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        }
+        setPrimaryInView(visible.size > 0);
+      },
+      { threshold: 0.4 },
+    );
+    // The page's client sections mount after this effect's first frame, so
+    // look again once they have rendered.
+    const scan = () => document.querySelectorAll("[data-wa-primary]").forEach((el) => observer.observe(el));
+    scan();
+    const later = window.setTimeout(scan, 400);
+    return () => {
+      window.clearTimeout(later);
+      observer.disconnect();
+      setPrimaryInView(false);
+    };
+  }, [pathname]);
+
+  if (splitLocale(pathname).path === "/contact") return null;
+
+  return (
+    <section id="wa-fab" aria-label={copy.regionLabel}>
+      <a
+        href={whatsappUrl(lang)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.label}
+        title={copy.label}
+        className="wa-fab"
+        data-hidden={primaryInView ? "" : undefined}
+        aria-hidden={primaryInView ? true : undefined}
+        tabIndex={primaryInView ? -1 : undefined}
+      >
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+        </svg>
+      </a>
+    </section>
+  );
+}

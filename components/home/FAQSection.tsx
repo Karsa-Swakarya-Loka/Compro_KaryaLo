@@ -1,87 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { faqData } from "@/data/faq";
-import { siteConfig } from "@/config/site";
-import { ChevronDown, MessageSquareQuote } from "lucide-react";
+import { getFaq } from "@/data/faq";
+import { whatsappUrl } from "@/config/site";
+import { homeCopy } from "@/content/home";
+import type { Locale } from "@/lib/i18n";
+import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { EASE_EXPO, SPRING_OVERSHOOT } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-export default function FAQSection() {
+/**
+ * Questions, in the Cargon manner: a centred header, then one column of white
+ * cards. The open card gains a blue edge and its chevron turns solid blue.
+ * Every answer stays mounted so it is in the server HTML for search engines and
+ * assistants; collapsed answers are `inert`.
+ */
+export default function FAQSection({ lang }: { lang: Locale }) {
+  const badges = homeCopy[lang].badges;
+  const copy = homeCopy[lang].faq;
+  const faqData = getFaq(lang);
   const [openId, setOpenId] = useState<string | null>(faqData[0]?.id || null);
 
-  const toggle = (id: string) => {
-    setOpenId(openId === id ? null : id);
-  };
-
   return (
-    <section className="bg-porcelain py-20 md:py-28 px-4 md:px-12 border-b border-slate-200/80" id="faq">
-      <div className="max-w-4xl mx-auto space-y-16">
+    <section className="bg-white section-support px-4 md:px-12" id="faq">
+      <div className="mx-auto max-w-[72rem]">
+        <SectionHeading badge={badges.faq} title={copy.title} intro={copy.intro} className="mb-10" />
 
-        {/* Section Header */}
-        <Reveal className="text-center space-y-4">
-          <h2 className="font-headline text-4xl md:text-5xl text-midnight font-normal">
-            Pertanyaan yang Sering Masuk
-          </h2>
-          <p className="font-story text-slate-600 text-base max-w-xl mx-auto leading-relaxed">
-            Soal kepemilikan kode, cara pembayaran, garansi, dan legalitas kontrak. Kami jawab apa adanya di sini.
-          </p>
-        </Reveal>
-
-        {/* Accordion List */}
-        <RevealGroup className="space-y-4" stagger={0.07}>
+        <RevealGroup className="mx-auto max-w-3xl space-y-4" stagger={0.06}>
           {faqData.map((item) => {
             const isOpen = openId === item.id;
             return (
-              <RevealItem key={item.id} distance={18} duration={0.55}>
-                {/*
-                  Named group: the trigger button below carries its own plain
-                  `group` for the chevron, and an unnamed group here would fire
-                  that chevron whenever the row was hovered anywhere.
-                  This row stays deliberately lighter than the other cards — a
-                  full surface flip on an open accordion would recolour the
-                  answer text mid-read.
-                */}
-                <div
-                  className={`group/faq rounded-2xl border transition-[border-color,background-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
-                    isOpen
-                      ? "bg-white border-accent/40 shadow-sm hover:border-accent/60"
-                      : "bg-white/80 border-slate-200/80 hover:border-accent/40 hover:bg-mist/15 hover:shadow-sm"
-                  }`}
-                >
+              <RevealItem key={item.id} distance={20}>
+                <div className={`overflow-hidden rounded-xl bg-white shadow-card ring-1 transition-[box-shadow] duration-300 ${isOpen ? "ring-brand" : "ring-line hover:ring-brand/40"}`}>
                   <button
-                    onClick={() => toggle(item.id)}
-                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 cursor-pointer group"
+                    type="button"
+                    onClick={() => setOpenId(isOpen ? null : item.id)}
+                    className="flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left"
                     id={`${item.id}-trigger`}
                     aria-controls={`${item.id}-answer`}
                     aria-expanded={isOpen}
                   >
-                    <span className="font-story text-base md:text-lg font-bold text-midnight leading-snug transition-colors duration-[400ms] group-hover/faq:text-midnight-light">
-                      {item.question}
-                    </span>
-                    {/* Chevron flips with a micro spring overshoot instead of a rigid rotation */}
-                    <motion.div
-                      animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.05 : 1 }}
-                      whileTap={{ scale: 0.9 }}
+                    <span className={`type-card-title transition-colors ${isOpen ? "text-brand" : "text-ink"}`}>{item.question}</span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={SPRING_OVERSHOOT}
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-300 ${
-                        isOpen
-                          ? "bg-accent text-white"
-                          : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
-                      }`}
+                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${isOpen ? "bg-brand text-white" : "bg-brand-soft text-brand"}`}
                     >
-                      <ChevronDown className="w-4 h-4" />
-                    </motion.div>
+                      <ChevronDown aria-hidden="true" className="h-4 w-4" />
+                    </motion.span>
                   </button>
-
-                  {/*
-                    Every answer stays mounted so it is present in the server-rendered
-                    HTML. Collapsing it by unmounting kept five of these answers out of
-                    the markup entirely, which meant crawlers and AI assistants never
-                    saw the most specific, most quotable copy on the site.
-                  */}
                   <motion.div
                     id={`${item.id}-answer`}
                     role="region"
@@ -92,11 +62,7 @@ export default function FAQSection() {
                     transition={{ duration: 0.35, ease: EASE_EXPO }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-1 border-t border-slate-200/50">
-                      <p className="font-story text-slate-600 text-sm md:text-base leading-relaxed">
-                        {item.answer}
-                      </p>
-                    </div>
+                    <p className="type-body max-w-[68ch] px-6 pb-6 text-body">{item.answer}</p>
                   </motion.div>
                 </div>
               </RevealItem>
@@ -104,32 +70,15 @@ export default function FAQSection() {
           })}
         </RevealGroup>
 
-        {/* Prompt Card */}
-        <Reveal distance={28} className="p-6 rounded-2xl bg-mist/25 border border-mist flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-accent text-white flex items-center justify-center shrink-0">
-              <MessageSquareQuote className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="font-story text-base md:text-lg font-bold text-midnight">
-                Ada pertanyaan yang belum terjawab di sini?
-              </h3>
-              <p className="font-story text-xs text-slate-700 mt-0.5">
-                Kami sediakan sesi online 30 menit untuk membahas kebutuhan Anda lebih detail.
-              </p>
-            </div>
-          </div>
-          <a
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-meta px-6 py-2.5 rounded-full bg-accent text-white text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors flex items-center gap-1.5 shrink-0 shadow-md shadow-midnight/10"
-          >
-            <span>Hubungi Kami</span>
-            <ArrowSwap className="w-3.5 h-3.5" />
+        <Reveal className="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4 text-center">
+          <p className="type-intro text-body">
+            <span className="font-semibold text-ink">{copy.askLead}</span> {copy.askBody}
+          </p>
+          <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary group">
+            <span>{copy.askCta}</span>
+            <ArrowSwap />
           </a>
         </Reveal>
-
       </div>
     </section>
   );

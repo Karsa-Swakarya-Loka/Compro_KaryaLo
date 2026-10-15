@@ -4,20 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { siteConfig, siteFeatures } from "@/config/site";
+import { whatsappUrl } from "@/config/site";
+import { commonCopy } from "@/content/common";
+import { type Locale, htmlLang, localePath, locales, splitLocale } from "@/lib/i18n";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, type Variants } from "motion/react";
 import { EASE_EXPO, SPRING_INTERACTIVE } from "@/components/motion/tokens";
-
-const navLinks = [
-  { name: "Layanan", href: "/services" },
-  { name: "Portofolio", href: "/works" },
-  ...(siteFeatures.enableProductsSection && siteFeatures.showProductsInNavbar
-    ? [{ name: "Produk", href: "/products" }]
-    : []),
-  { name: "Tentang", href: "/about" },
-  { name: "Kontak", href: "/contact" },
-];
 
 /** Mobile sheet: springs open from the top-right corner, links cascade in. */
 const sheetVariants: Variants = {
@@ -42,8 +34,42 @@ const sheetItemVariants: Variants = {
 
 const SCROLL_THRESHOLD = 50;
 
-export default function Navbar() {
+/**
+ * ID | EN switch. The current language is plain text marked as current; the
+ * other one links to this same page in that language. It is a plain anchor
+ * rather than <Link>: each language has its own root layout, so crossing
+ * between them is a full document load either way, and the anchor says so.
+ */
+function LanguageSwitch({ lang, path }: { lang: Locale; path: string }) {
+  const copy = commonCopy[lang];
+  return (
+    <div className="lang-switch" role="group" aria-label={copy.languageLabel}>
+      {locales.map((option) =>
+        option === lang ? (
+          <span key={option} className="lang-switch__item" aria-current="true">
+            {copy.languageNames[option]}
+          </span>
+        ) : (
+          <a
+            key={option}
+            href={localePath(option, path)}
+            hrefLang={htmlLang[option]}
+            lang={htmlLang[option]}
+            aria-label={copy.switchTo}
+            className="lang-switch__item"
+          >
+            {copy.languageNames[option]}
+          </a>
+        ),
+      )}
+    </div>
+  );
+}
+
+export default function Navbar({ lang }: { lang: Locale }) {
+  const copy = commonCopy[lang];
   const pathname = usePathname();
+  const { path: neutralPath } = splitLocale(pathname);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
@@ -82,11 +108,15 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  const activeHref = navLinks.find((link) => link.href === pathname)?.href ?? null;
+  const navLinks = copy.nav.map((link) => ({ ...link, href: localePath(lang, link.href), base: link.href }));
+  /* A case study under /portfolio/[slug] keeps "Portfolio" marked as the current section. */
+  const isCurrent = (base: string) => (base === "/" ? neutralPath === "/" : neutralPath === base || neutralPath.startsWith(`${base}/`));
+  const activeHref = navLinks.find((link) => isCurrent(link.base))?.href ?? null;
   const pillHref = hoveredHref ?? activeHref;
+  const homeHref = localePath(lang, "/");
 
   return (
-    <div className="nav-surface" data-overlay={pathname === "/" ? "" : undefined} data-scrolled={scrolled ? "" : undefined}>
+    <div className="nav-surface" data-overlay={neutralPath === "/" ? "" : undefined} data-scrolled={scrolled ? "" : undefined}>
       <div className="nav-container">
         <header ref={headerRef} className="site-header" onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget)) setMobileMenuOpen(false);
@@ -96,7 +126,7 @@ export default function Navbar() {
               The mark is decorative — the wordmark beside it carries the name,
               so the link's accessible name comes from that text.
             */}
-            <Link href="/" className="brand-link">
+            <Link href={homeHref} className="brand-link">
               <Image
                 src="/images/icon-karyalo.png"
                 alt=""
@@ -104,32 +134,29 @@ export default function Navbar() {
                 height={3354}
                 preload
                 sizes="28px"
-                className="h-9 w-auto shrink-0"
+                className="h-10 w-auto shrink-0"
               />
-              {/* Measured against the mark, the two-line block's ink sat 2.9px
-                  below the icon's optical centre — `leading-none` leaves more
-                  room above the caps than below the baseline here. The pull is
-                  double the correction because `align-items: center` splits a
-                  margin change across both sides of the box. */}
-              <span className="-mt-[6px]">
-                {/* Explicit space so the name is announced as "KaryaLo Digital
-                    Solution" rather than running together. */}
-                <span className="block font-story text-lg font-bold leading-none text-midnight">KaryaLo</span>{" "}
-                <span className="-mt-[5px] block font-story text-[13px] leading-none text-mist-ink">Digital Solution</span>
+              {/* Cargon's lockup: the mark, then a bold one-word wordmark with the
+                  descriptor beneath it in body grey. */}
+              <span className="flex flex-col">
+                <span className="text-xl font-bold leading-none tracking-tight text-ink">
+                  Karya<span className="text-brand">Lo</span>
+                </span>{" "}
+                <span className="mt-1 text-xs font-medium leading-none text-body">Digital Solution</span>
               </span>
             </Link>
 
             {/* Desktop links with a shared, spring-driven hover pill */}
             <nav
-              aria-label="Navigasi utama"
-              className="hidden lg:flex items-center gap-1"
+              aria-label={copy.navLabel}
+              className="hidden lg:flex items-center gap-0.5"
               onMouseLeave={() => setHoveredHref(null)}
             >
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  aria-current={pathname === link.href ? "page" : undefined}
+                  aria-current={isCurrent(link.base) ? "page" : undefined}
                   className="nav-link"
                   onMouseEnter={() => setHoveredHref(link.href)}
                   onFocus={() => setHoveredHref(link.href)}
@@ -145,14 +172,21 @@ export default function Navbar() {
                       transition={SPRING_INTERACTIVE}
                     />
                   )}
-                  <span className="relative z-10">{link.name}</span>
+                  <span className="relative z-10">{link.label}</span>
                 </Link>
               ))}
             </nav>
 
-            <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="nav-cta hidden lg:inline-flex">
-              Konsultasi WhatsApp <ArrowUpRight aria-hidden="true" size={16} />
-            </a>
+            {/* Language switch, then the bar's one solid shape: the WhatsApp
+                button, from xl. Below xl the six links leave no room for it and
+                the floating button in components/layout/WhatsAppFab.tsx covers
+                the job. */}
+            <div className="hidden lg:flex items-center gap-3">
+              <LanguageSwitch lang={lang} path={neutralPath} />
+              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm hidden xl:inline-flex">
+                {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
+              </a>
+            </div>
 
             <button
               ref={toggleRef}
@@ -161,7 +195,7 @@ export default function Navbar() {
               className="nav-toggle lg:hidden"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
-              aria-label={mobileMenuOpen ? "Tutup menu" : "Buka menu"}
+              aria-label={mobileMenuOpen ? copy.closeMenu : copy.openMenu}
             >
               <AnimatePresence initial={false}>
                 {mobileMenuOpen ? (
@@ -208,7 +242,7 @@ export default function Navbar() {
                 <motion.nav
                   key="sheet"
                   id="mobile-navigation"
-                  aria-label="Navigasi seluler"
+                  aria-label={copy.mobileNavLabel}
                   className="mobile-nav lg:hidden"
                   style={{ transformOrigin: "top right" }}
                   variants={sheetVariants}
@@ -221,22 +255,23 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        aria-current={pathname === link.href ? "page" : undefined}
+                        aria-current={isCurrent(link.base) ? "page" : undefined}
                         className="nav-link"
                       >
-                        {link.name} <ArrowUpRight aria-hidden="true" size={16} />
+                        {link.label} <ArrowUpRight aria-hidden="true" size={16} />
                       </Link>
                     </motion.div>
                   ))}
-                  <motion.div variants={sheetItemVariants}>
+                  <motion.div variants={sheetItemVariants} className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                    <LanguageSwitch lang={lang} path={neutralPath} />
                     <a
-                      href={siteConfig.whatsappUrl}
+                      href={whatsappUrl(lang)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="nav-cta mt-3"
+                      className="btn btn-primary btn-sm"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Konsultasi WhatsApp <ArrowUpRight aria-hidden="true" size={16} />
+                      {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
                     </a>
                   </motion.div>
                 </motion.nav>
