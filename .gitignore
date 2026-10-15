@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# google drive sync artifacts
+desktop.ini
+* (1).*
+
+# local design-tool session state
+/.impeccable/
