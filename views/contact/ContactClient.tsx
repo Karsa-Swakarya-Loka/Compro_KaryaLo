@@ -43,7 +43,7 @@ const fieldClass =
 const labelClass = "block type-label text-ink";
 
 /* Cargon's contact info card: an icon circle, a title, a line of detail. */
-const infoCardClass = "group flex items-start gap-4 lg:flex-1 rounded-3xl border border-line bg-white p-6 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]";
+const infoCardClass = "group flex items-start gap-4 rounded-3xl border border-line bg-white p-6 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]";
 /** On desktop each card grows by an equal share of the column's spare height. */
 const infoItemClass = "lg:flex lg:flex-auto lg:flex-col";
 const infoIconClass =
@@ -346,14 +346,15 @@ export default function ContactClient({ lang }: { lang: Locale }) {
           {/*
             Direct channels and the registered office, as stacked contact cards.
             On desktop the heading drops to the form heading's line (the card's
-            padding) and the cards share out the rest, so both columns end together.
+            padding). The column keeps its natural height (self-start) so the cards
+            do not stretch when the form grows with the message preview.
           */}
-          <div className="space-y-5 lg:col-span-5 lg:flex lg:flex-col lg:gap-5 lg:space-y-0 lg:pt-10">
+          <div className="space-y-5 lg:col-span-5 lg:flex lg:flex-col lg:gap-5 lg:space-y-0 lg:self-start lg:pt-10">
             <Reveal direction="right">
               <h2 className="type-card-title-lg text-ink">{copy.channels.heading}</h2>
             </Reveal>
 
-            <RevealGroup className="space-y-5 lg:flex lg:flex-1 lg:flex-col lg:gap-5 lg:space-y-0" stagger={0.1}>
+            <RevealGroup className="space-y-5 lg:flex lg:flex-col lg:gap-5 lg:space-y-0" stagger={0.1}>
               <RevealItem direction="right" className={infoItemClass}>
                 <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className={`${infoCardClass} hover:-translate-y-1 hover:shadow-lift`}>
                   <span className={`${infoIconClass} group-hover:bg-brand group-hover:text-white`}>

@@ -56,7 +56,7 @@ export const servicesPageCopy: Localized<{
     includedLabel: "Cakupan layanan",
     discuss: (shortName) => `Diskusikan ${shortName}`,
     discussMessage: (pillarName) => `Halo Tim KaryaLo, kami ingin berkonsultasi mengenai layanan ${pillarName}.`,
-    sendBrief: "Kirim brief proyek",
+    sendBrief: "Kirim kebutuhan proyek",
     proofHeading: "Proyek terkait",
     proofMore: "Lihat selengkapnya",
     projectType: { client: "Proyek klien", product: "Produk KaryaLo", prototype: "Purwarupa internal" },

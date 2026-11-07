@@ -65,7 +65,7 @@ export const siteText: Localized<{
     tagline: "Satu mitra, dari ide hingga implementasi.",
     description:
       "Mitra teknologi dari Kota Bekasi untuk pengembangan software, desain, dan IoT. Kami mendampingi bisnis Anda dari perencanaan hingga implementasi dan pemeliharaan.",
-    workingHours: "Senin sampai Jumat: 09.00 sampai 18.00 WIB | Sabtu & Minggu: dengan janji temu",
+    workingHours: "Senin sampai Jumat: 09.00 sampai 18.00 WIB. Sabtu dan Minggu: dengan janji temu",
     legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
     kbli: "62019: Aktivitas Pemrograman Komputer Lainnya",
     location: "Kota Bekasi, Jawa Barat",
@@ -77,7 +77,7 @@ export const siteText: Localized<{
     tagline: "One partner, from idea to implementation.",
     description:
       "A technology partner based in Bekasi, Indonesia, for software, design, and IoT. We support your business from planning through implementation and maintenance.",
-    workingHours: "Monday to Friday: 09:00 to 18:00 WIB (UTC+7) | Saturday & Sunday: by appointment",
+    workingHours: "Monday to Friday: 09:00 to 18:00 WIB (UTC+7). Saturday and Sunday: by appointment",
     legalEntity: "Sole-owner limited company (Perseroan Perorangan), ratified by the Indonesian Ministry of Law",
     kbli: "62019: Other Computer Programming Activities",
     location: "Bekasi, West Java, Indonesia",

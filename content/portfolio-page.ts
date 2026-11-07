@@ -154,7 +154,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
         "Diskusikan kebutuhan data, pengguna, dan integrasi sistem Anda. Kami membantu menyusun ruang lingkup awal sebagai dasar perencanaan proyek.",
       consultationWhatsapp: "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai rencana pengembangan sistem perusahaan kami.",
       consultationPrimary: "Mulai diskusi",
-      consultationSecondary: "Kirim brief proyek",
+      consultationSecondary: "Kirim kebutuhan proyek",
     },
     dialog: {
       headerClient: "Studi kasus klien",

@@ -31,10 +31,10 @@ export default function WhySection({ lang }: { lang: Locale }) {
             <Image src="/images/pdf/team-about-v3.webp" alt="" fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover object-[50%_25%]" />
           </RevealItem>
           <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-xl shadow-card">
-            <Image src="/images/pdf/services-design-v3.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+            <Image src="/images/pdf/services-design-v5.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
           </RevealItem>
           <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-xl shadow-card">
-            <Image src="/images/pdf/services-iot-v3.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+            <Image src="/images/pdf/services-iot-v5.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
           </RevealItem>
         </RevealGroup>
 
