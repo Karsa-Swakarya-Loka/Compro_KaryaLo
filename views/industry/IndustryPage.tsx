@@ -5,12 +5,10 @@ import JsonLd from "@/components/seo/JsonLd";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import PageBanner from "@/components/ui/PageBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { getWhatsAppUrl, siteFeatures } from "@/config/site";
+import { getWhatsAppUrl } from "@/config/site";
 import { commonCopy } from "@/content/common";
 import { industryCopy } from "@/content/industry";
 import { getIndustries, type IndustryItem } from "@/data/industries";
-import { getPortfolio } from "@/data/portfolio";
-import { getProducts } from "@/data/products";
 import { getServices } from "@/data/services";
 import { type Locale, localePath } from "@/lib/i18n";
 import { pageSchema, routeBreadcrumb } from "@/lib/schema";
@@ -20,9 +18,10 @@ import { pageSchema, routeBreadcrumb } from "@/lib/schema";
  * is the honesty note, the industry cards, and a closing blue band.
  *
  * Every card is a worked example of what we can build, not a claim of past
- * work in that industry. Proof is pulled from data/portfolio.ts by slug, so an
- * industry with no published project says so plainly; IoT shows up here as
- * what we build, with a sample device as the way in, never as a project.
+ * work in that industry. Cards deliberately carry no related projects, case
+ * studies or prototypes: only some industries have any, and a card without
+ * proof next to one with it would read as a gap. IoT shows up here as what we
+ * build, never as a project.
  *
  * Server-rendered: only the scroll-reveal wrappers are client components.
  */
@@ -49,8 +48,6 @@ const ICONS: Record<IndustryItem["id"], typeof ShoppingBag> = {
 export default function IndustryPage({ lang }: { lang: Locale }) {
   const copy = industryCopy[lang];
   const industries = getIndustries(lang);
-  const portfolio = getPortfolio(lang);
-  const products = getProducts(lang);
   const services = getServices(lang);
   const href = (path: string) => localePath(lang, path);
   const crumb = commonCopy[lang].nav.find((link) => link.href === "/industry")?.label ?? copy.hero.title;
@@ -73,13 +70,6 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
             <RevealGroup className="fit-grid fit-md-2" stagger={0.08}>
               {industries.map((industry) => {
                 const Icon = ICONS[industry.id];
-                const proof = industry.proof
-                  .map((slug) => portfolio.find((project) => project.slug === slug))
-                  .filter((project) => project !== undefined);
-                const product = siteFeatures.enableProductsSection && industry.productId
-                  ? products.find((item) => item.id === industry.productId)
-                  : undefined;
-                const hasIot = industry.pillars.includes("iot-hardware");
 
                 return (
                   <RevealItem key={industry.id} className="group flex">
@@ -143,45 +133,7 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
                         })}
                       </div>
 
-                      <div className="mt-auto space-y-3 border-t border-line pt-5">
-                        <p className="type-meta text-brand">{copy.card.proof}</p>
-                        {proof.length > 0 ? (
-                          <ul className="space-y-1">
-                            {proof.map((project) => (
-                              <li key={project.slug}>
-                                <Link
-                                  href={href(`/portfolio/${project.slug}`)}
-                                  className="group/proof inline-flex min-h-11 items-start gap-2 py-1 type-body-card text-ink hover:text-brand"
-                                >
-                                  <span>
-                                    <span className="mr-1.5 type-meta text-body">
-                                      {project.type === "client" ? copy.card.clientProject : project.type === "product" ? copy.card.ownProduct : copy.card.prototype}:
-                                    </span>
-                                    <span className="font-semibold underline decoration-line underline-offset-4 group-hover/proof:decoration-brand">{project.title}</span>
-                                  </span>
-                                  <ArrowRight aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/proof:translate-x-1" />
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="type-body-card text-body">
-                            {copy.card.noProof}
-                            {hasIot ? ` ${copy.card.noProofIot}` : ""}
-                          </p>
-                        )}
-
-                        {product && (
-                          <Link
-                            href={href(`/products#${product.id}`)}
-                            className="inline-flex min-h-11 items-center gap-1.5 type-body-card text-ink hover:text-brand"
-                          >
-                            <span className="type-meta text-body">{copy.card.product}:</span>
-                            <span className="font-semibold">{product.title}</span>
-                            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-                          </Link>
-                        )}
-
+                      <div className="mt-auto border-t border-line pt-5">
                         <a
                           href={getWhatsAppUrl(copy.card.whatsappMessage(industry.name), lang, { service: industry.name })}
                           target="_blank"

@@ -9,14 +9,6 @@ export interface IndustryCopy {
     problem: string;
     build: string;
     fields: string;
-    proof: string;
-    clientProject: string;
-    /** Label for KaryaLo's own live product (e.g. DeliaStore) in the proof list. */
-    ownProduct: string;
-    prototype: string;
-    noProof: string;
-    noProofIot: string;
-    product: string;
     discuss: string;
     whatsappMessage: (industry: string) => string;
   };
@@ -31,20 +23,13 @@ export const industryCopy: Localized<IndustryCopy> = {
       lede:
         "Setiap industri memiliki proses dan prioritas yang berbeda. Kami menyesuaikan pengembangan software, desain, dan perangkat IoT dengan kebutuhan operasional, pengguna, serta tujuan bisnis Anda.",
       honesty:
-        "Jelajahi contoh penerapan yang dapat kami kembangkan untuk setiap industri. Proyek yang telah dikerjakan ditampilkan melalui tautan studi kasus, produk, atau purwarupa terkait.",
+        "Jelajahi contoh penerapan yang dapat kami kembangkan untuk setiap industri, sesuai proses kerja dan kebutuhan operasional Anda.",
     },
     grid: { badge: "Penerapan per Industri", title: "Solusi Sesuai Kebutuhan Operasional" },
     card: {
       problem: "Tantangan operasional",
       build: "Solusi yang dapat dikembangkan",
       fields: "Bidang",
-      proof: "Proyek terkait",
-      clientProject: "Studi kasus",
-      ownProduct: "Produk KaryaLo",
-      prototype: "Purwarupa internal",
-      noProof: "Studi kasus untuk industri ini belum tersedia. Pendekatan awal kami mencakup pemetaan kebutuhan dan validasi purwarupa bersama tim Anda.",
-      noProofIot: "Pengembangan IoT dimulai dengan purwarupa perangkat yang diuji di lokasi untuk menilai kesesuaiannya sebelum penerapan lebih luas.",
-      product: "Platform siap pakai",
       discuss: "Diskusikan kebutuhan ini",
       whatsappMessage: (industry) => `Halo Tim KaryaLo, perusahaan kami bergerak di bidang ${industry}. Kami ingin berkonsultasi mengenai pengembangan sistem untuk bisnis kami.`,
     },
@@ -64,20 +49,13 @@ export const industryCopy: Localized<IndustryCopy> = {
       lede:
         "Every industry has distinct processes and priorities. We tailor software, design, and IoT development to your operations, users, and business goals.",
       honesty:
-        "Explore potential applications for each industry. Work we have completed is linked through related case studies, products, or prototypes.",
+        "Explore examples of what we can build for each industry, matched to your workflows and operational needs.",
     },
     grid: { badge: "Industry Applications", title: "Solutions for Your Operational Needs" },
     card: {
       problem: "Operational challenges",
       build: "Potential solutions",
       fields: "Service areas",
-      proof: "Related projects",
-      clientProject: "Case study",
-      ownProduct: "KaryaLo product",
-      prototype: "Internal prototype",
-      noProof: "A case study for this industry is not yet available. Our initial approach includes requirements mapping and prototype validation with your team.",
-      noProofIot: "IoT development begins with a device prototype tested at your site to assess suitability before wider deployment.",
-      product: "Ready-made platform",
       discuss: "Discuss this need",
       whatsappMessage: (industry) => `Hello KaryaLo team, we work in ${industry} and would like to discuss a system for our business.`,
     },
