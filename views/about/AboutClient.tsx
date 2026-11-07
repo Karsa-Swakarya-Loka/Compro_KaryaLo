@@ -60,10 +60,10 @@ export default function AboutClient({ lang }: { lang: Locale }) {
           <RevealGroup className="grid aspect-[6/7] grid-cols-2 grid-rows-[2fr_3fr] gap-4 sm:aspect-[4/3] sm:gap-6 lg:col-span-6 lg:aspect-auto lg:min-h-[34rem]" stagger={0.12}>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-2xl">
               {/* The top row is on screen at load and holds the page's largest paint: load it first. */}
-              <Image src="/images/pdf/services-dev-v3.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+              <Image src="/images/pdf/services-design-v5.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
             </RevealItem>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-2xl">
-              <Image src="/images/pdf/services-iot-v3.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+              <Image src="/images/pdf/services-iot-v5.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
             </RevealItem>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative col-span-2 overflow-hidden rounded-2xl">
               <Image src="/images/pdf/team-why-v2.webp" alt="" fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover object-[50%_20%]" />
