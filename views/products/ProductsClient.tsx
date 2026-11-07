@@ -88,7 +88,7 @@ function ProductSection({ product, lang, index }: { product: ProductItem; lang: 
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
-                href={getWhatsAppUrl(copy.demoMessage(product.title))}
+                href={getWhatsAppUrl(copy.demoMessage(product.title), lang, { service: (lang === "id" ? "Demo / lisensi " : "Demo / licensing ") + product.title })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -147,7 +147,7 @@ export default function ProductsClient({ lang }: { lang: Locale }) {
       <section aria-label={copy.ways.title} className="section-standard bg-white px-4 md:px-12">
         <div className="mx-auto max-w-[72rem]">
           <SectionHeading badge={copy.ways.badge} title={copy.ways.title} intro={copy.ways.intro} />
-          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14" stagger={0.12}>
+          <RevealGroup className="fit-grid mt-12 fit-md-2 lg:mt-14" stagger={0.12}>
             <RevealItem direction="left" className="h-full">
               <article className="group flex h-full flex-col gap-5 rounded-3xl bg-brand p-7 text-white shadow-lift md:p-9">
                 <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/15 text-white">
@@ -195,7 +195,7 @@ export default function ProductsClient({ lang }: { lang: Locale }) {
           <SectionHeading tone="dark" badge={copy.callout.badge} title={copy.callout.heading} intro={copy.callout.body}>
             <Reveal delay={0.15} className="pt-2">
               <a
-                href={getWhatsAppUrl(copy.callout.message)}
+                href={getWhatsAppUrl(copy.callout.message, lang, { service: lang === "id" ? "Produk digital KaryaLo" : "KaryaLo digital products" })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-lg btn-primary-light"

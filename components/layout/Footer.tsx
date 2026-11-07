@@ -33,10 +33,11 @@ export default function Footer({ lang }: { lang: Locale }) {
         </Reveal>
 
         <div className="rounded-3xl bg-white p-7 md:p-12 shadow-lift">
-          <RevealGroup className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-10 border-b border-line" stagger={0.08}>
+          {/* Two by two on tablets, where four columns would crush the link lists; one row from 1024px. */}
+          <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-x-10 lg:gap-8 pb-10 border-b border-line" stagger={0.08}>
 
             {/* Brand & contact */}
-            <RevealItem distance={20} className="md:col-span-4 space-y-5">
+            <RevealItem distance={20} className="lg:col-span-4 space-y-5">
               <Link href={href("/")} className="inline-flex items-center gap-3">
                 <Image src="/images/icon.svg" alt="" width={1040} height={1040} unoptimized className="h-10 w-auto shrink-0 rounded-lg" />
                 <span className="text-xl font-bold tracking-tight text-ink">
@@ -65,7 +66,7 @@ export default function Footer({ lang }: { lang: Locale }) {
             </RevealItem>
 
             {/* Company */}
-            <RevealItem distance={20} className="md:col-span-2 space-y-4">
+            <RevealItem distance={20} className="lg:col-span-2 space-y-4">
               <h2 className="type-card-title text-ink">{copy.footer.companyHeading}</h2>
               <ul className="space-y-3 type-small">
                 {companyLinks.map((link) => (
@@ -77,7 +78,7 @@ export default function Footer({ lang }: { lang: Locale }) {
             </RevealItem>
 
             {/* Services & platforms */}
-            <RevealItem distance={20} className="md:col-span-3 space-y-4">
+            <RevealItem distance={20} className="lg:col-span-3 space-y-4">
               <h2 className="type-card-title text-ink">{copy.footer.servicesHeading}</h2>
               <ul className="space-y-3 type-small">
                 {getServices(lang).map((pillar) => (
@@ -101,7 +102,7 @@ export default function Footer({ lang }: { lang: Locale }) {
             </RevealItem>
 
             {/* Legal standing */}
-            <RevealItem distance={20} className="md:col-span-3 space-y-4">
+            <RevealItem distance={20} className="lg:col-span-3 space-y-4">
               <h2 className="type-card-title text-ink">{copy.footer.legalHeading}</h2>
               <div className="rounded-2xl bg-surface p-5 space-y-2">
                 <div className="flex items-center gap-2 type-label text-brand">

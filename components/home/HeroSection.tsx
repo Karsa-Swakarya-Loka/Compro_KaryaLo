@@ -1,223 +1,281 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type PointerEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
-import { ArrowDown, ArrowRight, CheckCircle2 } from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { ArrowDown } from "lucide-react";
 import { whatsappUrl } from "@/config/site";
 import { homeCopy } from "@/content/home";
-import { getProblems } from "@/data/problems";
+import { portfolioCopy } from "@/content/portfolio-page";
+import { getPortfolio, type ProjectItem } from "@/data/portfolio";
 import { type Locale, localePath } from "@/lib/i18n";
 import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import DecorCurves from "@/components/ui/DecorCurves";
+import ProfileDownload from "@/components/ui/ProfileDownload";
 
+/** Time on each slide; slower while the pointer is over the slider, so a visitor can look without it stopping. */
 const ADVANCE_MS = 6500;
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const ADVANCE_HOVER_MS = 15000;
 
 /**
- * What each example shows in the panel. Screenshots sit as a card inside the
- * slanted panel, so the proof is seen whole; the IoT example is a photograph
- * and fills the panel (there is no IoT project to show yet).
+ * The projects in the slider, in order: client work and KaryaLo's own product,
+ * no prototypes. Every cover is the same 3D laptop mockup (1600×1240 on a
+ * transparent background), so each slide has the same size, angle and light.
  */
-const SLIDE_ART: Record<string, { image: string; screen: boolean; fallbackHref: string }> = {
-  "stok-tidak-cocok": { image: "/images/portofolio/alina-store.webp", screen: true, fallbackHref: "/portfolio" },
-  "laporan-manual": { image: "/images/prototype/karyalo-admin.webp", screen: true, fallbackHref: "/portfolio" },
-  "website-belum-meyakinkan": { image: "/images/portofolio/hij-compro.webp", screen: true, fallbackHref: "/portfolio" },
-  "alat-tidak-terpantau": { image: "/images/service-iot-2.webp", screen: false, fallbackHref: "/services#iot-hardware" },
-};
+const SLIDE_SLUGS = [
+  "alina-omnichannel-retail",
+  "deliastore-topup",
+  "hij-garment-erp",
+  "affirmate-company-profile",
+  "apegale-company-profile",
+  "hij-corporate-profile",
+];
+
+const SPRING = { stiffness: 120, damping: 22, mass: 0.8 };
+const pad = (n: number) => String(n).padStart(2, "0");
+const clamp = (n: number) => Math.max(-0.5, Math.min(0.5, n));
 
 /**
- * Cargon's hero: text on the left over the light surface, a slanted panel
- * bleeding off the right edge, thin curves.
+ * Cargon's hero: text on the left over the light surface, and on the right a
+ * slanted panel (a blue-toned photograph) with a 3D object standing in front of
+ * it, its base breaking out over the panel's leaning left edge.
  *
- * The left column answers, in reading order and without moving: what KaryaLo
- * is (the category pill and the H1), who it is for and what it does, why it
- * matters (three reasons the site already backs), and what to do next (one
- * solid WhatsApp button, one secondary, and a line on what happens when you
- * write). It is server-rendered and readable without JavaScript.
+ * The left column is short on purpose (hierarchy pass, 2026-10-16): what
+ * KaryaLo is (the category pill and the H1), one line on what it does, one
+ * solid WhatsApp button with a quiet link beside it, and one line that lowers
+ * the stakes. It is server-rendered and readable without JavaScript.
  *
- * The panel on the right is the slider: one everyday client problem per
- * slide (the owner's problem-first hook), with what we build and the proof.
- * There is no pause button (owner's call): slides advance every 6.5s, hold
- * while the hero is hovered or focused, stop for good once a visitor picks a
- * slide, and never auto-advance for reduced-motion visitors.
+ * The slider shows one project per slide as the same laptop mockup, with a
+ * short caption centred under it that names the mockup in reading order:
+ * project type and field, the title, then the slide bars and count. A new
+ * laptop swings in from the right as in Cargon, then floats; with a mouse, the
+ * laptop tilts toward the pointer and the photograph drifts the other way, so
+ * the panel reads as depth. Each laptop links to its case study.
+ *
+ * Timing (owner's calls): no pause button; slides advance every 6.5s, or every
+ * 15s while the pointer is over the slider, and picking a slide restarts the
+ * clock rather than stopping it. The slider holds while a keyboard user is on
+ * its controls, and never auto-advances or moves for reduced-motion visitors.
  */
 export default function HeroSection({ lang }: { lang: Locale }) {
   const copy = homeCopy[lang];
   const hero = copy.hero;
   const slider = copy.slider;
+  const types = portfolioCopy[lang].types;
   const reduceMotion = useReducedMotionSafe();
-  const problems = getProblems(lang);
+  const projects = getPortfolio(lang);
+  const slides = SLIDE_SLUGS.map((slug) => projects.find((project) => project.slug === slug)).filter(
+    (project): project is ProjectItem => Boolean(project),
+  );
+  const total = slides.length;
 
-  const slides = hero.slides.map((slide) => {
-    const problem = problems.find((item) => item.id === slide.problemId);
-    const art = SLIDE_ART[slide.problemId];
-    return {
-      ...slide,
-      ...art,
-      solution: problem?.solution ?? "",
-      proofHref: problem?.proof ? `/portfolio/${problem.proof.slug}` : art.fallbackHref,
-    };
-  });
-
-  const [index, setIndex] = useState(0);
-  const [chosen, setChosen] = useState(false);
-  const [holding, setHolding] = useState(false);
-  const autoplay = !reduceMotion && !chosen && !holding;
+  const [{ index, previous }, setSlide] = useState({ index: 0, previous: -1 });
+  const [hovering, setHovering] = useState(false);
+  const [keyboardHold, setKeyboardHold] = useState(false);
+  const autoplay = !reduceMotion && !keyboardHold;
+  const delay = hovering ? ADVANCE_HOVER_MS : ADVANCE_MS;
 
   useEffect(() => {
     if (!autoplay) return;
-    const timer = window.setTimeout(() => setIndex((current) => (current + 1) % slides.length), ADVANCE_MS);
+    const timer = window.setTimeout(
+      () => setSlide((current) => ({ index: (current.index + 1) % total, previous: current.index })),
+      delay,
+    );
     return () => window.clearTimeout(timer);
-  }, [autoplay, index, slides.length]);
+  }, [autoplay, delay, index, total]);
+
+  const pick = (next: number) =>
+    setSlide((current) => (next === current.index ? current : { index: next, previous: current.index }));
+
+  // The other five laptops load once the page has finished loading, so they never compete with the first one.
+  const [warm, setWarm] = useState(false);
+  useEffect(() => {
+    const start = () => setWarm(true);
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
+  }, []);
+
+  // Only keyboard focus holds the slider; a mouse click on a bar leaves it running.
+  const handleFocus = (event: FocusEvent<HTMLElement>) => {
+    if (event.target.matches(":focus-visible")) setKeyboardHold(true);
+  };
+
+  // Pointer depth: the laptop leans toward the mouse, the photograph drifts away from it.
+  const stageRef = useRef<HTMLDivElement>(null);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothX = useSpring(pointerX, SPRING);
+  const smoothY = useSpring(pointerY, SPRING);
+  const deviceRotateY = useTransform(smoothX, (v) => v * 14);
+  const deviceRotateX = useTransform(smoothY, (v) => v * -10);
+  const photoX = useTransform(smoothX, (v) => v * -28);
+  const photoY = useTransform(smoothY, (v) => v * -18);
+
+  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
+    if (reduceMotion || event.pointerType !== "mouse" || !stageRef.current) return;
+    const rect = stageRef.current.getBoundingClientRect();
+    pointerX.set(clamp((event.clientX - rect.left) / rect.width - 0.5));
+    pointerY.set(clamp((event.clientY - rect.top) / rect.height - 0.5));
+  };
+  const resetPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   const slide = slides[index];
 
   return (
-    <section
-      className="relative overflow-hidden bg-surface pb-10 lg:min-h-[44rem] lg:pb-0"
-      onMouseEnter={() => setHolding(true)}
-      onMouseLeave={() => setHolding(false)}
-      onFocusCapture={() => setHolding(true)}
-      onBlurCapture={() => setHolding(false)}
-    >
+    <section className="hero-fit relative overflow-hidden bg-surface" onPointerMove={handlePointerMove} onMouseLeave={resetPointer}>
       <DecorCurves className="-left-10 bottom-[-2rem] h-[26rem] w-auto lg:h-[34rem]" />
 
-      {/* What it is, who it is for, why it matters, what to do next. */}
-      <div className="relative z-10 mx-auto max-w-[76rem] px-4 pt-28 pb-10 md:px-12 md:pt-32 lg:px-8 lg:pt-36 lg:pb-20">
+      {/*
+        The copy, in the order the eye should take it: the headline first, the
+        slider beside it as the proof, then one action. A single solid button
+        (starting a conversation) with a quiet link beside it, and one short
+        line that lowers the stakes. Centred vertically beside the slider.
+      */}
+      <div className="relative z-10 mx-auto max-w-[76rem] px-4 pt-28 pb-8 md:px-12 md:pt-32 md:pb-10 hero-fit lg:flex lg:items-center lg:px-8 lg:pt-24 lg:pb-16">
         <div className="lg:w-[54%] lg:pr-12">
           <p className="enter-up badge-pill">{hero.category}</p>
 
-          <h1 className="enter-up mt-5 type-display-hero text-ink" style={{ "--i": 1 } as CSSProperties}>
+          <h1 className="enter-up mt-6 type-display-hero text-ink" style={{ "--i": 1 } as CSSProperties}>
             {hero.headline.lead} <span className="text-brand">{hero.headline.accent}</span>
           </h1>
 
-          <p className="enter-up mt-5 max-w-[52ch] type-lede text-body" style={{ "--i": 2 } as CSSProperties}>
+          <p className="enter-up mt-5 max-w-[42ch] type-lede text-body" style={{ "--i": 2 } as CSSProperties}>
             {hero.audience}
           </p>
 
-          <ul className="enter-up mt-5 flex flex-wrap gap-x-5 gap-y-2" style={{ "--i": 3 } as CSSProperties}>
-            {hero.reasons.map((reason) => (
-              <li key={reason} className="flex items-center gap-2 type-small font-medium text-ink">
-                <CheckCircle2 aria-hidden="true" className="h-[1.125rem] w-[1.125rem] shrink-0 text-brand" />
-                {reason}
-              </li>
-            ))}
-          </ul>
-
-          <div className="enter-up mt-7 flex flex-wrap items-center gap-3" style={{ "--i": 4 } as CSSProperties}>
+          <div className="enter-up mt-9 flex flex-wrap items-center gap-x-7 gap-y-3" style={{ "--i": 3 } as CSSProperties}>
             {/* `data-wa-primary`: the floating WhatsApp button steps aside while this one is on screen. */}
             <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" data-wa-primary="" className="btn btn-lg btn-primary group">
               <span>{hero.primaryCta}</span>
               <ArrowSwap />
             </a>
-            <a href="#portfolio" className="btn btn-lg btn-secondary group">
-              <span>{hero.secondaryCta}</span>
+            <a href="#portfolio" className="text-link text-ink hover:text-brand">
+              {hero.secondaryCta}
               <ArrowDown aria-hidden="true" className="h-4 w-4" />
             </a>
+            <ProfileDownload lang={lang} variant="link" className="text-link text-ink hover:text-brand" />
           </div>
-          <p className="enter-up mt-4 type-small text-body" style={{ "--i": 5 } as CSSProperties}>
+          <p className="enter-up mt-4 type-small text-body" style={{ "--i": 4 } as CSSProperties}>
             {hero.reassurance}
           </p>
         </div>
       </div>
 
-      {/* The examples: the slanted panel with the evidence, and a card naming the problem. */}
-      <div aria-roledescription="carousel" aria-label={slider.label}>
-        <div className="relative h-[20rem] sm:h-[26rem] lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[46%]">
-          <div className="hero-media-frame hidden lg:block" aria-hidden="true" />
-          <div className="hero-media absolute inset-0 overflow-hidden bg-brand-soft">
-            <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
-              <DecorCurves className="right-0 top-0 h-full w-auto" />
-            </div>
-            {slides.map((item, i) => (
-              <div
-                key={item.problemId}
-                aria-hidden={i !== index}
-                className="absolute inset-0 transition-[opacity,transform] duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={{ opacity: i === index ? 1 : 0, transform: i === index ? "scale(1)" : "scale(1.04)" } as CSSProperties}
-              >
-                {item.screen ? (
-                  /*
-                    A flat screenshot in a plain browser window: at this size a laptop
-                    mockup shrinks the screen past legibility. On desktop its top sits
-                    on the category pill's line (pt-36, as the text column).
-                  */
-                  <div className="absolute inset-0 flex items-start px-4 pt-6 sm:px-10 sm:pt-10 lg:pl-[19%] lg:pr-10 lg:pt-36">
-                    <div className="w-full overflow-hidden rounded-xl bg-white shadow-lift ring-1 ring-brand/15 lg:max-w-[32rem]">
-                      <div className="flex items-center gap-1.5 border-b border-line bg-surface px-3.5 py-2.5" aria-hidden="true">
-                        <span className="h-2 w-2 rounded-full bg-[#C3CDDC]" />
-                        <span className="h-2 w-2 rounded-full bg-[#C3CDDC]" />
-                        <span className="h-2 w-2 rounded-full bg-[#C3CDDC]" />
-                      </div>
-                      <div className="relative aspect-[16/9]">
-                        <Image
-                          src={item.image}
-                          alt={i === index ? item.imageAlt : ""}
-                          fill
-                          priority={i === 0}
-                          sizes="(min-width: 1024px) 36vw, 90vw"
-                          className="object-cover object-top"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <Image src={item.image} alt={i === index ? item.imageAlt : ""} fill sizes="(min-width: 1024px) 46vw, 100vw" className="object-cover" />
-                    {/* A blue wash so the photograph sits in the brand's light. */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-brand/45 via-brand/10 to-transparent" aria-hidden="true" />
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
+      {/* The stage: the slanted panel, and the laptop with its caption standing in front of it. */}
+      <div
+        ref={stageRef}
+        className="hero-stage"
+        aria-roledescription="carousel"
+        aria-label={slider.label}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        onFocusCapture={handleFocus}
+        onBlurCapture={() => setKeyboardHold(false)}
+      >
+        <div className="hero-panel-frame" aria-hidden="true" />
+        <div className="hero-panel" aria-hidden="true">
+          {/*
+            Cargon's blue duotone, baked into the file (hero-centerpiece.webp in
+            grayscale, contrast 1.25, multiplied by the brand blue) rather than
+            drawn with CSS filters and a blend layer on every frame. It is the
+            page's largest paint, so it loads first.
+          */}
+          <motion.div className="absolute -inset-8" style={{ x: photoX, y: photoY }}>
+            <Image src="/images/hero-panel.webp" alt="" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover opacity-[0.16]" />
+          </motion.div>
+          {/* Deepening toward the floor the laptop stands on. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
+          <div className="hero-floor" />
+          <div className="hero-spotlight" />
         </div>
 
-        {/* The problem card: under the panel on phones, overlapping its lower edge on desktop. */}
-        <div className="relative z-20 mx-4 -mt-16 rounded-2xl bg-white p-5 shadow-lift sm:mx-10 sm:p-6 lg:absolute lg:top-[21rem] lg:left-[57%] xl:top-[24.5rem] lg:mx-0 lg:mt-0 lg:w-[23rem]">
-          <p className="type-meta text-brand">{hero.problemLabel}</p>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={slide.problemId}
+        <div className="hero-showcase">
+          <motion.div
+            className="hero-device-box"
+            style={{ rotateX: deviceRotateX, rotateY: deviceRotateY, transformPerspective: 1600 }}
+          >
+            <div className="hero-device-enter">
+              {slides.map((project, i) => {
+                const state = i === index ? "active" : i === previous ? "leaving" : "waiting";
+                return (
+                  <div key={project.slug} className="hero-device" data-state={state} aria-hidden={i !== index}>
+                    <div className="hero-device-shadow" aria-hidden="true" />
+                    <div className="hero-float">
+                      <Link
+                        href={localePath(lang, `/portfolio/${project.slug}`)}
+                        aria-label={slider.openProject(project.title)}
+                        tabIndex={i === index ? undefined : -1}
+                        className="block rounded-[4%]"
+                      >
+                        {i === 0 || i === index || i === previous || warm ? (
+                          <Image
+                            src={project.coverImage}
+                            alt={slider.slideAlt(project.title)}
+                            width={1600}
+                            height={1240}
+                            priority={i === 0}
+                            sizes="(min-width: 1024px) 40rem, 92vw"
+                            className="hero-device-img h-auto w-full"
+                          />
+                        ) : (
+                          <span className="block aspect-[1600/1240]" />
+                        )}
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* What the mockup is: type and field, then the title; then the slide bars and count. */}
+          <div className="hero-caption">
+            <div
+              key={slide.slug}
+              className="hero-caption-text"
               aria-roledescription="slide"
-              aria-label={`${index + 1} / ${slides.length}`}
+              aria-label={`${index + 1} / ${total}`}
               aria-live={autoplay ? "off" : "polite"}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.45, ease: EASE }}
-              className="mt-2 space-y-2"
             >
-              <p className="type-label text-[1.0625rem] leading-snug text-ink">“{slide.headline}”</p>
-              <p className="type-small text-body">
-                <span className="font-semibold text-ink">{hero.builds}:</span> {slide.solution}
+              <p className="type-meta text-brand">
+                {types[slide.type]} · {slide.categoryLabel}
               </p>
-            </motion.div>
-          </AnimatePresence>
-          <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-3">
-            <Link href={localePath(lang, slide.proofHref)} className="text-link min-h-0 text-brand">
-              {hero.proofLink}
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-            <div className="flex items-center gap-1">
-              {slides.map((item, i) => (
-                <button
-                  key={item.problemId}
-                  type="button"
-                  onClick={() => {
-                    setChosen(true);
-                    setIndex(i);
-                  }}
-                  aria-label={slider.goTo(i + 1, slides.length)}
-                  aria-current={i === index ? "true" : undefined}
-                  className="grid h-8 w-8 place-items-center rounded-full"
-                >
-                  <span className="hero-dot" aria-current={i === index ? "true" : undefined} />
-                </button>
-              ))}
+              <p className="type-card-title mt-1.5 text-ink">{slide.title}</p>
+            </div>
+
+            <div className="hero-caption-nav" role="group" aria-label={slider.label}>
+              <div className="flex items-center">
+                {slides.map((project, i) => (
+                  <button
+                    key={project.slug}
+                    type="button"
+                    onClick={() => pick(i)}
+                    aria-label={slider.goTo(i + 1, total)}
+                    aria-current={i === index ? "true" : undefined}
+                    className="grid h-8 place-items-center px-1"
+                  >
+                    <span className="hero-bar" data-active={i === index ? "" : undefined}>
+                      {i === index && (
+                        <span
+                          key={`${index}-${autoplay}-${delay}`}
+                          className="hero-bar-fill"
+                          data-run={autoplay ? "" : undefined}
+                          style={{ "--hero-ms": `${delay}ms` } as CSSProperties}
+                        />
+                      )}
+                    </span>
+                  </button>
+                ))}
+              </div>
+              <p className="type-meta text-body" aria-hidden="true">
+                <span className="font-semibold text-ink">{pad(index + 1)}</span> / {pad(total)}
+              </p>
             </div>
           </div>
         </div>

@@ -42,6 +42,8 @@ export const contactCopy: Localized<{
     previewStatus: string;
     continueToWhatsapp: string;
     previewHint: string;
+    sentStatus: string;
+    sentHint: string;
     /** Line labels of the WhatsApp message the form assembles. */
     message: { greeting: string; name: string; company: string; service: string; budget: string; needs: string };
   };
@@ -85,8 +87,8 @@ export const contactCopy: Localized<{
       budgetLabel: "Perkiraan Anggaran",
       budgetRanges: [
         "< Rp 25.000.000",
-        "Rp 25.000.000 – Rp 50.000.000",
-        "Rp 50.000.000 – Rp 100.000.000",
+        "Rp 25.000.000 sampai Rp 50.000.000",
+        "Rp 50.000.000 sampai Rp 100.000.000",
         "≥ Rp 100.000.000",
       ],
       budgetUndecided: "Belum ditentukan",
@@ -100,6 +102,8 @@ export const contactCopy: Localized<{
       previewLabel: "Pratinjau pesan WhatsApp",
       previewStatus: "Pesan siap ditinjau. Belum ada pesan yang dikirim.",
       continueToWhatsapp: "Lanjutkan ke WhatsApp",
+      sentStatus: "Brief Anda sudah kami terima di support@karyalo.com.",
+      sentHint: "Tim kami akan membalas lewat email. Untuk respons lebih cepat, Anda juga dapat melanjutkan ke WhatsApp.",
       previewHint: "WhatsApp akan terbuka di tab baru. Pesan baru dikirim setelah Anda menekan Kirim di WhatsApp.",
       message: {
         greeting: "Halo Tim KaryaLo,",
@@ -171,8 +175,8 @@ export const contactCopy: Localized<{
       budgetLabel: "Estimated Budget",
       budgetRanges: [
         "< Rp 25.000.000",
-        "Rp 25.000.000 – Rp 50.000.000",
-        "Rp 50.000.000 – Rp 100.000.000",
+        "Rp 25.000.000 sampai Rp 50.000.000",
+        "Rp 50.000.000 sampai Rp 100.000.000",
         "≥ Rp 100.000.000",
       ],
       budgetUndecided: "Not decided yet",
@@ -186,6 +190,8 @@ export const contactCopy: Localized<{
       previewLabel: "WhatsApp message preview",
       previewStatus: "Message ready to review. Nothing has been sent yet.",
       continueToWhatsapp: "Continue to WhatsApp",
+      sentStatus: "Your brief has reached us at support@karyalo.com.",
+      sentHint: "Our team will reply by email. For a faster response you can also continue on WhatsApp.",
       previewHint: "WhatsApp will open in a new tab. Your message is only sent when you select Send in WhatsApp.",
       message: {
         greeting: "Hello KaryaLo team,",

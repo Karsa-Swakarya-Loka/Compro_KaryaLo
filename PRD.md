@@ -119,7 +119,7 @@ Aset gambar bersumber langsung dari `D:\KaryaLo\Projects\Internal\Compro_Karyalo
 
 Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra & nomor pesanan diburamkan), dan dasbor admin (omzet diburamkan).
 
-**Aturan gambar (2026-10-15):** sampul setiap proyek adalah mockup laptop 3D transparan dengan bayangan (`images/portofolio/mockup/*.webp`, dibuat dari tangkapan viewport 16:10 di atas template laptop dari pemilik) dan ditampilkan utuh (`object-contain`). Mockup 3D hanya dipakai di kartu portofolio besar (Beranda dan indeks Portofolio). Slider hero memakai tangkapan datar dalam bingkai jendela browser, dan kartu kecil (bukti di Layanan, "Proyek Lainnya" di studi kasus) memakai `galleryImages[0]` (`object-cover object-top`), karena di ukuran kecil layar laptop 3D terlalu kecil untuk dibaca. Galeri studi kasus memakai tangkapan viewport 16:9 biasa.
+**Aturan gambar (2026-10-15):** sampul setiap proyek adalah mockup laptop 3D transparan dengan bayangan (`images/portofolio/mockup/*.webp`, dibuat dari tangkapan viewport 16:10 di atas template laptop dari pemilik) dan ditampilkan utuh (`object-contain`). Mockup 3D dipakai di kartu portofolio besar (Beranda dan indeks Portofolio) dan, sejak malam 2026-10-15, di slider hero (lihat 5.3, Hero). Kartu kecil (bukti di Layanan, "Proyek Lainnya" di studi kasus) memakai `galleryImages[0]` (`object-cover object-top`), karena di ukuran kecil layar laptop 3D terlalu kecil untuk dibaca. Galeri studi kasus memakai tangkapan viewport 16:9 biasa.
 
 **Aturan kolom (2026-10-15):** di tata letak dua kolom (gambar di samping teks), kolom gambar direntangkan setinggi kolom teks di desktop: tepi atas gambar sejajar badge/judul, tepi bawah sejajar tombol. Gambar tidak diletakkan di tengah secara vertikal dengan ruang kosong di atas dan bawahnya. URL situs klien tidak pernah ditampilkan. Panel admin/OMS/ERP klien hanya dari tangkapan yang diambil pemilik sendiri; data pelanggan diburamkan.
 
@@ -149,12 +149,12 @@ Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra &
 * Radius rapat (8–12px), `shadow-card` dan `shadow-lift` saat hover.
 * Tombol kapsul `.btn` dengan ikon di lingkaran di ujung kanan. **Tombol solid hanya untuk memulai percakapan** (WhatsApp/form); selebihnya tombol sekunder atau tautan teks.
 * `SectionHeading` (badge kapsul + judul tengah + intro), `PageBanner` (banner halaman dalam: H1 + breadcrumb), `DecorCurves` (garis lengkung biru/cyan), `Counter` (angka naik saat terlihat).
-* Navbar: kapsul putih mengapung di atas semua halaman, lockup "KaryaLo / Digital Solution".
+* Navbar: kapsul putih mengapung di atas semua halaman, lockup "KaryaLo / Digital Solution". Seperti Cargon, setelah halaman di-scroll lebih dari 50px kapsul berubah menjadi bar putih selebar layar dengan bayangan. Gerakannya mengisi ke samping (keputusan pemilik): putih kapsul melebar ke kiri dan kanan sampai tepi layar dalam 0,75 detik. Kembali ke atas, bar menyusut lagi menjadi kapsul. Tablet portrait (768–1023px): bar berisi logo, ID/EN, tombol WhatsApp, dan tombol menu; menu berupa kartu 20rem rata kanan; tombol WhatsApp melayang disembunyikan agar tidak dobel.
 * Footer: band biru dengan slogan + kartu putih berisi kolom tautan.
 
 ### 4.4 Animasi
-* Reveal saat scroll: geser 40px, 0,9 detik, berurutan per kartu; gambar zoom pelan saat hover; hero berupa slider 4 slide dengan panel miring dan titik vertikal, **tanpa tombol jeda** (diminta pemilik). Slider berhenti saat disorot/difokus, berhenti permanen setelah pengunjung memilih slide, dan tidak berjalan untuk *reduced motion*.
-* **Loader logo:** potongan logo KaryaLo menyatu, wordmark muncul, lalu bar progres. Tampil sekali per sesi (`sessionStorage` `kl-preloaded`), sekitar 1–1,5 detik, dan dilewati bila pengunjung memilih *reduced motion*.
+* Reveal saat scroll: geser 40px, 0,9 detik, berurutan per kartu; gambar zoom pelan saat hover; hero berupa slider 6 proyek dengan panel miring dan caption di tengah bawah laptop (bilah progres + nomor slide), **tanpa tombol jeda** (diminta pemilik). Slider berganti tiap 6,5 detik; saat kursor berada di slider tetap berjalan tetapi 15 detik per slide; memilih slide memulai ulang hitungan, bukan menghentikan. Slider hanya tertahan saat pengguna keyboard berada di kontrolnya, dan tidak berjalan untuk *reduced motion*.
+* **Loader logo:** potongan logo KaryaLo menyatu, wordmark muncul, lalu bar progres. Tampil di setiap muat halaman penuh, baik kunjungan pertama maupun *refresh* (keputusan pemilik 2026-10-15; sebelumnya sekali per sesi). Tidak tampil saat berpindah halaman di dalam situs. Durasinya sekitar 1,5 detik, dan dilewati bila pengunjung memilih *reduced motion*. Ukuran: logo 7,25rem, wordmark 1,875rem, bar 12rem × 4px.
 * Semua animasi mati bila `prefers-reduced-motion` aktif.
 
 ### 4.5 Screenshot Berlatar Putih
@@ -180,7 +180,17 @@ Bahasa Indonesia tanpa awalan, bahasa Inggris di `/en/...`. Masing-masing punya 
 * **`/contact`:** form kebutuhan yang menyusun pesan WhatsApp untuk ditinjau, kanal langsung, alamat & Maps.
 
 ### 5.3 Alur Seksi di Halaman Beranda (`/`) — urutan Cargon, 2026-10-15
-1. **Hero (di atas lipatan, empat jawaban berurutan):** *apa* — pill "Extended IT Partner · Software, Desain & IoT" + H1 "Tim IT Anda, Tanpa Harus Merekrut."; *untuk siapa* — perusahaan yang belum punya tim IT sendiri atau timnya penuh, dan apa yang kami kerjakan; *kenapa penting* — tiga alasan (tim inti tidak dioper, purwarupa 7–14 hari kerja, source code milik Anda); *langkah berikutnya* — tombol WhatsApp "Ceritakan kebutuhan Anda", tombol sekunder "Lihat contoh proyek", dan keterangan waktu balas. Panel miring di kanan berisi slider contoh masalah (pilihan pemilik "masalah dulu"): tangkapan layar bukti + kartu masalah → yang kami bangun → "Lihat buktinya", tanpa tombol jeda.
+1. **Hero (di atas lipatan; hierarki ditata ulang 2026-10-16 agar mata tahu urutannya: judul → slider → satu aksi):**
+   * **Kolom kiri:** pill "Extended IT Partner · Software, Desain & IoT", H1 "Tim IT Anda, Tanpa Harus Merekrut.", lalu satu kalimat "Satu tim untuk software, desain, dan perangkat IoT, dari perencanaan hingga pemeliharaan." Di bawahnya satu tombol solid WhatsApp "Diskusikan kebutuhan Anda", tautan tenang "Lihat contoh proyek ↓", dan satu baris "Konsultasi awal via WhatsApp, tanpa kewajiban melanjutkan."
+   * **Isi yang dihapus dari hero:** tiga poin centang (tim inti, purwarupa 7–14 hari, kode milik Anda), karena sudah ada di seksi Studio, serta paragraf panjangnya.
+   * **Tinggi hero di desktop** mengikuti layar (40–50rem), sehingga judul, laptop, caption, dan tombol muat dalam satu layar, juga di laptop 768px.
+   * **Panel miring di kanan** berisi slider proyek (keputusan pemilik malam 2026-10-15, menggantikan slider "masalah dulu"; kartu masalah kini hanya di seksi Solusi): satu proyek per slide, semuanya mockup laptop 3D yang sama agar seragam.
+   * **Caption kaca di tengah bawah laptop** sengaja pendek (2026-10-16): jenis proyek · bidang (kecil, cyan), judul proyek, lalu bilah slide dan nomor 01/06. Deskripsi satu kalimat dihapus agar laptop tetap jadi fokus.
+   * **Urutan slide:** Alina, DeliaStore, ERP HIJ, Affirmate, Ape Gale, website HIJ (proyek klien dan produk sendiri, tanpa purwarupa).
+   * **Gaya mengikuti Cargon:** panel miring berisi foto duotone biru (`hero-panel.webp`), laptop berdiri di depannya, dan laptop serta caption berada di tengah panel.
+   * **Penyempurnaan 3D:** laptop masuk dari kanan sambil berayun, lalu melayang dengan bayangan di lantai; dengan mouse, laptop condong ke arah kursor dan foto bergeser berlawanan (paralaks); lantai garis perspektif dan sorotan cyan di panel.
+   * Setiap laptop menautkan ke studi kasusnya. Tanpa tombol jeda.
+   * **Satu tombol solid per tampilan pertama:** tombol WhatsApp di navbar tampil biru muda saat halaman di posisi atas, dan baru solid setelah bar terisi saat di-scroll.
 2. **Kenapa KaryaLo:** kolase foto studio, empat prinsip kerja, kutipan deskripsi perusahaan, tombol ke Tentang Kami.
 3. **Layanan:** kartu yang melebar untuk tiga bidang + layanan pendamping.
 4. **Portofolio:** tiga kartu gambar tinggi menuju studi kasus; testimoni hanya tampil setelah disetujui klien.
@@ -200,7 +210,7 @@ Bagian Cargon yang belum punya sumber nyata di KaryaLo (testimoni, blog, video, 
 * **Tim tanpa nama:** halaman Tentang Kami menampilkan fungsi tim (Manajemen & Arah Bisnis, Teknologi & Rekayasa Software, Desain & Pemasaran, Perangkat IoT, Administrasi & Keuangan), tanpa nama atau foto.
 * **Perlu konfirmasi founder:** slogan final (tetap usulan, boleh tampil), catatan bahasa di halaman legal versi Inggris, daftar teknologi IoT di Beranda (ESP32, MQTT).
 * **Diputuskan pemilik 2026-10-15:** klaim dampak Alina "sekitar 40%" dikonfirmasi benar; teks visi & misi (`content/about.ts`) tetap tampil sebagai draf.
-* **Riwayat tampilan 2026-10-15:** Cargon dipasang pagi hari; siang dicoba dunia visual "Gambar Kerja" (lembar gambar teknik); sore pemilik meminta kembali ke Cargon. Versi Cargon dipulihkan persis dari snapshot, dengan perbaikan yang dibawa: hero "masalah dulu", tanpa tombol jeda, tombol WhatsApp melayang tidak tampil di /contact.
+* **Riwayat tampilan 2026-10-15:** Cargon dipasang pagi hari; siang dicoba dunia visual "Gambar Kerja" (lembar gambar teknik); sore pemilik meminta kembali ke Cargon. Versi Cargon dipulihkan persis dari snapshot, dengan perbaikan yang dibawa: hero "masalah dulu", tanpa tombol jeda, tombol WhatsApp melayang tidak tampil di /contact. Malam hari pemilik meminta slider hero fokus ke gambar saja, seragam, dan lebih 3D seperti Cargon. Pada saat yang sama tampilan tablet (768–1023px) diperbaiki: grid yang dulu lompat dari 1 ke 3 kolom kini 2 kolom, kartu ganjil terakhir di tengah, layanan Beranda 2×2, footer 2×2.
 
 ---
 
@@ -234,3 +244,11 @@ Bagian Cargon yang belum punya sumber nyata di KaryaLo (testimoni, blog, video, 
 * **Smooth Scroll:** `lenis` (~3KB zero-jank physics scroll)
 * **Ikon:** `lucide-react`
 * **Optimasi Gambar:** `next/image` dengan format WebP/AVIF adaptif
+* **Performa (Lighthouse, build produksi lokal, 2026-10-15):** Beranda mobile 54 → ~90, desktop 95 → 98. Halaman dalam mobile 92–96. Aksesibilitas, Best Practices, dan SEO 100. Semua animasi dipertahankan. Yang diubah:
+  * **Google Tag Manager dimuat terlambat:** pada interaksi pertama (scroll, sentuh, klik, gerak mouse, tombol keyboard), atau 5 detik setelah `load` bila pengunjung diam. Event konversi sebelum itu tetap antre di `dataLayer`.
+    * **Konsekuensi data:** kunjungan yang pergi dalam ~5 detik tanpa interaksi apa pun tidak tercatat sebagai page view.
+  * **Foto panel hero** memakai `hero-panel.webp` dengan duotone biru yang sudah dibakar ke file (33 KB, sebelumnya filter CSS + blend). Foto ini dimuat dengan prioritas karena merupakan elemen LCP.
+  * **Laptop slide 2–6** baru dimuat setelah `load`, dan animasi melayang dijeda selama slide tersembunyi.
+  * **Reveal yang sudah terlihat** saat halaman pertama dimuat dijalankan lewat CSS tanpa menunggu hidrasi (`components/motion/earlyReveal.ts`). Reveal di bawah lipatan dan navigasi antarhalaman tetap memakai Motion.
+  * **Sisa selisih skor mobile** berasal dari preloader (Speed Index) dan simulasi CPU 4× Lighthouse. Di Chrome sungguhan, LCP Beranda sekitar 0,2 detik.
+  * **Cara mengukur:** ukur selalu dari build produksi (`next build && next start`) di jendela incognito, bukan dari `next dev`.

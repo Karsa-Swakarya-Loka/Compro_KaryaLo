@@ -44,7 +44,7 @@ const servicesId: ServicePillar[] = [
     name: "Pengembangan Software & Aplikasi",
     shortName: "Software & Aplikasi",
     focus: "Website, aplikasi, dan sistem internal yang dirancang untuk mendukung operasional harian serta perkembangan bisnis Anda.",
-    image: "/images/service-software.webp",
+    image: "/images/pdf/acc-dev.webp",
     imageAlt: "Laptop di atas meja kantor menampilkan dashboard laporan kinerja perusahaan, dengan ponsel dan buku catatan di sampingnya.",
     subServices: [
       {
@@ -74,7 +74,7 @@ const servicesId: ServicePillar[] = [
     name: "Desain Antarmuka & Identitas Merek",
     shortName: "Desain & Branding",
     focus: "Desain produk digital dan identitas merek yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda.",
-    image: "/images/service-design.webp",
+    image: "/images/pdf/acc-design.webp",
     imageAlt: "Buku sketsa berisi rancangan alur layar aplikasi, di sampingnya tablet menampilkan desain aplikasi dan kipas contoh warna cetak.",
     subServices: [
       {
@@ -104,7 +104,7 @@ const servicesId: ServicePillar[] = [
     name: "Perangkat IoT & Sistem Pemantauan",
     shortName: "IoT & Perangkat",
     focus: "Hubungkan sensor dan perangkat lapangan dengan dashboard untuk memantau kondisi operasional serta menerima peringatan sesuai parameter yang ditetapkan.",
-    image: "/images/service-iot-2.webp",
+    image: "/images/pdf/acc-iot.webp",
     imageAlt: "Meja kerja dengan papan rangkaian kecil tersambung ke perangkat pemantau hitam, sementara layar di belakangnya menampilkan kode program dan diagram alur datanya.",
     subServices: [
       {
@@ -258,3 +258,15 @@ export const supportServicesData: Localized<SupportService[]> = {
 export function getServices(lang: Locale) {
   return servicesData[lang];
 }
+
+/**
+ * Where each service photo is anchored inside its card. The cards narrow to a
+ * slice when closed, so the subject (laptop, palette card, device, faces) has
+ * to sit in that slice rather than at the photo's centre.
+ */
+export const SERVICE_FOCUS: Record<string, string> = {
+  "digital-engineering": "36% 50%",
+  "creative-design": "34% 50%",
+  "iot-hardware": "12% 50%",
+  support: "55% 50%",
+};

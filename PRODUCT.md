@@ -38,8 +38,8 @@ Calon klien biasanya datang dari rekomendasi, pencarian, atau tautan yang dikiri
 
 - Nama: KaryaLo Digital Solution, milik PT Karsa Swakarya Loka, Kota Bekasi.
 - Logo KaryaLo dengan warna biru `#1D469D` dan cyan `#3ABBCE`; keduanya tetap warna utama merek (dikonfirmasi pemilik 2026-10-15).
-- Loader logo (potongan logo merakit diri) tampil sekali per sesi dan dilewati untuk reduced motion (dikonfirmasi 2026-10-15).
-- Hero tetap berupa slider, tanpa tombol jeda (diminta pemilik 2026-10-15), dengan hook "masalah dulu".
+- Loader logo (potongan logo merakit diri) tampil di setiap muat halaman penuh, termasuk *refresh* (diminta pemilik 2026-10-15), dan dilewati untuk reduced motion.
+- Hero tetap berupa slider tanpa tombol jeda (diminta pemilik 2026-10-15), berisi proyek nyata sebagai mockup laptop 3D yang seragam, dengan caption singkat. Hook "masalah dulu" pindah ke seksi Solusi. Teks hero dibuat pendek dan slider jadi fokus (2026-10-16).
 - Tampilan mengikuti referensi template Cargon (unifato.com/cargon) dengan warna logo KaryaLo; pemilik kembali memilihnya setelah mencoba dunia "Gambar Kerja" (2026-10-15). Kode/foto Cargon tidak disalin.
 - Foto yang ada di `public/images` tetap jadi bahan visual utama.
 - Suara: jelas, praktis, operasional, manusiawi, profesional; tanpa hype dan tanpa jargon di depan. Bahasa pelanggan dulu, istilah teknis sesudahnya.

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Code2, Cpu, LifeBuoy, Palette } from "lucide-react";
-import { getServices, supportServicesData } from "@/data/services";
+import { getServices, supportServicesData, SERVICE_FOCUS } from "@/data/services";
 import { homeCopy } from "@/content/home";
 import { siteFeatures } from "@/config/site";
 import { type Locale, localePath } from "@/lib/i18n";
@@ -40,7 +40,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
       short: services.supportTitle,
       body: maintenance.description,
       items: maintenance.items,
-      image: "/images/process-blueprint.webp",
+      image: "/images/pdf/desk-contact-v2.webp",
       href: "/services#support",
     },
   ];
@@ -51,7 +51,8 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={copy.badges.services} title={services.title} intro={services.intro} className="mb-10 md:mb-12" />
 
-        <RevealGroup className="rail-mobile flex flex-col gap-5 lg:h-[32rem] lg:flex-row" stagger={0.1}>
+        {/* Tablet: two by two, every card open; desktop: the accordion row. */}
+        <RevealGroup className="rail-mobile flex flex-col gap-5 md:grid md:grid-cols-2 lg:flex lg:h-[32rem] lg:flex-row" stagger={0.1}>
           {cards.map((card, i) => {
             const Icon = ICONS[card.key];
             const open = i === active;
@@ -67,7 +68,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
                   onFocus={() => setActive(i)}
                 >
                   <div className="img-zoom relative h-40 lg:absolute lg:inset-0 lg:h-auto">
-                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 40vw, (min-width: 768px) 46vw, 84vw" className="object-cover" style={{ objectPosition: SERVICE_FOCUS[card.key] }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/10 to-transparent" aria-hidden="true" />
                   </div>
 
@@ -90,7 +91,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
                     </span>
                     <h3 className="type-card-title-lg text-white">{card.title}</h3>
                     <p className="type-body-card text-white max-w-[46ch]">{card.body}</p>
-                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                       {card.items.map((item) => (
                         <li key={item} className="flex items-start gap-2 type-small text-white">
                           <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-cyan" />

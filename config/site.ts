@@ -30,6 +30,8 @@ export const siteConfig = {
   address: "Jl. Al-Falah II, Jatiranggon, Kec. Jatisampurna, Kota Bekasi, Jawa Barat 17432",
   mapsUrl: "https://maps.app.goo.gl/3YrD56ctLmne1fGR8",
   email: "support@karyalo.com",
+  /** Company profile PDF served from /public/downloads. */
+  companyProfilePdf: "/downloads/Company-Profile-KaryaLo.pdf",
   phone,
   /**
    * Public profiles that independently corroborate this entity, used for schema `sameAs`.
@@ -63,9 +65,9 @@ export const siteText: Localized<{
     tagline: "Satu mitra, dari ide hingga implementasi.",
     description:
       "Mitra teknologi dari Kota Bekasi untuk pengembangan software, desain, dan IoT. Kami mendampingi bisnis Anda dari perencanaan hingga implementasi dan pemeliharaan.",
-    workingHours: "Senin – Jumat: 09.00 – 18.00 WIB | Sabtu & Minggu: dengan janji temu",
+    workingHours: "Senin sampai Jumat: 09.00 sampai 18.00 WIB | Sabtu & Minggu: dengan janji temu",
     legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
-    kbli: "62019 — Aktivitas Pemrograman Komputer Lainnya",
+    kbli: "62019: Aktivitas Pemrograman Komputer Lainnya",
     location: "Kota Bekasi, Jawa Barat",
     defaultWhatsappMessage:
       "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai kebutuhan software, desain, atau perangkat IoT untuk perusahaan kami.",
@@ -75,9 +77,9 @@ export const siteText: Localized<{
     tagline: "One partner, from idea to implementation.",
     description:
       "A technology partner based in Bekasi, Indonesia, for software, design, and IoT. We support your business from planning through implementation and maintenance.",
-    workingHours: "Monday – Friday: 09:00 – 18:00 WIB (UTC+7) | Saturday & Sunday: by appointment",
+    workingHours: "Monday to Friday: 09:00 to 18:00 WIB (UTC+7) | Saturday & Sunday: by appointment",
     legalEntity: "Sole-owner limited company (Perseroan Perorangan), ratified by the Indonesian Ministry of Law",
-    kbli: "62019 — Other Computer Programming Activities",
+    kbli: "62019: Other Computer Programming Activities",
     location: "Bekasi, West Java, Indonesia",
     defaultWhatsappMessage:
       "Hello KaryaLo team, I'd like to discuss our software, design, or IoT needs.",
@@ -93,12 +95,83 @@ export const siteFeatures = {
   enableClientLogosBar: false,  // Di-hold sesuai keputusan PRD
 };
 
-/** A wa.me link that opens with `message` already typed. */
-export function getWhatsAppUrl(message: string) {
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+const WA_TEXT = {
+  id: {
+    greeting: "Halo Tim KaryaLo,",
+    intro: "Saya ingin berkonsultasi mengenai kebutuhan berikut:",
+    name: "Nama",
+    company: "Perusahaan/Instansi",
+    service: "Jenis Layanan",
+    budget: "Perkiraan Anggaran/Target Waktu",
+    note: "Catatan",
+    defaultService: "Konsultasi umum (software, desain, atau IoT)",
+    thanks: "Terima kasih!",
+  },
+  en: {
+    greeting: "Hello KaryaLo team,",
+    intro: "I'd like to discuss the following needs:",
+    name: "Name",
+    company: "Company/Organisation",
+    service: "Service Type",
+    budget: "Budget/Timeline Estimate",
+    note: "Notes",
+    defaultService: "General consultation (software, design, or IoT)",
+    thanks: "Thank you!",
+  },
+} as const;
+
+export interface WhatsAppDetails {
+  service?: string;
+  /** The context sentence. A leading "Halo KaryaLo," greeting is dropped. */
+  note?: string;
+  name?: string;
+  company?: string;
+  budget?: string;
+}
+
+/** Drops the "Halo Tim KaryaLo," / "Hello KaryaLo team," opener and capitalises the rest. */
+function stripGreeting(message: string) {
+  const rest = message.replace(/^\s*(halo|hello)\s+(tim\s+)?karyalo(\s+team)?\s*,\s*/i, "").trim();
+  return rest.charAt(0).toUpperCase() + rest.slice(1);
+}
+
+/**
+ * The standard KaryaLo WhatsApp message: greeting, a short list of sender
+ * fields (blank "-" until filled in), the service the visitor clicked on, and
+ * a note. WhatsApp renders *text* as bold.
+ */
+export function buildWhatsAppMessage(lang: Locale, details: WhatsAppDetails = {}) {
+  const t = WA_TEXT[lang];
+  const value = (v?: string) => (v && v.trim() ? v.trim() : "-");
+  return [
+    t.greeting,
+    "",
+    t.intro,
+    `* *${t.name}:* ${value(details.name)}`,
+    `* *${t.company}:* ${value(details.company)}`,
+    `* *${t.service}:* ${value(details.service ?? t.defaultService)}`,
+    `* *${t.budget}:* ${value(details.budget)}`,
+    `* *${t.note}:* ${value(details.note)}`,
+    "",
+    t.thanks,
+  ].join("\n");
+}
+
+/**
+ * A wa.me link that opens with the standard message already typed.
+ * `message` is the context sentence for the clicked content; `service` names it.
+ */
+export function getWhatsAppUrl(message: string, lang: Locale, details: Omit<WhatsAppDetails, "note"> = {}) {
+  const text = buildWhatsAppMessage(lang, { ...details, note: stripGreeting(message) });
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+}
+
+/** wa.me link for a message already composed with `buildWhatsAppMessage`. */
+export function getWhatsAppUrlFromText(text: string) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
 /** The general-purpose WhatsApp link, opening with the default greeting in `lang`. */
 export function whatsappUrl(lang: Locale) {
-  return getWhatsAppUrl(siteText[lang].defaultWhatsappMessage);
+  return getWhatsAppUrl(siteText[lang].defaultWhatsappMessage, lang);
 }

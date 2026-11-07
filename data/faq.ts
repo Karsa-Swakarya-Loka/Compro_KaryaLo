@@ -36,7 +36,7 @@ export const faqData: Localized<FAQItem[]> = {
     {
       id: "faq-warranty-sla",
       question: "Apakah tersedia garansi dan pemeliharaan setelah peluncuran?",
-      answer: "Proyek dilengkapi garansi perbaikan bug selama 30–90 hari setelah peluncuran, dengan durasi dan cakupan yang ditetapkan dalam SPK. Untuk dukungan berkelanjutan, tersedia paket pemeliharaan yang mencakup pemantauan server, pembaruan keamanan, dan pencadangan data sesuai kesepakatan."
+      answer: "Proyek dilengkapi garansi perbaikan bug selama 30-90 hari setelah peluncuran, dengan durasi dan cakupan yang ditetapkan dalam SPK. Untuk dukungan berkelanjutan, tersedia paket pemeliharaan yang mencakup pemantauan server, pembaruan keamanan, dan pencadangan data sesuai kesepakatan."
     },
     {
       id: "faq-iot-custom",
@@ -78,7 +78,7 @@ export const faqData: Localized<FAQItem[]> = {
     {
       id: "faq-warranty-sla",
       question: "Are warranty and maintenance available after launch?",
-      answer: "Projects include a 30–90 day bug-fix warranty after launch, with duration and coverage defined in the work agreement. Ongoing maintenance plans are available for server monitoring, security updates, and data backups according to the agreed scope."
+      answer: "Projects include a 30-90 day bug-fix warranty after launch, with duration and coverage defined in the work agreement. Ongoing maintenance plans are available for server monitoring, security updates, and data backups according to the agreed scope."
     },
     {
       id: "faq-iot-custom",

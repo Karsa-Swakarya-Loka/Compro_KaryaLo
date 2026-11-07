@@ -45,7 +45,7 @@ export const privacyCopy: Localized<LegalPageCopy> = {
       },
       {
         heading: "Bagaimana Formulir Proyek Bekerja",
-        body: "Formulir pada halaman Kontak menyusun isian menjadi pesan di perangkat Anda tanpa mengirimkannya ke server kami. Pesan ditampilkan untuk ditinjau, kemudian dibuka di WhatsApp saat Anda memilih Lanjutkan ke WhatsApp. Kami menerima pesan hanya setelah Anda menekan Kirim di WhatsApp. Pemrosesan data oleh WhatsApp mengikuti kebijakan privasi layanan tersebut.",
+        body: "Saat Anda mengirim formulir pada halaman Kontak, isian Anda dikirim melalui server kami ke kotak masuk support@karyalo.com dan tidak disimpan di basis data situs. Anda juga dapat melanjutkan pesan yang sama ke WhatsApp. Pemrosesan data oleh WhatsApp mengikuti kebijakan privasi layanan tersebut.",
       },
       {
         heading: "Penggunaan Data",
@@ -85,7 +85,7 @@ export const privacyCopy: Localized<LegalPageCopy> = {
       },
       {
         heading: "How the Project Form Works",
-        body: "The Contact form prepares a message on your device without sending the information to our servers. You can review the message before selecting Continue to WhatsApp. We receive it only after you select Send in WhatsApp. Data processing by WhatsApp is governed by its own privacy policy.",
+        body: "When you submit the Contact form, your entries are sent through our server to the support@karyalo.com inbox and are not stored in a website database. You can also continue the same message on WhatsApp. Data processing by WhatsApp is governed by its own privacy policy.",
       },
       {
         heading: "How We Use Data",

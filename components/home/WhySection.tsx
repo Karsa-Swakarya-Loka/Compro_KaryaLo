@@ -28,13 +28,13 @@ export default function WhySection({ lang }: { lang: Locale }) {
         {/* Mosaic: the studio wide on top, design and hardware below. Fixed ratio on phones, the text's height on desktop. */}
         <RevealGroup className="grid aspect-[6/7] grid-cols-2 grid-rows-[3fr_2fr] gap-5 sm:aspect-[4/3] lg:aspect-auto lg:min-h-[34rem]" stagger={0.12}>
           <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative col-span-2 overflow-hidden rounded-xl shadow-card">
-            <Image src="/images/about-studio.webp" alt={copy.studio.imageAlt} fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover" />
+            <Image src="/images/pdf/team-about-v3.webp" alt="" fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover object-[50%_25%]" />
           </RevealItem>
           <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-xl shadow-card">
-            <Image src="/images/service-design.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+            <Image src="/images/pdf/services-design-v3.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
           </RevealItem>
           <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-xl shadow-card">
-            <Image src="/images/service-iot-2.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+            <Image src="/images/pdf/services-iot-v3.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
           </RevealItem>
         </RevealGroup>
 

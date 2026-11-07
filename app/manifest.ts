@@ -19,7 +19,7 @@ import { siteConfig, siteText } from "@/config/site";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${siteConfig.brandName} — ${siteConfig.companyName}`,
+    name: `${siteConfig.brandName} | ${siteConfig.companyName}`,
     short_name: "KaryaLo",
     description: siteText.id.description,
     lang: "id-ID",

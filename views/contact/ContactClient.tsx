@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { siteConfig, siteText, getWhatsAppUrl, whatsappUrl } from "@/config/site";
+import { siteConfig, siteText, buildWhatsAppMessage, getWhatsAppUrlFromText, whatsappUrl } from "@/config/site";
 import { contactCopy } from "@/content/contact-page";
 import { commonCopy } from "@/content/common";
 import { getServices, supportServicesData } from "@/data/services";
@@ -29,6 +29,7 @@ import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import PageBanner from "@/components/ui/PageBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
+import ProfileDownload from "@/components/ui/ProfileDownload";
 import { trackConversion } from "@/lib/analytics";
 
 const DESCRIPTION_MAX = 3000;
@@ -75,6 +76,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
 
   const [preparedMessage, setPreparedMessage] = useState<string | null>(null);
   const [isPreparing, setIsPreparing] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
   const prepareTimer = useRef<number | null>(null);
 
@@ -92,7 +94,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
     e.preventDefault();
     if (isPreparing) return;
     const form = e.currentTarget as HTMLFormElement;
-    for (const fieldName of ["name", "description"]) {
+    for (const fieldName of ["name", "company", "description"]) {
       const field = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLTextAreaElement;
       if (!field.value.trim()) {
         field.setCustomValidity(copy.form.whitespaceError);
@@ -100,8 +102,13 @@ export default function ContactClient({ lang }: { lang: Locale }) {
         return;
       }
     }
-    const labels = copy.form.message;
-    const message = `${labels.greeting}\n\n${labels.name}: ${formData.name.trim()}\n${labels.company}: ${formData.company.trim() || "-"}\n${labels.service}: ${formData.service}\n${labels.budget}: ${formData.budget}\n\n${labels.needs}\n${formData.description.trim()}`;
+    const message = buildWhatsAppMessage(lang, {
+      name: formData.name,
+      company: formData.company,
+      service: formData.service,
+      budget: formData.budget,
+      note: formData.description,
+    });
     /*
       The form cleared validation — that is the conversion. Only the fact is
       reported: no name, company, budget or brief ever leaves the page, because
@@ -110,10 +117,26 @@ export default function ContactClient({ lang }: { lang: Locale }) {
     trackConversion("lead_form_submit", { page: localePath(lang, "/contact"), location: "contact-form" });
 
     setIsPreparing(true);
-    prepareTimer.current = window.setTimeout(() => {
-      setPreparedMessage(message);
-      setIsPreparing(false);
-    }, PREPARE_DELAY_MS);
+    setEmailSent(false);
+    const website = (form.elements.namedItem("website") as HTMLInputElement | null)?.value ?? "";
+    const startedAt = Date.now();
+    /* The brief goes to the company inbox. If mail is unavailable the visitor
+       still gets the WhatsApp preview, so a brief is never lost. */
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, website }),
+    })
+      .then((response) => response.ok)
+      .catch(() => false)
+      .then((sent) => {
+        const wait = Math.max(0, PREPARE_DELAY_MS - (Date.now() - startedAt));
+        prepareTimer.current = window.setTimeout(() => {
+          setEmailSent(sent);
+          setPreparedMessage(message);
+          setIsPreparing(false);
+        }, wait);
+      });
   };
 
   const descriptionLength = formData.description.length;
@@ -143,6 +166,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
           <span>{copy.hero.whatsappCta}</span>
           <ArrowSwap />
         </a>
+        <ProfileDownload lang={lang} />
         <p className="type-small text-body">
           {copy.hero.emailLead}{" "}
           <a href={`mailto:${siteConfig.email}`} className="font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand transition-colors">
@@ -169,7 +193,8 @@ export default function ContactClient({ lang }: { lang: Locale }) {
               <p className="type-small text-body">{copy.form.intro}</p>
             </div>
 
-            <form onSubmit={handleSubmit} onChange={() => setPreparedMessage(null)} onInput={(event) => { const field = event.target; if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) field.setCustomValidity(""); }} className="space-y-5">
+            <form onSubmit={handleSubmit} onChange={() => { setPreparedMessage(null); setEmailSent(false); }} onInput={(event) => { const field = event.target; if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) field.setCustomValidity(""); }} className="space-y-5">
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="field space-y-2">
                   <label htmlFor="name" className={labelClass}>{copy.form.nameLabel}</label>
@@ -186,7 +211,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
 
                 <div className="field space-y-2">
                   <label htmlFor="company" className={labelClass}>{copy.form.companyLabel}</label>
-                  <input id="company" name="company" autoComplete="organization" maxLength={180}
+                  <input id="company" name="company" autoComplete="organization" maxLength={180} required
                     type="text"
                     placeholder={copy.form.companyPlaceholder}
                     value={formData.company}
@@ -305,12 +330,12 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                     className="overflow-hidden"
                   >
                     <div ref={previewRef} tabIndex={-1} role="region" aria-label={copy.form.previewLabel} className="message-preview space-y-4 rounded-2xl border border-line bg-surface p-5">
-                      <p role="status" className="type-card-title text-ink">{copy.form.previewStatus}</p>
+                      <p role="status" className="type-card-title text-ink">{emailSent ? copy.form.sentStatus : copy.form.previewStatus}</p>
                       <p className="whitespace-pre-wrap break-words type-small text-body">{preparedMessage}</p>
-                      <a href={getWhatsAppUrl(preparedMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      <a href={getWhatsAppUrlFromText(preparedMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                         {copy.form.continueToWhatsapp} <ArrowUpRight aria-hidden="true" size={16} />
                       </a>
-                      <p className="type-small text-body">{copy.form.previewHint}</p>
+                      <p className="type-small text-body">{emailSent ? copy.form.sentHint : copy.form.previewHint}</p>
                     </div>
                   </motion.div>
                 )}
@@ -400,7 +425,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.before.badge} title={copy.before.heading} intro={copy.before.intro} />
 
-          <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-3" stagger={0.1}>
+          <RevealGroup className="fit-grid fit-md-2 fit-lg-3" stagger={0.1}>
             {copy.before.cards.map((card, index) => {
               const Icon = BEFORE_ICONS[index % BEFORE_ICONS.length];
               return (
@@ -417,7 +442,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
             })}
           </RevealGroup>
 
-          <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2" stagger={0.1}>
+          <RevealGroup className="fit-grid fit-md-2" stagger={0.1}>
             <RevealItem direction="left" className="h-full">
               <article className="flex h-full gap-5 rounded-3xl bg-white p-7 shadow-card">
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">

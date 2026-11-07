@@ -37,12 +37,12 @@ export default function TrustSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={copy.badges.trust} title={trust.title} intro={trust.intro} className="mb-10" />
 
-        <RevealGroup className="rail-mobile grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4" stagger={0.08}>
+        <RevealGroup className="fit-grid rail-mobile fit-sm-2 fit-lg-4" stagger={0.08}>
           {facts.map((fact, index) => {
             const Icon = ICONS[index];
             return (
               <RevealItem key={fact.title}>
-                <article className="group h-full space-y-3 rounded-xl bg-white p-7 shadow-card transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-lift">
+                <article className="group h-full space-y-3 rounded-xl bg-white p-6 shadow-card transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-lift">
                   <span className="grid h-14 w-14 place-items-center rounded-full bg-brand-soft text-brand transition-colors duration-500 group-hover:bg-brand group-hover:text-white">
                     <Icon aria-hidden="true" className="h-6 w-6" />
                   </span>
@@ -50,7 +50,7 @@ export default function TrustSection({ lang }: { lang: Locale }) {
                   {fact.label ? (
                     <p className="space-y-0.5">
                       <span className="block type-meta text-body">{fact.label}</span>
-                      <span className={`block type-meta text-brand ${fact.code ? "whitespace-nowrap" : ""}`}>{fact.detail}</span>
+                      <span className={`block type-meta text-brand ${fact.code ? "whitespace-nowrap text-[0.75rem] max-xl:whitespace-normal max-xl:[overflow-wrap:anywhere]" : ""}`}>{fact.detail}</span>
                     </p>
                   ) : (
                     <p className="type-meta text-brand">{fact.detail}</p>
@@ -68,7 +68,7 @@ export default function TrustSection({ lang }: { lang: Locale }) {
             <p className="type-small text-body">{trust.bannerBody}</p>
           </div>
           <a
-            href={getWhatsAppUrl(trust.bannerMessage)}
+            href={getWhatsAppUrl(trust.bannerMessage, lang, { service: lang === "id" ? "Dokumen legal & NIB perusahaan" : "Company legal documents & NIB" })}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-secondary shrink-0 self-start md:self-auto group"

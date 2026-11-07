@@ -11,6 +11,7 @@ import { EASE_EXPO } from "./tokens";
  */
 export const REVEAL_VIEWPORT = { once: true, margin: "-60px" } as const;
 
+
 export type RevealDirection = "up" | "down" | "left" | "right" | "none";
 
 /**
@@ -110,6 +111,7 @@ export default function Reveal({
       className={className}
       style={style}
       data-reveal=""
+      data-reveal-delay={delay || undefined}
       variants={buildVariants({ direction, distance, duration, delay, scaleFrom })}
       initial="hidden"
       whileInView="visible"
@@ -149,6 +151,9 @@ export function RevealGroup({
       id={id}
       className={className}
       style={style}
+      data-reveal-group=""
+      data-reveal-stagger={stagger}
+      data-reveal-delay-children={delayChildren || undefined}
       initial="hidden"
       whileInView="visible"
       viewport={REVEAL_VIEWPORT}
@@ -181,6 +186,7 @@ export function RevealItem({
       className={className}
       style={style}
       data-reveal=""
+      data-reveal-delay={delay || undefined}
       variants={buildVariants({ direction, distance, duration, delay, scaleFrom })}
     >
       {children}

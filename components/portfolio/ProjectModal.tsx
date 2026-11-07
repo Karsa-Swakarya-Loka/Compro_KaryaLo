@@ -243,7 +243,7 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
       {/* Modal Footer CTA: the dialog's one solid button, on the content's left edge */}
       <div className="px-5 md:px-8 py-4 shrink-0 border-t border-line bg-white flex flex-wrap items-center gap-4">
         <a
-          href={getWhatsAppUrl(copy.whatsappSimilar(project.title))}
+          href={getWhatsAppUrl(copy.whatsappSimilar(project.title), lang, { service: (lang === "id" ? "Sistem seperti " : "A system like ") + project.title })}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary group"

@@ -76,7 +76,7 @@ export default function Navbar({ lang }: { lang: Locale }) {
   const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Scroll-aware morph: flush with the hero at the top, floating blurred pill after 50px.
+  // Scroll-aware morph (Cargon): the floating pill at the top; after 50px its white fills out sideways into a full-width bar.
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => setScrolled(latest > SCROLL_THRESHOLD));
   useEffect(() => {
@@ -117,6 +117,8 @@ export default function Navbar({ lang }: { lang: Locale }) {
 
   return (
     <div className="nav-surface" data-overlay={neutralPath === "/" ? "" : undefined} data-scrolled={scrolled ? "" : undefined}>
+      {/* The white that spreads from the pill to a full-width bar on scroll (CSS). */}
+      <span className="nav-fill" aria-hidden="true" />
       <div className="nav-container">
         <header ref={headerRef} className="site-header" onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget)) setMobileMenuOpen(false);
@@ -178,12 +180,13 @@ export default function Navbar({ lang }: { lang: Locale }) {
             </nav>
 
             {/* Language switch, then the bar's one solid shape: the WhatsApp
-                button, from xl. Below xl the six links leave no room for it and
-                the floating button in components/layout/WhatsAppFab.tsx covers
-                the job. */}
-            <div className="hidden lg:flex items-center gap-3">
+                button. On tablets (md) the links sit in the menu, so both fit
+                beside the menu button; at lg the six links leave no room for the
+                button until xl, and the floating button in
+                components/layout/WhatsAppFab.tsx covers the job. */}
+            <div className="hidden md:ml-auto md:flex lg:ml-0 items-center gap-3">
               <LanguageSwitch lang={lang} path={neutralPath} />
-              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm hidden xl:inline-flex">
+              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="nav-cta btn btn-primary btn-sm hidden md:inline-flex lg:hidden xl:inline-flex">
                 {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             </div>
@@ -262,7 +265,8 @@ export default function Navbar({ lang }: { lang: Locale }) {
                       </Link>
                     </motion.div>
                   ))}
-                  <motion.div variants={sheetItemVariants} className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                  {/* Phones only: on tablets the switch and the button are already in the bar. */}
+                  <motion.div variants={sheetItemVariants} className="mt-3 flex flex-wrap items-center justify-between gap-3 md:hidden">
                     <LanguageSwitch lang={lang} path={neutralPath} />
                     <a
                       href={whatsappUrl(lang)}

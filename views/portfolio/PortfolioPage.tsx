@@ -76,7 +76,7 @@ export default function PortfolioPage({ lang }: { lang: Locale }) {
         <SectionHeading badge={copy.index.consultationBadge} title={copy.index.consultationTitle} intro={copy.index.consultationBody}>
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 pt-4">
             <a
-              href={getWhatsAppUrl(copy.index.consultationWhatsapp)}
+              href={getWhatsAppUrl(copy.index.consultationWhatsapp, lang, { service: lang === "id" ? "Pengembangan sistem perusahaan" : "Company system development" })}
               target="_blank"
               rel="noopener noreferrer"
               data-wa-primary=""

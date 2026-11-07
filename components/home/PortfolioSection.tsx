@@ -29,7 +29,7 @@ export default function PortfolioSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={homeCopy[lang].badges.portfolio} title={copy.home.heading} intro={copy.home.intro} className="mb-10 md:mb-12" />
 
-        <RevealGroup className="rail-mobile grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.12}>
+        <RevealGroup className="fit-grid rail-mobile fit-md-2 fit-lg-3" stagger={0.12}>
           {featured.map((project) => (
             <motion.article key={project.id} variants={revealVariants()} data-reveal="" className="group relative">
               <Link
