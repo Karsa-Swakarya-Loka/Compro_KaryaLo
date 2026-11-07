@@ -60,14 +60,14 @@ export function caseStudyMetadata(lang: Locale, slug: string): Metadata {
       alternateLocale: locales.filter((other) => other !== lang).map((other) => ogLocale[other]),
       url: absoluteUrl(localePath(lang, path)),
       siteName: siteConfig.brandName,
-      title: `${title} — ${siteConfig.brandName}`,
+      title: `${title} | ${siteConfig.brandName}`,
       description,
       // Left unset so the generated card in this route's `opengraph-image.tsx`
       // wins; it renders this project's own title as a PNG every chat app can show.
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ${siteConfig.brandName}`,
+      title: `${title} | ${siteConfig.brandName}`,
       description,
     },
   };
@@ -183,7 +183,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
                 </p>
                 <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 mt-7">
                   <a
-                    href={getWhatsAppUrl(copy.whatsappSimilar(project.title))}
+                    href={getWhatsAppUrl(copy.whatsappSimilar(project.title), lang, { service: (lang === "id" ? "Sistem seperti " : "A system like ") + project.title })}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-wa-primary=""
@@ -204,7 +204,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
                 <Reveal direction="left" className="space-y-5">
                   <h2 className="type-subhead text-ink">{copy.caseStudy.scopeHeading}</h2>
                   <p className="type-body text-body max-w-[68ch]">{copy.caseStudy.scopeIntro(scope.length)}</p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <ul className="fit-grid fit-md-2 [--g:1.25rem]">
                     {scope.map((sub) => (
                       <li key={sub.code} className="group flex flex-col rounded-3xl bg-white p-6 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 hover:-translate-y-1 hover:shadow-lift">
                         <span className="type-meta text-brand">{sub.pillarName}</span>
@@ -262,7 +262,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         <section className="section-support px-4 md:px-12 bg-surface">
           <div className="max-w-[72rem] mx-auto">
             <SectionHeading badge={copy.caseStudy.galleryBadge} title={copy.caseStudy.galleryHeading} intro={copy.caseStudy.galleryIntro} />
-            <RevealGroup className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6" stagger={0.12}>
+            <RevealGroup className="fit-grid mt-12 fit-md-2" stagger={0.12}>
               {moreImages.map((image, index) => (
                 <RevealItem key={image} scaleFrom={0.94}>
                   <figure className="img-zoom relative aspect-[16/10] w-full overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-line">
@@ -286,7 +286,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         <section className={`section-standard px-4 md:px-12 ${moreImages.length > 0 ? "bg-white" : "bg-surface"}`}>
           <div className="max-w-[72rem] mx-auto">
             <SectionHeading badge={copy.caseStudy.relatedBadge} title={copy.caseStudy.relatedHeading} intro={copy.caseStudy.relatedIntro} />
-            <RevealGroup className="md-orphan-center mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
+            <RevealGroup className="fit-grid mt-12 fit-md-2 fit-lg-3" stagger={0.1}>
               {related.map((item) => (
                 <RevealItem key={item.slug} className="h-full">
                   <Link

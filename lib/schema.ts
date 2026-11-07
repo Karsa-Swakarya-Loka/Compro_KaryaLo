@@ -270,7 +270,7 @@ export function homePageSchema(lang: Locale) {
     "@type": "WebPage",
     "@id": `${url}#webpage`,
     url,
-    name: `${siteConfig.brandName} — ${routeSeo.home.text[lang].title}`,
+    name: `${siteConfig.brandName} | ${routeSeo.home.text[lang].title}`,
     description: routeSeo.home.text[lang].description,
     inLanguage: schemaLang[lang],
     isPartOf: { "@id": WEBSITE_ID },

@@ -180,7 +180,17 @@ Bahasa Indonesia tanpa awalan, bahasa Inggris di `/en/...`. Masing-masing punya 
 * **`/contact`:** form kebutuhan yang menyusun pesan WhatsApp untuk ditinjau, kanal langsung, alamat & Maps.
 
 ### 5.3 Alur Seksi di Halaman Beranda (`/`) — urutan Cargon, 2026-10-15
-1. **Hero (di atas lipatan, empat jawaban berurutan):** *apa* — pill "Extended IT Partner · Software, Desain & IoT" + H1 "Tim IT Anda, Tanpa Harus Merekrut."; *untuk siapa* — perusahaan yang belum punya tim IT sendiri atau timnya penuh, dan apa yang kami kerjakan; *kenapa penting* — tiga alasan (tim inti tidak dioper, purwarupa 7–14 hari kerja, source code milik Anda); *langkah berikutnya* — tombol WhatsApp "Ceritakan kebutuhan Anda", tombol sekunder "Lihat contoh proyek", dan keterangan waktu balas. Panel miring di kanan berisi slider proyek (keputusan pemilik malam 2026-10-15, menggantikan slider "masalah dulu"; kartu masalah kini hanya di seksi Solusi): satu proyek per slide, semuanya mockup laptop 3D yang sama agar seragam. Di tengah bawah laptop ada caption kaca yang menjelaskan mockup sesuai hierarki: jenis proyek · bidang (kecil, cyan), judul proyek, satu kalimat ringkas (diringkas dari `summary` portofolio, tanpa klaim baru), lalu bilah slide dan nomor 01/06. Urutan: Alina, DeliaStore, ERP HIJ, Affirmate, Ape Gale, website HIJ (proyek klien dan produk sendiri, tanpa purwarupa). Gaya mengikuti Cargon: panel miring berisi foto `hero-centerpiece.webp` dengan duotone biru, dan laptop berdiri di depannya; laptop dan caption berada di tengah panel. Penyempurnaan 3D: laptop baru masuk dari kanan sambil berayun (rotateY), lalu melayang pelan dengan bayangan di lantai; dengan mouse, laptop condong ke arah kursor dan foto bergeser berlawanan (paralaks); lantai garis perspektif dan sorotan cyan di panel. Setiap laptop menautkan ke studi kasusnya. Tanpa tombol jeda.
+1. **Hero (di atas lipatan; hierarki ditata ulang 2026-10-16 agar mata tahu urutannya: judul → slider → satu aksi):**
+   * **Kolom kiri:** pill "Extended IT Partner · Software, Desain & IoT", H1 "Tim IT Anda, Tanpa Harus Merekrut.", lalu satu kalimat "Satu tim untuk software, desain, dan perangkat IoT, dari perencanaan hingga pemeliharaan." Di bawahnya satu tombol solid WhatsApp "Diskusikan kebutuhan Anda", tautan tenang "Lihat contoh proyek ↓", dan satu baris "Konsultasi awal via WhatsApp, tanpa kewajiban melanjutkan."
+   * **Isi yang dihapus dari hero:** tiga poin centang (tim inti, purwarupa 7–14 hari, kode milik Anda), karena sudah ada di seksi Studio, serta paragraf panjangnya.
+   * **Tinggi hero di desktop** mengikuti layar (40–50rem), sehingga judul, laptop, caption, dan tombol muat dalam satu layar, juga di laptop 768px.
+   * **Panel miring di kanan** berisi slider proyek (keputusan pemilik malam 2026-10-15, menggantikan slider "masalah dulu"; kartu masalah kini hanya di seksi Solusi): satu proyek per slide, semuanya mockup laptop 3D yang sama agar seragam.
+   * **Caption kaca di tengah bawah laptop** sengaja pendek (2026-10-16): jenis proyek · bidang (kecil, cyan), judul proyek, lalu bilah slide dan nomor 01/06. Deskripsi satu kalimat dihapus agar laptop tetap jadi fokus.
+   * **Urutan slide:** Alina, DeliaStore, ERP HIJ, Affirmate, Ape Gale, website HIJ (proyek klien dan produk sendiri, tanpa purwarupa).
+   * **Gaya mengikuti Cargon:** panel miring berisi foto duotone biru (`hero-panel.webp`), laptop berdiri di depannya, dan laptop serta caption berada di tengah panel.
+   * **Penyempurnaan 3D:** laptop masuk dari kanan sambil berayun, lalu melayang dengan bayangan di lantai; dengan mouse, laptop condong ke arah kursor dan foto bergeser berlawanan (paralaks); lantai garis perspektif dan sorotan cyan di panel.
+   * Setiap laptop menautkan ke studi kasusnya. Tanpa tombol jeda.
+   * **Satu tombol solid per tampilan pertama:** tombol WhatsApp di navbar tampil biru muda saat halaman di posisi atas, dan baru solid setelah bar terisi saat di-scroll.
 2. **Kenapa KaryaLo:** kolase foto studio, empat prinsip kerja, kutipan deskripsi perusahaan, tombol ke Tentang Kami.
 3. **Layanan:** kartu yang melebar untuk tiga bidang + layanan pendamping.
 4. **Portofolio:** tiga kartu gambar tinggi menuju studi kasus; testimoni hanya tampil setelah disetujui klien.
@@ -234,3 +244,11 @@ Bagian Cargon yang belum punya sumber nyata di KaryaLo (testimoni, blog, video, 
 * **Smooth Scroll:** `lenis` (~3KB zero-jank physics scroll)
 * **Ikon:** `lucide-react`
 * **Optimasi Gambar:** `next/image` dengan format WebP/AVIF adaptif
+* **Performa (Lighthouse, build produksi lokal, 2026-10-15):** Beranda mobile 54 → ~90, desktop 95 → 98. Halaman dalam mobile 92–96. Aksesibilitas, Best Practices, dan SEO 100. Semua animasi dipertahankan. Yang diubah:
+  * **Google Tag Manager dimuat terlambat:** pada interaksi pertama (scroll, sentuh, klik, gerak mouse, tombol keyboard), atau 5 detik setelah `load` bila pengunjung diam. Event konversi sebelum itu tetap antre di `dataLayer`.
+    * **Konsekuensi data:** kunjungan yang pergi dalam ~5 detik tanpa interaksi apa pun tidak tercatat sebagai page view.
+  * **Foto panel hero** memakai `hero-panel.webp` dengan duotone biru yang sudah dibakar ke file (33 KB, sebelumnya filter CSS + blend). Foto ini dimuat dengan prioritas karena merupakan elemen LCP.
+  * **Laptop slide 2–6** baru dimuat setelah `load`, dan animasi melayang dijeda selama slide tersembunyi.
+  * **Reveal yang sudah terlihat** saat halaman pertama dimuat dijalankan lewat CSS tanpa menunggu hidrasi (`components/motion/earlyReveal.ts`). Reveal di bawah lipatan dan navigasi antarhalaman tetap memakai Motion.
+  * **Sisa selisih skor mobile** berasal dari preloader (Speed Index) dan simulasi CPU 4× Lighthouse. Di Chrome sungguhan, LCP Beranda sekitar 0,2 detik.
+  * **Cara mengukur:** ukur selalu dari build produksi (`next build && next start`) di jendela incognito, bukan dari `next dev`.

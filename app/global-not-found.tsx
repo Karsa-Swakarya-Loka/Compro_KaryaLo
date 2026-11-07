@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   // This document skips the root layouts, so it needs its own base for the
   // site-wide preview card that app/opengraph-image.tsx attaches to it.
   metadataBase: new URL(siteConfig.url),
-  title: "Halaman Tidak Ditemukan · Page Not Found — KaryaLo",
+  title: "Halaman Tidak Ditemukan · Page Not Found | KaryaLo",
   description: "Halaman yang Anda cari tidak tersedia. Kembali ke situs KaryaLo dalam bahasa Indonesia atau Inggris.",
   robots: { index: false, follow: true },
 };

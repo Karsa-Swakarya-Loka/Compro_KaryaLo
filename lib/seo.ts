@@ -276,7 +276,7 @@ export function pageMetadata({
   description: string;
 }): Metadata {
   const canonical = localePath(lang, path);
-  const cardAlt = `${siteConfig.brandName} — ${siteText[lang].tagline}`;
+  const cardAlt = `${siteConfig.brandName} | ${siteText[lang].tagline}`;
   return {
     title,
     description,
@@ -287,13 +287,13 @@ export function pageMetadata({
       alternateLocale: locales.filter((other) => other !== lang).map((other) => ogLocale[other]),
       url: absoluteUrl(canonical),
       siteName: siteConfig.brandName,
-      title: `${title} — ${siteConfig.brandName}`,
+      title: `${title} | ${siteConfig.brandName}`,
       description,
       images: [{ ...OG_CARD, alt: cardAlt }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ${siteConfig.brandName}`,
+      title: `${title} | ${siteConfig.brandName}`,
       description,
       images: [{ ...OG_CARD, alt: cardAlt }],
     },

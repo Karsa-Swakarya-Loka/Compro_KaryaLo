@@ -21,7 +21,7 @@ export const processData: Localized<ProcessStep[]> = {
       step: "02",
       title: "Purwarupa Interaktif & Uji Coba Awal",
       tagline: "Memvalidasi alur dan fungsi sebelum pengembangan dilanjutkan.",
-      description: "Dalam 7–14 hari kerja sesuai ruang lingkup yang disepakati, kami menyiapkan purwarupa Figma interaktif atau perangkat contoh untuk proyek IoT. Tinjauan bersama membantu memastikan kebutuhan telah dipahami sebelum tahap pengembangan berikutnya.",
+      description: "Dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati, kami menyiapkan purwarupa Figma interaktif atau perangkat contoh untuk proyek IoT. Tinjauan bersama membantu memastikan kebutuhan telah dipahami sebelum tahap pengembangan berikutnya.",
       deliverables: ["Purwarupa Figma interaktif", "Panduan antarmuka & komponen", "Purwarupa perangkat untuk proyek IoT"]
     },
     {
@@ -58,7 +58,7 @@ export const processData: Localized<ProcessStep[]> = {
       step: "02",
       title: "Interactive Prototype & Early Testing",
       tagline: "Validate workflows and functionality before development continues.",
-      description: "Within 7–14 working days, subject to the agreed scope, we prepare an interactive Figma prototype or a device prototype for IoT projects. Joint reviews confirm requirements before the next development stage.",
+      description: "Within 7-14 working days, subject to the agreed scope, we prepare an interactive Figma prototype or a device prototype for IoT projects. Joint reviews confirm requirements before the next development stage.",
       deliverables: ["Clickable Figma prototype", "Interface & component guide", "Sample device for IoT projects"]
     },
     {

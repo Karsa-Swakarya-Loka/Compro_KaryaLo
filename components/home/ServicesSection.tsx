@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Code2, Cpu, LifeBuoy, Palette } from "lucide-react";
-import { getServices, supportServicesData } from "@/data/services";
+import { getServices, supportServicesData, SERVICE_FOCUS } from "@/data/services";
 import { homeCopy } from "@/content/home";
 import { siteFeatures } from "@/config/site";
 import { type Locale, localePath } from "@/lib/i18n";
@@ -40,7 +40,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
       short: services.supportTitle,
       body: maintenance.description,
       items: maintenance.items,
-      image: "/images/process-blueprint.webp",
+      image: "/images/pdf/desk-contact-v2.webp",
       href: "/services#support",
     },
   ];
@@ -68,7 +68,7 @@ export default function ServicesSection({ lang }: { lang: Locale }) {
                   onFocus={() => setActive(i)}
                 >
                   <div className="img-zoom relative h-40 lg:absolute lg:inset-0 lg:h-auto">
-                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 40vw, (min-width: 768px) 46vw, 84vw" className="object-cover" style={{ objectPosition: SERVICE_FOCUS[card.key] }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/10 to-transparent" aria-hidden="true" />
                   </div>
 

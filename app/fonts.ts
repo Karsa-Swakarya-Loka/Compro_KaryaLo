@@ -1,7 +1,7 @@
-import { Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
 /**
- * One family for the whole site: Outfit, the face of the Cargon reference the
+ * One family for the whole site: Plus Jakarta Sans (matches the Compro PDF, 2026-11-07; the CSS variable keeps its old name --font-outfit), the face of the Cargon reference the
  * founder chose on 2026-10-15. Headings, body, labels and buttons all use it;
  * hierarchy comes from size and weight (see the `type-*` roles in globals.css).
  *
@@ -9,10 +9,10 @@ import { Outfit } from "next/font/google";
  * `--font-story` and `--font-meta` tokens now all point here, so any markup
  * still naming them renders in Outfit too.
  */
-const outfit = Outfit({
+const outfit = Plus_Jakarta_Sans({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 

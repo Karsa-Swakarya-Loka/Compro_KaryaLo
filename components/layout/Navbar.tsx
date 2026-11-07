@@ -186,7 +186,7 @@ export default function Navbar({ lang }: { lang: Locale }) {
                 components/layout/WhatsAppFab.tsx covers the job. */}
             <div className="hidden md:ml-auto md:flex lg:ml-0 items-center gap-3">
               <LanguageSwitch lang={lang} path={neutralPath} />
-              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm hidden md:inline-flex lg:hidden xl:inline-flex">
+              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="nav-cta btn btn-primary btn-sm hidden md:inline-flex lg:hidden xl:inline-flex">
                 {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             </div>

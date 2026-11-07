@@ -2,11 +2,15 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Script from "next/script";
 import { trackConversion, type ConversionEvent } from "@/lib/analytics";
 
 /** Container id, e.g. "GTM-XXXXXXX". Unset means no third-party script loads. */
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+
+/** Interactions that load GTM straight away: the visitor is engaged, so it can no longer delay the first paint. */
+const GTM_TRIGGERS = ["pointerdown", "keydown", "touchstart", "scroll", "mousemove"] as const;
+/** Without any interaction, GTM still loads this long after the page's `load` event. */
+const GTM_IDLE_MS = 5000;
 
 /** Maps an outbound href to the conversion it represents. */
 function eventForHref(href: string): ConversionEvent | null {
@@ -54,14 +58,44 @@ export default function Analytics() {
     return () => document.removeEventListener("click", onClick, true);
   }, [pathname]);
 
-  if (!GTM_ID) return null;
+  /*
+    Google Tag Manager, loaded late on purpose. Measured with Lighthouse on
+    2026-10-15, GTM and the GA4 tag it pulls in were the heaviest thing on the
+    page: ~300 KiB and ~500 ms of main-thread blocking on a phone, and the
+    script held back the `load` event (and so the logo loader) behind it. Now it
+    loads on the visitor's first interaction, or GTM_IDLE_MS after `load`.
+    Nothing is lost while it waits: conversions pushed to `dataLayer` before it
+    runs are queued, and GTM processes them when it starts.
+  */
+  useEffect(() => {
+    if (!GTM_ID) return;
+    let timer = 0;
 
-  return (
-    <Script id="gtm-loader" strategy="afterInteractive">
-      {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');`}
-    </Script>
-  );
+    const load = () => {
+      cleanup();
+      if (document.getElementById("gtm-script")) return;
+      window.dataLayer = window.dataLayer ?? [];
+      window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+      const script = document.createElement("script");
+      script.id = "gtm-script";
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+      document.head.appendChild(script);
+    };
+    const startIdleTimer = () => {
+      timer = window.setTimeout(load, GTM_IDLE_MS);
+    };
+    function cleanup() {
+      GTM_TRIGGERS.forEach((type) => window.removeEventListener(type, load));
+      window.removeEventListener("load", startIdleTimer);
+      window.clearTimeout(timer);
+    }
+
+    GTM_TRIGGERS.forEach((type) => window.addEventListener(type, load, { once: true, passive: true }));
+    if (document.readyState === "complete") startIdleTimer();
+    else window.addEventListener("load", startIdleTimer, { once: true });
+    return cleanup;
+  }, []);
+
+  return null;
 }

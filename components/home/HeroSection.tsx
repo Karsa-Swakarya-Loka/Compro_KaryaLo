@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type 
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { ArrowDown, CheckCircle2 } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { whatsappUrl } from "@/config/site";
 import { homeCopy } from "@/content/home";
 import { portfolioCopy } from "@/content/portfolio-page";
@@ -13,6 +13,7 @@ import { type Locale, localePath } from "@/lib/i18n";
 import useReducedMotionSafe from "@/components/motion/useReducedMotionSafe";
 import ArrowSwap from "@/components/motion/ArrowSwap";
 import DecorCurves from "@/components/ui/DecorCurves";
+import ProfileDownload from "@/components/ui/ProfileDownload";
 
 /** Time on each slide; slower while the pointer is over the slider, so a visitor can look without it stopping. */
 const ADVANCE_MS = 6500;
@@ -41,18 +42,17 @@ const clamp = (n: number) => Math.max(-0.5, Math.min(0.5, n));
  * slanted panel (a blue-toned photograph) with a 3D object standing in front of
  * it, its base breaking out over the panel's leaning left edge.
  *
- * The left column answers, in reading order and without moving: what KaryaLo
- * is (the category pill and the H1), who it is for and what it does, why it
- * matters (three reasons the site already backs), and what to do next (one
- * solid WhatsApp button, one secondary, and a line on what happens when you
- * write). It is server-rendered and readable without JavaScript.
+ * The left column is short on purpose (hierarchy pass, 2026-10-16): what
+ * KaryaLo is (the category pill and the H1), one line on what it does, one
+ * solid WhatsApp button with a quiet link beside it, and one line that lowers
+ * the stakes. It is server-rendered and readable without JavaScript.
  *
  * The slider shows one project per slide as the same laptop mockup, with a
- * caption centred under it that explains the mockup in reading order: project
- * type and field, the title, one line on what it is, then the slide bars and
- * count. A new laptop swings in from the right as in Cargon, then floats; with
- * a mouse, the laptop tilts toward the pointer and the photograph drifts the
- * other way, so the panel reads as depth. Each laptop links to its case study.
+ * short caption centred under it that names the mockup in reading order:
+ * project type and field, the title, then the slide bars and count. A new
+ * laptop swings in from the right as in Cargon, then floats; with a mouse, the
+ * laptop tilts toward the pointer and the photograph drifts the other way, so
+ * the panel reads as depth. Each laptop links to its case study.
  *
  * Timing (owner's calls): no pause button; slides advance every 6.5s, or every
  * 15s while the pointer is over the slider, and picking a slide restarts the
@@ -89,6 +89,15 @@ export default function HeroSection({ lang }: { lang: Locale }) {
   const pick = (next: number) =>
     setSlide((current) => (next === current.index ? current : { index: next, previous: current.index }));
 
+  // The other five laptops load once the page has finished loading, so they never compete with the first one.
+  const [warm, setWarm] = useState(false);
+  useEffect(() => {
+    const start = () => setWarm(true);
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
+  }, []);
+
   // Only keyboard focus holds the slider; a mouse click on a bar leaves it running.
   const handleFocus = (event: FocusEvent<HTMLElement>) => {
     if (event.target.matches(":focus-visible")) setKeyboardHold(true);
@@ -119,43 +128,40 @@ export default function HeroSection({ lang }: { lang: Locale }) {
   const slide = slides[index];
 
   return (
-    <section className="relative overflow-hidden bg-surface lg:min-h-[50rem]" onPointerMove={handlePointerMove} onMouseLeave={resetPointer}>
+    <section className="hero-fit relative overflow-hidden bg-surface" onPointerMove={handlePointerMove} onMouseLeave={resetPointer}>
       <DecorCurves className="-left-10 bottom-[-2rem] h-[26rem] w-auto lg:h-[34rem]" />
 
-      {/* What it is, who it is for, why it matters, what to do next. */}
-      <div className="relative z-10 mx-auto max-w-[76rem] px-4 pt-28 pb-8 md:px-12 md:pt-32 md:pb-10 lg:px-8 lg:pt-36 lg:pb-20">
+      {/*
+        The copy, in the order the eye should take it: the headline first, the
+        slider beside it as the proof, then one action. A single solid button
+        (starting a conversation) with a quiet link beside it, and one short
+        line that lowers the stakes. Centred vertically beside the slider.
+      */}
+      <div className="relative z-10 mx-auto max-w-[76rem] px-4 pt-28 pb-8 md:px-12 md:pt-32 md:pb-10 hero-fit lg:flex lg:items-center lg:px-8 lg:pt-24 lg:pb-16">
         <div className="lg:w-[54%] lg:pr-12">
           <p className="enter-up badge-pill">{hero.category}</p>
 
-          <h1 className="enter-up mt-5 type-display-hero text-ink" style={{ "--i": 1 } as CSSProperties}>
+          <h1 className="enter-up mt-6 type-display-hero text-ink" style={{ "--i": 1 } as CSSProperties}>
             {hero.headline.lead} <span className="text-brand">{hero.headline.accent}</span>
           </h1>
 
-          <p className="enter-up mt-5 max-w-[52ch] type-lede text-body" style={{ "--i": 2 } as CSSProperties}>
+          <p className="enter-up mt-5 max-w-[42ch] type-lede text-body" style={{ "--i": 2 } as CSSProperties}>
             {hero.audience}
           </p>
 
-          <ul className="enter-up mt-5 flex flex-wrap gap-x-5 gap-y-2" style={{ "--i": 3 } as CSSProperties}>
-            {hero.reasons.map((reason) => (
-              <li key={reason} className="flex items-center gap-2 type-small font-medium text-ink">
-                <CheckCircle2 aria-hidden="true" className="h-[1.125rem] w-[1.125rem] shrink-0 text-brand" />
-                {reason}
-              </li>
-            ))}
-          </ul>
-
-          <div className="enter-up mt-7 flex flex-wrap items-center gap-3" style={{ "--i": 4 } as CSSProperties}>
+          <div className="enter-up mt-9 flex flex-wrap items-center gap-x-7 gap-y-3" style={{ "--i": 3 } as CSSProperties}>
             {/* `data-wa-primary`: the floating WhatsApp button steps aside while this one is on screen. */}
             <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" data-wa-primary="" className="btn btn-lg btn-primary group">
               <span>{hero.primaryCta}</span>
               <ArrowSwap />
             </a>
-            <a href="#portfolio" className="btn btn-lg btn-secondary group">
-              <span>{hero.secondaryCta}</span>
+            <a href="#portfolio" className="text-link text-ink hover:text-brand">
+              {hero.secondaryCta}
               <ArrowDown aria-hidden="true" className="h-4 w-4" />
             </a>
+            <ProfileDownload lang={lang} variant="link" className="text-link text-ink hover:text-brand" />
           </div>
-          <p className="enter-up mt-4 type-small text-body" style={{ "--i": 5 } as CSSProperties}>
+          <p className="enter-up mt-4 type-small text-body" style={{ "--i": 4 } as CSSProperties}>
             {hero.reassurance}
           </p>
         </div>
@@ -174,18 +180,17 @@ export default function HeroSection({ lang }: { lang: Locale }) {
       >
         <div className="hero-panel-frame" aria-hidden="true" />
         <div className="hero-panel" aria-hidden="true">
+          {/*
+            Cargon's blue duotone, baked into the file (hero-centerpiece.webp in
+            grayscale, contrast 1.25, multiplied by the brand blue) rather than
+            drawn with CSS filters and a blend layer on every frame. It is the
+            page's largest paint, so it loads first.
+          */}
           <motion.div className="absolute -inset-8" style={{ x: photoX, y: photoY }}>
-            <Image
-              src="/images/hero-centerpiece.webp"
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover grayscale contrast-125"
-            />
+            <Image src="/images/hero-panel.webp" alt="" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover opacity-[0.16]" />
           </motion.div>
-          {/* Cargon's blue duotone, deepening toward the floor the laptop stands on. */}
-          <div className="absolute inset-0 bg-brand mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-night/90 via-brand-deep/35 to-brand/10" />
+          {/* Deepening toward the floor the laptop stands on. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
           <div className="hero-floor" />
           <div className="hero-spotlight" />
         </div>
@@ -208,15 +213,19 @@ export default function HeroSection({ lang }: { lang: Locale }) {
                         tabIndex={i === index ? undefined : -1}
                         className="block rounded-[4%]"
                       >
-                        <Image
-                          src={project.coverImage}
-                          alt={slider.slideAlt(project.title)}
-                          width={1600}
-                          height={1240}
-                          priority={i === 0}
-                          sizes="(min-width: 1024px) 40rem, 92vw"
-                          className="hero-device-img h-auto w-full"
-                        />
+                        {i === 0 || i === index || i === previous || warm ? (
+                          <Image
+                            src={project.coverImage}
+                            alt={slider.slideAlt(project.title)}
+                            width={1600}
+                            height={1240}
+                            priority={i === 0}
+                            sizes="(min-width: 1024px) 40rem, 92vw"
+                            className="hero-device-img h-auto w-full"
+                          />
+                        ) : (
+                          <span className="block aspect-[1600/1240]" />
+                        )}
                       </Link>
                     </div>
                   </div>
@@ -225,7 +234,7 @@ export default function HeroSection({ lang }: { lang: Locale }) {
             </div>
           </motion.div>
 
-          {/* What the mockup is: type and field, title, one line; then the slide bars and count. */}
+          {/* What the mockup is: type and field, then the title; then the slide bars and count. */}
           <div className="hero-caption">
             <div
               key={slide.slug}
@@ -234,11 +243,10 @@ export default function HeroSection({ lang }: { lang: Locale }) {
               aria-label={`${index + 1} / ${total}`}
               aria-live={autoplay ? "off" : "polite"}
             >
-              <p className="type-meta text-cyan">
+              <p className="type-meta text-brand">
                 {types[slide.type]} · {slide.categoryLabel}
               </p>
-              <p className="type-card-title mt-1.5 text-white">{slide.title}</p>
-              <p className="type-small mt-1 text-white/80">{slider.captions[slide.slug]}</p>
+              <p className="type-card-title mt-1.5 text-ink">{slide.title}</p>
             </div>
 
             <div className="hero-caption-nav" role="group" aria-label={slider.label}>
@@ -265,8 +273,8 @@ export default function HeroSection({ lang }: { lang: Locale }) {
                   </button>
                 ))}
               </div>
-              <p className="type-meta text-white/70" aria-hidden="true">
-                <span className="font-semibold text-white">{pad(index + 1)}</span> / {pad(total)}
+              <p className="type-meta text-body" aria-hidden="true">
+                <span className="font-semibold text-ink">{pad(index + 1)}</span> / {pad(total)}
               </p>
             </div>
           </div>

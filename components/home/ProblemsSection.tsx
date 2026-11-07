@@ -32,7 +32,7 @@ export default function ProblemsSection({ lang }: { lang: Locale }) {
       <div className="mx-auto max-w-[72rem]">
         <SectionHeading badge={copy.badges.problems} title={problems.title} intro={problems.intro} className="mb-10 md:mb-12" />
 
-        <RevealGroup className="rail-mobile md-orphan-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+        <RevealGroup className="fit-grid rail-mobile fit-md-2 fit-lg-3" stagger={0.08}>
           {getProblems(lang).map((item) => (
             <motion.article
               key={item.id}
@@ -58,7 +58,7 @@ export default function ProblemsSection({ lang }: { lang: Locale }) {
                   <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </Link>
               ) : (
-                <a href={getWhatsAppUrl(item.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="stretched-link text-link self-start text-brand">
+                <a href={getWhatsAppUrl(item.whatsappMessage, lang, { service: fieldName(item.pillarId) })} target="_blank" rel="noopener noreferrer" className="stretched-link text-link self-start text-brand">
                   {problems.discuss}
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                 </a>

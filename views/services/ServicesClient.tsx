@@ -3,10 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getServices, supportServicesData, type ServicePillar, type SupportService } from "@/data/services";
+import { getServices, supportServicesData, SERVICE_FOCUS, type ServicePillar, type SupportService } from "@/data/services";
 import { getPortfolio } from "@/data/portfolio";
 import { getWhatsAppUrl } from "@/config/site";
 import { IOT_PILLAR_ID, servicesPageCopy } from "@/content/services-page";
+
+/** Related projects shown per field; more are one button away in the portfolio. */
+const PROOF_LIMIT = 6;
 import { type Locale, localePath } from "@/lib/i18n";
 import { routeSeo } from "@/lib/seo";
 import {
@@ -114,6 +117,7 @@ function ServiceRange({
                 fill
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 100vw"
                 className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                style={{ objectPosition: SERVICE_FOCUS[item.id] }}
               />
               {/* Phones: a dark gradient under the text. Wide screens: solid brand
                   blue on the open card, a light wash on the closed ones. */}
@@ -174,7 +178,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
       href: "#support",
       title: copy.support.heading,
       body: copy.support.intro,
-      image: "/images/about-studio.webp",
+      image: "/images/pdf/team-process-v2.webp",
       Icon: Wrench,
     },
   ];
@@ -289,7 +293,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                   {/* The field's one solid button, then the brief as an outline. */}
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href={getWhatsAppUrl(copy.discussMessage(pillar.name))}
+                      href={getWhatsAppUrl(copy.discussMessage(pillar.name), lang, { service: pillar.name })}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-primary"
@@ -310,19 +314,19 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                 <Reveal>
                   <h3 className="type-subhead text-center text-ink">{copy.includedLabel}</h3>
                 </Reveal>
-                <RevealGroup className="rail-mobile md-orphan-center grid gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
+                <RevealGroup className="fit-grid rail-mobile fit-md-2 fit-lg-3" stagger={0.1}>
                   {pillar.subServices.map((sub) => {
                     const SubIcon = SUB_ICONS[sub.code] ?? CheckCircle2;
                     return (
-                      <RevealItem key={sub.code} className="h-full">
+                      <RevealItem key={sub.code} className="flex">
                         <article
-                          className={`group flex h-full flex-col rounded-3xl border border-line p-7 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
+                          className={`group flex w-full flex-col rounded-3xl border border-line p-7 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
                         >
                           <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-soft text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
                             <SubIcon aria-hidden="true" className="h-6 w-6" />
                           </span>
                           <h4 className="type-card-title mt-6 text-ink">{sub.name}</h4>
-                          <p className="type-body-card mt-3 text-body">{sub.description}</p>
+                          <p className="type-body-card mt-3 flex-1 text-body">{sub.description}</p>
                           <ul className="mt-5 space-y-2 border-t border-line pt-5">
                             {sub.items.map((item) => (
                               <li key={item} className="type-small flex items-start gap-2 text-body">
@@ -343,12 +347,12 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                   <Reveal>
                     <h3 className="type-subhead text-center text-ink">{copy.proofHeading}</h3>
                   </Reveal>
-                  <RevealGroup className="rail-mobile md-orphan-center grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
-                    {proof.map((project) => (
-                      <RevealItem key={project.slug} className="h-full">
+                  <RevealGroup className="fit-grid rail-mobile fit-sm-2 fit-lg-3" stagger={0.1}>
+                    {proof.slice(0, PROOF_LIMIT).map((project) => (
+                      <RevealItem key={project.slug} className="flex">
                         <Link
                           href={localePath(lang, `/portfolio/${project.slug}`)}
-                          className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-line shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
+                          className={`group flex w-full flex-col overflow-hidden rounded-3xl border border-line shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
                         >
                           <span className="img-zoom relative block aspect-[16/10] border-b border-line bg-surface">
                             <Image
@@ -372,6 +376,14 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                       </RevealItem>
                     ))}
                   </RevealGroup>
+                  {proof.length > PROOF_LIMIT && (
+                    <Reveal className="flex justify-center pt-2">
+                      <Link href={localePath(lang, "/portfolio")} className="btn btn-secondary">
+                        {copy.proofMore}
+                        <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                      </Link>
+                    </Reveal>
+                  )}
                 </div>
               )}
 
@@ -389,7 +401,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                     </div>
                     {/* Outline: the field's "Diskusikan" button above is its one primary. */}
                     <a
-                      href={getWhatsAppUrl(copy.iotNoProof.message)}
+                      href={getWhatsAppUrl(copy.iotNoProof.message, lang, { service: lang === "id" ? "Perangkat IoT & Sistem Pemantauan" : "IoT Devices & Monitoring Systems" })}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-secondary btn-sm shrink-0 self-start md:self-center"
@@ -410,15 +422,15 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
       <section id="support" aria-label={copy.support.heading} className="section-standard bg-white px-4 md:px-12">
         <div className="mx-auto max-w-[72rem]">
           <SectionHeading badge={copy.support.badge} title={copy.support.heading} intro={copy.support.intro} />
-          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14" stagger={0.12}>
+          <RevealGroup className="fit-grid mt-12 fit-md-2 lg:mt-14" stagger={0.12}>
             {supportServices.map((service, index) => {
               const Icon = SUPPORT_ICONS[service.id];
               /* The first card takes Cargon's solid blue "active" treatment. */
               const featured = index === 0;
               return (
-                <RevealItem key={service.id} direction={index === 0 ? "left" : "right"} className="h-full">
+                <RevealItem key={service.id} direction={index === 0 ? "left" : "right"} className="flex">
                   <article
-                    className={`group flex h-full flex-col gap-6 rounded-3xl p-7 md:p-9 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 ${
+                    className={`group flex w-full flex-col gap-6 rounded-3xl p-7 md:p-9 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 ${
                       featured ? "bg-brand text-white shadow-lift" : "border border-line bg-white shadow-card hover:shadow-lift"
                     }`}
                   >
@@ -442,7 +454,7 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                       ))}
                     </ul>
                     <a
-                      href={getWhatsAppUrl(copy.support.messages[service.id])}
+                      href={getWhatsAppUrl(copy.support.messages[service.id], lang, { service: service.name })}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`btn btn-sm mt-auto self-start ${featured ? "btn-secondary-light" : "btn-secondary"}`}
@@ -462,12 +474,12 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
       <section aria-label={copy.guaranteesLabel} data-surface="dark" className="section-standard bg-night px-4 md:px-12">
         <div className="mx-auto max-w-[72rem]">
           <SectionHeading tone="dark" badge={copy.guaranteesBadge} title={copy.guaranteesTitle} />
-          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-2" stagger={0.12}>
+          <RevealGroup className="fit-grid mt-12 fit-md-2" stagger={0.12}>
             {copy.guarantees.map(({ title, description }, index) => {
               const Icon = GUARANTEE_ICONS[index] ?? Layers;
               return (
-                <RevealItem key={title} className="h-full">
-                  <div className="flex h-full items-start gap-5 rounded-3xl border border-white/10 bg-white/5 p-7 md:p-8">
+                <RevealItem key={title} className="flex">
+                  <div className="flex w-full items-start gap-5 rounded-3xl border border-white/10 bg-white/5 p-7 md:p-8">
                     <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand text-white">
                       <Icon aria-hidden="true" className="h-6 w-6" />
                     </span>

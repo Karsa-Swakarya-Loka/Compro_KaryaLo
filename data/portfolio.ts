@@ -161,7 +161,7 @@ const portfolioId: ProjectItem[] = [
     coverImage: "/images/portofolio/mockup/deliastore.webp",
     galleryImages: [
       "/images/portofolio/deliastore.webp",
-      "/images/portofolio/deliastore-track.webp"
+      "/images/portofolio/deliastore-topup.webp"
     ],
     tags: ["Next.js 16", "PostgreSQL", "DOKU Checkout", "Digiflazz", "PWA"],
     summary: "Produk KaryaLo untuk penjualan top-up game, pulsa, paket data, token PLN, dan e-money. Platform mengintegrasikan pembayaran DOKU, pengiriman otomatis, promosi, serta program poin pelanggan.",

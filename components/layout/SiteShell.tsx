@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import Preloader, { PRELOAD_SCRIPT } from "@/components/layout/Preloader";
+import { EARLY_REVEAL_SCRIPT } from "@/components/motion/earlyReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import Analytics from "@/components/analytics/Analytics";
 import { commonCopy } from "@/content/common";
@@ -51,9 +52,9 @@ export function rootMetadata(lang: Locale): Metadata {
     title: {
       // Keyword first: Google cuts the tail of a long title, and what a buyer
       // searches for is the service, not the studio's name.
-      default: `${routeSeo.home.text[lang].title} — ${siteConfig.brandName}`,
+      default: `${routeSeo.home.text[lang].title} | ${siteConfig.brandName}`,
       // Short suffix so page titles survive SERP truncation.
-      template: "%s — KaryaLo",
+      template: "%s | KaryaLo",
     },
     applicationName: siteConfig.brandName,
     authors: [{ name: siteConfig.companyName, url: siteConfig.url }],
@@ -93,6 +94,8 @@ export default function SiteShell({ lang, children }: { lang: Locale; children: 
           <Footer lang={lang} />
           <WhatsAppFab lang={lang} />
         </SmoothScrollProvider>
+        {/* After all the content: starts the entrance of reveals already on screen without waiting for hydration. */}
+        <script dangerouslySetInnerHTML={{ __html: EARLY_REVEAL_SCRIPT }} />
       </body>
     </html>
   );

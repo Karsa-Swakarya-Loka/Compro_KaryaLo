@@ -5,6 +5,7 @@ import { siteConfig, siteText } from "@/config/site";
 import { aboutCopy } from "@/content/about";
 import { commonCopy } from "@/content/common";
 import { type Locale, localePath } from "@/lib/i18n";
+import ProfileDownload from "@/components/ui/ProfileDownload";
 import { ArrowRight, Briefcase, Check, CircleCheck, Code2, Cpu, FileText, Handshake, MapPin, Palette } from "lucide-react";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import ContactCTA from "@/components/home/ContactCTA";
@@ -46,6 +47,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
             </li>
           ))}
         </ul>
+        <ProfileDownload lang={lang} />
       </PageBanner>
 
       {/*
@@ -57,13 +59,14 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto grid max-w-[72rem] grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <RevealGroup className="grid aspect-[6/7] grid-cols-2 grid-rows-[2fr_3fr] gap-4 sm:aspect-[4/3] sm:gap-6 lg:col-span-6 lg:aspect-auto lg:min-h-[34rem]" stagger={0.12}>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-2xl">
-              <Image src="/images/service-software.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+              {/* The top row is on screen at load and holds the page's largest paint: load it first. */}
+              <Image src="/images/pdf/services-dev-v3.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
             </RevealItem>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative overflow-hidden rounded-2xl">
-              <Image src="/images/service-iot-2.webp" alt="" fill sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
+              <Image src="/images/pdf/services-iot-v3.webp" alt="" fill priority sizes="(min-width: 1024px) 18rem, 50vw" className="object-cover" />
             </RevealItem>
             <RevealItem direction="left" scaleFrom={0.92} className="img-zoom relative col-span-2 overflow-hidden rounded-2xl">
-              <Image src="/images/about-studio.webp" alt={copy.studio.imageAlt} fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover" />
+              <Image src="/images/pdf/team-why-v2.webp" alt="" fill sizes="(min-width: 1024px) 36rem, 100vw" className="object-cover object-[50%_20%]" />
             </RevealItem>
           </RevealGroup>
 
@@ -130,7 +133,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.badges.team} title={copy.team.title} intro={copy.team.intro} />
 
-          <RevealGroup className="sm-orphan-center grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          <RevealGroup className="fit-grid fit-sm-2 fit-lg-3" stagger={0.08}>
             {copy.team.units.map((unit) => {
               const Icon = UNIT_ICONS[unit.icon];
               return (
@@ -154,7 +157,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.badges.process} title={<span id="cara-kerja">{copy.process.title}</span>} intro={copy.process.intro} />
 
-          <RevealGroup className="md-orphan-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
+          <RevealGroup className="fit-grid fit-md-2 fit-lg-3" stagger={0.08}>
             {processSteps.map((step) => (
               <RevealItem key={step.step} className="h-full">
                 <article className="relative flex h-full flex-col gap-3 overflow-hidden rounded-3xl bg-white p-7 shadow-card">
@@ -186,7 +189,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         <div className="mx-auto max-w-[72rem] space-y-12">
           <SectionHeading badge={copy.badges.coverage} title={copy.coverage.title} />
 
-          <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2" stagger={0.1}>
+          <RevealGroup className="fit-grid fit-md-2" stagger={0.1}>
             {[
               { icon: MapPin, title: copy.coverage.areaTitle, body: copy.coverage.areaBody },
               { icon: Handshake, title: copy.coverage.modelTitle, body: copy.coverage.modelBody },
@@ -229,7 +232,7 @@ export default function AboutClient({ lang }: { lang: Locale }) {
               <div className="space-y-1">
                 <dt className="type-meta text-white/80">{copy.legal.kbliLabel}</dt>
                 <dd className="type-card-title-lg text-white tabular-nums">{siteConfig.kbliCode}</dd>
-                <dd className="type-small text-white/80">{siteText[lang].kbli.split("— ")[1]}</dd>
+                <dd className="type-small text-white/80">{siteText[lang].kbli.split(": ")[1]}</dd>
               </div>
               <div className="space-y-1 sm:col-span-2 lg:col-span-1">
                 <dt className="type-meta text-white/80">{copy.legal.addressLabel}</dt>

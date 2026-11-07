@@ -16,10 +16,11 @@ export interface HomeCopy {
   /** The small pill over each section title (Cargon's section badge). */
   badges: { why: string; services: string; portfolio: string; studio: string; problems: string; process: string; trust: string; faq: string };
   /**
-   * Hero slider (owner's calls, 2026-10-15 evening): one project per slide,
-   * each shown as the same 3D laptop mockup, with a caption centred under it
-   * that explains the mockup: project type and field, then the title, then one
-   * line on what it is. The problem-first hook lives on in the "Solutions"
+   * Hero slider (owner's calls, 2026-10-15/16): one project per slide, each
+   * shown as the same 3D laptop mockup, with a short caption centred under it:
+   * project type and field, then the title, then the slide bars. Kept to two
+   * lines so the laptop leads (2026-10-16 hierarchy pass); the case study
+   * carries the rest. The problem-first hook lives on in the "Solutions"
    * section further down. No pause button; the slider keeps moving under the
    * pointer, only slower (15s a slide instead of 6.5s), and holds while a
    * keyboard user is on its controls.
@@ -31,8 +32,6 @@ export interface HomeCopy {
     slideAlt: (title: string) => string;
     /** Accessible name of the link from a slide to its case study. */
     openProject: (title: string) => string;
-    /** One line per project slug, condensed from its portfolio summary. No claims beyond it. */
-    captions: Record<string, string>;
   };
   /** The commitments box over the studio photo. Figures the site already promises, not metrics. */
   studio: {
@@ -40,16 +39,17 @@ export interface HomeCopy {
     commitments: { figure?: string; count?: number; suffix?: string; label: string }[];
   };
   /**
-   * Above the fold, in reading order: what KaryaLo is (pill + H1), who it is
-   * for and what it does (`audience`), why it matters (`reasons`), and what to
-   * do next (the two buttons and `reassurance`). The project slider sits in
-   * the right-hand panel as the proof.
+   * Above the fold, in the order the eye should take it (hierarchy pass,
+   * 2026-10-16): the H1, then the project slider on the right as the proof,
+   * then one action. Copy is kept short on purpose: one line on what KaryaLo
+   * does (`audience`), one solid button, one quiet link, one line that lowers
+   * the stakes (`reassurance`). The three commitments that used to sit here as
+   * ticks are in the Studio section (7–14 days, code ownership, one team).
    */
   hero: {
     category: string;
     headline: { lead: string; accent: string };
     audience: string;
-    reasons: string[];
     primaryCta: string;
     secondaryCta: string;
     reassurance: string;
@@ -144,19 +144,11 @@ export const homeCopy: Localized<HomeCopy> = {
       goTo: (n, total) => `Tampilkan proyek ${n} dari ${total}`,
       slideAlt: (title) => `${title}, ditampilkan pada laptop`,
       openProject: (title) => `Lihat studi kasus: ${title}`,
-      captions: {
-        "alina-omnichannel-retail": "Toko online yang tersambung ke pengelolaan pesanan dan stok gudang.",
-        "deliastore-topup": "Top up game dan produk digital dengan pembayaran DOKU dan pengiriman otomatis.",
-        "hij-garment-erp": "ERP web dari pesanan, SPK, dan produksi hingga logistik dan keuangan.",
-        "affirmate-company-profile": "Website dua bahasa untuk layanan korporat, perizinan, dan visa.",
-        "apegale-company-profile": "Website dua bahasa untuk perizinan ekspatriat dan tenaga kerja asing.",
-        "hij-corporate-profile": "Website profil yang menyampaikan kapabilitas perusahaan secara terstruktur.",
-      },
     },
     studio: {
       imageAlt: "Ruang studio KaryaLo dengan meja kerja pengembangan software",
       commitments: [
-        { figure: "7–14", label: "hari kerja untuk purwarupa awal" },
+        { figure: "7-14", label: "hari kerja untuk purwarupa awal" },
         { count: 100, suffix: "%", label: "kepemilikan kode proyek khusus sesuai SPK" },
         { count: 3, label: "bidang keahlian dalam satu tim" },
       ],
@@ -164,16 +156,10 @@ export const homeCopy: Localized<HomeCopy> = {
     hero: {
       category: "Extended IT Partner · Software, Desain & IoT",
       headline: { lead: "Tim IT Anda,", accent: "Tanpa Harus Merekrut." },
-      audience:
-        "KaryaLo membantu bisnis Anda mengembangkan software, desain, dan perangkat IoT melalui satu tim. Kami mendampingi dari perencanaan hingga pemeliharaan, baik sebagai tim IT Anda maupun sebagai pendukung tim internal.",
-      reasons: [
-        "Ditangani langsung oleh tim inti KaryaLo",
-        "Purwarupa awal dalam 7–14 hari kerja",
-        "Serah terima kode dan dokumentasi sesuai SPK",
-      ],
+      audience: "Satu tim untuk software, desain, dan perangkat IoT, dari perencanaan hingga pemeliharaan.",
       primaryCta: "Diskusikan kebutuhan Anda",
       secondaryCta: "Lihat contoh proyek",
-      reassurance: "Konsultasi awal via WhatsApp · dilayani pada jam kerja · tanpa kewajiban melanjutkan",
+      reassurance: "Konsultasi awal via WhatsApp, tanpa kewajiban melanjutkan.",
     },
     principles: {
       title: "Cara Kami Bermitra",
@@ -259,7 +245,7 @@ export const homeCopy: Localized<HomeCopy> = {
       bannerBadge: "Validasi Sebelum Pengembangan",
       bannerTitle: "Tinjau Alur Sistem Sebelum Pengembangan Dimulai",
       bannerBody:
-        "Purwarupa awal disiapkan dalam 7–14 hari kerja sesuai ruang lingkup yang disepakati. Tim Anda dapat meninjau alur dan memberi masukan sebelum pengembangan dilanjutkan.",
+        "Purwarupa awal disiapkan dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati. Tim Anda dapat meninjau alur dan memberi masukan sebelum pengembangan dilanjutkan.",
       stage: "Tahap",
       youGet: "Yang Anda terima:",
     },
@@ -329,7 +315,7 @@ export const homeCopy: Localized<HomeCopy> = {
       primary: "Diskusikan kebutuhan Anda",
       secondary: "Kenali KaryaLo",
       officeLabel: "Kantor & Studio",
-      hours: "Senin – Jumat (09.00 – 18.00 WIB)",
+      hours: "Senin sampai Jumat (09.00 sampai 18.00 WIB)",
     },
   },
   en: {
@@ -348,19 +334,11 @@ export const homeCopy: Localized<HomeCopy> = {
       goTo: (n, total) => `Show project ${n} of ${total}`,
       slideAlt: (title) => `${title}, shown on a laptop`,
       openProject: (title) => `View case study: ${title}`,
-      captions: {
-        "alina-omnichannel-retail": "An online store connected to order management and warehouse stock.",
-        "deliastore-topup": "Game top-ups and digital products, with DOKU payments and automatic delivery.",
-        "hij-garment-erp": "A web ERP from orders, work orders and production to logistics and finance.",
-        "affirmate-company-profile": "A bilingual website for corporate services, licensing and visas.",
-        "apegale-company-profile": "A bilingual website for expatriate and foreign worker licensing.",
-        "hij-corporate-profile": "A company profile website that presents its capabilities in a clear structure.",
-      },
     },
     studio: {
       imageAlt: "The KaryaLo studio with software development workstations",
       commitments: [
-        { figure: "7–14", label: "working days for an initial prototype" },
+        { figure: "7-14", label: "working days for an initial prototype" },
         { count: 100, suffix: "%", label: "ownership of custom project code under the SPK" },
         { count: 3, label: "areas of expertise in one team" },
       ],
@@ -368,16 +346,10 @@ export const homeCopy: Localized<HomeCopy> = {
     hero: {
       category: "Extended IT Partner · Software, Design & IoT",
       headline: { lead: "Your IT Team,", accent: "Without the Recruitment." },
-      audience:
-        "KaryaLo brings software development, design, and IoT together in one team. From planning through ongoing maintenance, we work as your IT partner or provide additional expertise for your internal team.",
-      reasons: [
-        "Delivered directly by KaryaLo's core team",
-        "An initial prototype in 7–14 working days",
-        "Code and documentation handover under the SPK",
-      ],
+      audience: "One team for software, design and IoT, from planning through maintenance.",
       primaryCta: "Discuss your project",
       secondaryCta: "See example projects",
-      reassurance: "Initial consultation via WhatsApp · available during business hours · no obligation",
+      reassurance: "Initial consultation via WhatsApp, with no obligation to continue.",
     },
     principles: {
       title: "How We Partner",
@@ -462,7 +434,7 @@ export const homeCopy: Localized<HomeCopy> = {
       bannerBadge: "Validate Before Development",
       bannerTitle: "Review the Workflow Before Development Begins",
       bannerBody:
-        "An initial prototype is prepared in 7–14 working days within the agreed scope. Your team can review the workflow and provide feedback before development continues.",
+        "An initial prototype is prepared in 7-14 working days within the agreed scope. Your team can review the workflow and provide feedback before development continues.",
       stage: "Stage",
       youGet: "What you receive:",
     },
@@ -532,7 +504,7 @@ export const homeCopy: Localized<HomeCopy> = {
       primary: "Discuss your project",
       secondary: "Get to know KaryaLo",
       officeLabel: "Office & Studio",
-      hours: "Monday – Friday (09:00 – 18:00 WIB)",
+      hours: "Monday to Friday (09:00 to 18:00 WIB)",
     },
   },
 };

@@ -19,6 +19,8 @@ export const servicesPageCopy: Localized<{
   discussMessage: (pillarName: string) => string;
   sendBrief: string;
   proofHeading: string;
+  /** Button under the related projects when a field has more than the page shows. */
+  proofMore: string;
   projectType: { client: string; product: string; prototype: string };
   /** Shown in place of the proof list while the IoT field has no published project. */
   iotNoProof: { heading: string; body: string; cta: string; message: string };
@@ -56,11 +58,12 @@ export const servicesPageCopy: Localized<{
     discussMessage: (pillarName) => `Halo Tim KaryaLo, kami ingin berkonsultasi mengenai layanan ${pillarName}.`,
     sendBrief: "Kirim brief proyek",
     proofHeading: "Proyek terkait",
+    proofMore: "Lihat selengkapnya",
     projectType: { client: "Proyek klien", product: "Produk KaryaLo", prototype: "Purwarupa internal" },
     iotNoProof: {
       heading: "Belum ada proyek IoT yang kami publikasikan",
       body:
-        "Pengembangan dimulai dengan purwarupa perangkat dalam 7–14 hari kerja sesuai ruang lingkup yang disepakati. Pengujian di lokasi membantu menilai kesesuaian perangkat sebelum penerapan lebih luas.",
+        "Pengembangan dimulai dengan purwarupa perangkat dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati. Pengujian di lokasi membantu menilai kesesuaian perangkat sebelum penerapan lebih luas.",
       cta: "Diskusikan purwarupa IoT",
       message: "Halo Tim KaryaLo, kami ingin mendiskusikan pengembangan purwarupa IoT untuk diuji di lokasi kami.",
     },
@@ -85,7 +88,7 @@ export const servicesPageCopy: Localized<{
       },
       {
         title: "Garansi Setelah Rilis",
-        description: "Garansi perbaikan bug selama 30–90 hari setelah peluncuran, dengan cakupan dan durasi yang ditetapkan dalam SPK.",
+        description: "Garansi perbaikan bug selama 30-90 hari setelah peluncuran, dengan cakupan dan durasi yang ditetapkan dalam SPK.",
       },
     ],
   },
@@ -111,11 +114,12 @@ export const servicesPageCopy: Localized<{
     discussMessage: (pillarName) => `Hello KaryaLo, we'd like to discuss your ${pillarName} service.`,
     sendBrief: "Send a project brief",
     proofHeading: "Related projects",
+    proofMore: "See more projects",
     projectType: { client: "Client project", product: "KaryaLo product", prototype: "Internal prototype" },
     iotNoProof: {
       heading: "No IoT project published yet",
       body:
-        "Development begins with a device prototype in 7–14 working days within the agreed scope. On-site testing helps assess suitability before wider deployment.",
+        "Development begins with a device prototype in 7-14 working days within the agreed scope. On-site testing helps assess suitability before wider deployment.",
       cta: "Discuss an IoT prototype",
       message: "Hello KaryaLo team, we would like to discuss an IoT prototype for testing at our site.",
     },
@@ -140,7 +144,7 @@ export const servicesPageCopy: Localized<{
       },
       {
         title: "Warranty After Release",
-        description: "A 30–90 day bug-fix warranty after launch, with coverage and duration defined in the work agreement.",
+        description: "A 30-90 day bug-fix warranty after launch, with coverage and duration defined in the work agreement.",
       },
     ],
   },

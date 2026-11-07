@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Briefcase, Building, CircleCheck, CreditCard, Factory, ShoppingBag, Truck } from "lucide-react";
 import JsonLd from "@/components/seo/JsonLd";
@@ -25,6 +26,16 @@ import { pageSchema, routeBreadcrumb } from "@/lib/schema";
  *
  * Server-rendered: only the scroll-reveal wrappers are client components.
  */
+
+/* Illustration per industry. Every industry id has a photo; a missing entry just renders no photo. */
+const IMAGES: Record<string, { src: string; position?: string }> = {
+  retail: { src: "/images/industry/retail.webp", position: "50% 30%" },
+  corporate: { src: "/images/industry/corporate.webp", position: "50% 35%" },
+  "digital-products": { src: "/images/industry/digital-products.webp", position: "55% 45%" },
+  distribution: { src: "/images/industry/distribution.webp", position: "60% 45%" },
+  manufacturing: { src: "/images/industry/manufacturing.webp", position: "40% 40%" },
+  property: { src: "/images/industry/property.webp", position: "55% 45%" },
+};
 
 const ICONS: Record<IndustryItem["id"], typeof ShoppingBag> = {
   retail: ShoppingBag,
@@ -59,7 +70,7 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
           <div className="mx-auto max-w-[72rem] space-y-12">
             <SectionHeading badge={copy.grid.badge} title={copy.grid.title} intro={copy.hero.honesty} />
 
-            <RevealGroup className="grid grid-cols-1 gap-6 md:grid-cols-2" stagger={0.08}>
+            <RevealGroup className="fit-grid fit-md-2" stagger={0.08}>
               {industries.map((industry) => {
                 const Icon = ICONS[industry.id];
                 const proof = industry.proof
@@ -71,12 +82,25 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
                 const hasIot = industry.pillars.includes("iot-hardware");
 
                 return (
-                  <RevealItem key={industry.id} className="group h-full">
+                  <RevealItem key={industry.id} className="group flex">
                     <article
                       id={industry.id}
                       aria-labelledby={`${industry.id}-title`}
-                      className="flex h-full scroll-mt-28 flex-col gap-5 rounded-3xl bg-white p-7 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift md:p-8"
+                      className="flex w-full scroll-mt-28 flex-col gap-5 overflow-hidden rounded-3xl bg-white p-7 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift md:p-8"
                     >
+                      {IMAGES[industry.id] && (
+                        <div className="img-zoom relative -mx-7 -mt-7 mb-1 aspect-[16/9] bg-surface md:-mx-8 md:-mt-8">
+                          <Image
+                            src={IMAGES[industry.id].src}
+                            alt=""
+                            fill
+                            sizes="(min-width: 1152px) 576px, (min-width: 768px) 50vw, 100vw"
+                            className="object-cover"
+                            style={{ objectPosition: IMAGES[industry.id].position }}
+                          />
+                        </div>
+                      )}
+
                       <div className="flex items-center gap-4">
                         <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
                           <Icon aria-hidden="true" className="h-6 w-6" />
@@ -159,7 +183,7 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
                         )}
 
                         <a
-                          href={getWhatsAppUrl(copy.card.whatsappMessage(industry.name))}
+                          href={getWhatsAppUrl(copy.card.whatsappMessage(industry.name), lang, { service: industry.name })}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-link text-brand"
@@ -185,7 +209,7 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
             <p className="type-intro max-w-[56ch] text-white">{copy.cta.body}</p>
             <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:flex-wrap sm:justify-center">
               <a
-                href={getWhatsAppUrl(copy.cta.whatsappMessage)}
+                href={getWhatsAppUrl(copy.cta.whatsappMessage, lang, { service: lang === "id" ? "Pengembangan sistem sesuai industri" : "Industry-specific system development" })}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-wa-primary=""

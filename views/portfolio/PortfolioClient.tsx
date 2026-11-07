@@ -86,28 +86,23 @@ export default function PortfolioClient({ lang }: { lang: Locale }) {
         </p>
       </Reveal>
 
-      <RevealGroup id="project-results" className="md-orphan-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7" stagger={0.1}>
+      <RevealGroup key={activeFilter} id="project-results" className="fit-grid fit-md-2 fit-lg-3 lg:[--g:1.75rem]" stagger={0.1}>
         {filteredProjects.map((project, index) => {
-          const featured = index === 0;
+          const featured = index === 0; // only the first image is preloaded
           return (
             <motion.article
               key={project.id}
               variants={revealVariants()}
               data-reveal=""
-              className={`group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift focus-within:ring-2 focus-within:ring-brand ${
-                featured ? "md:col-span-2" : ""
-              }`}
+              className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 hover:shadow-lift focus-within:ring-2 focus-within:ring-brand"
             >
-              {/* 8:3 on the double-width card keeps its image as tall as a 4:3 single one. */}
-              <div className={`img-zoom relative w-full bg-surface ${featured ? "aspect-[4/3] md:aspect-[8/3]" : "aspect-[4/3]"}`}>
+              <div className="img-zoom relative aspect-[4/3] w-full bg-surface">
                 <Image
                   src={project.coverImage}
                   alt={copy.coverAlt(project.title, project.client)}
                   fill
                   preload={featured}
-                  sizes={featured
-                    ? "(min-width: 1152px) 760px, (min-width: 768px) calc(100vw - 96px), calc(100vw - 32px)"
-                    : "(min-width: 1152px) 370px, (min-width: 768px) calc(50vw - 60px), calc(100vw - 32px)"}
+                  sizes="(min-width: 1152px) 370px, (min-width: 768px) calc(50vw - 60px), calc(100vw - 32px)"
                   className="object-contain p-4"
                 />
                 <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1 type-meta text-ink shadow-sm">
@@ -120,8 +115,7 @@ export default function PortfolioClient({ lang }: { lang: Locale }) {
                 <p className="type-meta text-body">
                   {project.categoryLabel} · <time dateTime={project.year}>{project.year}</time>
                 </p>
-                {/* The leading project takes the larger card title. */}
-                <h2 className={`mt-2 text-ink transition-colors duration-300 group-hover:text-brand ${featured ? "type-card-title-lg" : "type-card-title"}`}>
+                                <h2 className="mt-2 type-card-title text-ink transition-colors duration-300 group-hover:text-brand">
                   {project.title}
                 </h2>
                 <p className="type-body-card text-body mt-3 max-w-[60ch]">{project.summary}</p>

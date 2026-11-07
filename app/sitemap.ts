@@ -21,8 +21,8 @@ import { absoluteUrl, languageAlternates, routeSeo, routeUpdatedAt, type RouteKe
 /** Images that belong to a specific route, in the order they appear on it. */
 const routeImages: Partial<Record<RouteKey, string[]>> = {
   home: ["/images/hero-centerpiece.webp", "/images/process-blueprint.webp", "/images/legal-trust.webp"],
-  services: ["/images/service-software.webp", "/images/service-design.webp", "/images/service-iot-2.webp"],
-  about: ["/images/about-studio.webp", "/images/legal-trust.webp"],
+  services: ["/images/pdf/acc-dev.webp", "/images/pdf/acc-design.webp", "/images/pdf/acc-iot.webp"],
+  about: ["/images/pdf/team-why-v2.webp", "/images/legal-trust.webp"],
   portfolio: portfolioData.id.map((project) => project.coverImage),
   products: productsData.id.map((product) => product.image),
 };

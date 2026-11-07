@@ -15,7 +15,7 @@ import { siteConfig } from "@/config/site";
 
 /* One card serves both languages, so it carries the positioning, which reads
    the same in Indonesian and English, rather than a sentence in either one. */
-export const alt = `${siteConfig.brandName} — Extended IT Partner: Software, UI/UX & IoT`;
+export const alt = `${siteConfig.brandName} | Extended IT Partner: Software, UI/UX & IoT`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -90,7 +90,7 @@ export default function OpengraphImage() {
             Extended IT Partner
           </div>
           <div style={{ display: "flex", fontSize: 30, color: MIST, lineHeight: 1.4 }}>
-            Software · UI/UX · IoT — Bekasi, Indonesia
+            Software · UI/UX · IoT | Bekasi, Indonesia
           </div>
         </div>
 

@@ -106,7 +106,7 @@ export default function ProjectDetails({ lang, project, onClose }: { lang: Local
             <ul>{project.tags.map((tag) => <li key={tag} className="type-meta">{tag}</li>)}</ul>
           </section>
           <div className={styles.detailAction}>
-            <a href={getWhatsAppUrl(copy.whatsappSimilar(project.title))} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{copy.discussSimilar} <ArrowUpRight aria-hidden="true" className="w-4 h-4" /></a>
+            <a href={getWhatsAppUrl(copy.whatsappSimilar(project.title), lang, { service: (lang === "id" ? "Sistem seperti " : "A system like ") + project.title })} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{copy.discussSimilar} <ArrowUpRight aria-hidden="true" className="w-4 h-4" /></a>
           </div>
         </div>
       </div>
