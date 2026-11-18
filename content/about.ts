@@ -46,22 +46,22 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "IT Agency untuk",
       accent: "Bisnis yang Sedang Tumbuh",
       lede:
-        "KaryaLo membantu perusahaan menghubungkan kebutuhan bisnis dengan teknologi yang tepat. Sebagai IT agency, kami menyatukan pengembangan software, desain, foto dan video, perangkat IoT, serta pengadaan perangkat keras, dengan pendampingan sejak perencanaan hingga sistem digunakan dan dipelihara.",
+        "Bisnis yang sedang tumbuh membutuhkan teknologi yang menopang, bukan menambah beban. KaryaLo menyatukan software, desain, foto dan video, IoT, serta pengadaan perangkat keras dalam satu tim, dan mendampingi Anda sejak perencanaan hingga sistem benar-benar digunakan.",
       chips: ["Terdaftar di Kementerian Hukum RI", "NIB", "Kota Bekasi, Jawa Barat"],
     },
     studio: {
       title: "Satu Tim untuk Software, Desain, dan Perangkat",
       body:
-        "Studio dan bengkel perangkat kami di Kota Bekasi menjadi tempat pengembang, desainer, dan teknisi berkolaborasi. Koordinasi langsung membantu menyelaraskan antarmuka, fungsi sistem, dan perangkat dengan kebutuhan operasional Anda.",
+        "Di studio dan bengkel perangkat kami di Kota Bekasi, pengembang, desainer, dan teknisi bekerja berdampingan. Tampilan, fungsi sistem, dan perangkat Anda dirancang selaras sejak awal, dengan penanggung jawab yang jelas.",
       points: [
         "Pengembang, desainer & teknisi dalam satu tim",
         "Proyek ditangani langsung oleh tim inti",
-        "Validasi purwarupa sebelum pengembangan",
-        "Kepemilikan hasil kerja diatur dalam SPK",
+        "Demo dicoba dulu sebelum pengembangan",
+        "Kepemilikan hasil kerja diatur dalam kontrak kerja",
       ],
       promiseLabel: "Kejelasan Kepemilikan dan Serah Terima",
       promiseBody:
-        "Untuk proyek khusus, repositori, dokumentasi, dan file desain diserahkan sesuai SPK setelah serah terima dan pembayaran selesai. Kami melatih tim Anda untuk mengelola sistem serta menyediakan opsi pemeliharaan lanjutan.",
+        "Untuk proyek khusus, kode sumber, dokumentasi, dan file desain diserahkan sesuai kontrak kerja setelah serah terima dan pembayaran selesai. Kami melatih tim Anda untuk mengelola sistem serta menyediakan opsi pemeliharaan lanjutan.",
       imageAlt: "Ruang studio KaryaLo dengan meja kerja pengembangan software",
       cta: "Lihat layanan kami",
     },
@@ -80,9 +80,9 @@ export const aboutCopy: Localized<AboutCopy> = {
       ],
     },
     team: {
-      title: "Keahlian di Balik Setiap Proyek",
+      title: "Siapa yang Mengerjakan Proyek Anda",
       intro:
-        "Lima fungsi dalam tim inti KaryaLo bekerja bersama untuk menjaga kualitas teknis, desain, dan pelaksanaan proyek Anda.",
+        "Lima fungsi dalam tim inti KaryaLo, masing-masing dengan tanggung jawab yang jelas, menjaga kualitas teknis, desain, dan pelaksanaan proyek Anda.",
       units: [
         {
           icon: "management",
@@ -92,17 +92,17 @@ export const aboutCopy: Localized<AboutCopy> = {
         {
           icon: "engineering",
           name: "Teknologi & Rekayasa Software",
-          body: "Merancang arsitektur sistem, memimpin pengerjaan harian, dan menjaga kualitas kode dari awal sampai serah terima.",
+          body: "Merancang struktur sistem, memimpin pengerjaan harian, dan menjaga kualitas kode dari awal sampai serah terima.",
         },
         {
           icon: "design",
           name: "Desain & Pemasaran",
-          body: "Merancang antarmuka, identitas merek, dan materi komunikasi yang mudah dipahami serta konsisten di setiap kanal.",
+          body: "Merancang tampilan aplikasi, identitas merek, dan materi komunikasi yang mudah dipahami serta konsisten di setiap kanal.",
         },
         {
           icon: "iot",
           name: "Perangkat IoT",
-          body: "Merancang, memprogram, dan menguji perangkat pemantauan, termasuk pemasangan serta kalibrasi di lokasi proyek.",
+          body: "Merancang, memprogram, dan menguji perangkat pemantauan, termasuk pemasangan serta penyetelan di lokasi proyek.",
         },
         {
           icon: "admin",
@@ -114,7 +114,7 @@ export const aboutCopy: Localized<AboutCopy> = {
     process: {
       title: "Cara Kami Menjalankan Proyek",
       intro:
-        "Proyek mengikuti lima tahap dengan hasil kerja dan titik evaluasi yang disepakati sejak awal. Anda dapat meninjau kemajuan sebelum melanjutkan ke tahap berikutnya.",
+        "Lima tahap dengan hasil kerja dan titik evaluasi yang disepakati sejak awal. Anda selalu dapat meninjau hasilnya sebelum melanjutkan ke tahap berikutnya.",
       termsLink: "Baca ketentuan kerja sama",
       youGet: "Yang Anda terima",
     },
@@ -122,10 +122,10 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "Di Mana dan Bagaimana Kami Bekerja",
       areaTitle: "Area Layanan",
       areaBody:
-        "Kantor dan bengkel perangkat kami berlokasi di Jatisampurna, Kota Bekasi. Pertemuan langsung di Jabodetabek dapat dijadwalkan, sementara klien di seluruh Indonesia dapat berkolaborasi secara daring. Kunjungan pemasangan dan kalibrasi IoT diatur sesuai kebutuhan proyek.",
+        "Kantor dan bengkel perangkat kami berlokasi di Jatisampurna, Kota Bekasi. Pertemuan langsung di Jabodetabek dapat dijadwalkan, sementara klien di seluruh Indonesia dapat berkolaborasi secara daring. Kunjungan pemasangan dan penyetelan perangkat IoT diatur sesuai kebutuhan proyek.",
       modelTitle: "Model Kerja Sama",
       modelBody:
-        "Setiap proyek memiliki SPK resmi yang menetapkan ruang lingkup, jadwal, dan termin pembayaran. Invoice diterbitkan atas nama perusahaan, dan NDA dapat disepakati sebelum diskusi teknis. Kepemilikan hasil kerja mengikuti ketentuan serah terima dan pembayaran dalam SPK. Pemeliharaan lanjutan tersedia secara bulanan atau tahunan.",
+        "Setiap proyek memiliki kontrak kerja resmi (SPK) yang menetapkan ruang lingkup, jadwal, dan tahap pembayaran. Invoice diterbitkan atas nama perusahaan, dan NDA dapat disepakati sebelum diskusi teknis. Kepemilikan hasil kerja mengikuti ketentuan serah terima dan pembayaran dalam kontrak kerja. Pemeliharaan lanjutan tersedia secara bulanan atau tahunan.",
     },
     legal: {
       nibLabel: "Nomor Induk Berusaha (NIB)",
@@ -147,22 +147,22 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "An IT Agency for",
       accent: "Growing Businesses",
       lede:
-        "KaryaLo helps companies connect business needs with the right technology. As an IT agency, we bring software development, design, photo and video, IoT, and hardware supply together, supporting your team from planning through launch and ongoing maintenance.",
+        "A growing business needs technology that carries the load, not adds to it. KaryaLo brings software, design, photo and video, IoT, and hardware supply into one team, and stays with you from planning until the system is genuinely in use.",
       chips: ["Registered with the Indonesian Ministry of Law", "Business ID (NIB)", "Bekasi, West Java"],
     },
     studio: {
       title: "One Team for Software, Design, and Devices",
       body:
-        "Our Bekasi studio and device workshop bring developers, designers, and engineers together. Direct collaboration helps align interfaces, system functionality, and hardware with your operational needs.",
+        "In our Bekasi studio and device workshop, developers, designers, and engineers work side by side. Your app screens, system logic, and hardware are designed to fit together from day one, with clear accountability.",
       points: [
         "Developers, designers & engineers in one team",
         "Direct delivery by our core team",
-        "Prototype validation before development",
-        "Ownership defined in the work agreement",
+        "Demo tried out before development",
+        "Ownership set out in the contract",
       ],
       promiseLabel: "Clear Ownership and Handover",
       promiseBody:
-        "For custom projects, the repository, documentation, and design files are transferred under the work agreement once handover and payment are complete. We train your team to manage the system and offer ongoing maintenance options.",
+        "For custom projects, the source code, documentation, and design files are handed over under the contract once handover and payment are complete. We train your team to manage the system and offer ongoing maintenance options.",
       imageAlt: "The KaryaLo studio with software development workstations",
       cta: "See our services",
     },
@@ -181,9 +181,9 @@ export const aboutCopy: Localized<AboutCopy> = {
       ],
     },
     team: {
-      title: "The Expertise Behind Your Project",
+      title: "Who Works on Your Project",
       intro:
-        "Five functions within KaryaLo's core team work together to oversee the technical quality, design, and delivery of your project.",
+        "Five functions in KaryaLo's core team, each with clear responsibilities, look after the technical quality, design, and delivery of your project.",
       units: [
         {
           icon: "management",
@@ -193,17 +193,17 @@ export const aboutCopy: Localized<AboutCopy> = {
         {
           icon: "engineering",
           name: "Technology & Software Engineering",
-          body: "Designs system architecture, leads development, and maintains code quality from planning through handover.",
+          body: "Designs how the system is structured, leads development, and maintains code quality from planning through handover.",
         },
         {
           icon: "design",
           name: "Design & Marketing",
-          body: "Designs interfaces, brand identities, and communication materials so products are easy to use and consistent.",
+          body: "Designs app screens, brand identities, and communication materials so products are easy to use and consistent.",
         },
         {
           icon: "iot",
           name: "IoT Devices",
-          body: "Assembles, programs, and tests monitoring devices, including installing and calibrating them on site.",
+          body: "Assembles, programs, and tests monitoring devices, including installing and setting them up on site.",
         },
         {
           icon: "admin",
@@ -215,7 +215,7 @@ export const aboutCopy: Localized<AboutCopy> = {
     process: {
       title: "How We Run a Project",
       intro:
-        "Projects follow five stages, with deliverables and review points agreed at the start. You can assess progress before moving to the next stage.",
+        "Five stages, with outputs and review points agreed at the start. You always see the results before moving on to the next stage.",
       termsLink: "Read our terms of engagement",
       youGet: "What you receive",
     },
@@ -223,10 +223,10 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "Where and How We Work",
       areaTitle: "Where We Work",
       areaBody:
-        "Our office and device workshop are in Jatisampurna, Bekasi. In-person meetings across Greater Jakarta can be scheduled, while clients throughout Indonesia can collaborate remotely. IoT installation and calibration visits are arranged according to project needs.",
+        "Our office and device workshop are in Jatisampurna, Bekasi. In-person meetings across Greater Jakarta can be scheduled, while clients throughout Indonesia can collaborate remotely. IoT installation and set-up visits are arranged according to project needs.",
       modelTitle: "How We Engage",
       modelBody:
-        "Each project has a formal work agreement (SPK) defining scope, schedule, and payment milestones. Invoices are issued in the company's name, and an NDA can be agreed before technical discussions. Ownership follows the handover and payment terms in the SPK. Ongoing maintenance is available monthly or annually.",
+        "Each project has a formal contract (SPK) setting out scope, schedule, and payment stages. Invoices are issued in the company's name, and an NDA can be agreed before technical discussions. Ownership follows the handover and payment terms in the contract. Ongoing maintenance is available monthly or annually.",
     },
     legal: {
       nibLabel: "Business Identification Number (NIB)",

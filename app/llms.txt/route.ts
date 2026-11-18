@@ -86,7 +86,7 @@ function buildLlmsTxt(): string {
   lines.push("## Portofolio");
   lines.push("");
   for (const project of getPortfolio("id")) {
-    const kind = project.type === "client" ? "proyek klien" : project.type === "product" ? "produk KaryaLo (live)" : "purwarupa internal";
+    const kind = project.type === "client" ? "proyek klien" : project.type === "product" ? "produk KaryaLo (live)" : "proyek internal";
     lines.push(`- [${project.title}](${absoluteUrl(`/portfolio/${project.slug}`)}): ${kind}, ${project.year}. ${project.summary}`);
   }
   lines.push("- Belum ada proyek perangkat IoT yang dipublikasikan; layanan IoT dimulai dari satu alat contoh yang diuji di lokasi klien.");

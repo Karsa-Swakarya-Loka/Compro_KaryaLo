@@ -34,7 +34,7 @@ const productsId: ProductItem[] = [
       "Indikator kinerja dan pembaruan laporan otomatis",
       "Pengaturan akses berdasarkan peran pengguna",
       "Pemasangan sebagai aplikasi di ponsel atau desktop",
-      "Ekspor PDF/Excel dan integrasi antarsistem",
+      "Ekspor PDF/Excel dan terhubung ke sistem lain",
     ],
   },
   {
@@ -45,10 +45,10 @@ const productsId: ProductItem[] = [
     image: "/images/prototype/karyalo-store.webp",
     status: "Siap dipasang",
     summary:
-      "Platform toko online dengan katalog yang mudah dijelajahi, alur checkout ringkas, dan keranjang belanja tersimpan. Panel admin membantu tim Anda mengelola produk, promosi, dan persediaan.",
+      "Platform toko online dengan katalog yang mudah dijelajahi, proses bayar yang ringkas, dan keranjang belanja tersimpan. Panel admin membantu tim Anda mengelola produk, promosi, dan persediaan.",
     features: [
       "Halaman yang dioptimalkan untuk kecepatan akses",
-      "Alur checkout ringkas dan keranjang tersimpan",
+      "Proses bayar yang ringkas dan keranjang tersimpan",
       "Pembayaran QRIS, transfer VA, dan e-wallet",
       "Panel pengelolaan produk, diskon, dan stok",
     ],
@@ -92,12 +92,12 @@ const productsEn: Record<string, ProductText> = {
     title: "KaryaLo Storefront",
     tagline: "A straightforward shopping experience for your customers",
     category: "Online Store",
-    status: "Ready to deploy",
+    status: "Ready to use",
     summary:
-      "An online store platform with an accessible catalogue, a streamlined checkout, and a saved shopping cart. The admin panel helps your team manage products, promotions, and inventory.",
+      "An online store platform with an accessible catalogue, a quick payment flow, and a saved shopping cart. The admin panel helps your team manage products, promotions, and inventory.",
     features: [
       "Pages optimised for loading performance",
-      "Streamlined checkout with a saved cart",
+      "Quick payment flow with a saved cart",
       "QRIS, virtual account, and e-wallet payments",
       "A panel for managing products, discounts, and stock",
     ],
@@ -106,7 +106,7 @@ const productsEn: Record<string, ProductText> = {
     title: "KaryaLo Voucher & Top-Up",
     tagline: "Automate mobile credit, voucher, and digital product sales",
     category: "Digital Transactions",
-    status: "Ready to deploy",
+    status: "Ready to use",
     summary:
       "Manage orders, payment verification, and digital product delivery through one automated workflow. Supplier integrations and daily reporting help your team track transactions and sales margins.",
     features: [

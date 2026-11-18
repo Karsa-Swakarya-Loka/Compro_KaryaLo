@@ -68,14 +68,14 @@ export const contactCopy: Localized<{
     hero: {
       titleLead: "Ceritakan Kebutuhan",
       titleAccent: "Proyek Anda",
-      lede: "Sampaikan tantangan operasional atau rencana pengembangan Anda. Tim kami akan membantu menentukan prioritas, meninjau kebutuhan, dan menyusun ruang lingkup awal tanpa kewajiban melanjutkan proyek.",
+      lede: "Sampaikan tantangan atau rencana pengembangan Anda; dokumen teknis belum diperlukan. Tim kami akan membantu menentukan prioritas dan menyusun ruang lingkup awal, tanpa kewajiban melanjutkan proyek.",
       badges: ["Dilayani pada jam kerja", "NDA tersedia sebelum diskusi teknis"],
       whatsappCta: "Diskusikan via WhatsApp",
       emailLead: "atau email ke",
     },
     form: {
       heading: "Formulir Kebutuhan Proyek",
-      intro: "Lengkapi ringkasan kebutuhan Anda untuk menyiapkan pesan WhatsApp. Anda dapat meninjaunya sebelum mengirim. Kolom bertanda * wajib diisi.",
+      intro: "Lengkapi beberapa kolom singkat, dan pesan WhatsApp Anda akan tersusun otomatis untuk ditinjau sebelum dikirim. Kolom bertanda * wajib diisi.",
       nameLabel: "Nama Lengkap *",
       namePlaceholder: "Contoh: Budi Pratama",
       companyLabel: "Nama Perusahaan / Organisasi",
@@ -124,8 +124,8 @@ export const contactCopy: Localized<{
     },
     before: {
       badge: "Persiapan",
-      heading: "Awali Diskusi dengan Gambaran Kebutuhan Anda",
-      intro: "Dokumen lengkap belum diperlukan untuk konsultasi awal. Gambaran tentang tiga hal berikut membantu kami memahami kebutuhan dan memberikan arahan yang relevan.",
+      heading: "Tiga Informasi untuk Mempercepat Konsultasi",
+      intro: "Dokumen lengkap belum diperlukan. Gambaran umum mengenai tiga hal berikut sudah cukup bagi kami untuk memberikan arahan yang tepat.",
       cards: [
         {
           title: "Tantangan dan tujuan proyek",
@@ -146,7 +146,7 @@ export const contactCopy: Localized<{
       },
       browse: {
         title: "Kenali layanan dan hasil pekerjaan kami",
-        body: "Pelajari cakupan layanan kami, lalu jelajahi proyek klien, produk KaryaLo, dan purwarupa internal untuk menemukan referensi yang sesuai.",
+        body: "Pelajari cakupan layanan kami, lalu jelajahi proyek klien, produk KaryaLo, dan proyek internal untuk menemukan referensi yang sesuai.",
         services: "Lihat layanan",
         portfolio: "Lihat portofolio",
       },
@@ -156,14 +156,14 @@ export const contactCopy: Localized<{
     hero: {
       titleLead: "Tell Us About",
       titleAccent: "Your Project",
-      lede: "Share your operational challenges or development plans. Our team will help identify priorities, review your requirements, and outline an initial scope, with no obligation to proceed.",
+      lede: "Share your challenges or development plans; no technical documents are needed. Our team will help set priorities and outline an initial scope, with no obligation to proceed.",
       badges: ["Available during business hours", "NDA available before technical discussions"],
       whatsappCta: "Discuss on WhatsApp",
       emailLead: "or email",
     },
     form: {
       heading: "Project Brief Form",
-      intro: "Summarise your requirements to prepare a WhatsApp message. You can review it before sending. Fields marked * are required.",
+      intro: "Complete a few short fields and your WhatsApp message is prepared automatically for review before sending. Fields marked * are required.",
       nameLabel: "Full Name *",
       namePlaceholder: "e.g. Budi Pratama",
       companyLabel: "Company / Organisation Name",
@@ -212,8 +212,8 @@ export const contactCopy: Localized<{
     },
     before: {
       badge: "Before You Write",
-      heading: "Help Us Understand Your Project",
-      intro: "You do not need a complete specification for an initial consultation. An overview of the following three areas helps us understand your needs and offer relevant guidance.",
+      heading: "Three Details That Speed Up Your Consultation",
+      intro: "A full specification is not required. A general overview of these three areas is enough for us to give you the right direction.",
       cards: [
         {
           title: "Challenges and project goals",
@@ -234,7 +234,7 @@ export const contactCopy: Localized<{
       },
       browse: {
         title: "Explore our services and work",
-        body: "Review our service scope, then explore client projects, KaryaLo products, and internal prototypes for references relevant to your plans.",
+        body: "Review our service scope, then explore client projects, KaryaLo products, and internal projects for references relevant to your plans.",
         services: "See our services",
         portfolio: "See our portfolio",
       },

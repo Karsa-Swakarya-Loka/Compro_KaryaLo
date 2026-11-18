@@ -29,11 +29,11 @@ export const productsPageCopy: Localized<{
     },
     ways: {
       badge: "Dua Cara Memulai",
-      title: "Lisensi Platform atau Pengembangan Khusus",
+      title: "Pakai Platform Siap Pakai atau Bangun Khusus",
       intro: "Tentukan pendekatan berdasarkan kebutuhan, jadwal, dan tingkat penyesuaian. Tim kami membantu menilai pilihan yang sesuai.",
     },
     license: {
-      heading: "Lisensi platform siap pakai",
+      heading: "Gunakan platform siap pakai",
       body:
         "Gunakan platform yang tersedia sebagai dasar solusi Anda. Tampilan, konfigurasi, dan integrasi dapat disesuaikan dengan cakupan lisensi serta kebutuhan implementasi yang disepakati.",
     },
@@ -70,11 +70,11 @@ export const productsPageCopy: Localized<{
     },
     ways: {
       badge: "Two Ways to Start",
-      title: "Platform Licensing or Custom Development",
+      title: "Use a Ready-Made Platform or Build Custom",
       intro: "Choose an approach based on your requirements, schedule, and level of customisation. Our team can help assess the right fit.",
     },
     license: {
-      heading: "Licensing a ready-made platform",
+      heading: "Use a ready-made platform",
       body:
         "Use an existing platform as the foundation for your solution. Branding, configuration, and integrations can be tailored to the agreed licence scope and implementation requirements.",
     },
@@ -97,7 +97,7 @@ export const productsPageCopy: Localized<{
       badge: "Licensing",
       heading: "Make the Platform Part of Your Brand",
       body:
-        "Discuss your company branding, deployment on your servers, and workflow customisation. Usage rights, support, and licensing are defined before implementation.",
+        "Discuss your company branding, installation on your own servers, and workflow customisation. Usage rights, support, and licensing are defined before implementation.",
       cta: "Ask about licensing",
       message: "Hello KaryaLo, we'd like to ask about platform licensing options.",
     },

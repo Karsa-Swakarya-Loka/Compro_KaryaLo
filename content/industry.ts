@@ -29,9 +29,9 @@ export const industryCopy: Localized<IndustryCopy> = {
       title: "Solusi yang Memahami",
       accent: "Cara Kerja Industri Anda",
       lede:
-        "Setiap industri memiliki proses dan prioritas yang berbeda. Kami menyesuaikan pengembangan software, desain, dan perangkat IoT dengan kebutuhan operasional, pengguna, serta tujuan bisnis Anda.",
+        "Toko online, distributor, pabrik, dan pengelola gedung punya cara kerja yang berbeda. Karena itu software, desain, dan perangkat IoT yang kami bangun selalu mengikuti alur kerja Anda, bukan sebaliknya.",
       honesty:
-        "Jelajahi contoh penerapan yang dapat kami kembangkan untuk setiap industri. Proyek yang telah dikerjakan ditampilkan melalui tautan studi kasus, produk, atau purwarupa terkait.",
+        "Temukan industri Anda dan solusi yang dapat kami bangun. Proyek terkait ditautkan langsung melalui studi kasus, produk, atau proyek internal.",
     },
     grid: { badge: "Penerapan per Industri", title: "Solusi Sesuai Kebutuhan Operasional" },
     card: {
@@ -41,9 +41,9 @@ export const industryCopy: Localized<IndustryCopy> = {
       proof: "Proyek terkait",
       clientProject: "Studi kasus",
       ownProduct: "Produk KaryaLo",
-      prototype: "Purwarupa internal",
-      noProof: "Studi kasus untuk industri ini belum tersedia. Pendekatan awal kami mencakup pemetaan kebutuhan dan validasi purwarupa bersama tim Anda.",
-      noProofIot: "Pengembangan IoT dimulai dengan purwarupa perangkat yang diuji di lokasi untuk menilai kesesuaiannya sebelum penerapan lebih luas.",
+      prototype: "Proyek internal",
+      noProof: "Studi kasus untuk industri ini belum tersedia. Pendekatan awal kami mencakup pemetaan kebutuhan dan uji coba demo bersama tim Anda.",
+      noProofIot: "Pengembangan IoT dimulai dengan perangkat uji coba yang dipasang langsung di lokasi untuk menilai kesesuaiannya sebelum penerapan lebih luas.",
       product: "Platform siap pakai",
       discuss: "Diskusikan kebutuhan ini",
       whatsappMessage: (industry) => `Halo Tim KaryaLo, perusahaan kami bergerak di bidang ${industry}. Kami ingin berkonsultasi mengenai pengembangan sistem untuk bisnis kami.`,
@@ -51,7 +51,7 @@ export const industryCopy: Localized<IndustryCopy> = {
     cta: {
       title: "Industri Anda Tidak Ada di Daftar?",
       body:
-        "Diskusikan proses kerja, tantangan, dan rencana pengembangan Anda. Kami akan membantu menilai kebutuhan serta menentukan ruang lingkup awal yang relevan.",
+        "Sampaikan proses kerja dan tantangan bisnis Anda. Kami akan membantu menilai kebutuhan dan menyusun ruang lingkup awal yang relevan, tanpa kewajiban melanjutkan proyek.",
       primary: "Diskusikan kebutuhan Anda",
       secondary: "Lihat portofolio",
       whatsappMessage: "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai pengembangan sistem yang mendukung proses kerja perusahaan kami.",
@@ -62,9 +62,9 @@ export const industryCopy: Localized<IndustryCopy> = {
       title: "Solutions Built Around",
       accent: "Your Industry's Workflows",
       lede:
-        "Every industry has distinct processes and priorities. We tailor software, design, and IoT development to your operations, users, and business goals.",
+        "Online shops, distributors, factories, and building managers all work differently. So the software, design, and IoT we build always follows your workflow, not the other way round.",
       honesty:
-        "Explore potential applications for each industry. Work we have completed is linked through related case studies, products, or prototypes.",
+        "Find your industry and the solutions we can build. Related work is linked directly through case studies, products, or internal projects.",
     },
     grid: { badge: "Industry Applications", title: "Solutions for Your Operational Needs" },
     card: {
@@ -74,9 +74,9 @@ export const industryCopy: Localized<IndustryCopy> = {
       proof: "Related projects",
       clientProject: "Case study",
       ownProduct: "KaryaLo product",
-      prototype: "Internal prototype",
-      noProof: "A case study for this industry is not yet available. Our initial approach includes requirements mapping and prototype validation with your team.",
-      noProofIot: "IoT development begins with a device prototype tested at your site to assess suitability before wider deployment.",
+      prototype: "Internal project",
+      noProof: "A case study for this industry is not yet available. Our initial approach includes mapping your needs and trying out a demo with your team.",
+      noProofIot: "IoT development begins with a test device installed at your site, so you can judge it before a wider rollout.",
       product: "Ready-made platform",
       discuss: "Discuss this need",
       whatsappMessage: (industry) => `Hello KaryaLo team, we work in ${industry} and would like to discuss a system for our business.`,
@@ -84,7 +84,7 @@ export const industryCopy: Localized<IndustryCopy> = {
     cta: {
       title: "Your Industry Isn't Listed?",
       body:
-        "Discuss your workflows, challenges, and development plans. We will help assess your requirements and define a relevant initial scope.",
+        "Share your workflows and business challenges. We will help assess your needs and define a relevant initial scope, with no obligation to proceed.",
       primary: "Discuss your project",
       secondary: "See the portfolio",
       whatsappMessage: "Hello KaryaLo team, we'd like to discuss a system for how our business works.",

@@ -117,7 +117,7 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
       id: {
         title: "Portofolio Proyek Software, Web & Desain",
         description:
-          "Jelajahi proyek klien, produk KaryaLo, dan purwarupa internal: website perusahaan, toko online, ERP, dashboard, serta sistem transaksi digital.",
+          "Jelajahi proyek klien, produk KaryaLo, dan proyek internal: website perusahaan, toko online, ERP, dashboard, serta sistem transaksi digital.",
         breadcrumb: "Portfolio",
       },
       en: {

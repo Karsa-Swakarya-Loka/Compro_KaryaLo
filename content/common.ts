@@ -76,7 +76,7 @@ export const commonCopy: Localized<{
       title: "Halaman Tidak Ditemukan",
       description: "Halaman yang Anda cari tidak tersedia. Kembali ke beranda atau jelajahi layanan KaryaLo.",
       heading: "Halaman tidak ditemukan.",
-      body: "Halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda atau jelajahi layanan kami.",
+      body: "Halaman ini mungkin telah dipindahkan. Silakan kembali ke beranda atau jelajahi layanan yang dapat kami bantu.",
       home: "Kembali ke beranda",
       services: "Lihat layanan",
     },

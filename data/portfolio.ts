@@ -50,7 +50,7 @@ const portfolioId: ProjectItem[] = [
     type: "client",
     categoryLabel: "Ritel & e-commerce",
     serviceCode: "DEV-WEB // DEV-ENT // DSG-UI",
-    serviceTags: ["Aplikasi web", "Sistem internal", "Desain UI/UX"],
+    serviceTags: ["Aplikasi web", "Sistem internal", "Desain tampilan aplikasi"],
     client: "Alina Fashion & Retail",
     year: "2025",
     coverImage: "/images/portofolio/mockup/alina.webp",
@@ -63,7 +63,7 @@ const portfolioId: ProjectItem[] = [
     summary: "Integrasi toko online dan sistem pengelolaan pesanan untuk menyelaraskan transaksi pelanggan dengan pencatatan persediaan gudang.",
     seoDescription: "Studi kasus Alina: integrasi toko online, pengelolaan pesanan, dan stok gudang. Dikembangkan KaryaLo pada 2025.",
     challenge: "Perbedaan data antara pesanan online dan persediaan gudang menyebabkan pesanan masuk untuk barang yang telah habis, pembatalan transaksi, dan keterlambatan pengiriman.",
-    solution: "Kami mengembangkan etalase belanja yang dioptimalkan untuk kecepatan akses serta panel pengelolaan pesanan yang terhubung dengan gudang. Tim dapat mengikuti status pesanan dari checkout hingga penyerahan kepada kurir.",
+    solution: "Kami mengembangkan etalase belanja yang dioptimalkan untuk kecepatan akses serta panel pengelolaan pesanan yang terhubung dengan gudang. Tim dapat mengikuti status pesanan dari pembayaran hingga penyerahan kepada kurir.",
     impact: "Waktu pemrosesan pesanan berkurang sekitar 40%, disertai berkurangnya selisih pencatatan stok gudang."
   },
   {
@@ -80,9 +80,9 @@ const portfolioId: ProjectItem[] = [
     galleryImages: [
       "/images/portofolio/hij-compro.webp"
     ],
-    tags: ["Next.js", "Framer Motion", "Tailwind CSS", "Optimasi SEO"],
+    tags: ["Next.js", "Framer Motion", "Tailwind CSS", "Mudah ditemukan di Google"],
     summary: "Website profil perusahaan yang menyampaikan kapabilitas HIJ melalui informasi terstruktur, desain profesional, dan akses yang nyaman di berbagai perangkat.",
-    seoDescription: "Studi kasus website korporat HIJ: profil perusahaan, desain responsif, dan optimasi kecepatan akses. Dikembangkan KaryaLo pada 2025.",
+    seoDescription: "Studi kasus website korporat HIJ: profil perusahaan, tampilan yang menyesuaikan layar, dan optimasi kecepatan akses. Dikembangkan KaryaLo pada 2025.",
     challenge: "HIJ membutuhkan kehadiran digital yang mencerminkan profesionalisme perusahaan dan memudahkan calon mitra mempelajari layanannya, termasuk melalui ponsel.",
     solution: "Kami menyusun struktur informasi, memperkuat konsistensi visual, dan mengoptimalkan performa halaman. Animasi digunakan secara terukur untuk mendukung penyampaian informasi.",
     impact: "Tim HIJ memiliki profil digital yang dapat dibagikan kepada calon mitra sebagai referensi layanan dan kapabilitas perusahaan."
@@ -90,7 +90,7 @@ const portfolioId: ProjectItem[] = [
   {
     id: "hij-garment-erp",
     slug: "hij-garment-erp",
-    title: "Sistem ERP Konveksi HIJ",
+    title: "Sistem Manajemen Konveksi HIJ",
     type: "client",
     categoryLabel: "Manufaktur & konveksi",
     serviceCode: "DEV-ENT // DSG-UI",
@@ -102,10 +102,10 @@ const portfolioId: ProjectItem[] = [
       "/images/portofolio/hij-erp.webp"
     ],
     tags: ["Aplikasi web", "Scan QR", "Portal pelanggan"],
-    summary: "Sistem ERP berbasis web yang menghubungkan pesanan, surat perintah kerja, tahapan produksi, logistik, dan keuangan, dilengkapi pemindaian QR serta portal pelanggan.",
+    summary: "Sistem manajemen perusahaan (ERP) berbasis web yang menghubungkan pesanan, surat perintah kerja, tahapan produksi, logistik, dan keuangan, dilengkapi pemindaian QR serta portal pelanggan.",
     seoDescription: "ERP konveksi HIJ: pesanan, SPK, progres produksi per tahap, logistik, dan keuangan dalam satu sistem, dengan scan QR. Studi kasus KaryaLo, 2026.",
     challenge: "Operasional konveksi membutuhkan pencatatan yang terhubung dari penerimaan pesanan dan penerbitan surat perintah kerja hingga produksi, pengiriman, serta pelaporan keuangan.",
-    solution: "Kami mengembangkan ERP dengan modul penjualan, perencanaan, produksi, logistik, dan keuangan. Dashboard menyediakan ringkasan 7, 30, atau 90 hari, dilengkapi pemindaian QR, pelacakan tahapan produksi, panduan penggunaan, dan portal pelanggan."
+    solution: "Kami mengembangkan sistem dengan bagian penjualan, perencanaan, produksi, logistik, dan keuangan. Dashboard menyediakan ringkasan 7, 30, atau 90 hari, dilengkapi pemindaian QR, pelacakan tahapan produksi, panduan penggunaan, dan portal pelanggan."
   },
   {
     id: "apegale-corporate-web",
@@ -114,7 +114,7 @@ const portfolioId: ProjectItem[] = [
     type: "client",
     categoryLabel: "Jasa ekspatriat & perizinan",
     serviceCode: "DEV-WEB // DSG-UI",
-    serviceTags: ["Website perusahaan", "Desain UI/UX"],
+    serviceTags: ["Website perusahaan", "Desain tampilan aplikasi"],
     client: "PT Ape Gale Indonesia",
     year: "2026",
     liveUrl: "https://apegale.com",
@@ -136,7 +136,7 @@ const portfolioId: ProjectItem[] = [
     type: "client",
     categoryLabel: "Jasa korporat & administrasi",
     serviceCode: "DEV-WEB // DSG-UI",
-    serviceTags: ["Website perusahaan", "Desain UI/UX"],
+    serviceTags: ["Website perusahaan", "Desain tampilan aplikasi"],
     client: "Affirmate Administrative",
     year: "2026",
     liveUrl: "https://tatakelola.affirmate.co.id",
@@ -159,7 +159,7 @@ const portfolioId: ProjectItem[] = [
     type: "product",
     categoryLabel: "Produk digital & pembayaran",
     serviceCode: "DEV-WEB // DEV-ENT // DSG-UI",
-    serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain UI/UX"],
+    serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain tampilan aplikasi"],
     client: "DeliaStore, unit usaha PT Karsa Swakarya Loka",
     year: "2026",
     liveUrl: "https://deliastore.id",
@@ -189,8 +189,8 @@ const portfolioId: ProjectItem[] = [
       "/images/prototype/karyalo-admin.webp"
     ],
     tags: ["Next.js", "Bisa dipasang seperti aplikasi", "Chart.js"],
-    summary: "Purwarupa dashboard yang menyatukan indikator operasional dan status proyek dalam tampilan responsif untuk desktop serta ponsel.",
-    seoDescription: "Purwarupa dashboard internal KaryaLo untuk indikator operasional dan status proyek, dengan tampilan responsif untuk desktop dan ponsel. Riset 2026.",
+    summary: "Demo dashboard yang menyatukan indikator operasional dan status proyek dalam tampilan yang pas di komputer maupun ponsel.",
+    seoDescription: "Demo dashboard internal KaryaLo untuk indikator operasional dan status proyek, dengan tampilan yang pas di komputer maupun ponsel. Riset 2026.",
     challenge: "Data operasional tersebar di beberapa file dan aplikasi, sehingga tim perlu menggabungkan informasi secara manual sebelum evaluasi mingguan.",
     solution: "Kami menyatukan data dalam dashboard dengan hierarki informasi yang jelas. Tampilan menyesuaikan ukuran layar dan dapat dipasang di layar utama ponsel untuk memudahkan akses.",
     impact: "Tim memiliki satu tampilan untuk meninjau data operasional dan menyiapkan evaluasi mingguan."
@@ -202,18 +202,18 @@ const portfolioId: ProjectItem[] = [
     type: "prototype",
     categoryLabel: "Ritel & e-commerce",
     serviceCode: "DEV-WEB // DSG-UI",
-    serviceTags: ["Toko online", "Desain UI/UX"],
+    serviceTags: ["Toko online", "Desain tampilan aplikasi"],
     client: "PT Karsa Swakarya Loka (riset internal)",
     year: "2026",
     coverImage: "/images/portofolio/mockup/karyalo-store.webp",
     galleryImages: [
       "/images/prototype/karyalo-store.webp"
     ],
-    tags: ["Next.js 15", "Tailwind CSS", "Alur checkout singkat"],
-    summary: "Purwarupa platform toko online dengan navigasi terstruktur, checkout ringkas, dan optimasi performa untuk mendukung pengalaman belanja.",
-    seoDescription: "Purwarupa toko online KaryaLo dengan navigasi terstruktur, checkout ringkas, dan keranjang tersimpan. Riset internal untuk kebutuhan ritel, 2026.",
+    tags: ["Next.js 15", "Tailwind CSS", "Proses bayar singkat"],
+    summary: "Demo platform toko online dengan navigasi terstruktur, proses bayar ringkas, dan optimasi performa untuk mendukung pengalaman belanja.",
+    seoDescription: "Demo toko online KaryaLo dengan navigasi terstruktur, proses bayar ringkas, dan keranjang tersimpan. Riset internal untuk kebutuhan ritel, 2026.",
     challenge: "Navigasi yang rumit dan waktu muat halaman yang panjang dapat menghambat pelanggan saat mencari produk dan menyelesaikan pembelian.",
-    solution: "Kami merancang alur dari sudut pandang pelanggan, mengoptimalkan pemuatan halaman, menyederhanakan checkout, dan menyediakan keranjang belanja tersimpan.",
+    solution: "Kami merancang alur dari sudut pandang pelanggan, mengoptimalkan pemuatan halaman, menyederhanakan proses bayar, dan menyediakan keranjang belanja tersimpan.",
     impact: "Struktur modular menyediakan dasar yang dapat disesuaikan untuk kebutuhan toko online berikutnya."
   },
   {
@@ -231,11 +231,11 @@ const portfolioId: ProjectItem[] = [
       "/images/prototype/karyalo-topup.webp"
     ],
     tags: ["Next.js", "Integrasi pembayaran", "Antrean otomatis"],
-    summary: "Purwarupa sistem transaksi yang menghubungkan penerimaan pesanan, verifikasi pembayaran, dan pengiriman produk digital secara otomatis.",
-    seoDescription: "Purwarupa voucher dan top-up KaryaLo dengan antrean transaksi, verifikasi pembayaran, dan pengiriman otomatis. Riset internal 2026.",
+    summary: "Demo sistem transaksi yang menghubungkan penerimaan pesanan, verifikasi pembayaran, dan pengiriman produk digital secara otomatis.",
+    seoDescription: "Demo voucher dan top-up KaryaLo dengan antrean transaksi, verifikasi pembayaran, dan pengiriman otomatis. Riset internal 2026.",
     challenge: "Transaksi yang masuk bersamaan dan keterlambatan notifikasi pembayaran memerlukan pengelolaan antrean agar setiap pesanan dapat ditindaklanjuti dengan tepat.",
     solution: "Kami menyusun pemrosesan terpisah untuk setiap pesanan, dengan verifikasi pembayaran otomatis dan notifikasi kepada pembeli. Pendekatan ini mendukung pengelolaan transaksi secara terstruktur.",
-    impact: "Purwarupa menghubungkan antrean pesanan, verifikasi pembayaran, dan notifikasi dalam satu alur pemrosesan."
+    impact: "Demo ini menghubungkan antrean pesanan, verifikasi pembayaran, dan notifikasi dalam satu alur pemrosesan."
   },
   {
     id: "summarevent",
@@ -244,7 +244,7 @@ const portfolioId: ProjectItem[] = [
     type: "prototype",
     categoryLabel: "Tiket event & pemesanan kursi",
     serviceCode: "DEV-WEB // DEV-ENT // DSG-UI",
-    serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain UI/UX"],
+    serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain tampilan aplikasi"],
     client: "Tim Summarevent, Bandung Build Challenge 2026",
     year: "2026",
     coverImage: "/images/portofolio/mockup/summarevent-laptop.webp",
@@ -253,10 +253,10 @@ const portfolioId: ProjectItem[] = [
       "/images/portofolio/summarevent-arsitektur.webp"
     ],
     tags: ["React 19", "Vite", "Tailwind CSS", "Convex", "PWA", "WCAG 2.1 AA"],
-    summary: "Purwarupa tiket event untuk skenario event Summarecon Mall Bandung: pengunjung memilih kursi langsung dari denah, panitia mengelola event, petugas memindai tiket di pintu, dan semuanya berujung pada satu e-ticket QR.",
-    seoDescription: "Summarevent, purwarupa tiket event dengan pilih kursi dari denah, e-ticket QR, dashboard panitia, dan scan petugas. Dibuat untuk Bandung Build Challenge 2026.",
+    summary: "Demo tiket event untuk skenario event Summarecon Mall Bandung: pengunjung memilih kursi langsung dari denah, panitia mengelola event, petugas memindai tiket di pintu, dan semuanya berujung pada satu e-ticket QR.",
+    seoDescription: "Summarevent, demo sistem tiket event dengan pilih kursi dari denah, e-ticket QR, dashboard panitia, dan scan petugas. Dibuat untuk Bandung Build Challenge 2026.",
     challenge: "Masuk ke satu event bisa lewat banyak jalan: tiket di platform luar, akses lewat belanja, daftar di desk, dan struk di aplikasi mal. Pengunjung tidak tahu kursi mana yang tersisa, panitia mencatat denah, kuota, dan pembayaran di tempat terpisah, dan petugas mengecek tiket satu per satu di pintu.",
-    solution: "Kami menyatukannya di satu denah. Pengunjung memilih kursi sendiri, atau meminta dipilihkan kursi berdampingan. Kursi pesanan ditahan sekaligus dengan hitung mundur, dan satu kursi hanya bisa dimiliki satu pemesan: yang kalah rebutan langsung ditawari kursi terdekat. Tiket bisa didapat lewat pembayaran, pendaftaran gratis, atau tukar struk belanja, dan hasilnya selalu satu e-ticket QR bertanda tangan untuk tiap kursi. Panitia memiliki dashboard, wizard pembuatan event, peta kursi langsung, verifikasi struk, dan unduhan data peserta. Petugas melihat hasil scan Valid, Sudah digunakan, atau Tidak valid dengan jelas dari jarak jauh. Seluruhnya berjalan sebagai aplikasi web yang bisa dipasang di HP tanpa unduhan toko aplikasi, dengan pemeriksaan aksesibilitas otomatis di tiga peran. Ini purwarupa untuk Bandung Build Challenge 2026 (tema Event Ticketing System): pembayaran, OTP, WhatsApp, dan email masih simulasi, sementara data kursi memakai backend bersama sehingga rebutan kursi bisa diuji dari dua HP."
+    solution: "Kami menyatukannya di satu denah. Pengunjung memilih kursi sendiri, atau meminta dipilihkan kursi berdampingan. Kursi pesanan ditahan sekaligus dengan hitung mundur, dan satu kursi hanya bisa dimiliki satu pemesan: yang kalah rebutan langsung ditawari kursi terdekat. Tiket bisa didapat lewat pembayaran, pendaftaran gratis, atau tukar struk belanja, dan hasilnya selalu satu e-ticket QR bertanda tangan untuk tiap kursi. Panitia memiliki dashboard, wizard pembuatan event, peta kursi langsung, verifikasi struk, dan unduhan data peserta. Petugas melihat hasil scan Valid, Sudah digunakan, atau Tidak valid dengan jelas dari jarak jauh. Seluruhnya berjalan sebagai aplikasi web yang bisa dipasang di HP tanpa unduhan toko aplikasi, dengan pemeriksaan aksesibilitas otomatis di tiga peran. Ini proyek demo untuk Bandung Build Challenge 2026 (tema Event Ticketing System): pembayaran, OTP, WhatsApp, dan email masih simulasi, sementara data kursi memakai backend bersama sehingga rebutan kursi bisa diuji dari dua HP."
   }
 ];
 
@@ -271,13 +271,13 @@ const portfolioEn: Record<string, ProjectText> = {
   "alina-omnichannel": {
     title: "Alina Online Store & Order Management System",
     categoryLabel: "Retail & e-commerce",
-    serviceTags: ["Web application", "Internal system", "UI/UX design"],
+    serviceTags: ["Web application", "Internal system", "App design"],
     client: "Alina Fashion & Retail",
     tags: ["Next.js 15", "Tailwind CSS", "PostgreSQL", "Cloudflare CDN", "Warehouse system"],
     summary: "An integrated online store and order management system that aligns customer transactions with warehouse inventory records.",
     seoDescription: "Alina case study: online store, order management, and warehouse inventory integration. Developed by KaryaLo in 2025.",
     challenge: "Differences between online order data and warehouse inventory led to orders for unavailable items, cancellations, and delivery delays.",
-    solution: "We developed a storefront optimised for loading performance and an order management panel connected to the warehouse. The team can track each order from checkout through courier handover.",
+    solution: "We developed a storefront optimised for loading performance and an order management panel connected to the warehouse. The team can track each order from payment through to courier pickup.",
     impact: "Order processing time decreased by approximately 40%, alongside fewer warehouse inventory discrepancies.",
   },
   "hij-corporate-web": {
@@ -285,28 +285,28 @@ const portfolioEn: Record<string, ProjectText> = {
     categoryLabel: "Corporate profile",
     serviceTags: ["Company website", "Brand identity"],
     client: "PT HIJ",
-    tags: ["Next.js", "Framer Motion", "Tailwind CSS", "SEO optimisation"],
-    summary: "A company profile website presenting HIJ's capabilities through structured information, professional design, and a responsive experience across devices.",
-    seoDescription: "HIJ corporate website case study: company information, responsive design, and loading performance optimisation. Developed by KaryaLo in 2025.",
+    tags: ["Next.js", "Framer Motion", "Tailwind CSS", "Easy to find on Google"],
+    summary: "A company profile website presenting HIJ's capabilities through structured information, professional design, and a layout that works on any screen.",
+    seoDescription: "HIJ corporate website case study: company information, a layout for every screen, and fast loading. Developed by KaryaLo in 2025.",
     challenge: "HIJ needed a digital presence that reflected its professionalism and helped prospective partners understand its services, including on mobile devices.",
     solution: "We structured the information, strengthened visual consistency, and optimised page performance. Purposeful animation supports the presentation of content.",
     impact: "The HIJ team has a digital company profile to share with prospective partners as a reference for its services and capabilities.",
   },
   "hij-garment-erp": {
-    title: "HIJ Garment ERP",
+    title: "HIJ Garment Management System",
     categoryLabel: "Manufacturing & garments",
     serviceTags: ["Internal system", "Web application"],
     client: "PT HIJ",
     tags: ["Web application", "QR scanning", "Customer portal"],
-    summary: "A web-based ERP connecting orders, production work orders, manufacturing stages, logistics, and finance, with QR scanning and a customer portal.",
+    summary: "A web-based business management system (ERP) connecting orders, production work orders, manufacturing stages, logistics, and finance, with QR scanning and a customer portal.",
     seoDescription: "HIJ's garment ERP: orders, work orders, production progress by stage, logistics, and finance in one system, with QR scanning. A KaryaLo case study, 2026.",
     challenge: "Garment operations require connected records from order intake and production instructions through manufacturing, delivery, and financial reporting.",
-    solution: "We developed an ERP with sales, planning, production, logistics, and finance modules. The dashboard provides 7, 30, or 90-day summaries, supported by QR scanning, production stage tracking, user guidance, and a customer portal.",
+    solution: "We developed a system with sales, planning, production, logistics, and finance sections. The dashboard provides 7, 30, or 90-day summaries, supported by QR scanning, production stage tracking, user guidance, and a customer portal.",
   },
   "apegale-corporate-web": {
     title: "PT Ape Gale Indonesia Company Website",
     categoryLabel: "Expatriate & permit services",
-    serviceTags: ["Company website", "UI/UX design"],
+    serviceTags: ["Company website", "App design"],
     client: "PT Ape Gale Indonesia",
     tags: ["Next.js", "Bilingual (ID/EN)", "A page per service"],
     summary: "An Indonesian and English website for expatriate and foreign worker permit services, with dedicated service information, a regulation library, and quotation enquiries.",
@@ -317,7 +317,7 @@ const portfolioEn: Record<string, ProjectText> = {
   "affirmate-corporate-web": {
     title: "Affirmate Administrative Company Website",
     categoryLabel: "Corporate & administrative services",
-    serviceTags: ["Company website", "UI/UX design"],
+    serviceTags: ["Company website", "App design"],
     client: "Affirmate Administrative",
     tags: ["Next.js", "Payload CMS", "Bilingual (EN/ID)"],
     summary: "A bilingual website for Affirmate Group's corporate and administrative services, covering incorporation, licensing, visas, work permits, HR, and payroll.",
@@ -328,7 +328,7 @@ const portfolioEn: Record<string, ProjectText> = {
   "deliastore": {
     title: "DeliaStore: Game Top-Up & Digital Products Store",
     categoryLabel: "Digital products & payments",
-    serviceTags: ["Web application", "Transaction system", "UI/UX design"],
+    serviceTags: ["Web application", "Transaction system", "App design"],
     client: "DeliaStore, a PT Karsa Swakarya Loka business",
     tags: ["Next.js 16", "PostgreSQL", "DOKU Checkout", "Digiflazz", "PWA"],
     summary: "A KaryaLo product for game top-ups, mobile credit, data packages, electricity tokens, and e-money. The platform integrates DOKU payments, automated delivery, promotions, and customer rewards.",
@@ -342,22 +342,22 @@ const portfolioEn: Record<string, ProjectText> = {
     serviceTags: ["Dashboards & reporting"],
     client: internalClientEn,
     tags: ["Next.js", "Installable like an app", "Chart.js"],
-    summary: "A dashboard prototype bringing operational indicators and project status into a responsive view for desktop and mobile.",
-    seoDescription: "KaryaLo's internal dashboard prototype for operational indicators and project status, with responsive desktop and mobile views. Internal research, 2026.",
+    summary: "A dashboard demo bringing operational indicators and project status into one view that works on desktop and mobile.",
+    seoDescription: "KaryaLo's internal dashboard demo for operational indicators and project status, with views for desktop and mobile. Internal research, 2026.",
     challenge: "Operational data was spread across multiple files and applications, requiring manual compilation before weekly reviews.",
-    solution: "We brought the data into a dashboard with a clear information hierarchy. The interface adapts to different screen sizes and can be added to a phone's home screen for convenient access.",
+    solution: "We brought the data into a dashboard with a clear information hierarchy. The screens adapt to any device and can be added to a phone's home screen for convenient access.",
     impact: "The team has a single view for reviewing operational data and preparing weekly evaluations.",
   },
   "karyalo-storefront-saas": {
     title: "KaryaLo Online Store Platform",
     categoryLabel: "Retail & e-commerce",
-    serviceTags: ["Online store", "UI/UX design"],
+    serviceTags: ["Online store", "App design"],
     client: internalClientEn,
-    tags: ["Next.js 15", "Tailwind CSS", "Short checkout flow"],
-    summary: "An online store prototype with structured navigation, streamlined checkout, and performance optimisation to support the shopping experience.",
-    seoDescription: "KaryaLo's online store prototype with structured navigation, streamlined checkout, and a saved cart. Internal retail research, 2026.",
+    tags: ["Next.js 15", "Tailwind CSS", "Short payment flow"],
+    summary: "An online store demo with clear navigation, a quick payment flow, and performance optimisation to support the shopping experience.",
+    seoDescription: "KaryaLo's online store demo with clear navigation, a quick payment flow, and a saved cart. Internal retail research, 2026.",
     challenge: "Complex navigation and slow-loading pages can make it harder for customers to find products and complete purchases.",
-    solution: "We designed the workflow around the customer, optimised page loading, simplified checkout, and provided a saved shopping cart.",
+    solution: "We designed the workflow around the customer, optimised page loading, simplified payment, and provided a saved shopping cart.",
     impact: "The modular structure provides a foundation that can be adapted for future online stores.",
   },
   "karyalo-topup-engine": {
@@ -366,22 +366,22 @@ const portfolioEn: Record<string, ProjectText> = {
     serviceTags: ["Transaction system", "Web application"],
     client: internalClientEn,
     tags: ["Next.js", "Payment integration", "Automated queue"],
-    summary: "A transaction system prototype connecting order intake, payment verification, and digital product delivery through an automated workflow.",
-    seoDescription: "KaryaLo's voucher and top-up prototype with transaction queues, payment verification, and automated delivery. Internal research, 2026.",
+    summary: "A transaction system demo connecting order intake, payment verification, and digital product delivery through an automated workflow.",
+    seoDescription: "KaryaLo's voucher and top-up demo with transaction queues, payment verification, and automated delivery. Internal research, 2026.",
     challenge: "Concurrent transactions and delayed payment notifications require queue management so each order can be processed appropriately.",
     solution: "We designed independent processing for each order, with automated payment verification and buyer notifications. This approach supports structured transaction management.",
-    impact: "The prototype connects order queues, payment verification, and notifications within one processing workflow.",
+    impact: "The demo connects order queues, payment verification, and notifications within one processing workflow.",
   },
   "summarevent": {
     title: "Summarevent: Event Ticketing with Seat Selection",
     categoryLabel: "Event ticketing & seat booking",
-    serviceTags: ["Web application", "Transaction system", "UI/UX design"],
+    serviceTags: ["Web application", "Transaction system", "App design"],
     client: "Summarevent Team, Bandung Build Challenge 2026",
     tags: ["React 19", "Vite", "Tailwind CSS", "Convex", "PWA", "WCAG 2.1 AA"],
-    summary: "An event ticketing prototype for a Summarecon Mall Bandung event scenario: visitors choose seats straight from the seat map, organisers manage the event, gate staff scan tickets, and everything ends in one QR e-ticket.",
-    seoDescription: "Summarevent, an event ticketing prototype with seat selection from a live map, QR e-tickets, an organiser dashboard, and gate scanning. Built for Bandung Build Challenge 2026.",
+    summary: "An event ticketing demo for a Summarecon Mall Bandung event scenario: visitors choose seats straight from the seat map, organisers manage the event, gate staff scan tickets, and everything ends in one QR e-ticket.",
+    seoDescription: "Summarevent, an event ticketing demo with seat selection from a live map, QR e-tickets, an organiser dashboard, and gate scanning. Built for Bandung Build Challenge 2026.",
     challenge: "Getting into one event can happen in many ways: tickets on outside platforms, access through shopping, sign-up at a desk, and receipts in the mall app. Visitors cannot tell which seats are left, organisers track the seat map, quotas, and payments in separate places, and gate staff check tickets one by one.",
-    solution: "We brought it together on one seat map. Visitors pick their own seats, or ask for seats together to be chosen for them. All seats in an order are held at once with a countdown, and a seat can belong to only one buyer: whoever loses the race is offered the nearest seats straight away. Tickets can come from payment, free registration, or exchanging a shopping receipt, and the result is always one signed QR e-ticket per seat. Organisers get a dashboard, an event-creation wizard, a live seat map, receipt verification, and attendee downloads. Gate staff see Valid, Already used, or Invalid clearly from a distance. It all runs as a web app that installs on a phone without an app store, with automated accessibility checks across the three roles. This is a prototype for Bandung Build Challenge 2026 (theme: Event Ticketing System): payments, OTP, WhatsApp, and email are simulated, while seat data uses a shared backend so seat races can be tested from two phones."
+    solution: "We brought it together on one seat map. Visitors pick their own seats, or ask for seats together to be chosen for them. All seats in an order are held at once with a countdown, and a seat can belong to only one buyer: whoever loses the race is offered the nearest seats straight away. Tickets can come from payment, free registration, or exchanging a shopping receipt, and the result is always one signed QR e-ticket per seat. Organisers get a dashboard, an event-creation wizard, a live seat map, receipt verification, and attendee downloads. Gate staff see Valid, Already used, or Invalid clearly from a distance. It all runs as a web app that installs on a phone without an app store, with automated accessibility checks across the three roles. This is a demo project for Bandung Build Challenge 2026 (theme: Event Ticketing System): payments, OTP, WhatsApp, and email are simulated, while seat data uses a shared backend so seat races can be tested from two phones."
   },
 };
 

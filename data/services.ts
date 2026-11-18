@@ -50,20 +50,20 @@ const servicesId: ServicePillar[] = [
       {
         code: "DEV-WEB",
         name: "Website & Aplikasi Web",
-        description: "Pengembangan website perusahaan, aplikasi operasional, dan platform berlangganan dengan perhatian pada kecepatan akses, kemudahan penggunaan, serta optimasi mesin pencari.",
-        items: ["Website perusahaan dengan optimasi SEO", "Aplikasi web yang dapat dipasang di ponsel", "Platform berlangganan (SaaS)"]
+        description: "Pengembangan website perusahaan, aplikasi operasional, dan platform berlangganan dengan perhatian pada kecepatan akses, kemudahan penggunaan, serta mudah ditemukan di Google.",
+        items: ["Website perusahaan yang mudah ditemukan di Google", "Aplikasi web yang dapat dipasang di ponsel", "Platform berlangganan untuk pelanggan Anda"]
       },
       {
         code: "DEV-APP",
         name: "Aplikasi Mobile",
-        description: "Pengembangan aplikasi Android dan iOS dari satu basis kode untuk mendukung tim lapangan, transaksi kasir, dan pencatatan persediaan.",
+        description: "Pengembangan aplikasi Android dan iOS sekaligus dalam satu kali pengembangan untuk mendukung tim lapangan, transaksi kasir, dan pencatatan persediaan.",
         items: ["Aplikasi Android & iOS", "Aplikasi tim lapangan", "Kasir & pencatatan stok"]
       },
       {
         code: "DEV-ENT",
         name: "Sistem Internal & Integrasi",
         description: "Satukan data dan proses melalui dashboard bisnis, integrasi pembayaran, serta koneksi antarsistem yang mendukung alur kerja perusahaan Anda.",
-        items: ["Dashboard laporan bisnis", "Integrasi pembayaran", "Integrasi antarsistem (API)"]
+        items: ["Dashboard laporan bisnis", "Integrasi pembayaran", "Menghubungkan sistem yang sudah ada"]
       }
     ]
   },
@@ -75,13 +75,13 @@ const servicesId: ServicePillar[] = [
     shortName: "Desain & Kreatif",
     focus: "Desain produk digital, identitas merek, serta foto dan video yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda.",
     image: "/images/pdf/design-brand-v4.webp",
-    imageAlt: "Tampilan aplikasi KaryaLo di layar tablet, dengan contoh palet warna biru, huruf, dan deretan ikon antarmuka di sampingnya.",
+    imageAlt: "Tampilan aplikasi KaryaLo di layar tablet, dengan contoh palet warna biru, huruf, dan deretan ikon aplikasi di sampingnya.",
     subServices: [
       {
         code: "DSG-UI",
-        name: "Desain UI/UX Produk Digital",
-        description: "Perancangan alur pengguna, purwarupa interaktif di Figma, dan penyempurnaan antarmuka untuk membantu pengguna menyelesaikan tugas dengan lebih mudah.",
-        items: ["Purwarupa Figma interaktif", "Panduan komponen antarmuka", "Perancangan ulang aplikasi"]
+        name: "Desain Tampilan & Alur Aplikasi (UI/UX)",
+        description: "Perancangan alur pengguna, demo interaktif di Figma, dan penyempurnaan tampilan untuk membantu pengguna menyelesaikan tugas dengan lebih mudah.",
+        items: ["Demo interaktif (Figma)", "Panduan elemen tampilan", "Perancangan ulang aplikasi"]
       },
       {
         code: "DSG-BRD",
@@ -115,15 +115,15 @@ const servicesId: ServicePillar[] = [
     subServices: [
       {
         code: "IOT-HW",
-        name: "Perakitan Perangkat & Purwarupa",
+        name: "Perakitan Perangkat & Uji Coba",
         description: "Perancangan perangkat pemantauan sesuai kebutuhan, mencakup pemilihan komponen, integrasi sensor dan GPS, serta pembuatan casing cetak 3D.",
-        items: ["Purwarupa perangkat pemantauan", "Integrasi sensor & GPS", "Rangkaian & casing khusus"]
+        items: ["Perangkat pemantauan uji coba", "Integrasi sensor & GPS", "Rangkaian & casing khusus"]
       },
       {
         code: "IOT-FW",
         name: "Program Perangkat & Pengiriman Data",
-        description: "Pengembangan firmware untuk mengelola pengiriman data, keamanan komunikasi, dan konsumsi daya dengan mempertimbangkan kondisi jaringan di lokasi.",
-        items: ["Pengiriman data terenkripsi", "Koneksi jarak jauh & hemat daya", "Pengolahan data di perangkat"]
+        description: "Pemrograman perangkat agar data terkirim dengan aman, koneksi tetap stabil, dan baterai lebih awet dengan mempertimbangkan kondisi jaringan di lokasi.",
+        items: ["Pengiriman data yang aman", "Koneksi jarak jauh & hemat daya", "Data diolah langsung di perangkat"]
       },
       {
         code: "IOT-PLT",
@@ -155,17 +155,17 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
       "DEV-WEB": {
         name: "Websites & Web Applications",
         description: "Company websites, operational web applications, and subscription platforms developed with a focus on performance, usability, and search engine optimisation.",
-        items: ["Company websites with SEO optimisation", "Installable mobile web apps", "Subscription platforms (SaaS)"],
+        items: ["Company websites that are easy to find on Google", "Installable mobile web apps", "Subscription platforms for your customers"],
       },
       "DEV-APP": {
         name: "Mobile Applications",
-        description: "Android and iOS applications built from a single codebase to support field teams, point-of-sale transactions, and inventory management.",
+        description: "Android and iOS applications built together in one go to support field teams, point-of-sale transactions, and inventory management.",
         items: ["Android & iOS apps", "Field team apps", "Point of sale & inventory"],
       },
       "DEV-ENT": {
         name: "Internal Systems & Integration",
         description: "Connect data and workflows through business dashboards, payment integrations, and connections between your existing systems.",
-        items: ["Business reporting dashboards", "Payment integration", "System integration (APIs)"],
+        items: ["Business reporting dashboards", "Payment integration", "Connecting your existing systems"],
       },
     },
   },
@@ -173,12 +173,12 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
     name: "Design, Brand Identity, Photo & Video",
     shortName: "Design & Creative",
     focus: "Digital product design, brand identity, photo and video that clarify your message, improve usability, and create a consistent business presence.",
-    imageAlt: "A KaryaLo app design on a tablet screen, beside a blue colour palette, a type sample and a row of interface icons.",
+    imageAlt: "A KaryaLo app design on a tablet screen, beside a blue colour palette, a type sample and a row of app icons.",
     subServices: {
       "DSG-UI": {
-        name: "Digital Product UI/UX Design",
-        description: "User flows, interactive Figma prototypes, and interface improvements that help people complete their tasks more easily.",
-        items: ["Interactive Figma prototypes", "Interface component guide", "Redesign of existing apps"],
+        name: "App Screen & Flow Design (UI/UX)",
+        description: "User flows, clickable Figma demos, and screen improvements that help people complete their tasks more easily.",
+        items: ["Clickable demos (Figma)", "Screen element guide", "Redesign of existing apps"],
       },
       "DSG-BRD": {
         name: "Brand Identity & Company Materials",
@@ -204,14 +204,14 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
     imageAlt: "A white sensor device with an antenna on a table, beside a Field Monitoring dashboard card showing temperature, humidity and a normal status.",
     subServices: {
       "IOT-HW": {
-        name: "Device Assembly & Prototyping",
+        name: "Device Assembly & Test Units",
         description: "Custom monitoring device design, including component selection, sensor and GPS integration, and 3D-printed enclosures.",
-        items: ["Monitoring device prototypes", "Sensor & GPS fitting", "Custom circuits & enclosures"],
+        items: ["Test monitoring devices", "Sensor & GPS fitting", "Custom circuits & enclosures"],
       },
       "IOT-FW": {
-        name: "Device Firmware & Data Transmission",
-        description: "Firmware development for data transmission, communication security, and power management, taking local network conditions into account.",
-        items: ["Encrypted data transmission", "Long-range, low-power connectivity", "On-device data processing"],
+        name: "Device Programming & Data Sending",
+        description: "Programming devices so data is sent securely, connections stay stable, and batteries last longer, taking local network conditions into account.",
+        items: ["Secure data sending", "Long-range, low-power connectivity", "Data processed on the device"],
       },
       "IOT-PLT": {
         name: "Monitoring Dashboard & Alerts",
