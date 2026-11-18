@@ -15,10 +15,10 @@ export default function TestimonialsSection({ lang }: { lang: Locale }) {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="bg-white section-band px-4 md:px-12" id="testimoni">
-      <div className="max-w-[72rem] mx-auto space-y-10">
+    <section className="agx-section" id="testimoni">
+      <div className="agx-wrap space-y-10">
         <Reveal>
-          <h2 className="type-section-title text-midnight">{copy.title}</h2>
+          <h2 className="agx-h2 text-center">{copy.title}</h2>
         </Reveal>
 
         <div className={`grid grid-cols-1 gap-6 ${testimonials.length > 1 ? "lg:grid-cols-2" : ""}`}>

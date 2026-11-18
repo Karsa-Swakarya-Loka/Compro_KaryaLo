@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
     // Two root layouts (one per language) leave no single layout to render an
     // unmatched URL in; app/global-not-found.tsx covers that case.
     globalNotFound: true,
+    // `inlineCss` was tried (2026-11-18) and left off: Next also repeats the CSS in
+    // the RSC payload, so the home HTML grew 30 → 75 KB and mobile FCP got slower.
   },
   /*
     The portfolio moved from /works to /portfolio when the navbar was aligned

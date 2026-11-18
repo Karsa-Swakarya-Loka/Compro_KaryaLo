@@ -18,7 +18,7 @@ Situs company profile KaryaLo Digital Solution (PT Karsa Swakarya Loka). Tugasny
 
 ## Positioning
 
-Extended IT partner: bekerja seperti tim IT klien sendiri untuk software (website, aplikasi, sistem internal), desain (UI/UX dan identitas merek), dan perangkat IoT, dari perencanaan dan pembangunan sampai perawatan setelah rilis. Dikerjakan tim inti sendiri (tidak dioper), lima tahap transparan, purwarupa bisa diklik sebelum kode ditulis, dan batas kerja dinyatakan tertulis.
+IT agency (diputuskan founder 2026-11-18, menggantikan "Extended IT partner"): bekerja seperti tim IT klien sendiri untuk software (website, aplikasi, sistem internal), desain (UI/UX, identitas merek), foto dan video, perangkat IoT, serta pengadaan hardware (komputer, perangkat jaringan MikroTik), dari perencanaan dan pembangunan sampai perawatan setelah rilis. Dikerjakan tim inti sendiri (tidak dioper), lima tahap transparan, purwarupa bisa diklik sebelum kode ditulis, dan batas kerja dinyatakan tertulis.
 
 ## Operating Context
 
@@ -40,7 +40,7 @@ Calon klien biasanya datang dari rekomendasi, pencarian, atau tautan yang dikiri
 - Logo KaryaLo dengan warna biru `#1D469D` dan cyan `#3ABBCE`; keduanya tetap warna utama merek (dikonfirmasi pemilik 2026-10-15).
 - Loader logo (potongan logo merakit diri) tampil di setiap muat halaman penuh, termasuk *refresh* (diminta pemilik 2026-10-15), dan dilewati untuk reduced motion.
 - Hero tetap berupa slider tanpa tombol jeda (diminta pemilik 2026-10-15), berisi proyek nyata sebagai mockup laptop 3D yang seragam, dengan caption singkat. Hook "masalah dulu" pindah ke seksi Solusi. Teks hero dibuat pendek dan slider jadi fokus (2026-10-16).
-- Tampilan mengikuti referensi template Cargon (unifato.com/cargon) dengan warna logo KaryaLo; pemilik kembali memilihnya setelah mencoba dunia "Gambar Kerja" (2026-10-15). Kode/foto Cargon tidak disalin.
+- Tampilan mengikuti template Agenciex (agenciex.framer.website): latar titik-titik, Roboto, badge pil, ring 3D proyek yang bisa diputar, kartu bulat, pita industri penuh, panel proses bertumpuk, tabel proyek, pita miring, footer navy; warna tetap biru logo KaryaLo (`#1B5FD1`, cyan `#3ABBCE`). Kode/foto template tidak disalin.
 - Foto yang ada di `public/images` tetap jadi bahan visual utama.
 - Suara: jelas, praktis, operasional, manusiawi, profesional; tanpa hype dan tanpa jargon di depan. Bahasa pelanggan dulu, istilah teknis sesudahnya.
 - Tombol solid hanya untuk memulai percakapan (WhatsApp / form).

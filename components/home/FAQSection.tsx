@@ -8,16 +8,10 @@ import type { Locale } from "@/lib/i18n";
 import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react";
 import { EASE_EXPO, SPRING_OVERSHOOT } from "@/components/motion/tokens";
-import ArrowSwap from "@/components/motion/ArrowSwap";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
-/**
- * Questions, in the Cargon manner: a centred header, then one column of white
- * cards. The open card gains a blue edge and its chevron turns solid blue.
- * Every answer stays mounted so it is in the server HTML for search engines and
- * assistants; collapsed answers are `inert`.
- */
 export default function FAQSection({ lang }: { lang: Locale }) {
   const badges = homeCopy[lang].badges;
   const copy = homeCopy[lang].faq;
@@ -25,16 +19,16 @@ export default function FAQSection({ lang }: { lang: Locale }) {
   const [openId, setOpenId] = useState<string | null>(faqData[0]?.id || null);
 
   return (
-    <section className="bg-white section-support px-4 md:px-12" id="faq">
-      <div className="mx-auto max-w-[72rem]">
-        <SectionHeading badge={badges.faq} title={copy.title} intro={copy.intro} className="mb-10" />
+    <section className="agx-section" id="faq">
+      <div className="agx-wrap">
+        <SectionHeading badge={badges.faq} title={copy.title} />
 
-        <RevealGroup className="mx-auto max-w-3xl space-y-4" stagger={0.06}>
+        <RevealGroup className="mx-auto mt-14 max-w-3xl space-y-3" stagger={0.06}>
           {faqData.map((item) => {
             const isOpen = openId === item.id;
             return (
               <RevealItem key={item.id} distance={20}>
-                <div className={`overflow-hidden rounded-xl bg-white shadow-card ring-1 transition-[box-shadow] duration-300 ${isOpen ? "ring-brand" : "ring-line hover:ring-brand/40"}`}>
+                <div className="agx-faq-item" data-open={isOpen ? "" : undefined}>
                   <button
                     type="button"
                     onClick={() => setOpenId(isOpen ? null : item.id)}
@@ -43,11 +37,11 @@ export default function FAQSection({ lang }: { lang: Locale }) {
                     aria-controls={`${item.id}-answer`}
                     aria-expanded={isOpen}
                   >
-                    <span className={`type-card-title transition-colors ${isOpen ? "text-brand" : "text-ink"}`}>{item.question}</span>
+                    <span className={`text-[1.125rem] font-medium leading-snug tracking-[-0.01em] transition-colors ${isOpen ? "text-brand" : "text-ink"}`}>{item.question}</span>
                     <motion.span
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={SPRING_OVERSHOOT}
-                      className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${isOpen ? "bg-brand text-white" : "bg-brand-soft text-brand"}`}
+                      className={`grid h-10 w-10 shrink-0 place-items-center rounded-full transition-colors duration-300 ${isOpen ? "bg-brand text-white" : "bg-white text-ink ring-1 ring-line"}`}
                     >
                       <ChevronDown aria-hidden="true" className="h-4 w-4" />
                     </motion.span>
@@ -70,13 +64,13 @@ export default function FAQSection({ lang }: { lang: Locale }) {
           })}
         </RevealGroup>
 
-        <Reveal className="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4 text-center">
+        <Reveal className="mx-auto mt-12 flex max-w-3xl flex-col items-center gap-4 text-center">
           <p className="type-intro text-body">
-            <span className="font-semibold text-ink">{copy.askLead}</span> {copy.askBody}
+            <span className="font-medium text-ink">{copy.askLead}</span> {copy.askBody}
           </p>
-          <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary group">
+          <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
+            <WhatsAppIcon size={18} />
             <span>{copy.askCta}</span>
-            <ArrowSwap />
           </a>
         </Reveal>
       </div>

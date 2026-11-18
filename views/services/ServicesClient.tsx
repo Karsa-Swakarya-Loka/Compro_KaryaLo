@@ -1,24 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getServices, supportServicesData, SERVICE_FOCUS, type ServicePillar, type SupportService } from "@/data/services";
-import { getPortfolio } from "@/data/portfolio";
-import { getWhatsAppUrl } from "@/config/site";
-import { IOT_PILLAR_ID, servicesPageCopy } from "@/content/services-page";
-
-/** Related projects shown per field; more are one button away in the portfolio. */
-const PROOF_LIMIT = 6;
-import { type Locale, localePath } from "@/lib/i18n";
-import { routeSeo } from "@/lib/seo";
 import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
-  Code2,
-  Compass,
   Cpu,
   Gauge,
   Globe,
@@ -30,31 +18,39 @@ import {
   Radio,
   ShieldCheck,
   Smartphone,
-  Wrench,
   type LucideIcon,
 } from "lucide-react";
+import { getServices, supportServicesData, SERVICE_FOCUS_THUMB, type SupportService } from "@/data/services";
+import FitImage from "@/components/ui/FitImage";
+import { getPortfolio } from "@/data/portfolio";
+import { getWhatsAppUrl, whatsappUrl } from "@/config/site";
+import { IOT_PILLAR_ID, servicesPageCopy } from "@/content/services-page";
+import { homeCopy } from "@/content/home";
+import { type Locale, localePath } from "@/lib/i18n";
+import { routeSeo } from "@/lib/seo";
+import { FlyIn } from "@/components/motion/Entrance";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import PageBanner from "@/components/ui/PageBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ContactCTA from "@/components/home/ContactCTA";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 /*
-  /services in the Cargon manner (redesign 2026-10-15):
+  /services after Agenciex's services page (2026-11-17):
 
-    banner → the range of services (expanding photo cards) → one section per
-    field (photo + text, then its sub-service cards and proof) → support after
-    launch → guarantees on the page's one dark band → closing CTA.
+    banner (badge, title, lede, jump links, giant phrase) → one large photograph
+    → the range: blush cards two across, each an arrow down to its field → the
+    underlined one-line conversation → one section per field (photo beside the
+    header, its sub-services as blush cards, related work as a ruled table) →
+    support as numbered sticky panels → commitments on the blue band → bands
+    and the closing CTA.
 
-  The solid button stays reserved for starting a conversation: each field's
-  "Diskusikan …" is its single primary; briefs, the IoT sample device and the
-  support cards are outline buttons.
+  Solid blue is kept for starting a conversation, one per screen: each field's
+  "Discuss …" and each support panel's WhatsApp button.
 */
 
-const PILLAR_ICONS: Record<ServicePillar["id"], LucideIcon> = {
-  "digital-engineering": Code2,
-  "creative-design": PenTool,
-  "iot-hardware": Cpu,
-};
+/** Related projects shown per field; more are one button away in the portfolio. */
+const PROOF_LIMIT = 6;
 
 /* Sub-service icons, by the internal code (never rendered). */
 const SUB_ICONS: Record<string, LucideIcon> = {
@@ -69,122 +65,47 @@ const SUB_ICONS: Record<string, LucideIcon> = {
   "IOT-PLT": Gauge,
 };
 
-const SUPPORT_ICONS: Record<SupportService["id"], LucideIcon> = {
-  maintenance: Wrench,
-  scoping: Compass,
+/* Existing photographs for the support panels; decoration, not evidence. */
+const SUPPORT_IMAGES: Record<SupportService["id"], string> = {
+  maintenance: "/images/pdf/desk-contact-v2.webp",
+  scoping: "/images/process-blueprint.webp",
 };
 
 /* Icons pair with the guarantees by position; the copy module stays icon-free. */
 const GUARANTEE_ICONS = [Layers, ShieldCheck];
 
-/**
- * Cargon's "range of services" strip: photo cards in a row, one open at a
- * time. On wide screens the open card grows and turns brand blue with its
- * text; the others stay narrow photographs. Hover or keyboard focus opens a
- * card, and each card is one link down to its section. On phones every card
- * shows its text over a dark gradient, stacked.
- */
-function ServiceRange({
-  items,
-  more,
-}: {
-  items: { id: string; href: string; title: string; body: string; image: string; Icon: LucideIcon }[];
-  more: string;
-}) {
-  const [active, setActive] = useState(0);
-
-  return (
-    <RevealGroup className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-14 lg:flex lg:h-[27rem]" stagger={0.1}>
-      {items.map((item, index) => {
-        const open = index === active;
-        const Icon = item.Icon;
-        return (
-          <RevealItem
-            key={item.id}
-            className={`relative min-h-[20rem] overflow-hidden rounded-3xl shadow-card transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] lg:min-h-0 lg:basis-0 ${
-              open ? "lg:grow-[3.2]" : "lg:grow"
-            }`}
-          >
-            <a
-              href={item.href}
-              onMouseEnter={() => setActive(index)}
-              onFocus={() => setActive(index)}
-              className="group absolute inset-0 block"
-            >
-              <Image
-                src={item.image}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                style={{ objectPosition: SERVICE_FOCUS[item.id] }}
-              />
-              {/* Phones: a dark gradient under the text. Wide screens: solid brand
-                  blue on the open card, a light wash on the closed ones. */}
-              <span
-                aria-hidden="true"
-                className={`absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/45 to-transparent transition-opacity duration-500 lg:bg-none ${
-                  open ? "lg:bg-brand lg:opacity-[0.94]" : "lg:bg-ink/15"
-                }`}
-              />
-              <span
-                className={`absolute inset-x-0 bottom-0 flex flex-col gap-3 p-6 md:p-7 transition-opacity duration-500 lg:w-[24rem] ${
-                  open ? "lg:opacity-100" : "lg:opacity-0"
-                }`}
-              >
-                <span className="grid h-14 w-14 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/25">
-                  <Icon aria-hidden="true" className="h-6 w-6" />
-                </span>
-                <span className="type-card-title-lg text-white">{item.title}</span>
-                <span className="type-body-card text-white">{item.body}</span>
-                <span className="text-link text-white">
-                  {more} <ArrowDown aria-hidden="true" className="h-4 w-4" />
-                </span>
-              </span>
-              {/* Closed cards on wide screens keep a quiet marker of what they are. */}
-              <span
-                aria-hidden="true"
-                className={`absolute bottom-6 left-1/2 hidden h-12 w-12 -translate-x-1/2 place-items-center rounded-full bg-white text-brand shadow-card transition-opacity duration-500 lg:grid ${
-                  open ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-              </span>
-            </a>
-          </RevealItem>
-        );
-      })}
-    </RevealGroup>
-  );
-}
-
 export default function ServicesClient({ lang }: { lang: Locale }) {
   const copy = servicesPageCopy[lang];
+  const home = homeCopy[lang];
   const services = getServices(lang);
   const portfolio = getPortfolio(lang);
   const supportServices = supportServicesData[lang];
 
-  const rangeItems = [
+  /* The glass tag on each support photo names the promise it stands for. */
+  const supportTags: Record<SupportService["id"], string> = {
+    maintenance: copy.promises[2],
+    scoping: copy.promises[0],
+  };
+
+  const rangeCards = [
     ...services.map((pillar) => ({
-      id: pillar.id,
-      href: `#${pillar.id}`,
+      id: pillar.id as string,
       title: pillar.name,
       body: pillar.focus,
       image: pillar.image,
-      Icon: PILLAR_ICONS[pillar.id],
+      focus: SERVICE_FOCUS_THUMB[pillar.id] ?? "50% 50%",
     })),
     {
       id: "support",
-      href: "#support",
       title: copy.support.heading,
       body: copy.support.intro,
-      image: "/images/pdf/team-process-v2.webp",
-      Icon: Wrench,
+      image: "/images/pdf/team-why-v2.webp",
+      focus: "50% 40%",
     },
   ];
 
   return (
-    <main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col bg-white">
+    <main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col">
       <PageBanner
         lang={lang}
         title={
@@ -195,41 +116,68 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
         crumbs={[{ name: routeSeo.services.text[lang].breadcrumb ?? routeSeo.services.text[lang].title }]}
         lede={copy.hero.lede}
       >
-        {/* In-page jump links: quiet words with a down arrow. */}
         <nav aria-label={copy.pillarNavLabel}>
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-1">
-            {services.map((pillar) => (
-              <li key={pillar.id}>
-                <a href={`#${pillar.id}`} className="text-link text-brand">
-                  {pillar.shortName} <ArrowDown aria-hidden="true" className="h-4 w-4" />
-                </a>
-              </li>
-            ))}
-            <li>
-              <a href="#support" className="text-link text-brand">
-                {copy.supportNavLabel} <ArrowDown aria-hidden="true" className="h-4 w-4" />
-              </a>
-            </li>
+          <ul className="flex flex-wrap gap-x-6">
+            {[...services.map((pillar) => ({ id: pillar.id as string, label: pillar.shortName })), { id: "support", label: copy.supportNavLabel }].map(
+              (item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="text-link min-h-11 text-brand">
+                    {item.label}
+                    <ArrowDown aria-hidden="true" className="h-4 w-4" />
+                  </a>
+                </li>
+              ),
+            )}
           </ul>
         </nav>
       </PageBanner>
 
-      {/* The range of services. */}
-      <section aria-label={copy.overview.title} className="section-standard bg-white px-4 md:px-12">
-        <div className="mx-auto max-w-[72rem]">
-          <SectionHeading badge={copy.overview.badge} title={copy.overview.title} intro={copy.overview.intro} />
-          <ServiceRange items={rangeItems} more={copy.overview.more} />
+      {/* One large photograph across the column, flying in with the scroll. */}
+      <div className="agx-wrap">
+        <FlyIn className="relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
+          <div className="agx-photo h-full w-full">
+            <FitImage src="/images/pdf/team-process-v2.webp" sizes="(min-width: 1344px) 80rem, 100vw" />
+          </div>
+        </FlyIn>
+      </div>
+
+      {/* The range: one blush card per field plus support, each an arrow to its section. */}
+      <section aria-labelledby="services-range" className="agx-section">
+        <div className="agx-wrap">
+          <SectionHeading id="services-range" badge={copy.overview.badge} title={copy.overview.title} intro={copy.overview.intro} />
+
+          <RevealGroup className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2" stagger={0.1}>
+            {rangeCards.map((card) => (
+              <RevealItem key={card.id}>
+                <article className="agx-card group flex h-full min-h-[22rem] flex-col">
+                  <h3 className="text-[1.5rem] font-medium leading-tight tracking-[-0.025em] text-ink">{card.title}</h3>
+                  <p className="mt-3 max-w-[42ch] type-body-card text-body">{card.body}</p>
+                  <div className="mt-auto flex items-end justify-between gap-4 pt-8">
+                    <a href={`#${card.id}`} aria-label={`${copy.overview.more}: ${card.title}`} className="agx-arrow shrink-0">
+                      <ArrowDown aria-hidden="true" size={22} />
+                    </a>
+                    <div className="img-zoom relative aspect-[4/3] w-[48%] max-w-[15rem] overflow-hidden rounded-2xl">
+                      <Image src={card.image} alt="" fill sizes="240px" className="object-cover" style={{ objectPosition: card.focus }} />
+                    </div>
+                  </div>
+                </article>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+
+          <Reveal className="mt-14 text-center">
+            <p className="agx-underline">
+              {home.cta.title}{" "}
+              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer">
+                {home.hero.primaryCta}.
+              </a>
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {services.map((pillar, index) => {
-        /* Photo and text swap sides each field; each enters from the side it sits on. */
         const reversed = index % 2 === 1;
-        const textFrom = reversed ? "right" : "left";
-        const photoFrom = reversed ? "left" : "right";
-        const surface = index % 2 === 0 ? "bg-surface" : "bg-white";
-        const cardSurface = index % 2 === 0 ? "bg-white" : "bg-surface";
-        const PillarIcon = PILLAR_ICONS[pillar.id];
 
         /* Proof, matched the same way the case study page does it: a project's
            `serviceCode` against this field's sub-service codes. */
@@ -243,93 +191,65 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
         /* IoT has no published project yet: the page says so, and offers the
            sample device every IoT project starts with. */
         const showIotNoProof = proof.length === 0 && pillar.id === IOT_PILLAR_ID;
+        const titleId = `${pillar.id}-title`;
 
         return (
-          <section
-            key={pillar.id}
-            id={pillar.id}
-            aria-label={pillar.name}
-            className={`section-standard px-4 md:px-12 ${surface}`}
-          >
-            <div className="mx-auto max-w-[72rem]">
-              <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-                {/* Photo: zooms on hover, sits on an offset brand frame. On desktop it takes the text column's height, edge to edge. */}
-                <RevealItem
-                  direction={photoFrom}
-                  scaleFrom={0.92}
-                  className={`relative ${reversed ? "lg:order-2" : ""}`}
-                >
-                  <div
-                    aria-hidden="true"
-                    className={`absolute inset-0 rounded-3xl border-2 border-brand ${reversed ? "-translate-x-4" : "translate-x-4"} translate-y-4`}
-                  />
-                  <div className="img-zoom relative aspect-[4/3] overflow-hidden rounded-3xl shadow-card lg:aspect-auto lg:h-full lg:min-h-[22rem]">
-                    <Image
-                      src={pillar.image}
-                      alt={pillar.imageAlt}
-                      fill
-                      sizes="(min-width: 1024px) 560px, calc(100vw - 32px)"
-                      className="object-cover"
-                    />
+          <section key={pillar.id} id={pillar.id} aria-labelledby={titleId} className="agx-section border-t border-line">
+            <div className="agx-wrap">
+              {/* Header beside the photograph; sides alternate per field. */}
+              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                <div className={reversed ? "lg:order-2" : ""}>
+                  <SectionHeading
+                    align="left"
+                    id={titleId}
+                    badge={`${pillar.pillarNumber} · ${pillar.shortName}`}
+                    title={pillar.name}
+                    intro={pillar.focus}
+                  >
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
+                      <a
+                        href={getWhatsAppUrl(copy.discussMessage(pillar.name), lang, { service: pillar.name })}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary"
+                      >
+                        <WhatsAppIcon size={18} />
+                        <span>{copy.discuss(pillar.shortName)}</span>
+                        <ArrowUpRight aria-hidden="true" />
+                      </a>
+                      <Link href={localePath(lang, "/contact")} className="btn btn-secondary">
+                        <span>{copy.sendBrief}</span>
+                        <ArrowRight aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </SectionHeading>
+                </div>
+                <FlyIn side={reversed ? "left" : "right"} className="relative aspect-[4/3]">
+                  <div className="agx-photo h-full w-full">
+                    <FitImage src={pillar.image} alt={pillar.imageAlt} sizes="(min-width: 1024px) 40rem, 100vw" />
                   </div>
-                  <div className={`absolute -bottom-6 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift ${reversed ? "right-6" : "left-6"}`}>
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-white">
-                      <PillarIcon aria-hidden="true" className="h-5 w-5" />
-                    </span>
-                    <span className="type-label text-ink">{pillar.shortName}</span>
-                  </div>
-                </RevealItem>
-
-                <RevealItem direction={textFrom} className="space-y-7">
-                  <SectionHeading align="left" badge={pillar.shortName} title={pillar.name} intro={pillar.focus} />
-                  <ul className="hidden gap-3 sm:grid sm:grid-cols-2">
-                    {pillar.subServices.map((sub) => (
-                      <li key={sub.code} className="type-body-card flex items-start gap-2.5 font-medium text-ink">
-                        <CheckCircle2 aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-brand" />
-                        <span>{sub.name}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {/* The field's one solid button, then the brief as an outline. */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    <a
-                      href={getWhatsAppUrl(copy.discussMessage(pillar.name), lang, { service: pillar.name })}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary"
-                    >
-                      {copy.discuss(pillar.shortName)}
-                      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-                    </a>
-                    <Link href={localePath(lang, "/contact")} className="btn btn-secondary">
-                      {copy.sendBrief}
-                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </RevealItem>
+                </FlyIn>
               </div>
 
-              {/* What the field includes: Cargon service cards. */}
-              <div className="mt-14 space-y-6 md:mt-20">
+              {/* What the field includes. */}
+              <div className="mt-12 md:mt-14">
                 <Reveal>
-                  <h3 className="type-subhead text-center text-ink">{copy.includedLabel}</h3>
+                  <h3 className="type-label text-ink">{copy.includedLabel}</h3>
                 </Reveal>
-                <RevealGroup className="fit-grid rail-mobile fit-md-2 fit-lg-3" stagger={0.1}>
+                <RevealGroup className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" stagger={0.1}>
                   {pillar.subServices.map((sub) => {
                     const SubIcon = SUB_ICONS[sub.code] ?? CheckCircle2;
                     return (
-                      <RevealItem key={sub.code} className="flex">
-                        <article
-                          className={`group flex w-full flex-col rounded-3xl border border-line p-7 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
-                        >
-                          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-soft text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
-                            <SubIcon aria-hidden="true" className="h-6 w-6" />
+                      <RevealItem key={sub.code}>
+                        <article className="agx-card flex h-full flex-col">
+                          <span className="grid h-12 w-12 place-items-center rounded-full bg-brand text-white">
+                            <SubIcon aria-hidden="true" className="h-5 w-5" />
                           </span>
-                          <h4 className="type-card-title mt-6 text-ink">{sub.name}</h4>
-                          <p className="type-body-card mt-3 flex-1 text-body">{sub.description}</p>
-                          <ul className="mt-5 space-y-2 border-t border-line pt-5">
+                          <h4 className="mt-6 text-[1.25rem] font-medium leading-snug tracking-[-0.02em] text-ink">{sub.name}</h4>
+                          <p className="mt-3 flex-1 type-body-card text-body">{sub.description}</p>
+                          <ul className="mt-6 space-y-2 border-t border-line pt-5">
                             {sub.items.map((item) => (
-                              <li key={item} className="type-small flex items-start gap-2 text-body">
+                              <li key={item} className="flex items-start gap-2 type-small text-body">
                                 <CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                                 <span>{item}</span>
                               </li>
@@ -342,45 +262,38 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                 </RevealGroup>
               </div>
 
+              {/* Related work as the ruled table. */}
               {proof.length > 0 && (
-                <div className="mt-16 space-y-6">
+                <div className="mt-12">
                   <Reveal>
-                    <h3 className="type-subhead text-center text-ink">{copy.proofHeading}</h3>
+                    <h3 className="type-label text-ink">{copy.proofHeading}</h3>
                   </Reveal>
-                  <RevealGroup className="fit-grid rail-mobile fit-sm-2 fit-lg-3" stagger={0.1}>
+                  <ul className="agx-table !mt-5">
                     {proof.slice(0, PROOF_LIMIT).map((project) => (
-                      <RevealItem key={project.slug} className="flex">
-                        <Link
-                          href={localePath(lang, `/portfolio/${project.slug}`)}
-                          className={`group flex w-full flex-col overflow-hidden rounded-3xl border border-line shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-lift ${cardSurface}`}
-                        >
-                          <span className="img-zoom relative block aspect-[16/10] border-b border-line bg-surface">
-                            <Image
-                              src={project.galleryImages[0] ?? project.coverImage}
-                              alt=""
-                              fill
-                              sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-                              className="object-cover object-top"
-                            />
-                          </span>
-                          <span className="flex flex-1 flex-col gap-2 p-6">
-                            <span className="type-meta text-brand">{project.serviceTags.join(" · ")}</span>
-                            <span className="type-card-title text-ink transition-colors group-hover:text-brand">{project.title}</span>
-                            <span className="type-body-card text-body">{project.summary}</span>
-                            <span className="type-meta mt-auto inline-flex items-center gap-1.5 pt-2 text-ink">
-                              {copy.projectType[project.type]} · {project.year}
-                              <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 text-brand transition-transform duration-500 group-hover:translate-x-1" />
+                      <li key={project.slug}>
+                        <Link href={localePath(lang, `/portfolio/${project.slug}`)} className="agx-row group">
+                          <span className="hidden md:inline">{project.year}</span>
+                          <span className="hidden md:inline">{copy.projectType[project.type]}</span>
+                          <span>
+                            <strong>{project.client}</strong>
+                            <span className="block text-sm md:hidden">
+                              {project.title} · {project.year}
                             </span>
                           </span>
+                          <span className="hidden md:inline">{project.title}</span>
+                          <ArrowUpRight aria-hidden="true" className="h-5 w-5 justify-self-end text-ink transition-transform duration-500 group-hover:rotate-45 group-hover:text-brand" />
+                          <span className="agx-row-thumb" aria-hidden="true">
+                            <Image src={project.galleryImages[0] ?? project.coverImage} alt="" fill sizes="208px" className="object-cover object-top" />
+                          </span>
                         </Link>
-                      </RevealItem>
+                      </li>
                     ))}
-                  </RevealGroup>
+                  </ul>
                   {proof.length > PROOF_LIMIT && (
-                    <Reveal className="flex justify-center pt-2">
-                      <Link href={localePath(lang, "/portfolio")} className="btn btn-secondary">
-                        {copy.proofMore}
-                        <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                    <Reveal className="mt-8 flex justify-center">
+                      <Link href={localePath(lang, "/portfolio")} className="btn btn-dark">
+                        <span>{copy.proofMore}</span>
+                        <ArrowRight aria-hidden="true" />
                       </Link>
                     </Reveal>
                   )}
@@ -388,26 +301,22 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
               )}
 
               {showIotNoProof && (
-                <Reveal className="mt-16">
-                  <div className="flex flex-col gap-5 rounded-3xl border border-dashed border-brand/40 bg-brand-soft p-6 md:flex-row md:items-center md:justify-between md:gap-8 md:p-8">
-                    <div className="flex items-start gap-4">
-                      <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-card">
-                        <Cpu aria-hidden="true" className="h-6 w-6" />
-                      </span>
-                      <div className="space-y-1.5">
-                        <h3 className="type-card-title text-ink">{copy.iotNoProof.heading}</h3>
-                        <p className="type-body-card max-w-[60ch] text-body">{copy.iotNoProof.body}</p>
-                      </div>
+                <Reveal className="mt-12">
+                  <div className="flex flex-col gap-5 rounded-[1.75rem] border border-dashed border-brand/40 bg-white/80 p-7 md:flex-row md:items-center md:justify-between md:gap-8 md:p-9">
+                    <div className="max-w-[62ch] space-y-2">
+                      <h3 className="text-[1.25rem] font-medium leading-snug text-ink">{copy.iotNoProof.heading}</h3>
+                      <p className="type-body-card text-body">{copy.iotNoProof.body}</p>
                     </div>
-                    {/* Outline: the field's "Diskusikan" button above is its one primary. */}
+                    {/* Outline: the field's "Discuss" button above is its one primary. */}
                     <a
-                      href={getWhatsAppUrl(copy.iotNoProof.message, lang, { service: lang === "id" ? "Perangkat IoT & Sistem Pemantauan" : "IoT Devices & Monitoring Systems" })}
+                      href={getWhatsAppUrl(copy.iotNoProof.message, lang, { service: pillar.name })}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-secondary btn-sm shrink-0 self-start md:self-center"
+                      className="btn btn-secondary shrink-0 self-start md:self-center"
                     >
-                      {copy.iotNoProof.cta}
-                      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                      <WhatsAppIcon size={18} />
+                      <span>{copy.iotNoProof.cta}</span>
+                      <ArrowUpRight aria-hidden="true" />
                     </a>
                   </div>
                 </Reveal>
@@ -417,38 +326,28 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
         );
       })}
 
-      {/* What keeps an extended IT partner around after handover. The footer
-          links straight here (`/services#support`). */}
-      <section id="support" aria-label={copy.support.heading} className="section-standard bg-white px-4 md:px-12">
-        <div className="mx-auto max-w-[72rem]">
-          <SectionHeading badge={copy.support.badge} title={copy.support.heading} intro={copy.support.intro} />
-          <RevealGroup className="fit-grid mt-12 fit-md-2 lg:mt-14" stagger={0.12}>
-            {supportServices.map((service, index) => {
-              const Icon = SUPPORT_ICONS[service.id];
-              /* The first card takes Cargon's solid blue "active" treatment. */
-              const featured = index === 0;
-              return (
-                <RevealItem key={service.id} direction={index === 0 ? "left" : "right"} className="flex">
-                  <article
-                    className={`group flex w-full flex-col gap-6 rounded-3xl p-7 md:p-9 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 ${
-                      featured ? "bg-brand text-white shadow-lift" : "border border-line bg-white shadow-card hover:shadow-lift"
-                    }`}
-                  >
-                    <span
-                      className={`grid h-14 w-14 place-items-center rounded-2xl transition-colors duration-300 ${
-                        featured ? "bg-white/15 text-white" : "bg-brand-soft text-brand group-hover:bg-brand group-hover:text-white"
-                      }`}
-                    >
-                      <Icon aria-hidden="true" className="h-6 w-6" />
-                    </span>
-                    <div className="space-y-3">
-                      <h3 className={`type-card-title-lg ${featured ? "text-white" : "text-ink"}`}>{service.name}</h3>
-                      <p className={`type-body-card ${featured ? "text-white" : "text-body"}`}>{service.description}</p>
-                    </div>
-                    <ul className={`space-y-2.5 border-t pt-5 ${featured ? "border-white/20" : "border-line"}`}>
+      {/* Support as the template's numbered sticky panels. The footer and the
+          home page link straight here (`/services#support`). */}
+      <section id="support" aria-labelledby="support-title" className="agx-section border-t border-line">
+        <div className="agx-wrap">
+          <SectionHeading id="support-title" badge={copy.support.badge} title={copy.support.heading} intro={copy.support.intro} />
+
+          <div className="agx-stack mt-14">
+            {supportServices.map((service, index) => (
+              <article key={service.id} className="agx-panel" aria-labelledby={`support-${service.id}`}>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="agx-panel-num text-ink">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <h3 id={`support-${service.id}`} className="agx-panel-title border-b border-line pb-6">
+                  {service.name}
+                </h3>
+                <div className="agx-panel-body">
+                  <div className="flex flex-col gap-6">
+                    <p className="max-w-[48ch] type-intro text-body">{service.description}</p>
+                    <ul className="space-y-2.5">
                       {service.items.map((item) => (
-                        <li key={item} className={`type-small flex items-start gap-2 ${featured ? "text-white" : "text-body"}`}>
-                          <CheckCircle2 aria-hidden="true" className={`mt-0.5 h-4 w-4 shrink-0 ${featured ? "text-cyan" : "text-brand"}`} />
+                        <li key={item} className="flex items-start gap-2.5 type-body-card text-body">
+                          <CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -457,35 +356,40 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                       href={getWhatsAppUrl(copy.support.messages[service.id], lang, { service: service.name })}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`btn btn-sm mt-auto self-start ${featured ? "btn-secondary-light" : "btn-secondary"}`}
+                      className="btn btn-primary self-start"
                     >
-                      {copy.support.cta}
-                      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                      <WhatsAppIcon size={18} />
+                      <span>{copy.support.cta}</span>
+                      <ArrowUpRight aria-hidden="true" />
                     </a>
-                  </article>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
+                  </div>
+                  <div className="agx-panel-media">
+                    <FitImage src={SUPPORT_IMAGES[service.id]} sizes="(min-width: 900px) 45vw, 100vw" />
+                    <span className="agx-panel-tag">{supportTags[service.id]}</span>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* The page's one dark band: what every engagement comes with. */}
-      <section aria-label={copy.guaranteesLabel} data-surface="dark" className="section-standard bg-night px-4 md:px-12">
-        <div className="mx-auto max-w-[72rem]">
-          <SectionHeading tone="dark" badge={copy.guaranteesBadge} title={copy.guaranteesTitle} />
-          <RevealGroup className="fit-grid mt-12 fit-md-2" stagger={0.12}>
+      {/* What every engagement comes with, on the page's one blue band. */}
+      <section aria-labelledby="guarantees-title" data-surface="dark" className="agx-band">
+        <div className="agx-wrap">
+          <SectionHeading tone="dark" id="guarantees-title" badge={copy.guaranteesBadge} title={copy.guaranteesTitle} />
+          <RevealGroup className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2" stagger={0.12}>
             {copy.guarantees.map(({ title, description }, index) => {
               const Icon = GUARANTEE_ICONS[index] ?? Layers;
               return (
-                <RevealItem key={title} className="flex">
-                  <div className="flex w-full items-start gap-5 rounded-3xl border border-white/10 bg-white/5 p-7 md:p-8">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand text-white">
-                      <Icon aria-hidden="true" className="h-6 w-6" />
+                <RevealItem key={title}>
+                  <div className="flex h-full items-start gap-5 rounded-[1.75rem] border border-white/20 bg-white/10 p-7 md:p-8">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-brand">
+                      <Icon aria-hidden="true" className="h-5 w-5" />
                     </span>
                     <div className="space-y-2">
-                      <h3 className="type-card-title text-white">{title}</h3>
-                      <p className="type-body-card max-w-[56ch] text-midnight-muted">{description}</p>
+                      <h3 className="text-[1.25rem] font-medium leading-snug text-white">{title}</h3>
+                      <p className="max-w-[56ch] type-body-card text-white/85">{description}</p>
                     </div>
                   </div>
                 </RevealItem>
@@ -495,8 +399,8 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
           <Reveal className="mt-10">
             <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3">
               {copy.promises.map((promise) => (
-                <li key={promise} className="type-body-card flex items-center gap-2 text-white">
-                  <CheckCircle2 aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+                <li key={promise} className="flex items-center gap-2 type-body-card text-white">
+                  <CheckCircle2 aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan-soft" />
                   {promise}
                 </li>
               ))}
@@ -505,9 +409,8 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
         </div>
       </section>
 
-      {/* Every page ends on the same closing ask. */}
+      {/* Every page ends on the same bands and closing ask. */}
       <ContactCTA lang={lang} />
     </main>
   );
 }
-

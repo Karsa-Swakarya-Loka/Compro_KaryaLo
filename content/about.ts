@@ -43,10 +43,10 @@ export const aboutCopy: Localized<AboutCopy> = {
       coverage: "Lokasi & Legalitas",
     },
     hero: {
-      title: "Extended IT Partner untuk",
+      title: "IT Agency untuk",
       accent: "Bisnis yang Sedang Tumbuh",
       lede:
-        "KaryaLo membantu perusahaan menghubungkan kebutuhan bisnis dengan teknologi yang tepat. Sebagai extended IT partner, kami menyatukan pengembangan software, desain, dan perangkat IoT, dengan pendampingan sejak perencanaan hingga sistem digunakan dan dipelihara.",
+        "KaryaLo membantu perusahaan menghubungkan kebutuhan bisnis dengan teknologi yang tepat. Sebagai IT agency, kami menyatukan pengembangan software, desain, foto dan video, perangkat IoT, serta pengadaan perangkat keras, dengan pendampingan sejak perencanaan hingga sistem digunakan dan dipelihara.",
       chips: ["Terdaftar di Kementerian Hukum RI", "NIB", "Kota Bekasi, Jawa Barat"],
     },
     studio: {
@@ -144,10 +144,10 @@ export const aboutCopy: Localized<AboutCopy> = {
       coverage: "Location & Legal",
     },
     hero: {
-      title: "An Extended IT Partner for",
+      title: "An IT Agency for",
       accent: "Growing Businesses",
       lede:
-        "KaryaLo helps companies connect business needs with the right technology. As your extended IT partner, we bring software development, design, and IoT together, supporting your team from planning through launch and ongoing maintenance.",
+        "KaryaLo helps companies connect business needs with the right technology. As an IT agency, we bring software development, design, photo and video, IoT, and hardware supply together, supporting your team from planning through launch and ongoing maintenance.",
       chips: ["Registered with the Indonesian Ministry of Law", "Business ID (NIB)", "Bekasi, West Java"],
     },
     studio: {

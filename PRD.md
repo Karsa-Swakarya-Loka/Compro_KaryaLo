@@ -3,7 +3,7 @@
 **Entitas Legal:** PT Karsa Swakarya Loka  
 **Branding Publik:** KaryaLo Digital Solution  
 **Status Dokumen:** Approved & Production-Ready  
-**Terakhir Diperbarui:** 2026-10-15 (positioning Extended IT Partner, navbar baru, situs dua bahasa, halaman Industri)  
+**Terakhir Diperbarui:** 2026-11-16 (scroll scenes ala Kilnfield di Beranda, transisi slide hero "jendela terbuka"; sebelumnya 2026-10-15: positioning Extended IT Partner, navbar baru, situs dua bahasa, halaman Industri)  
 
 ---
 
@@ -98,12 +98,12 @@ Aset gambar bersumber langsung dari `D:\KaryaLo\Projects\Internal\Compro_Karyalo
 
 3. **Website Perusahaan PT Ape Gale Indonesia** (ditambahkan 2026-10-15)
    * **Kode Layanan:** `DEV-WEB`, `DSG-UI` · tahun 2026 (perlu konfirmasi pemilik)
-   * **Gambar:** `images/portofolio/apegale-compro.webp`, `apegale-layanan.webp`
+   * **Gambar:** `images/portofolio/apegale-compro-v2.webp`, `apegale-layanan-v2.webp`
    * Website dua bahasa layanan perizinan ekspatriat & TKA: halaman per layanan, GARIS, pustaka regulasi, berita, formulir minta penawaran.
 
 4. **Website Perusahaan Affirmate Administrative** (ditambahkan 2026-10-15)
    * **Kode Layanan:** `DEV-WEB`, `DSG-UI` · tahun 2026
-   * **Gambar:** `images/portofolio/affirmate-compro.webp`, `affirmate-services.webp`, `affirmate-network.webp`
+   * **Gambar:** `images/portofolio/affirmate-compro-v2.webp`, `affirmate-services-v2.webp`, `affirmate-network-v2.webp`
    * Website dua bahasa (EN/ID) unit korporat & administrasi Affirmate Group.
 
 5. **Sistem ERP Konveksi HIJ** (ditambahkan 2026-10-15)
@@ -114,7 +114,7 @@ Aset gambar bersumber langsung dari `D:\KaryaLo\Projects\Internal\Compro_Karyalo
 ### 3.1b Produk KaryaLo (live, milik sendiri)
 1. **DeliaStore: Toko Top Up Game & Produk Digital** (ditambahkan 2026-10-15, wajib tampil; ikut tampil di Beranda)
    * **Kode Layanan:** `DEV-WEB`, `DEV-ENT`, `DSG-UI` · 2026 · tipe `product` (label "Produk KaryaLo", bukan proyek klien/purwarupa)
-   * **Gambar:** `images/portofolio/deliastore.webp`, `deliastore-track.webp`; sampul `mockup/deliastore.webp`
+   * **Gambar:** `images/portofolio/deliastore-v2.webp`, `deliastore-track.webp`; sampul `mockup/deliastore.webp`
    * Next.js 16 + PostgreSQL, pembayaran DOKU (QRIS/VA), pengiriman otomatis Digiflazz, flash sale & voucher, poin member (login WA), lacak pesanan, dasbor admin, PWA. Juga jadi bukti di Industri "Produk Digital & Pembayaran".
 
 Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra & nomor pesanan diburamkan), dan dasbor admin (omzet diburamkan).
@@ -127,6 +127,12 @@ Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra &
 1. **KaryaLo Executive Analytics Dashboard** (`images/prototype/karyalo-admin.png`) — `DEV-ENT`
 2. **KaryaLo SaaS Storefront Platform** (`images/prototype/karyalo-store.png`) — `DEV-WEB`
 3. **KaryaLo Digital Voucher & Top-Up Engine** (`images/prototype/karyalo-topup.png`) — `DEV-ENT`
+4. **Summarevent: Tiket Event dengan Pilih Kursi** (ditambahkan 2026-11-16) — `DEV-WEB`, `DEV-ENT`, `DSG-UI` · 2026 · tipe `prototype` (label "Purwarupa internal"), slug `summarevent-tiket-event`
+   * **Sumber:** repo `Karsa-Swakarya-Loka/summarevent` (lokal: `09_PORTOFOLIO/Event/summarevent`) dan demo `summarevent.vercel.app`. Purwarupa tim untuk **Bandung Build Challenge 2026** (tema Event Ticketing System) dengan skenario event Summarecon Mall Bandung; **bukan proyek klien yang dikontrak**.
+   * **Isi:** pengunjung memilih kursi dari denah (kursi ditahan dengan hitung mundur, satu kursi satu pemesan, tawaran kursi terdekat bila kalah rebutan); tiket lewat bayar, daftar gratis, atau tukar struk; satu e-ticket QR bertanda tangan per kursi; dashboard dan wizard untuk panitia; layar scan untuk petugas; PWA; pemeriksaan WCAG 2.1 AA otomatis di tiga peran. Stack: React 19, Vite, Tailwind CSS, Convex.
+   * **Batas yang ditulis jujur di studi kasus:** pembayaran, OTP, WhatsApp, dan email masih simulasi. Tidak ada angka dampak yang ditampilkan (sengaja tanpa `impact`, karena catatan "diamati dari pemakaian internal" tidak sesuai).
+   * **Gambar:** sampul `images/portofolio/mockup/summarevent.webp` (empat poster HP dari repo, bukan laptop, karena aplikasinya mobile-first; hanya tampil di arsip Portfolio, tidak masuk slider hero), galeri `summarevent-alur.webp` (empat poster) dan `summarevent-arsitektur.webp` (diagram arsitektur). Semua dari aset repo sendiri.
+   * **Tidak ditampilkan:** nama anggota tim (aturan tim tanpa nama), tautan ke situs demo, dan angka Lighthouse/keamanan dari README.
 
 ---
 
@@ -140,6 +146,14 @@ Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra &
 * **Ink `#0E1A2E`** untuk judul, **Body `#5A6578`** untuk paragraf (kontras 5,9:1 di putih).
 * **Surface `#F5F7FB`** untuk section selang-seling dan banner halaman, **Line `#E3E8F0`** untuk garis.
 * **Night `#071430`**: satu band gelap per halaman.
+
+#### Audit kontras teks (2026-11-16)
+Audit seluruh halaman (Beranda, Tentang, Services, Portfolio + studi kasus, Industri, Kontak, Produk, legal) dengan pemeriksaan rasio kontras otomatis dan tinjauan kode. Temuan dan perbaikan:
+* **Cyan `#3ABBCE` di atas biru `#1B5FD1` hanya 2,5:1** (label "Kantor & Studio", lencana banner Lima Tahap, ikon centang kartu layanan, ikon kontak di CTA). Ditambah token **`cyan-soft` `#BDF1FA`** (4,7:1 di atas biru) untuk teks dan ikon cyan di atas biru. Cyan biasa tetap dipakai di atas band gelap `night` (≈8:1) dan untuk garis dekoratif.
+* **`text-white/80` di atas biru** (kotak legalitas Tentang Kami, ±4,3:1) diganti putih penuh.
+* **Gradien foto kartu Services versi ponsel** terlalu tipis di tengah (45%), jadi teks putih di atas foto terang kurang terbaca. Diganti `ink/95 → ink/75 → ink/10`.
+* **Placeholder form** `#7D879A` (3,6:1) diganti `#66718A` (4,9:1).
+* **Aturan:** di atas biru merek hanya putih penuh atau `cyan-soft`; jangan putih transparan, cyan biasa, atau `midnight-muted` (2,9:1 di atas biru; hanya untuk band `night`). Teks dekoratif besar (`sc-ticker`, angka outline rail) berstatus `aria-hidden` dan dikecualikan.
 
 ### 4.2 Tipografi
 * Satu keluarga: **Outfit** (`app/fonts.ts`), judul weight 600 tanpa huruf kapital.
@@ -156,6 +170,13 @@ Galeri Alina diperbarui dengan tangkapan baru: toko (katalog), OMS (nama mitra &
 * Reveal saat scroll: geser 40px, 0,9 detik, berurutan per kartu; gambar zoom pelan saat hover; hero berupa slider 6 proyek dengan panel miring dan caption di tengah bawah laptop (bilah progres + nomor slide), **tanpa tombol jeda** (diminta pemilik). Slider berganti tiap 6,5 detik; saat kursor berada di slider tetap berjalan tetapi 15 detik per slide; memilih slide memulai ulang hitungan, bukan menghentikan. Slider hanya tertahan saat pengguna keyboard berada di kontrolnya, dan tidak berjalan untuk *reduced motion*.
 * **Loader logo:** potongan logo KaryaLo menyatu, wordmark muncul, lalu bar progres. Tampil di setiap muat halaman penuh, baik kunjungan pertama maupun *refresh* (keputusan pemilik 2026-10-15; sebelumnya sekali per sesi). Tidak tampil saat berpindah halaman di dalam situs. Durasinya sekitar 1,5 detik, dan dilewati bila pengunjung memilih *reduced motion*. Ukuran: logo 7,25rem, wordmark 1,875rem, bar 12rem × 4px.
 * Semua animasi mati bila `prefers-reduced-motion` aktif.
+
+### 4.6 Scroll Scenes (2026-11-16)
+Animasi dan penempatan gambar di Beranda mengadopsi teknik dari template Kilnfield (8b.com/templates/kilnfield) atas permintaan pemilik. Teknik dan struktur ditiru; kode, foto, dan palet Kilnfield tidak disalin. Warna, font, dan konten tetap KaryaLo.
+* **Teknologi:** CSS `animation-timeline` (view timeline) di `app/scroll-scenes.css`, ditambah satu hook `components/motion/useSceneMeasure.ts` yang mengukur variabel CSS (jarak rail, offset kartu). Tanpa pustaka tambahan.
+* **Gerbang:** aktif hanya bila browser mendukung `animation-timeline: view()` (Chrome, Edge, Safari 26+) **dan** pengunjung tidak memilih `prefers-reduced-motion`. Selain itu semua seksi kembali ke tata letak biasa (portofolio jadi baris yang bisa digeser, layanan accordion biasa, angka dan foto diam).
+* **Daftar scene:** rail portofolio (pin + geser horizontal, jarak diukur: lebar rail dikurangi lebar layar); layanan (kartu dibagikan, tidak di-pin); lima tahap (angka mendarat); cara bermitra dan studio (foto bergeser pelan di dalam bingkai, `scale 1.14`, ±5%); masalah (sorot menyapu kutipan); hero (laptop naik lebih lambat); ticker slogan di CTA.
+* **Aturan:** jangan pin seksi yang isinya lebih tinggi dari layar atau yang judulnya bisa tertinggal di atas; jangan animasikan di dalam kontainer yang bisa digeser horizontal di ponsel (`rail-mobile`); animasi memakai properti `translate`/`rotate`/`scale` terpisah agar tidak bentrok dengan `transform` dari `motion`.
 
 ### 4.5 Screenshot Berlatar Putih
 Screenshot dashboard berlatar putih (Alina, KaryaLo) tetap dibungkus bingkai browser tipis dengan border `line` dan bayangan lembut agar tidak menyatu dengan latar putih.
@@ -188,18 +209,18 @@ Bahasa Indonesia tanpa awalan, bahasa Inggris di `/en/...`. Masing-masing punya 
    * **Caption kaca di tengah bawah laptop** sengaja pendek (2026-10-16): jenis proyek · bidang (kecil, cyan), judul proyek, lalu bilah slide dan nomor 01/06. Deskripsi satu kalimat dihapus agar laptop tetap jadi fokus.
    * **Urutan slide:** Alina, DeliaStore, ERP HIJ, Affirmate, Ape Gale, website HIJ (proyek klien dan produk sendiri, tanpa purwarupa).
    * **Gaya mengikuti Cargon:** panel miring berisi foto duotone biru (`hero-panel.webp`), laptop berdiri di depannya, dan laptop serta caption berada di tengah panel.
-   * **Penyempurnaan 3D:** laptop masuk dari kanan sambil berayun, lalu melayang dengan bayangan di lantai; dengan mouse, laptop condong ke arah kursor dan foto bergeser berlawanan (paralaks); lantai garis perspektif dan sorotan cyan di panel.
+   * **Gerak laptop (diubah 2026-11-16, izin pemilik "boleh diubah jika memengaruhi desain yang bagus"):** ayunan 3D (putar `rotateY`, masuk dari kanan) dan kemiringan laptop mengikuti mouse **dihapus**. Pergantian slide kini seperti jendela terbuka (ala hero Kilnfield): laptop berikutnya terbuka ke atas dari tepi bawah dengan `clip-path` (0,9 detik, `cubic-bezier(.6,0,.2,1)`) menutupi laptop sebelumnya yang naik sedikit lalu disembunyikan. Laptop tetap melayang pelan dengan bayangan di lantai. Foto panel masih bergeser berlawanan arah mouse (paralaks); lantai garis perspektif dan sorotan cyan tetap. Di desktop, laptop naik sedikit lebih lambat dari halaman saat di-scroll (`animation-timeline: scroll()`, 9vh).
    * Setiap laptop menautkan ke studi kasusnya. Tanpa tombol jeda.
    * **Satu tombol solid per tampilan pertama:** tombol WhatsApp di navbar tampil biru muda saat halaman di posisi atas, dan baru solid setelah bar terisi saat di-scroll.
-2. **Kenapa KaryaLo:** kolase foto studio, empat prinsip kerja, kutipan deskripsi perusahaan, tombol ke Tentang Kami.
-3. **Layanan:** kartu yang melebar untuk tiga bidang + layanan pendamping.
-4. **Portofolio:** tiga kartu gambar tinggi menuju studi kasus; testimoni hanya tampil setelah disetujui klien.
+2. **Kenapa KaryaLo:** kolase foto studio (foto tim di atas; dua foto bawah sejak 2026-11-16 adalah visual Desain & Branding `images/pdf/design-brand-v4.webp` dan IoT & Perangkat `images/pdf/iot-monitor-v4.webp`, dari pemilik), empat prinsip kerja, kutipan deskripsi perusahaan, tombol ke Tentang Kami.
+3. **Layanan:** kartu yang melebar untuk tiga bidang + layanan pendamping. Foto kartu Desain & Branding dan IoT & Perangkat memakai dua visual dari pemilik yang sama dengan seksi Kenapa KaryaLo (potret 4:5; di kartu desktop diangkur ke bawah lewat `SERVICE_FOCUS_WIDE` agar mockup terlihat di atas panel biru). Gambar ini juga tampil di halaman /services dan di sitemap gambar. Scroll scene (desktop ≥1024px): kartu mulai menumpuk di tengah baris lalu "dibagikan" ke tempatnya dengan sedikit putaran saat baris masuk layar, selesai begitu baris terlihat penuh. **Tidak di-pin** (versi pin sempat dicoba 2026-11-16 tetapi judul tertinggal di atas, jadi dibuang). Tablet 768–1023px: kartu masuk bergantian dari kiri dan kanan.
+4. **Portofolio:** rail horizontal yang menempel di layar (scroll scene): enam proyek (Alina, DeliaStore, ERP HIJ, Affirmate, Ape Gale, website HIJ; tanpa purwarupa) bergeser ke samping saat di-scroll ke bawah, dengan angka outline besar di belakang tiap laptop, rasio foto selang-seling, dan heading sebagai panel pertama. Tanpa scroll timeline atau dengan reduced motion: baris yang bisa digeser. Testimoni hanya tampil setelah disetujui klien.
 5. **Studio:** foto studio + kotak komitmen biru dengan angka (7–14 hari kerja sampai purwarupa, 100% source code milik klien, 3 bidang dalam satu tim; janji yang sudah ada di situs, bukan metrik), lalu band gelap berisi keahlian tim dan cakupan wilayah.
-6. **Masalah yang Sering Kami Bereskan:** berbentuk kartu testimoni tanpa nama/bintang, ditutup tombol WhatsApp utama.
-7. **Lima Tahap Pengerjaan:** kartu bernomor + panel purwarupa.
+6. **Masalah yang Sering Kami Bereskan:** berbentuk kartu testimoni tanpa nama/bintang, ditutup tombol WhatsApp utama. Garis sorot biru muda menyapu di belakang kutipan masalah saat kartu masuk layar.
+7. **Lima Tahap Pengerjaan:** kartu bernomor + panel purwarupa. Lingkaran angka membesar dari samping lalu mendarat di tempatnya saat kartu di-scroll.
 8. **Legalitas yang Bisa Dicek:** empat kartu fakta + permintaan dokumen (tombol sekunder).
 9. **FAQ:** accordion di tengah.
-10. **CTA penutup:** band biru dengan garis lengkung putih.
+10. **CTA penutup:** band biru dengan garis lengkung putih. Di atasnya tiga baris slogan besar (`siteText.tagline`, dekoratif, `aria-hidden`) bergerak berlawanan arah saat di-scroll.
 
 Bagian Cargon yang belum punya sumber nyata di KaryaLo (testimoni, blog, video, statistik persen) tidak dibuat-buat: diisi konten KaryaLo yang ada atau tidak ditampilkan.
 

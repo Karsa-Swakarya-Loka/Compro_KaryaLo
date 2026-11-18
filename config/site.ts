@@ -35,10 +35,10 @@ export const siteConfig = {
   phone,
   /**
    * Public profiles that independently corroborate this entity, used for schema `sameAs`.
-   * Intentionally empty: no verified profiles exist yet. Add the real URLs once the
-   * Google Business Profile and LinkedIn company page are live.
+   * Google Business Profile is confirmed (same listing as `mapsUrl`). Add the LinkedIn
+   * company page URL here once it exists.
    */
-  sameAs: [] as string[],
+  sameAs: ["https://maps.app.goo.gl/3YrD56ctLmne1fGR8"] as string[],
 };
 
 /**
@@ -61,10 +61,10 @@ export const siteText: Localized<{
   defaultWhatsappMessage: string;
 }> = {
   id: {
-    positioning: "Extended IT Partner",
+    positioning: "IT Agency",
     tagline: "Satu mitra, dari ide hingga implementasi.",
     description:
-      "Mitra teknologi dari Kota Bekasi untuk pengembangan software, desain, dan IoT. Kami mendampingi bisnis Anda dari perencanaan hingga implementasi dan pemeliharaan.",
+      "IT agency dan software house dari Kota Bekasi: pengembangan software, desain, foto dan video, IoT, serta pengadaan komputer dan perangkat jaringan. Kami mendampingi bisnis Anda dari perencanaan hingga implementasi dan pemeliharaan.",
     workingHours: "Senin sampai Jumat: 09.00 sampai 18.00 WIB | Sabtu & Minggu: dengan janji temu",
     legalEntity: "Perseroan Perorangan (SK Kementerian Hukum RI)",
     kbli: "62019: Aktivitas Pemrograman Komputer Lainnya",
@@ -73,10 +73,10 @@ export const siteText: Localized<{
       "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai kebutuhan software, desain, atau perangkat IoT untuk perusahaan kami.",
   },
   en: {
-    positioning: "Extended IT Partner",
+    positioning: "IT Agency",
     tagline: "One partner, from idea to implementation.",
     description:
-      "A technology partner based in Bekasi, Indonesia, for software, design, and IoT. We support your business from planning through implementation and maintenance.",
+      "An IT agency and software house in Bekasi, Indonesia: software development, design, photo and video, IoT, and supply of computers and networking hardware. We support your business from planning through implementation and maintenance.",
     workingHours: "Monday to Friday: 09:00 to 18:00 WIB (UTC+7) | Saturday & Sunday: by appointment",
     legalEntity: "Sole-owner limited company (Perseroan Perorangan), ratified by the Indonesian Ministry of Law",
     kbli: "62019: Other Computer Programming Activities",

@@ -10,8 +10,23 @@ export const faqData: Localized<FAQItem[]> = {
   id: [
     {
       id: "faq-extended-partner",
-      question: "Apa peran KaryaLo sebagai extended IT partner?",
-      answer: "Kami mendampingi kebutuhan teknologi perusahaan, mulai dari pemetaan kebutuhan dan pengembangan hingga pemeliharaan sistem. Layanan ini sesuai untuk bisnis yang belum memiliki tim IT atau memerlukan dukungan tambahan bagi tim internal. Keahlian kami mencakup software, desain, dan perangkat IoT, dengan ruang lingkup kerja sama yang disepakati sejak awal."
+      question: "Apa itu KaryaLo, dan apa bedanya IT agency dengan software house?",
+      answer: "KaryaLo adalah IT agency dan software house di Kota Bekasi milik PT Karsa Swakarya Loka. Software house berfokus membangun software; sebagai IT agency, kami juga mengerjakan desain, foto dan video, perangkat IoT, serta pengadaan komputer dan perangkat jaringan, sehingga kebutuhan IT dan visual bisnis Anda ditangani satu mitra. Kami mendampingi mulai dari pemetaan kebutuhan hingga pemeliharaan, dengan ruang lingkup yang disepakati sejak awal."
+    },
+    {
+      id: "faq-sistem-umkm",
+      question: "Apakah KaryaLo melayani pembuatan sistem internal untuk UMKM?",
+      answer: "Ya. Kami membuat sistem internal seperti kasir dan stok, pencatatan pesanan, dashboard laporan, serta toko online untuk usaha yang belum memiliki tim IT. Pekerjaan dimulai dari pemetaan kebutuhan tanpa kewajiban melanjutkan proyek, lalu purwarupa yang bisa dicoba sebelum kode ditulis. Biaya disampaikan melalui penawaran sesuai lingkup."
+    },
+    {
+      id: "faq-foto-video",
+      question: "Apakah KaryaLo menyediakan jasa fotografi dan videografi?",
+      answer: "Ya. Kami memproduksi foto produk, foto profil perusahaan, video company profile, dan dokumentasi kegiatan usaha. Hasilnya diselaraskan dengan identitas merek dan materi promosi Anda. Lingkup, lokasi, dan jadwal pengambilan gambar disepakati lewat penawaran."
+    },
+    {
+      id: "faq-hardware-mikrotik",
+      question: "Apakah KaryaLo menjual komputer dan perangkat jaringan seperti MikroTik?",
+      answer: "Ya. Kami menyediakan komputer, laptop, serta perangkat jaringan seperti router MikroTik untuk kantor dan usaha. Spesifikasi dipilih sesuai kebutuhan Anda dan harga disampaikan melalui penawaran. Pengadaan dapat digabung dengan layanan software atau IoT agar semuanya saling terhubung."
     },
     {
       id: "faq-area-layanan",
@@ -52,8 +67,23 @@ export const faqData: Localized<FAQItem[]> = {
   en: [
     {
       id: "faq-extended-partner",
-      question: "What does KaryaLo do as an extended IT partner?",
-      answer: "We support your technology needs from discovery and development through system maintenance. Our services suit businesses without an IT team and those seeking additional expertise for an internal team. We cover software, design, and IoT, with the scope of each engagement agreed at the outset."
+      question: "What is KaryaLo, and how is an IT agency different from a software house?",
+      answer: "KaryaLo is an IT agency and software house in Bekasi, owned by PT Karsa Swakarya Loka. A software house focuses on building software; as an IT agency we also handle design, photo and video, IoT devices, and supply of computers and networking equipment, so your IT and visual needs sit with one partner. We support you from discovery through maintenance, with the scope agreed at the outset."
+    },
+    {
+      id: "faq-sistem-umkm",
+      question: "Does KaryaLo build internal systems for small businesses?",
+      answer: "Yes. We build internal systems such as point of sale and inventory, order tracking, reporting dashboards, and online stores for businesses without an IT team. Work starts with a no-obligation discovery step, then a clickable prototype before any code is written. Pricing is given through a quotation based on scope."
+    },
+    {
+      id: "faq-foto-video",
+      question: "Does KaryaLo offer photography and videography?",
+      answer: "Yes. We produce product photos, company profile photos, company profile videos, and documentation of business activities, aligned with your brand identity and promotional material. Scope, location, and shooting schedule are agreed through a quotation."
+    },
+    {
+      id: "faq-hardware-mikrotik",
+      question: "Does KaryaLo sell computers and networking equipment such as MikroTik?",
+      answer: "Yes. We supply computers, laptops, and networking equipment such as MikroTik routers for offices and businesses. Specifications are chosen for your needs and pricing is given through a quotation. Supply can be combined with software or IoT work so everything fits together."
     },
     {
       id: "faq-area-layanan",

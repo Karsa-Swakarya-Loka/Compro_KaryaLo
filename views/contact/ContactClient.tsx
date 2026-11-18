@@ -1,55 +1,51 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import FitImage from "@/components/ui/FitImage";
 import Link from "next/link";
 import { siteConfig, siteText, buildWhatsAppMessage, getWhatsAppUrlFromText, whatsappUrl } from "@/config/site";
 import { contactCopy } from "@/content/contact-page";
 import { commonCopy } from "@/content/common";
 import { getServices, supportServicesData } from "@/data/services";
 import { type Locale, localePath } from "@/lib/i18n";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Building2,
-  CalendarClock,
-  CircleCheck,
-  Clock,
-  Compass,
-  Loader2,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Plug,
-  ShieldCheck,
-  Target,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, CircleCheck, Loader2, MapPin, ShieldCheck } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { EASE_EXPO } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
+import { BlurText, FlipIn, FlyIn } from "@/components/motion/Entrance";
 import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import PageBanner from "@/components/ui/PageBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProfileDownload from "@/components/ui/ProfileDownload";
 import { trackConversion } from "@/lib/analytics";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 const DESCRIPTION_MAX = 3000;
 /** Brief "preparing" beat so the button acknowledges the press before the preview lands. */
 const PREPARE_DELAY_MS = 650;
 
-/* Cargon form fields: soft grey fills, the brand blue on focus. */
+/* Fields: white on the blush panel, 16px text (no zoom on phones), the brand blue on focus. */
 const fieldClass =
-  "w-full px-4 py-3.5 rounded-xl bg-surface border border-line text-base text-ink focus:outline-none focus:bg-white focus:border-brand focus:ring-2 focus:ring-brand/15";
+  "w-full min-h-[3.25rem] px-4 py-3.5 rounded-2xl bg-white border border-line text-base text-ink placeholder:text-body/70 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15";
 
 const labelClass = "block type-label text-ink";
 
-/* Cargon's contact info card: an icon circle, a title, a line of detail. */
-const infoCardClass = "group flex items-start gap-4 lg:flex-1 rounded-3xl border border-line bg-white p-6 shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]";
-/** On desktop each card grows by an equal share of the column's spare height. */
-const infoItemClass = "lg:flex lg:flex-auto lg:flex-col";
-const infoIconClass =
-  "flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand transition-colors duration-300";
+/** The template's small uppercase grey label over a large value. */
+const rowLabel = "text-[0.8125rem] font-bold uppercase tracking-[0.14em] text-body";
 
-const BEFORE_ICONS = [Target, CalendarClock, Plug];
+/**
+ * Labels carry their own " *" in the copy; it is drawn here as a brand-blue
+ * mark (hidden from screen readers, which get the `required` attribute).
+ */
+function FieldLabel({ htmlFor, text, required = false }: { htmlFor: string; text: string; required?: boolean }) {
+  const bare = text.replace(/\s*\*\s*$/, "");
+  return (
+    <label htmlFor={htmlFor} className={labelClass}>
+      {bare}
+      {required && <span aria-hidden="true" className="ml-1 text-brand">*</span>}
+    </label>
+  );
+}
 
 export default function ContactClient({ lang }: { lang: Locale }) {
   const copy = contactCopy[lang];
@@ -143,7 +139,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
   const nearLimit = descriptionLength > DESCRIPTION_MAX * 0.9;
 
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen flex flex-col bg-white">
+    <main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col">
       {/*
         The page's one solid button sits in the banner: someone who came to
         /contact to talk should not have to scroll past a form to find the
@@ -162,18 +158,12 @@ export default function ContactClient({ lang }: { lang: Locale }) {
           data-wa-primary=""
           className="btn btn-lg btn-primary group"
         >
-          <MessageSquare aria-hidden="true" className="h-5 w-5" />
+          <WhatsAppIcon size={20} />
           <span>{copy.hero.whatsappCta}</span>
           <ArrowSwap />
         </a>
         <ProfileDownload lang={lang} />
-        <p className="type-small text-body">
-          {copy.hero.emailLead}{" "}
-          <a href={`mailto:${siteConfig.email}`} className="font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand transition-colors">
-            {siteConfig.email}
-          </a>
-        </p>
-        <ul className="flex basis-full flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-1">
+        <ul className="flex basis-full flex-wrap items-center gap-x-6 gap-y-2 pt-2">
           {copy.hero.badges.map((badge) => (
             <li key={badge} className="flex items-center gap-2 type-small text-ink">
               <CircleCheck aria-hidden="true" className="h-4 w-4 shrink-0 text-brand" />
@@ -183,21 +173,76 @@ export default function ContactClient({ lang }: { lang: Locale }) {
         </ul>
       </PageBanner>
 
-      {/* Cargon's contact block: the message form on the left, contact cards stacked on the right. */}
-      <section className="section-standard bg-white px-4 md:px-12">
-        <div className="mx-auto grid max-w-[72rem] grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-
-          <Reveal direction="left" className="space-y-6 rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8 md:p-10 lg:col-span-7">
-            <div className="space-y-2">
-              <h2 className="type-card-title-lg text-ink">{copy.form.heading}</h2>
-              <p className="type-small text-body">{copy.form.intro}</p>
+      {/* Agenciex's contact block: one large photograph, then label / value pairs. */}
+      <section aria-labelledby="channels-title" className="pb-12 md:pb-16">
+        <div className="agx-wrap">
+          <FlyIn side="left">
+            <div className="agx-photo relative aspect-[4/3] sm:aspect-[16/8] lg:aspect-[16/6]">
+              <FitImage src="/images/pdf/desk-contact-v2.webp" sizes="(min-width: 1344px) 1264px, 100vw" />
             </div>
+          </FlyIn>
 
+          <h2 id="channels-title" className="sr-only">{copy.channels.heading}</h2>
+          <RevealGroup className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 md:mt-12 lg:grid-cols-4" stagger={0.08}>
+            <RevealItem className="space-y-3">
+              <p className={rowLabel}>{copy.channels.whatsappTitle}</p>
+              <p className="agx-underline font-medium">
+                <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="inline-block whitespace-nowrap">
+                  {siteConfig.phone}
+                </a>
+              </p>
+              <p className="type-small text-body">{copy.channels.whatsappSubtitle}</p>
+            </RevealItem>
+
+            <RevealItem className="space-y-3">
+              <p className={rowLabel}>{copy.channels.emailTitle}</p>
+              <p className="agx-underline font-medium">
+                <a href={`mailto:${siteConfig.email}`} className="inline-block break-all">
+                  {siteConfig.email}
+                </a>
+              </p>
+            </RevealItem>
+
+            <RevealItem className="space-y-3">
+              <p className={rowLabel}>{copy.channels.hoursTitle}</p>
+              <ul className="space-y-1 text-[1.0625rem] leading-snug text-ink">
+                {text.workingHours.split("|").map((line) => (
+                  <li key={line}>{line.trim()}</li>
+                ))}
+              </ul>
+            </RevealItem>
+
+            <RevealItem className="space-y-3">
+              <p className={rowLabel}>{siteConfig.companyName}</p>
+              <p className="text-[1.0625rem] leading-snug text-ink">{siteConfig.address}</p>
+              <p className="type-meta text-body">NIB: {siteConfig.nib}</p>
+              <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-link text-brand">
+                <MapPin aria-hidden="true" className="h-4 w-4" />
+                <span>{copy.channels.mapsLink}</span>
+              </a>
+            </RevealItem>
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* The written brief: header on the left, the form in a blush panel on the right. */}
+      <section aria-labelledby="form-title" className="agx-section !pt-0">
+        <div className="agx-wrap grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="space-y-5 lg:col-span-5 lg:pt-4">
+            <FlipIn id="form-title" className="agx-h2 max-w-[14ch]">{copy.form.heading}</FlipIn>
+            <BlurText className="agx-lede">{copy.form.intro}</BlurText>
+            <Reveal delay={0.2} className="flex items-start gap-2.5 type-small text-body">
+              <ShieldCheck aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+              <span>{copy.form.confidentiality}</span>
+            </Reveal>
+          </div>
+
+          <Reveal className="agx-card lg:col-span-7">
             <form onSubmit={handleSubmit} onChange={() => { setPreparedMessage(null); setEmailSent(false); }} onInput={(event) => { const field = event.target; if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) field.setCustomValidity(""); }} className="space-y-5">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div className="field space-y-2">
-                  <label htmlFor="name" className={labelClass}>{copy.form.nameLabel}</label>
+                  <FieldLabel htmlFor="name" text={copy.form.nameLabel} required />
                   <input id="name" name="name" autoComplete="name" maxLength={120}
                     type="text"
                     required
@@ -210,7 +255,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                 </div>
 
                 <div className="field space-y-2">
-                  <label htmlFor="company" className={labelClass}>{copy.form.companyLabel}</label>
+                  <FieldLabel htmlFor="company" text={copy.form.companyLabel} required />
                   <input id="company" name="company" autoComplete="organization" maxLength={180} required
                     type="text"
                     placeholder={copy.form.companyPlaceholder}
@@ -222,9 +267,9 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div className="field space-y-2">
-                  <label htmlFor="service" className={labelClass}>{copy.form.serviceLabel}</label>
+                  <FieldLabel htmlFor="service" text={copy.form.serviceLabel} required />
                   <select id="service" name="service" required
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -239,7 +284,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                 </div>
 
                 <div className="field space-y-2">
-                  <label htmlFor="budget" className={labelClass}>{copy.form.budgetLabel}</label>
+                  <FieldLabel htmlFor="budget" text={copy.form.budgetLabel} />
                   <select id="budget" name="budget"
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
@@ -255,10 +300,10 @@ export default function ContactClient({ lang }: { lang: Locale }) {
 
               <div className="field space-y-2">
                 <div className="flex items-baseline justify-between gap-3">
-                  <label htmlFor="description" className={labelClass}>{copy.form.descriptionLabel}</label>
+                  <FieldLabel htmlFor="description" text={copy.form.descriptionLabel} required />
                   <span
                     aria-hidden="true"
-                    className={`type-meta transition-colors duration-300 ${nearLimit ? "text-brand font-semibold" : "text-body"}`}
+                    className={`type-meta tabular-nums transition-colors duration-300 ${nearLimit ? "text-brand font-semibold" : "text-body"}`}
                   >
                     {descriptionLength} / {DESCRIPTION_MAX}
                   </span>
@@ -276,14 +321,18 @@ export default function ContactClient({ lang }: { lang: Locale }) {
 
               <p id="description-help" className="type-small text-body">{copy.form.descriptionHelp}</p>
 
-              {/* The section's one solid button: it hands the brief to WhatsApp. */}
+              {/*
+                The panel's one solid button hands the brief over. Once the
+                preview is up, its "Continue to WhatsApp" becomes the solid
+                one and this steps back to an outline.
+              */}
               <motion.button
                 type="submit"
                 disabled={isPreparing}
                 aria-busy={isPreparing}
                 whileTap={isPreparing ? undefined : { scale: 0.985 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="btn btn-lg btn-primary w-full disabled:opacity-100 disabled:cursor-progress"
+                className={`btn btn-lg w-full disabled:opacity-100 disabled:cursor-progress ${preparedMessage ? "btn-secondary" : "btn-primary"}`}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {isPreparing ? (
@@ -314,11 +363,6 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                 </AnimatePresence>
               </motion.button>
 
-              <div className="flex items-center justify-center gap-2 type-small text-body">
-                <ShieldCheck aria-hidden="true" className="h-4 w-4 shrink-0 text-brand" />
-                <span>{copy.form.confidentiality}</span>
-              </div>
-
               <AnimatePresence initial={false}>
                 {preparedMessage && (
                   <motion.div
@@ -329,10 +373,11 @@ export default function ContactClient({ lang }: { lang: Locale }) {
                     transition={{ duration: 0.45, ease: EASE_EXPO }}
                     className="overflow-hidden"
                   >
-                    <div ref={previewRef} tabIndex={-1} role="region" aria-label={copy.form.previewLabel} className="message-preview space-y-4 rounded-2xl border border-line bg-surface p-5">
+                    <div ref={previewRef} tabIndex={-1} role="region" aria-label={copy.form.previewLabel} className="message-preview space-y-4 rounded-2xl border border-line bg-white p-5">
                       <p role="status" className="type-card-title text-ink">{emailSent ? copy.form.sentStatus : copy.form.previewStatus}</p>
                       <p className="whitespace-pre-wrap break-words type-small text-body">{preparedMessage}</p>
                       <a href={getWhatsAppUrlFromText(preparedMessage)} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                        <WhatsAppIcon size={18} />
                         {copy.form.continueToWhatsapp} <ArrowUpRight aria-hidden="true" size={16} />
                       </a>
                       <p className="type-small text-body">{emailSent ? copy.form.sentHint : copy.form.previewHint}</p>
@@ -342,137 +387,47 @@ export default function ContactClient({ lang }: { lang: Locale }) {
               </AnimatePresence>
             </form>
           </Reveal>
-
-          {/*
-            Direct channels and the registered office, as stacked contact cards.
-            On desktop the heading drops to the form heading's line (the card's
-            padding) and the cards share out the rest, so both columns end together.
-          */}
-          <div className="space-y-5 lg:col-span-5 lg:flex lg:flex-col lg:gap-5 lg:space-y-0 lg:pt-10">
-            <Reveal direction="right">
-              <h2 className="type-card-title-lg text-ink">{copy.channels.heading}</h2>
-            </Reveal>
-
-            <RevealGroup className="space-y-5 lg:flex lg:flex-1 lg:flex-col lg:gap-5 lg:space-y-0" stagger={0.1}>
-              <RevealItem direction="right" className={infoItemClass}>
-                <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className={`${infoCardClass} hover:-translate-y-1 hover:shadow-lift`}>
-                  <span className={`${infoIconClass} group-hover:bg-brand group-hover:text-white`}>
-                    <MessageSquare aria-hidden="true" className="h-6 w-6" />
-                  </span>
-                  <span className="flex-1 space-y-1">
-                    <span className="block type-card-title text-ink group-hover:text-brand transition-colors">{copy.channels.whatsappTitle}</span>
-                    <span className="block type-small text-body">{copy.channels.whatsappSubtitle}</span>
-                  </span>
-                  <ArrowUpRight aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-brand" />
-                </a>
-              </RevealItem>
-
-              <RevealItem direction="right" className={infoItemClass}>
-                <a href={`mailto:${siteConfig.email}`} className={`${infoCardClass} hover:-translate-y-1 hover:shadow-lift`}>
-                  <span className={`${infoIconClass} group-hover:bg-brand group-hover:text-white`}>
-                    <Mail aria-hidden="true" className="h-6 w-6" />
-                  </span>
-                  <span className="flex-1 space-y-1">
-                    <span className="block type-card-title text-ink group-hover:text-brand transition-colors">{copy.channels.emailTitle}</span>
-                    <span className="block break-all type-small text-body">{siteConfig.email}</span>
-                  </span>
-                  <ArrowUpRight aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-brand" />
-                </a>
-              </RevealItem>
-
-              <RevealItem direction="right" className={infoItemClass}>
-                <div className={infoCardClass}>
-                  <span className={infoIconClass}>
-                    <Clock aria-hidden="true" className="h-6 w-6" />
-                  </span>
-                  <span className="space-y-1">
-                    <span className="block type-card-title text-ink">{copy.channels.hoursTitle}</span>
-                    <span className="block type-small text-body">{text.workingHours}</span>
-                  </span>
-                </div>
-              </RevealItem>
-
-              {/* Registered office. Static card with its Maps link. */}
-              <RevealItem direction="right" className={infoItemClass}>
-                <div className={infoCardClass}>
-                  <span className={infoIconClass}>
-                    <Building2 aria-hidden="true" className="h-6 w-6" />
-                  </span>
-                  <span className="space-y-1">
-                    <span className="block type-card-title text-ink">{siteConfig.companyName}</span>
-                    <span className="block type-small text-body">{siteConfig.address}</span>
-                    <span className="block type-meta text-body pt-1">NIB: {siteConfig.nib}</span>
-                    <a
-                      href={siteConfig.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-link text-brand"
-                    >
-                      <MapPin aria-hidden="true" className="h-4 w-4" />
-                      {copy.channels.mapsLink}
-                    </a>
-                  </span>
-                </div>
-              </RevealItem>
-            </RevealGroup>
-          </div>
-
         </div>
       </section>
 
-      {/* Preparation & coverage — the two things people ask before writing in. */}
-      <section className="section-support bg-surface px-4 md:px-12">
-        <div className="mx-auto max-w-[72rem] space-y-12">
-          <SectionHeading badge={copy.before.badge} title={copy.before.heading} intro={copy.before.intro} />
+      {/* Before you write: the three things worth knowing, then coverage and where to look. */}
+      <section aria-labelledby="before-title" className="agx-section !pt-0">
+        <div className="agx-wrap space-y-12 md:space-y-14">
+          <SectionHeading id="before-title" badge={copy.before.badge} title={copy.before.heading} intro={copy.before.intro} />
 
-          <RevealGroup className="fit-grid fit-md-2 fit-lg-3" stagger={0.1}>
-            {copy.before.cards.map((card, index) => {
-              const Icon = BEFORE_ICONS[index % BEFORE_ICONS.length];
-              return (
-                <RevealItem key={card.title} className="h-full">
-                  <article className="flex h-full flex-col gap-4 rounded-3xl bg-white p-7 shadow-card">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand">
-                      <Icon aria-hidden="true" className="h-6 w-6" />
-                    </span>
-                    <h3 className="type-card-title text-ink">{card.title}</h3>
-                    <p className="type-body-card text-body">{card.body}</p>
-                  </article>
-                </RevealItem>
-              );
-            })}
+          <RevealGroup className="grid grid-cols-1 gap-5 md:grid-cols-3" stagger={0.1}>
+            {copy.before.cards.map((card, index) => (
+              <RevealItem key={card.title} className="h-full">
+                <article className="agx-card flex h-full flex-col gap-5">
+                  <span aria-hidden="true" className="agx-panel-num text-ink">{String(index + 1).padStart(2, "0")}</span>
+                  <h3 className="text-[1.375rem] font-medium leading-snug tracking-[-0.02em] text-ink">{card.title}</h3>
+                  <p className="type-body text-body">{card.body}</p>
+                </article>
+              </RevealItem>
+            ))}
           </RevealGroup>
 
-          <RevealGroup className="fit-grid fit-md-2" stagger={0.1}>
-            <RevealItem direction="left" className="h-full">
-              <article className="flex h-full gap-5 rounded-3xl bg-white p-7 shadow-card">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">
-                  <MapPin aria-hidden="true" className="h-6 w-6" />
-                </span>
-                <div className="space-y-2">
-                  <h3 className="type-card-title text-ink">{copy.before.coverage.title}</h3>
-                  <p className="type-body-card text-body">{copy.before.coverage.body}</p>
-                </div>
+          <RevealGroup className="grid grid-cols-1 gap-5 md:grid-cols-2" stagger={0.1}>
+            <RevealItem className="h-full">
+              <article className="agx-card flex h-full flex-col gap-4">
+                <h3 className="text-[1.375rem] font-medium leading-snug tracking-[-0.02em] text-ink">{copy.before.coverage.title}</h3>
+                <p className="type-body text-body">{copy.before.coverage.body}</p>
               </article>
             </RevealItem>
 
-            <RevealItem direction="right" className="h-full">
-              <article className="flex h-full gap-5 rounded-3xl bg-white p-7 shadow-card">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">
-                  <Compass aria-hidden="true" className="h-6 w-6" />
-                </span>
-                <div className="space-y-2">
-                  <h3 className="type-card-title text-ink">{copy.before.browse.title}</h3>
-                  <p className="type-body-card text-body">{copy.before.browse.body}</p>
-                  <div className="flex flex-wrap gap-x-6 gap-y-1">
-                    <Link href={localePath(lang, "/services")} className="text-link text-brand">
-                      {copy.before.browse.services}
-                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                    </Link>
-                    <Link href={localePath(lang, "/portfolio")} className="text-link text-brand">
-                      {copy.before.browse.portfolio}
-                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                    </Link>
-                  </div>
+            <RevealItem className="h-full">
+              <article className="agx-card flex h-full flex-col gap-4">
+                <h3 className="text-[1.375rem] font-medium leading-snug tracking-[-0.02em] text-ink">{copy.before.browse.title}</h3>
+                <p className="type-body text-body">{copy.before.browse.body}</p>
+                <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
+                  <Link href={localePath(lang, "/services")} className="btn btn-dark">
+                    <span>{copy.before.browse.services}</span>
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                  </Link>
+                  <Link href={localePath(lang, "/portfolio")} className="text-link text-brand">
+                    <span>{copy.before.browse.portfolio}</span>
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                  </Link>
                 </div>
               </article>
             </RevealItem>
@@ -482,4 +437,3 @@ export default function ContactClient({ lang }: { lang: Locale }) {
     </main>
   );
 }
-

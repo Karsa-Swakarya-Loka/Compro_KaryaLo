@@ -60,14 +60,14 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
     changeFrequency: "monthly",
     text: {
       id: {
-        title: "Extended IT Partner: Software, Desain & IoT",
+        title: "IT Agency & Software House Bekasi: Web, Desain, IoT",
         description:
-          "KaryaLo, mitra IT di Bekasi untuk software, desain UI/UX, dan perangkat IoT. Dukungan dari perencanaan hingga peluncuran dan pemeliharaan sistem.",
+          "KaryaLo, IT agency dan software house di Bekasi: website, aplikasi, desain UI/UX, foto & video, IoT, serta pengadaan komputer dan perangkat jaringan MikroTik.",
       },
       en: {
-        title: "Extended IT Partner: Software, Design & IoT",
+        title: "IT Agency & Software House in Bekasi: Web, Design, IoT",
         description:
-          "KaryaLo is your IT partner in Bekasi for software, UI/UX design, and IoT. Support from planning and development through launch and maintenance.",
+          "KaryaLo is an IT agency and software house in Bekasi: websites, apps, UI/UX design, photo & video, IoT, and supply of computers and MikroTik networking hardware.",
       },
     },
   },
@@ -96,15 +96,15 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
     changeFrequency: "monthly",
     text: {
       id: {
-        title: "Layanan Software, Desain UI/UX & IoT",
+        title: "Layanan IT Agency: Software, Desain, Foto/Video & IoT",
         description:
-          "Pengembangan website dan aplikasi, desain UI/UX, identitas merek, serta perangkat IoT. Temukan layanan dan dukungan sistem yang sesuai untuk bisnis Anda.",
+          "Pengembangan website dan aplikasi, desain UI/UX, identitas merek, foto dan video, IoT, serta pengadaan komputer dan perangkat jaringan MikroTik untuk bisnis Anda.",
         breadcrumb: "Services",
       },
       en: {
-        title: "Services: Software, UI/UX Design & IoT",
+        title: "IT Agency Services: Software, Design, Photo/Video & IoT",
         description:
-          "Explore website and app development, UI/UX, brand identity, and IoT services from KaryaLo, with project scoping and post-launch maintenance options.",
+          "Website and app development, UI/UX, brand identity, photo and video, IoT, and computer and MikroTik networking supply from KaryaLo, with scoping and post-launch maintenance.",
         breadcrumb: "Services",
       },
     },

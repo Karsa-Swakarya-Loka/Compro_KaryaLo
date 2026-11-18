@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import Preloader, { PRELOAD_SCRIPT } from "@/components/layout/Preloader";
-import { EARLY_REVEAL_SCRIPT } from "@/components/motion/earlyReveal";
+import { EARLY_REVEAL_SCRIPT, REVEAL_SCRIPT } from "@/components/motion/earlyReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import Analytics from "@/components/analytics/Analytics";
 import { commonCopy } from "@/content/common";
@@ -23,9 +23,11 @@ import "@/app/globals.css";
 
 const keywords: Record<Locale, string[]> = {
   id: [
-    "extended IT partner",
+    "IT agency Bekasi",
     "jasa pembuatan software",
     "software house Bekasi",
+    "jasa foto dan video company profile",
+    "jual komputer dan MikroTik",
     "jasa pembuatan aplikasi",
     "jasa UI UX design",
     "vendor IoT Indonesia",
@@ -34,8 +36,9 @@ const keywords: Record<Locale, string[]> = {
     "PT Karsa Swakarya Loka",
   ],
   en: [
-    "extended IT partner",
+    "IT agency Indonesia",
     "software development Indonesia",
+    "MikroTik and networking hardware supplier",
     "software house Bekasi",
     "app development company Indonesia",
     "UI UX design agency",
@@ -51,8 +54,10 @@ export function rootMetadata(lang: Locale): Metadata {
     ...buildMetadata("home", lang),
     title: {
       // Keyword first: Google cuts the tail of a long title, and what a buyer
-      // searches for is the service, not the studio's name.
-      default: `${routeSeo.home.text[lang].title} | ${siteConfig.brandName}`,
+      // searches for is the service, not the studio's name. The short brand keeps
+      // it at 53 characters (with the full "KaryaLo Digital Solution" it was 70,
+      // past the ~60 Google shows, so the brand itself was cut off).
+      default: `${routeSeo.home.text[lang].title} | KaryaLo`,
       // Short suffix so page titles survive SERP truncation.
       template: "%s | KaryaLo",
     },
@@ -95,6 +100,8 @@ export default function SiteShell({ lang, children }: { lang: Locale; children: 
           <WhatsAppFab lang={lang} />
         </SmoothScrollProvider>
         {/* After all the content: starts the entrance of reveals already on screen without waiting for hydration. */}
+        {/* Plays every scroll entrance (Entrance.tsx) from one observer, before hydration. */}
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: EARLY_REVEAL_SCRIPT }} />
       </body>
     </html>

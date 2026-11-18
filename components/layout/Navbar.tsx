@@ -7,32 +7,14 @@ import { usePathname } from "next/navigation";
 import { whatsappUrl } from "@/config/site";
 import { commonCopy } from "@/content/common";
 import { type Locale, htmlLang, localePath, locales, splitLocale } from "@/lib/i18n";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, type Variants } from "motion/react";
-import { EASE_EXPO, SPRING_INTERACTIVE } from "@/components/motion/tokens";
-
-/** Mobile sheet: springs open from the top-right corner, links cascade in. */
-const sheetVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.94,
-    y: -10,
-    transition: { duration: 0.22, ease: EASE_EXPO },
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.05, delayChildren: 0.04 },
-  },
-};
-
-const sheetItemVariants: Variants = {
-  hidden: { opacity: 0, x: 18, y: -6, transition: { duration: 0.15 } },
-  visible: { opacity: 1, x: 0, y: 0, transition: { type: "spring", stiffness: 300, damping: 26 } },
-};
+import { Menu, X } from "lucide-react";
+import { AnimatePresence, animate, motion, useMotionValue, useMotionValueEvent, useScroll, useSpring } from "motion/react";
+import { EASE_EXPO } from "@/components/motion/tokens";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 const SCROLL_THRESHOLD = 50;
+const SCROLL_RELEASE = 20;
+const SPRING = { type: "spring" as const, stiffness: 420, damping: 34, mass: 0.8 };
 
 /**
  * ID | EN switch. The current language is plain text marked as current; the
@@ -66,224 +48,252 @@ function LanguageSwitch({ lang, path }: { lang: Locale; path: string }) {
   );
 }
 
+type NavLink = { href: string; label: string };
+
+/** One pill link: a small magnetic pull toward the cursor and a label that rolls up on hover. */
+function PillItem({
+  link,
+  lit,
+  current,
+  onEnter,
+  onPress,
+  register,
+}: {
+  link: NavLink;
+  lit: boolean;
+  current: boolean;
+  onEnter: () => void;
+  onPress: () => void;
+  register: (el: HTMLElement | null) => void;
+}) {
+  const x = useSpring(0, { stiffness: 300, damping: 20 });
+  const y = useSpring(0, { stiffness: 300, damping: 20 });
+  const [hover, setHover] = useState(false);
+  return (
+    <motion.span ref={register} style={{ x, y, position: "relative", zIndex: 1, display: "inline-flex" }}>
+      <Link
+        href={link.href}
+        aria-current={current ? "page" : undefined}
+        className="agx-pillnav-link"
+        data-lit={lit ? "" : undefined}
+        onPointerDown={onPress}
+        onClick={onPress}
+        onMouseEnter={() => {
+          setHover(true);
+          onEnter();
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+          x.set(0);
+          y.set(0);
+        }}
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          x.set(((e.clientX - (r.left + r.width / 2)) / r.width) * 10);
+          y.set(((e.clientY - (r.top + r.height / 2)) / r.height) * 6);
+        }}
+      >
+        <span className="agx-roll">
+          <motion.span style={{ display: "block" }} animate={{ y: hover ? "-50%" : "0%" }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}>
+            <span className="agx-roll-line">{link.label}</span>
+            <span className="agx-roll-line" aria-hidden="true">{link.label}</span>
+          </motion.span>
+        </span>
+      </Link>
+    </motion.span>
+  );
+}
+
+/**
+ * The Agenciex template's pill navigation: a glass pill whose highlight springs
+ * from the current page to whichever link is hovered.
+ */
+function PillNav({ links, activeIndex, label }: { links: NavLink[]; activeIndex: number; label: string }) {
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const [hovered, setHovered] = useState<number | null>(null);
+  // The link just pressed: the highlight slides there at once, before the next page has loaded
+  // (and on touch, where there is no hover to lead it). Cleared when the route changes.
+  const [pressed, setPressed] = useState<{ index: number; from: number } | null>(null);
+  const hx = useMotionValue(0);
+  const hw = useMotionValue(0);
+  const ho = useMotionValue(0);
+  const placed = useRef(false);
+  const pending = pressed && pressed.from === activeIndex ? pressed.index : null;
+  const target = hovered ?? pending ?? (activeIndex >= 0 ? activeIndex : null);
+  const targetRef = useRef(target);
+
+  useEffect(() => {
+    targetRef.current = target;
+  }, [target]);
+
+  useEffect(() => {
+    if (target === null) {
+      animate(ho, 0, { duration: 0.25 });
+      return;
+    }
+    const el = itemRefs.current[target];
+    if (!el) return;
+    const left = el.offsetLeft;
+    const width = el.offsetWidth;
+    if (!placed.current) {
+      hx.set(left);
+      hw.set(width);
+      placed.current = true;
+    } else {
+      animate(hx, left, SPRING);
+      animate(hw, width, SPRING);
+    }
+    animate(ho, 1, { duration: 0.25 });
+  }, [target, links.length, hx, hw, ho]);
+
+  // Keep the highlight aligned when fonts load late or the window resizes. One observer for the
+  // nav's life: re-creating it on every target change fired its first callback at once, which
+  // snapped the highlight to the end point and cancelled the slide.
+  useEffect(() => {
+    let first = true;
+    const ro = new ResizeObserver(() => {
+      if (first) {
+        first = false;
+        return;
+      }
+      const t = targetRef.current;
+      const el = t === null ? null : itemRefs.current[t];
+      if (el) {
+        hx.set(el.offsetLeft);
+        hw.set(el.offsetWidth);
+      }
+    });
+    itemRefs.current.forEach((el) => el && ro.observe(el));
+    return () => ro.disconnect();
+  }, [links.length, hx, hw]);
+
+  return (
+    <nav aria-label={label} className="agx-pillnav" onMouseLeave={() => setHovered(null)}>
+      <motion.span aria-hidden="true" className="agx-pillnav-hl" style={{ x: hx, width: hw, opacity: ho }} />
+      {links.map((link, i) => (
+        <PillItem
+          key={link.href}
+          link={link}
+          lit={i === target}
+          current={i === activeIndex}
+          onEnter={() => setHovered(i)}
+          onPress={() => setPressed({ index: i, from: activeIndex })}
+          register={(el) => {
+            itemRefs.current[i] = el;
+          }}
+        />
+      ))}
+    </nav>
+  );
+}
+
 export default function Navbar({ lang }: { lang: Locale }) {
   const copy = commonCopy[lang];
   const pathname = usePathname();
   const { path: neutralPath } = splitLocale(pathname);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
-  const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Scroll-aware morph (Cargon): the floating pill at the top; after 50px its white fills out sideways into a full-width bar.
   const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (latest) => setScrolled(latest > SCROLL_THRESHOLD));
+  useMotionValueEvent(scrollY, "change", (latest) =>
+    setScrolled((current) => (current ? latest > SCROLL_RELEASE : latest > SCROLL_THRESHOLD)),
+  );
   useEffect(() => {
-    // Sync once after mount for reloads that restore a mid-page scroll position.
     const frame = window.requestAnimationFrame(() => setScrolled(window.scrollY > SCROLL_THRESHOLD));
     return () => window.cancelAnimationFrame(frame);
   }, []);
 
+  // The menu is a full-screen sheet: it closes on Escape or after a link is followed, and holds the page still while open.
   useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const closeOnOutside = (event: PointerEvent) => {
-      if (!headerRef.current?.contains(event.target as Node)) setMobileMenuOpen(false);
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setMobileMenuOpen(false);
+        setOpen(false);
         toggleRef.current?.focus();
       }
     };
-    const desktop = window.matchMedia("(min-width: 1024px)");
-    const closeOnResize = () => { if (desktop.matches) setMobileMenuOpen(false); };
-    document.addEventListener("pointerdown", closeOnOutside);
-    document.addEventListener("keydown", closeOnEscape);
-    desktop.addEventListener("change", closeOnResize);
+    document.addEventListener("keydown", onKey);
+    const previous = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
     return () => {
-      document.removeEventListener("pointerdown", closeOnOutside);
-      document.removeEventListener("keydown", closeOnEscape);
-      desktop.removeEventListener("change", closeOnResize);
+      document.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = previous;
     };
-  }, [mobileMenuOpen]);
+  }, [open]);
 
   const navLinks = copy.nav.map((link) => ({ ...link, href: localePath(lang, link.href), base: link.href }));
-  /* A case study under /portfolio/[slug] keeps "Portfolio" marked as the current section. */
   const isCurrent = (base: string) => (base === "/" ? neutralPath === "/" : neutralPath === base || neutralPath.startsWith(`${base}/`));
-  const activeHref = navLinks.find((link) => isCurrent(link.base))?.href ?? null;
-  const pillHref = hoveredHref ?? activeHref;
+  const activeIndex = navLinks.findIndex((link) => isCurrent(link.base));
   const homeHref = localePath(lang, "/");
 
   return (
-    <div className="nav-surface" data-overlay={neutralPath === "/" ? "" : undefined} data-scrolled={scrolled ? "" : undefined}>
-      {/* The white that spreads from the pill to a full-width bar on scroll (CSS). */}
-      <span className="nav-fill" aria-hidden="true" />
-      <div className="nav-container">
-        <header ref={headerRef} className="site-header" onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) setMobileMenuOpen(false);
-        }}>
-          <div className="site-nav">
-            {/*
-              The mark is decorative — the wordmark beside it carries the name,
-              so the link's accessible name comes from that text.
-            */}
-            <Link href={homeHref} className="brand-link">
-              <Image
-                src="/images/icon-karyalo.png"
-                alt=""
-                width={2390}
-                height={3354}
-                preload
-                sizes="28px"
-                className="h-10 w-auto shrink-0"
-              />
-              {/* Cargon's lockup: the mark, then a bold one-word wordmark with the
-                  descriptor beneath it in body grey. */}
-              <span className="flex flex-col">
-                <span className="text-xl font-bold leading-none tracking-tight text-ink">
-                  Karya<span className="text-brand">Lo</span>
-                </span>{" "}
-                <span className="mt-1 text-xs font-medium leading-none text-body">Digital Solution</span>
-              </span>
-            </Link>
+    <div className="nav-surface" data-scrolled={scrolled ? "" : undefined}>
+      <header className="agx-nav">
+        <Link href={homeHref} className="agx-logo" onClick={() => setOpen(false)}>
+          <Image src="/images/icon-karyalo.png" alt="" width={2390} height={3354} preload sizes="28px" className="h-9 w-auto shrink-0" />
+          <span className="agx-logo-word">
+            Karya<span>Lo</span>
+          </span>
+        </Link>
 
-            {/* Desktop links with a shared, spring-driven hover pill */}
-            <nav
-              aria-label={copy.navLabel}
-              className="hidden lg:flex items-center gap-0.5"
-              onMouseLeave={() => setHoveredHref(null)}
-            >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={isCurrent(link.base) ? "page" : undefined}
-                  className="nav-link"
-                  onMouseEnter={() => setHoveredHref(link.href)}
-                  onFocus={() => setHoveredHref(link.href)}
-                  onBlur={() => setHoveredHref(null)}
-                >
-                  {pillHref === link.href && (
-                    <motion.span
-                      layoutId="nav-pill-hover"
-                      className="nav-pill"
-                      aria-hidden="true"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={SPRING_INTERACTIVE}
-                    />
-                  )}
-                  <span className="relative z-10">{link.label}</span>
-                </Link>
-              ))}
-            </nav>
+        <PillNav links={navLinks} activeIndex={activeIndex} label={copy.navLabel} />
 
-            {/* Language switch, then the bar's one solid shape: the WhatsApp
-                button. On tablets (md) the links sit in the menu, so both fit
-                beside the menu button; at lg the six links leave no room for the
-                button until xl, and the floating button in
-                components/layout/WhatsAppFab.tsx covers the job. */}
-            <div className="hidden md:ml-auto md:flex lg:ml-0 items-center gap-3">
-              <LanguageSwitch lang={lang} path={neutralPath} />
-              <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="nav-cta btn btn-primary btn-sm hidden md:inline-flex lg:hidden xl:inline-flex">
-                {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
-              </a>
+        <div className="agx-nav-end">
+          <LanguageSwitch lang={lang} path={neutralPath} />
+          <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="agx-pill" aria-label={copy.navCta}>
+            <WhatsAppIcon size={16} />
+            <span className="agx-pill-label">{copy.navCta}</span>
+          </a>
+          <button
+            ref={toggleRef}
+            type="button"
+            className="agx-round agx-menu-toggle"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            aria-label={open ? copy.closeMenu : copy.openMenu}
+          >
+            {open ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
+          </button>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            key="menu"
+            id="site-menu"
+            aria-label={copy.mobileNavLabel}
+            className="agx-menu"
+            style={{ pointerEvents: "auto" }}
+            initial={{ opacity: 0, y: -24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.45, ease: EASE_EXPO }}
+          >
+            <div className="agx-menu-inner">
+              <ul>
+                {navLinks.map((link, index) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="agx-menu-link" aria-current={isCurrent(link.base) ? "page" : undefined} onClick={() => setOpen(false)}>
+                      <small>{String(index + 1).padStart(2, "0")}</small>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col items-start gap-5">
+                <LanguageSwitch lang={lang} path={neutralPath} />
+                <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg" onClick={() => setOpen(false)}>
+                  <WhatsAppIcon size={18} />
+                  <span>{copy.navCta}</span>
+                </a>
+              </div>
             </div>
-
-            <button
-              ref={toggleRef}
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="nav-toggle lg:hidden"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-navigation"
-              aria-label={mobileMenuOpen ? copy.closeMenu : copy.openMenu}
-            >
-              <AnimatePresence initial={false}>
-                {mobileMenuOpen ? (
-                  <motion.span
-                    key="close"
-                    className="flex"
-                    initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-                    transition={{ duration: 0.28, ease: EASE_EXPO }}
-                  >
-                    <X aria-hidden="true" size={22} />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="open"
-                    className="flex"
-                    initial={{ rotate: 90, opacity: 0, scale: 0.6 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: -90, opacity: 0, scale: 0.6 }}
-                    transition={{ duration: 0.28, ease: EASE_EXPO }}
-                  >
-                    <Menu aria-hidden="true" size={22} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
-
-          {/* Mobile sheet: blurred backdrop + spring-staggered reveal from the top-right */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <>
-                <motion.div
-                  key="backdrop"
-                  className="nav-backdrop lg:hidden"
-                  aria-hidden="true"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35, ease: EASE_EXPO }}
-                  onClick={() => setMobileMenuOpen(false)}
-                />
-                <motion.nav
-                  key="sheet"
-                  id="mobile-navigation"
-                  aria-label={copy.mobileNavLabel}
-                  className="mobile-nav lg:hidden"
-                  style={{ transformOrigin: "top right" }}
-                  variants={sheetVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                >
-                  {navLinks.map((link) => (
-                    <motion.div key={link.href} variants={sheetItemVariants}>
-                      <Link
-                        href={link.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        aria-current={isCurrent(link.base) ? "page" : undefined}
-                        className="nav-link"
-                      >
-                        {link.label} <ArrowUpRight aria-hidden="true" size={16} />
-                      </Link>
-                    </motion.div>
-                  ))}
-                  {/* Phones only: on tablets the switch and the button are already in the bar. */}
-                  <motion.div variants={sheetItemVariants} className="mt-3 flex flex-wrap items-center justify-between gap-3 md:hidden">
-                    <LanguageSwitch lang={lang} path={neutralPath} />
-                    <a
-                      href={whatsappUrl(lang)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary btn-sm"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {copy.navCta} <ArrowUpRight aria-hidden="true" size={16} />
-                    </a>
-                  </motion.div>
-                </motion.nav>
-              </>
-            )}
-          </AnimatePresence>
-        </header>
-      </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -26,23 +26,27 @@ export const metadata: Metadata = {
 export default function GlobalNotFound() {
   return (
     <html lang="id" className={`${fontVariables} antialiased`}>
-      <body className="min-h-screen flex flex-col bg-surface text-ink">
-        <main id="main-content" className="section-anchor flex flex-1 items-center px-4 md:px-12">
-          <div className="mx-auto w-full max-w-3xl space-y-8">
-            <p className="badge-pill">KaryaLo Digital Solution · 404</p>
-            <div className="space-y-4">
-              <h1 className="type-display-page text-ink">Halaman tidak ditemukan.</h1>
-              <p className="type-lede text-body max-w-[60ch]">
+      <body className="min-h-screen flex flex-col text-ink">
+        <main id="main-content" className="relative flex flex-1 items-center overflow-hidden py-24">
+          {/* The template's huge faded figure behind the message. */}
+          <p aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none text-center text-[clamp(10rem,6rem+22vw,26rem)] font-bold leading-none tracking-[-0.06em] text-[#EDF2F9]">
+            404
+          </p>
+          <div className="agx-wrap relative space-y-8">
+            <p className="enter-up badge-pill">KaryaLo · 404</p>
+            <div className="space-y-5">
+              <h1 className="enter-up agx-h1 !mt-0" style={{ animationDelay: "0.1s" }}>Halaman tidak ditemukan.</h1>
+              <p className="enter-up agx-sub !mt-0" style={{ animationDelay: "0.2s" }}>
                 Halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda.
               </p>
             </div>
-            <div lang="en" className="space-y-2 border-t border-line pt-6">
-              <p className="type-card-title text-ink">Page not found.</p>
-              <p className="type-body text-body max-w-[60ch]">The page you are looking for is unavailable or has moved. Please return to the home page.</p>
+            <div lang="en" className="enter-up max-w-xl space-y-1.5 border-t border-line pt-6" style={{ animationDelay: "0.3s" }}>
+              <p className="text-[1.25rem] font-medium tracking-[-0.02em] text-ink">Page not found.</p>
+              <p className="type-body text-body">The page you are looking for is unavailable or has moved. Please return to the home page.</p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/" className="btn btn-secondary">Kembali ke beranda</Link>
-              <Link href="/en" lang="en" hrefLang="en" className="text-link">English home page</Link>
+            <div className="enter-up flex flex-wrap items-center gap-5" style={{ animationDelay: "0.4s" }}>
+              <Link href="/" className="btn btn-dark">Kembali ke beranda</Link>
+              <Link href="/en" lang="en" hrefLang="en" className="text-link text-ink hover:text-brand">English home page</Link>
             </div>
           </div>
         </main>

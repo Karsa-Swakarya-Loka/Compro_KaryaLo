@@ -1,46 +1,45 @@
 import HeroSection from "@/components/home/HeroSection";
-import WhySection from "@/components/home/WhySection";
+import AdvantageSection from "@/components/home/AdvantageSection";
+import Giant from "@/components/home/Giant";
 import ServicesSection from "@/components/home/ServicesSection";
-import PortfolioSection from "@/components/home/PortfolioSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
-import StudioSection from "@/components/home/StudioSection";
-import ProblemsSection from "@/components/home/ProblemsSection";
+import IndustriesSection from "@/components/home/IndustriesSection";
 import ProcessSection from "@/components/home/ProcessSection";
-import TrustSection from "@/components/home/TrustSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FAQSection from "@/components/home/FAQSection";
 import ContactCTA from "@/components/home/ContactCTA";
 import JsonLd from "@/components/seo/JsonLd";
+import { homeCopy } from "@/content/home";
 import type { Locale } from "@/lib/i18n";
 import { faqSchema, homePageSchema } from "@/lib/schema";
 
 /**
- * The home page in the Cargon order (redesign, 2026-10-15), carrying
- * KaryaLo's own content:
+ * The home page, kept to the point (2026-11-17): each topic appears once and
+ * hands off to the page that covers it in full.
  *
- *   hero slider → why KaryaLo (collage + principles) → services (expanding
- *   cards) → portfolio grid → studio band (commitments, team, coverage) →
- *   client problems (testimonial-style cards) → five stages → legal standing
- *   → FAQ → the closing blue band
+ *   hero          the work itself (the 3D ring of projects → /portfolio) and the four commitments
+ *   why KaryaLo   the goal and how we differ from the usual IT vendor → /about
+ *   services      three fields + support, one line each → /services
+ *   industries    the blue band → /industry
+ *   process       five stages, one line each → /about#cara-kerja
+ *   FAQ           questions only, answers on demand
+ *   closing       marquee bands and the conversation panel
  *
- * Cargon's testimonials, blog and percentage stats have no KaryaLo source yet,
- * so they are not invented: the problems take the testimonial shape without
- * names or stars, and testimonials render only once a client approves one.
- * Backgrounds alternate surface/white with one night band.
+ * Removed because they repeated another section or page: the projects table
+ * (the hero ring already shows the work), the team band (/about), the client
+ * situations (/industry, /services) and the legal cards (/about, the footer).
  */
 export default function HomePage({ lang }: { lang: Locale }) {
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen flex flex-col bg-white">
+    <main id="main-content" tabIndex={-1} className="home-main flex min-h-screen flex-col">
       <JsonLd data={[homePageSchema(lang), faqSchema(lang)]} />
 
       <HeroSection lang={lang} />
-      <WhySection lang={lang} />
+      <AdvantageSection lang={lang} />
+      <Giant text={homeCopy[lang].hero.category} />
       <ServicesSection lang={lang} />
-      <PortfolioSection lang={lang} />
-      <TestimonialsSection lang={lang} />
-      <StudioSection lang={lang} />
-      <ProblemsSection lang={lang} />
+      <IndustriesSection lang={lang} />
       <ProcessSection lang={lang} />
-      <TrustSection lang={lang} />
+      <TestimonialsSection lang={lang} />
       <FAQSection lang={lang} />
       <ContactCTA lang={lang} />
     </main>

@@ -16,6 +16,8 @@ export interface ProjectItem {
   serviceTags: string[];
   client: string;
   year: string;
+  /** The live site, for public work. Shown in the hero's browser address bar. */
+  liveUrl?: string;
   /** A 3D laptop mockup on a transparent background: show it whole (object-contain), never cropped. */
   coverImage: string;
   /** Plain viewport screenshots (16:9) for the case study gallery and the small cards, where detail matters. */
@@ -37,7 +39,7 @@ export interface ProjectItem {
  * Update it when a project's text changes — not on every deploy, or the hint
  * becomes noise Google learns to ignore.
  */
-export const portfolioUpdatedAt = "2026-10-15";
+export const portfolioUpdatedAt = "2026-11-16";
 
 /** Indonesian is the source; the English overlay below only replaces wording. */
 const portfolioId: ProjectItem[] = [
@@ -115,10 +117,11 @@ const portfolioId: ProjectItem[] = [
     serviceTags: ["Website perusahaan", "Desain UI/UX"],
     client: "PT Ape Gale Indonesia",
     year: "2026",
+    liveUrl: "https://apegale.com",
     coverImage: "/images/portofolio/mockup/apegale.webp",
     galleryImages: [
-      "/images/portofolio/apegale-compro.webp",
-      "/images/portofolio/apegale-layanan.webp"
+      "/images/portofolio/apegale-compro-v2.webp",
+      "/images/portofolio/apegale-layanan-v2.webp"
     ],
     tags: ["Next.js", "Dua bahasa (ID/EN)", "Halaman per layanan"],
     summary: "Website berbahasa Indonesia dan Inggris untuk layanan perizinan ekspatriat serta tenaga kerja asing, dengan informasi layanan, pustaka regulasi, dan formulir permintaan penawaran.",
@@ -136,11 +139,12 @@ const portfolioId: ProjectItem[] = [
     serviceTags: ["Website perusahaan", "Desain UI/UX"],
     client: "Affirmate Administrative",
     year: "2026",
+    liveUrl: "https://tatakelola.affirmate.co.id",
     coverImage: "/images/portofolio/mockup/affirmate.webp",
     galleryImages: [
-      "/images/portofolio/affirmate-compro.webp",
-      "/images/portofolio/affirmate-services.webp",
-      "/images/portofolio/affirmate-network.webp"
+      "/images/portofolio/affirmate-compro-v2.webp",
+      "/images/portofolio/affirmate-services-v2.webp",
+      "/images/portofolio/affirmate-network-v2.webp"
     ],
     tags: ["Next.js", "Payload CMS", "Dua bahasa (EN/ID)"],
     summary: "Website dua bahasa untuk layanan korporat dan administrasi Affirmate Group, mencakup pendirian usaha, perizinan, visa, izin kerja, serta pengelolaan SDM dan penggajian.",
@@ -158,10 +162,11 @@ const portfolioId: ProjectItem[] = [
     serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain UI/UX"],
     client: "DeliaStore, unit usaha PT Karsa Swakarya Loka",
     year: "2026",
+    liveUrl: "https://deliastore.id",
     coverImage: "/images/portofolio/mockup/deliastore.webp",
     galleryImages: [
-      "/images/portofolio/deliastore.webp",
-      "/images/portofolio/deliastore-topup.webp"
+      "/images/portofolio/deliastore-v2.webp",
+      "/images/portofolio/deliastore-topup-v2.webp"
     ],
     tags: ["Next.js 16", "PostgreSQL", "DOKU Checkout", "Digiflazz", "PWA"],
     summary: "Produk KaryaLo untuk penjualan top-up game, pulsa, paket data, token PLN, dan e-money. Platform mengintegrasikan pembayaran DOKU, pengiriman otomatis, promosi, serta program poin pelanggan.",
@@ -231,6 +236,27 @@ const portfolioId: ProjectItem[] = [
     challenge: "Transaksi yang masuk bersamaan dan keterlambatan notifikasi pembayaran memerlukan pengelolaan antrean agar setiap pesanan dapat ditindaklanjuti dengan tepat.",
     solution: "Kami menyusun pemrosesan terpisah untuk setiap pesanan, dengan verifikasi pembayaran otomatis dan notifikasi kepada pembeli. Pendekatan ini mendukung pengelolaan transaksi secara terstruktur.",
     impact: "Purwarupa menghubungkan antrean pesanan, verifikasi pembayaran, dan notifikasi dalam satu alur pemrosesan."
+  },
+  {
+    id: "summarevent",
+    slug: "summarevent-tiket-event",
+    title: "Summarevent: Tiket Event dengan Pilih Kursi",
+    type: "prototype",
+    categoryLabel: "Tiket event & pemesanan kursi",
+    serviceCode: "DEV-WEB // DEV-ENT // DSG-UI",
+    serviceTags: ["Aplikasi web", "Sistem transaksi", "Desain UI/UX"],
+    client: "Tim Summarevent, Bandung Build Challenge 2026",
+    year: "2026",
+    coverImage: "/images/portofolio/mockup/summarevent-laptop.webp",
+    galleryImages: [
+      "/images/portofolio/summarevent-alur.webp",
+      "/images/portofolio/summarevent-arsitektur.webp"
+    ],
+    tags: ["React 19", "Vite", "Tailwind CSS", "Convex", "PWA", "WCAG 2.1 AA"],
+    summary: "Purwarupa tiket event untuk skenario event Summarecon Mall Bandung: pengunjung memilih kursi langsung dari denah, panitia mengelola event, petugas memindai tiket di pintu, dan semuanya berujung pada satu e-ticket QR.",
+    seoDescription: "Summarevent, purwarupa tiket event dengan pilih kursi dari denah, e-ticket QR, dashboard panitia, dan scan petugas. Dibuat untuk Bandung Build Challenge 2026.",
+    challenge: "Masuk ke satu event bisa lewat banyak jalan: tiket di platform luar, akses lewat belanja, daftar di desk, dan struk di aplikasi mal. Pengunjung tidak tahu kursi mana yang tersisa, panitia mencatat denah, kuota, dan pembayaran di tempat terpisah, dan petugas mengecek tiket satu per satu di pintu.",
+    solution: "Kami menyatukannya di satu denah. Pengunjung memilih kursi sendiri, atau meminta dipilihkan kursi berdampingan. Kursi pesanan ditahan sekaligus dengan hitung mundur, dan satu kursi hanya bisa dimiliki satu pemesan: yang kalah rebutan langsung ditawari kursi terdekat. Tiket bisa didapat lewat pembayaran, pendaftaran gratis, atau tukar struk belanja, dan hasilnya selalu satu e-ticket QR bertanda tangan untuk tiap kursi. Panitia memiliki dashboard, wizard pembuatan event, peta kursi langsung, verifikasi struk, dan unduhan data peserta. Petugas melihat hasil scan Valid, Sudah digunakan, atau Tidak valid dengan jelas dari jarak jauh. Seluruhnya berjalan sebagai aplikasi web yang bisa dipasang di HP tanpa unduhan toko aplikasi, dengan pemeriksaan aksesibilitas otomatis di tiga peran. Ini purwarupa untuk Bandung Build Challenge 2026 (tema Event Ticketing System): pembayaran, OTP, WhatsApp, dan email masih simulasi, sementara data kursi memakai backend bersama sehingga rebutan kursi bisa diuji dari dua HP."
   }
 ];
 
@@ -345,6 +371,17 @@ const portfolioEn: Record<string, ProjectText> = {
     challenge: "Concurrent transactions and delayed payment notifications require queue management so each order can be processed appropriately.",
     solution: "We designed independent processing for each order, with automated payment verification and buyer notifications. This approach supports structured transaction management.",
     impact: "The prototype connects order queues, payment verification, and notifications within one processing workflow.",
+  },
+  "summarevent": {
+    title: "Summarevent: Event Ticketing with Seat Selection",
+    categoryLabel: "Event ticketing & seat booking",
+    serviceTags: ["Web application", "Transaction system", "UI/UX design"],
+    client: "Summarevent Team, Bandung Build Challenge 2026",
+    tags: ["React 19", "Vite", "Tailwind CSS", "Convex", "PWA", "WCAG 2.1 AA"],
+    summary: "An event ticketing prototype for a Summarecon Mall Bandung event scenario: visitors choose seats straight from the seat map, organisers manage the event, gate staff scan tickets, and everything ends in one QR e-ticket.",
+    seoDescription: "Summarevent, an event ticketing prototype with seat selection from a live map, QR e-tickets, an organiser dashboard, and gate scanning. Built for Bandung Build Challenge 2026.",
+    challenge: "Getting into one event can happen in many ways: tickets on outside platforms, access through shopping, sign-up at a desk, and receipts in the mall app. Visitors cannot tell which seats are left, organisers track the seat map, quotas, and payments in separate places, and gate staff check tickets one by one.",
+    solution: "We brought it together on one seat map. Visitors pick their own seats, or ask for seats together to be chosen for them. All seats in an order are held at once with a countdown, and a seat can belong to only one buyer: whoever loses the race is offered the nearest seats straight away. Tickets can come from payment, free registration, or exchanging a shopping receipt, and the result is always one signed QR e-ticket per seat. Organisers get a dashboard, an event-creation wizard, a live seat map, receipt verification, and attendee downloads. Gate staff see Valid, Already used, or Invalid clearly from a distance. It all runs as a web app that installs on a phone without an app store, with automated accessibility checks across the three roles. This is a prototype for Bandung Build Challenge 2026 (theme: Event Ticketing System): payments, OTP, WhatsApp, and email are simulated, while seat data uses a shared backend so seat races can be tested from two phones."
   },
 };
 

@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { EASE_EXPO, SPRING_INTERACTIVE, SPRING_MODAL } from "@/components/motion/tokens";
 import ArrowSwap from "@/components/motion/ArrowSwap";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 interface ProjectModalProps {
   lang: Locale;
@@ -27,7 +28,13 @@ export default function ProjectModal({ lang, project, onClose }: ProjectModalPro
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const previousOverflow = useRef("");
+  const locked = useRef(false);
   const lenis = useLenis();
+  // Latest Lenis instance for the unmount cleanup, without re-running it when the instance arrives late.
+  const lenisRef = useRef(lenis);
+  useEffect(() => {
+    lenisRef.current = lenis;
+  }, [lenis]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -37,26 +44,38 @@ export default function ProjectModal({ lang, project, onClose }: ProjectModalPro
       triggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       previousOverflow.current = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-      lenis?.stop();
+      locked.current = true;
       dialog.dataset.state = "open";
       dialog.showModal();
     } else if (dialog.open) {
       dialog.dataset.state = "closing";
     }
+  }, [project]);
+
+  // Freeze Lenis while a project is open. Separate from the effect above so it
+  // still applies when Lenis mounts after the dialog opened (the old code
+  // skipped stop() in that case and the page scrolled behind the modal).
+  useEffect(() => {
+    if (!project) return;
+    lenis?.stop();
   }, [project, lenis]);
 
-  // Safety net: restore page scroll if the modal unmounts while open (route change).
+  // Safety net: restore page scroll only if the modal unmounts while open (route change).
   useEffect(() => {
     return () => {
-      document.body.style.overflow = previousOverflow.current;
-      lenis?.start();
+      if (locked.current) {
+        locked.current = false;
+        document.body.style.overflow = previousOverflow.current;
+        lenisRef.current?.start();
+      }
     };
-  }, [lenis]);
+  }, []);
 
   const finishClose = () => {
     const dialog = dialogRef.current;
     if (dialog?.open) dialog.close();
     delete dialog?.dataset.state;
+    locked.current = false;
     document.body.style.overflow = previousOverflow.current;
     lenis?.start();
     triggerRef.current?.focus({ preventScroll: true });
@@ -111,7 +130,7 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
           whileHover={{ rotate: 90 }}
           whileTap={{ scale: 0.92 }}
           transition={SPRING_INTERACTIVE}
-          className="w-11 h-11 shrink-0 rounded-full bg-surface hover:bg-brand flex items-center justify-center text-ink hover:text-white transition-colors cursor-pointer"
+          className="w-11 h-11 shrink-0 rounded-full bg-(--agx-tint) hover:bg-(--agx-ink) flex items-center justify-center text-ink hover:text-white transition-colors cursor-pointer"
           aria-label={copy.closeDetails}
         >
           <X className="w-5 h-5" />
@@ -134,9 +153,9 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
           </p>
         </div>
 
-        {/* The screenshot on the light surface, one frame, Cargon's 12px corners. */}
-        <div className="rounded-3xl bg-surface p-2.5 md:p-3 shadow-card">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-white">
+        {/* The screenshot on the blush-blue panel, the site's 1.75rem card radius. */}
+        <div className="rounded-[1.75rem] bg-(--agx-tint) p-2.5 md:p-3">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.25rem] bg-white">
             <AnimatePresence initial={false}>
               <motion.div
                 key={currentImage}
@@ -172,7 +191,7 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
 
         {/* Impact / Key Outcome: the one tinted callout in the dialog */}
         {project.impact && (
-          <section className="p-5 rounded-2xl bg-brand-soft flex items-start gap-3">
+          <section className="p-5 rounded-[1.25rem] bg-(--agx-tint) flex items-start gap-3">
             <CheckCircle2 aria-hidden="true" className="w-5 h-5 text-brand shrink-0 mt-1" />
             <div className="space-y-1">
               <h3 className="type-card-title text-ink">{copy.impact}</h3>
@@ -186,7 +205,7 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
           <h3 className="type-label text-ink">{copy.technologies}</h3>
           <ul className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <li key={tag} className="type-meta px-3 py-1.5 rounded-full bg-brand-soft text-brand">
+              <li key={tag} className="type-meta px-3.5 py-1.5 rounded-full border border-line bg-white text-ink">
                 {tag}
               </li>
             ))}
@@ -248,6 +267,7 @@ function ModalBody({ lang, project, onClose }: { lang: Locale; project: ProjectI
           rel="noopener noreferrer"
           className="btn btn-primary group"
         >
+          <WhatsAppIcon size={18} />
           <span>{copy.discussSimilar}</span>
           <ArrowSwap className="w-4 h-4" />
         </a>

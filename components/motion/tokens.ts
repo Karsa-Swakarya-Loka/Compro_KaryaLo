@@ -1,7 +1,7 @@
 import type { Transition } from "motion/react";
 
 /** easeOutExpo — editorial "settle" for entrances, masks and layout moves. */
-export const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
+export const EASE_EXPO: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 /** Snappy, slightly damped spring for hover pills, magnetic pulls and tabs. */
 export const SPRING_INTERACTIVE: Transition = { type: "spring", stiffness: 300, damping: 30 };

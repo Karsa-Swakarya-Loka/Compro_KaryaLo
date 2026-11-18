@@ -87,6 +87,10 @@ export function organizationSchema(lang: Locale) {
       { "@type": "Country", name: "Indonesia" },
     ],
     knowsLanguage: ["id-ID", "en"],
+    knowsAbout:
+      lang === "en"
+        ? ["Software development", "Web and mobile applications", "UI/UX design", "Brand identity", "Photography and videography", "Internet of Things", "Computer and MikroTik networking hardware"]
+        : ["Pengembangan software", "Aplikasi web dan mobile", "Desain UI/UX", "Identitas merek", "Fotografi dan videografi", "Internet of Things", "Perangkat komputer dan jaringan MikroTik"],
     identifier: [
       { "@type": "PropertyValue", name: "NIB", value: siteConfig.nib },
       { "@type": "PropertyValue", name: "KBLI", value: siteText[lang].kbli },

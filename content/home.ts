@@ -39,20 +39,20 @@ export interface HomeCopy {
     commitments: { figure?: string; count?: number; suffix?: string; label: string }[];
   };
   /**
-   * Above the fold, in the order the eye should take it (hierarchy pass,
-   * 2026-10-16): the H1, then the project slider on the right as the proof,
-   * then one action. Copy is kept short on purpose: one line on what KaryaLo
-   * does (`audience`), one solid button, one quiet link, one line that lowers
-   * the stakes (`reassurance`). The three commitments that used to sit here as
-   * ticks are in the Studio section (7–14 days, code ownership, one team).
+   * Above the fold, kept to the point (2026-11-17): a short badge, the H1, one
+   * line on what KaryaLo does (`audience`), one solid WhatsApp button and the
+   * company-profile link. The project band right below is the proof, so there
+   * is no "see projects" link or reassurance line any more. The commitments
+   * (7–14 days, code ownership, one team) are in the stat cards under the band.
    */
   hero: {
+    /** The long brand phrase: the giant scrolling text under the hero and on inner pages. */
     category: string;
+    /** The short pill above the headline. */
+    badge: string;
     headline: { lead: string; accent: string };
     audience: string;
     primaryCta: string;
-    secondaryCta: string;
-    reassurance: string;
   };
   principles: {
     title: string;
@@ -117,6 +117,22 @@ export interface HomeCopy {
     bannerMessage: string;
   };
   faq: { title: string; intro: string; askLead: string; askBody: string; askCta: string };
+  /**
+   * Why KaryaLo (home, 2026-11-17): the goal in one line, then how working with
+   * KaryaLo differs from the usual IT vendor. Every "KaryaLo" cell restates a
+   * commitment the site already makes (PRODUCT.md: core team, five stages,
+   * clickable prototype in 7-14 days, written scope, code ownership per SPK,
+   * three fields in one team, care after launch). The "usual" column describes
+   * the common pattern in general terms and names no company.
+   */
+  advantage: {
+    title: string;
+    intro: string;
+    othersLabel: string;
+    usLabel: string;
+    rows: { topic: string; others: string; us: string }[];
+    link: string;
+  };
   cta: {
     title: string;
     body: string;
@@ -154,17 +170,16 @@ export const homeCopy: Localized<HomeCopy> = {
       ],
     },
     hero: {
-      category: "Extended IT Partner · Software, Desain & IoT",
+      category: "IT Agency · Software, Desain, Foto & Video, IoT & Hardware",
+      badge: "IT Agency",
       headline: { lead: "Tim IT Anda,", accent: "Tanpa Harus Merekrut." },
-      audience: "Satu tim untuk software, desain, dan perangkat IoT, dari perencanaan hingga pemeliharaan.",
+      audience: "Software, desain, foto & video, IoT, dan perangkat keras dalam satu tim.",
       primaryCta: "Diskusikan kebutuhan Anda",
-      secondaryCta: "Lihat contoh proyek",
-      reassurance: "Konsultasi awal via WhatsApp, tanpa kewajiban melanjutkan.",
     },
     principles: {
       title: "Cara Kami Bermitra",
       intro:
-        "Sebagai extended IT partner, kami menyelaraskan kebutuhan teknologi dengan tujuan bisnis Anda. Empat prinsip berikut menjadi dasar setiap kerja sama.",
+        "Sebagai IT agency yang menjadi mitra jangka panjang, kami menyelaraskan kebutuhan teknologi dengan tujuan bisnis Anda. Empat prinsip berikut menjadi dasar setiap kerja sama.",
       items: [
         {
           icon: "learn",
@@ -308,6 +323,21 @@ export const homeCopy: Localized<HomeCopy> = {
       askBody: "Jadwalkan sesi daring selama 30 menit untuk membahas kebutuhan Anda bersama tim kami.",
       askCta: "Tanya via WhatsApp",
     },
+    advantage: {
+      title: "Tujuan kami: sistem yang benar-benar dipakai tim Anda.",
+      intro: "Bukan sekadar selesai diserahkan. Karena itu kami bekerja seperti tim IT Anda sendiri, dari rancangan sampai dirawat.",
+      othersLabel: "Vendor IT pada umumnya",
+      usLabel: "Bersama KaryaLo",
+      rows: [
+        { topic: "Pengerjaan", others: "Bisa dialihkan ke pihak lain", us: "Dikerjakan tim inti sendiri, tidak dioper" },
+        { topic: "Sebelum kode ditulis", others: "Hasil baru terlihat setelah pengembangan berjalan", us: "Purwarupa yang bisa diklik dalam 7-14 hari kerja" },
+        { topic: "Ruang lingkup", others: "Batas kerja sering tidak tertulis", us: "Batas kerja & serah terima tertulis di SPK" },
+        { topic: "Kepemilikan", others: "Kode & file desain tetap di vendor", us: "Kode & file desain proyek khusus milik Anda sesuai SPK" },
+        { topic: "Bidang", others: "Software, desain, dan IoT dari vendor berbeda", us: "Software, desain & IoT dalam satu tim" },
+        { topic: "Setelah rilis", others: "Selesai saat serah terima", us: "Perawatan & pendampingan setelah peluncuran" },
+      ],
+      link: "Kenali tim & cara kerja kami",
+    },
     cta: {
       title: "Mulai dengan Kebutuhan Bisnis Anda",
       body:
@@ -344,17 +374,16 @@ export const homeCopy: Localized<HomeCopy> = {
       ],
     },
     hero: {
-      category: "Extended IT Partner · Software, Design & IoT",
+      category: "IT Agency · Software, Design, Photo & Video, IoT & Hardware",
+      badge: "IT Agency",
       headline: { lead: "Your IT Team,", accent: "Without the Recruitment." },
-      audience: "One team for software, design and IoT, from planning through maintenance.",
+      audience: "Software, design, photo & video, IoT and hardware in one team.",
       primaryCta: "Discuss your project",
-      secondaryCta: "See example projects",
-      reassurance: "Initial consultation via WhatsApp, with no obligation to continue.",
     },
     principles: {
       title: "How We Partner",
       intro:
-        "As your extended IT partner, we align technology decisions with your business goals. These four principles guide every engagement.",
+        "As an IT agency and long-term partner, we align technology decisions with your business goals. These four principles guide every engagement.",
       items: [
         {
           icon: "learn",
@@ -496,6 +525,21 @@ export const homeCopy: Localized<HomeCopy> = {
       askLead: "Your question isn't here?",
       askBody: "Arrange a 30-minute online consultation to discuss your requirements with our team.",
       askCta: "Ask on WhatsApp",
+    },
+    advantage: {
+      title: "Our goal: systems your team actually uses.",
+      intro: "Not just delivered and left behind. That is why we work like your own IT team, from the first plan to ongoing care.",
+      othersLabel: "The usual IT vendor",
+      usLabel: "With KaryaLo",
+      rows: [
+        { topic: "Who builds it", others: "Work may be passed to other parties", us: "Built by our own core team, never handed off" },
+        { topic: "Before any code", others: "You see results only once development is underway", us: "A clickable prototype in 7-14 working days" },
+        { topic: "Scope", others: "Boundaries are often left unwritten", us: "Scope and handover written into the SPK" },
+        { topic: "Ownership", others: "Code and design files stay with the vendor", us: "Custom-project code and design files are yours under the SPK" },
+        { topic: "Fields", others: "Software, design and IoT from different vendors", us: "Software, design & IoT in one team" },
+        { topic: "After launch", others: "The job ends at handover", us: "Maintenance and support after launch" },
+      ],
+      link: "Meet the team & how we work",
     },
     cta: {
       title: "Start with Your Business Needs",

@@ -1,0 +1,192 @@
+/*
+  Scroll scenes (2026-11-16)
+
+  Scroll-driven sections in the manner of the Kilnfield template
+  (8b.com/templates/kilnfield): pinned stages, a horizontal rail that moves with
+  the vertical scroll, cards dealt out of a stack, numerals that land in place,
+  and photographs that drift inside their frames. Rebuilt on KaryaLo's own
+  markup and palette; nothing is copied from the template's files.
+
+  Everything here is CSS `animation-timeline` (view timelines) plus a few custom
+  properties measured by `useSceneMeasure`. It only switches on where the
+  browser supports scroll timelines AND the visitor has not asked for reduced
+  motion. Everywhere else the sections fall back to their plain layouts
+  (a swipeable row, an accordion, static numerals).
+*/
+
+/* ── Fallback: the rail is a swipeable row ───────────────────────────────── */
+.sc-rail-stage {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.sc-rail-stage::-webkit-scrollbar { display: none; }
+.sc-rail {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 36px);
+  width: max-content;
+  padding: 3.5rem max(1rem, 4.4vw);
+}
+.sc-rail-head { flex: none; width: min(34rem, 84vw); scroll-snap-align: start; }
+.sc-rail-card { position: relative; flex: none; width: clamp(16.5rem, 28vw, 24rem); padding-top: clamp(2.5rem, 4vw, 4rem); scroll-snap-align: start; }
+.sc-rail-num {
+  position: absolute; top: 0; left: -0.25rem; z-index: 0;
+  font-weight: 800; letter-spacing: -0.04em; line-height: 0.8;
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  color: transparent; -webkit-text-stroke: 1.5px rgb(27 95 209 / 0.28);
+  pointer-events: none; user-select: none;
+}
+.sc-rail-card > a { position: relative; z-index: 1; }
+.sc-rail-end { flex: none; width: clamp(14rem, 22vw, 18rem); scroll-snap-align: start; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+
+    /* ── Portfolio: pinned horizontal rail ─────────────────────────────── */
+    .sc-rail-room { view-timeline: --sc-rail-room block; view-timeline-inset: 0; }
+    .sc-rail-space { height: var(--sc-rail-distance, 0px); }
+    .sc-rail-stage {
+      position: sticky; top: 0;
+      height: 100vh; height: 100svh;
+      overflow: hidden;
+      scroll-snap-type: none;
+    }
+    .sc-rail {
+      padding-block: 0;
+      animation: sc-rail-move linear both;
+      animation-timeline: --sc-rail-room;
+      animation-range: cover 100vh cover calc(100vh + var(--sc-rail-distance, 0px));
+    }
+    .sc-rail-card:nth-of-type(even) { margin-top: 12vh; }
+    .sc-rail-card .sc-rail-photo { max-height: 46svh; }
+    @keyframes sc-rail-move {
+      from { translate: 0 0; }
+      to { translate: calc(-1 * var(--sc-rail-distance, 0px)) 0; }
+    }
+    @media (max-width: 767px) {
+      .sc-rail-card { width: 74vw; }
+      .sc-rail-card:nth-of-type(even) { margin-top: 0; }
+      .sc-rail-card .sc-rail-photo { max-height: 38svh; }
+    }
+
+    /* ── Services: cards dealt out of a stack (desktop) ────────────────── */
+    @media (min-width: 1024px) {
+      /*
+        Not pinned: the deck deals itself out while it scrolls into view, and
+        has settled by the time it is fully on screen, so the heading never
+        gets left behind above it (revised 2026-11-16).
+      */
+      .sc-deck {
+        view-timeline: --sc-deck block;
+        view-timeline-inset: 0;
+      }
+      .sc-deck > .sc-deck-card {
+        z-index: calc(var(--n, 4) - var(--i, 0));
+        --sc-turn: -7deg;
+        animation-name: sc-deal;
+        animation-timeline: --sc-deck;
+        animation-range:
+          entry calc(0% + var(--i, 0) * 8%)
+          entry calc(60% + var(--i, 0) * 8%);
+        animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+        animation-fill-mode: both;
+      }
+      .sc-deck > .sc-deck-card:nth-child(4n + 2) { --sc-turn: 5deg; }
+      .sc-deck > .sc-deck-card:nth-child(4n + 3) { --sc-turn: -3deg; }
+      .sc-deck > .sc-deck-card:nth-child(4n + 4) { --sc-turn: 8deg; }
+      @keyframes sc-deal {
+        from { translate: var(--sc-x, 0px) calc(26px + var(--i, 0) * 6px); rotate: var(--sc-turn); scale: 0.9; }
+        to { translate: 0 0; rotate: 0deg; scale: 1; }
+      }
+    }
+
+    /* Tablet (2 × 2): cards swing in from alternating sides. */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .sc-deck > .sc-deck-card {
+        view-timeline: --sc-deck-item block;
+        view-timeline-inset: 0;
+        animation-timeline: --sc-deck-item;
+        animation-range: cover 2vh cover 45vh;
+        animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
+        animation-fill-mode: both;
+        animation-name: sc-swing-left;
+      }
+      .sc-deck > .sc-deck-card:nth-child(even) { animation-name: sc-swing-right; }
+      @keyframes sc-swing-left { from { translate: -40% 0; rotate: -6deg; } to { translate: 0 0; rotate: 0deg; } }
+      @keyframes sc-swing-right { from { translate: 40% 0; rotate: 6deg; } to { translate: 0 0; rotate: 0deg; } }
+    }
+
+    /* ── Process: the numeral grows in from the side and lands ─────────── */
+    .sc-step { view-timeline: --sc-step block; view-timeline-inset: 0; }
+    .sc-step-num {
+      transform-origin: 0% 50%;
+      animation: sc-num-land linear both;
+      animation-timeline: --sc-step;
+      animation-range: cover 5vh cover 50vh;
+      animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
+    }
+    @keyframes sc-num-land {
+      from { scale: 2.2; translate: 45% 0; }
+      to { scale: 1; translate: 0 0; }
+    }
+
+    /* ── Photographs drift inside their frames ─────────────────────────── */
+    .sc-parallax { view-timeline: --sc-photo block; view-timeline-inset: 0; }
+    .sc-parallax img {
+      scale: 1.14;
+      animation: sc-drift linear both;
+      animation-timeline: --sc-photo;
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes sc-drift {
+      from { translate: 0 -5%; }
+      to { translate: 0 5%; }
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Slogan ticker above the closing call to action
+   ══════════════════════════════════════════════ */
+.sc-ticker { overflow: hidden; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); padding-block: 0.5rem; }
+/* Solid ink and brand blue with one outlined row between: strong against the white ground, never pale. */
+.sc-ticker-row {
+  display: flex; gap: 0.35em; width: max-content; margin: 0;
+  font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; white-space: nowrap;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  color: var(--color-ink);
+}
+.sc-ticker-row[data-row="1"] { color: transparent; -webkit-text-stroke: 2px var(--color-brand); }
+.sc-ticker-row[data-row="2"] { color: var(--color-brand); }
+.sc-ticker-row > span::after { content: " ·"; }
+
+/* ══════════════════════════════════════════════
+   Hero: the laptop drifts up slower than the page as it scrolls away
+   ══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sc-ticker { view-timeline: --sc-ticker block; view-timeline-inset: 0; }
+    .sc-ticker-row {
+      animation: sc-ticker-right linear both;
+      animation-timeline: --sc-ticker;
+      animation-range: cover 0% cover 100%;
+    }
+    .sc-ticker-row[data-row="1"] { animation-name: sc-ticker-left; }
+    @keyframes sc-ticker-right { from { translate: -10vw 0; } to { translate: 3vw 0; } }
+    @keyframes sc-ticker-left { from { translate: 3vw 0; } to { translate: -10vw 0; } }
+
+    /* ── Client problems: a highlight band sweeps behind each quote ───── */
+    .sc-mark-card { view-timeline: --sc-mark block; view-timeline-inset: 0; }
+    .sc-mark {
+      background: linear-gradient(var(--color-brand-soft), var(--color-brand-soft)) 0 88% / 0% 0.62em no-repeat;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone;
+      animation: sc-mark-sweep linear both;
+      animation-timeline: --sc-mark;
+      animation-range: cover 12vh cover 52vh;
+    }
+    @keyframes sc-mark-sweep { to { background-size: 100% 0.62em; } }
+  }
+}

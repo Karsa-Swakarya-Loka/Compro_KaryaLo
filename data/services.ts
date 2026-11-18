@@ -71,11 +71,11 @@ const servicesId: ServicePillar[] = [
     id: "creative-design",
     pillarNumber: "02",
     codePrefix: "DSG",
-    name: "Desain Antarmuka & Identitas Merek",
-    shortName: "Desain & Branding",
-    focus: "Desain produk digital dan identitas merek yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda.",
-    image: "/images/pdf/acc-design.webp",
-    imageAlt: "Buku sketsa berisi rancangan alur layar aplikasi, di sampingnya tablet menampilkan desain aplikasi dan kipas contoh warna cetak.",
+    name: "Desain, Identitas Merek, Foto & Video",
+    shortName: "Desain & Kreatif",
+    focus: "Desain produk digital, identitas merek, serta foto dan video yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda.",
+    image: "/images/pdf/design-brand-v4.webp",
+    imageAlt: "Tampilan aplikasi KaryaLo di layar tablet, dengan contoh palet warna biru, huruf, dan deretan ikon antarmuka di sampingnya.",
     subServices: [
       {
         code: "DSG-UI",
@@ -94,6 +94,12 @@ const servicesId: ServicePillar[] = [
         name: "Materi Promosi & Presentasi",
         description: "Materi komunikasi yang membantu menjelaskan produk dan menyampaikan penawaran, mulai dari template media sosial hingga infografis dan presentasi bisnis.",
         items: ["Template media sosial", "Infografis penjelas produk", "Deck presentasi penjualan"]
+      },
+      {
+        code: "DSG-MED",
+        name: "Fotografi & Videografi",
+        description: "Produksi foto dan video untuk kebutuhan bisnis, seperti foto produk, dokumentasi kegiatan, profil perusahaan, dan materi promosi, sejalan dengan identitas merek Anda.",
+        items: ["Foto produk & profil perusahaan", "Video company profile & promosi", "Dokumentasi kegiatan usaha"]
       }
     ]
   },
@@ -101,11 +107,11 @@ const servicesId: ServicePillar[] = [
     id: "iot-hardware",
     pillarNumber: "03",
     codePrefix: "IOT",
-    name: "Perangkat IoT & Sistem Pemantauan",
+    name: "IoT, Jaringan & Perangkat Keras",
     shortName: "IoT & Perangkat",
-    focus: "Hubungkan sensor dan perangkat lapangan dengan dashboard untuk memantau kondisi operasional serta menerima peringatan sesuai parameter yang ditetapkan.",
-    image: "/images/pdf/acc-iot.webp",
-    imageAlt: "Meja kerja dengan papan rangkaian kecil tersambung ke perangkat pemantau hitam, sementara layar di belakangnya menampilkan kode program dan diagram alur datanya.",
+    focus: "Hubungkan sensor dan perangkat lapangan dengan dashboard untuk memantau kondisi operasional, serta penuhi kebutuhan komputer dan perangkat jaringan kantor Anda dari satu mitra.",
+    image: "/images/pdf/iot-monitor-v4.webp",
+    imageAlt: "Perangkat sensor putih dengan antena di atas meja, di sebelahnya kartu dashboard Monitoring Lapangan yang menampilkan suhu, kelembapan, dan status normal.",
     subServices: [
       {
         code: "IOT-HW",
@@ -124,6 +130,12 @@ const servicesId: ServicePillar[] = [
         name: "Dashboard Pemantauan & Notifikasi",
         description: "Pantau data perangkat melalui dashboard dan terima notifikasi otomatis melalui WhatsApp, Telegram, atau email berdasarkan kondisi yang ditentukan.",
         items: ["Dashboard pemantauan perangkat", "Notifikasi otomatis WhatsApp", "Integrasi dengan aplikasi Anda"]
+      },
+      {
+        code: "IOT-RTL",
+        name: "Pengadaan Komputer & Perangkat Jaringan",
+        description: "Penyediaan komputer, laptop, dan perangkat jaringan seperti router MikroTik untuk kantor dan usaha Anda. Spesifikasi disesuaikan kebutuhan, dan harga disampaikan melalui penawaran.",
+        items: ["Komputer & laptop kerja", "Router & perangkat jaringan MikroTik", "Pemilihan spesifikasi sesuai kebutuhan"]
       }
     ]
   }
@@ -158,10 +170,10 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
     },
   },
   "creative-design": {
-    name: "Interface Design & Brand Identity",
-    shortName: "Design & Branding",
-    focus: "Digital product design and brand identity that clarify your message, improve usability, and create a consistent business presence.",
-    imageAlt: "A sketchbook of app screen flows, beside a tablet showing an app design and a fan of print colour swatches.",
+    name: "Design, Brand Identity, Photo & Video",
+    shortName: "Design & Creative",
+    focus: "Digital product design, brand identity, photo and video that clarify your message, improve usability, and create a consistent business presence.",
+    imageAlt: "A KaryaLo app design on a tablet screen, beside a blue colour palette, a type sample and a row of interface icons.",
     subServices: {
       "DSG-UI": {
         name: "Digital Product UI/UX Design",
@@ -178,13 +190,18 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
         description: "Communication materials that explain your products and present your offer, from social media templates to infographics and business presentations.",
         items: ["Social media templates", "Product explainer infographics", "Sales presentation decks"],
       },
+      "DSG-MED": {
+        name: "Photography & Videography",
+        description: "Photo and video production for business needs such as product photos, event documentation, company profiles, and promotional material, in line with your brand identity.",
+        items: ["Product & company profile photography", "Company profile & promo videos", "Business activity documentation"],
+      },
     },
   },
   "iot-hardware": {
-    name: "IoT Devices & Monitoring Systems",
+    name: "IoT, Networking & Hardware",
     shortName: "IoT & Devices",
-    focus: "Connect sensors and field devices to a dashboard to monitor operational conditions and receive alerts based on defined parameters.",
-    imageAlt: "A workbench with a small circuit board wired to a black monitoring device, while a screen behind it shows program code and a diagram of its data flow.",
+    focus: "Connect sensors and field devices to a dashboard to monitor operations, and get your office computers and networking equipment from the same partner.",
+    imageAlt: "A white sensor device with an antenna on a table, beside a Field Monitoring dashboard card showing temperature, humidity and a normal status.",
     subServices: {
       "IOT-HW": {
         name: "Device Assembly & Prototyping",
@@ -200,6 +217,11 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
         name: "Monitoring Dashboard & Alerts",
         description: "Monitor device data through a dashboard and receive automated WhatsApp, Telegram, or email notifications when defined conditions are met.",
         items: ["Live monitoring dashboard", "Automatic WhatsApp alerts", "Connection to your apps"],
+      },
+      "IOT-RTL": {
+        name: "Computer & Networking Hardware Supply",
+        description: "Supply of computers, laptops, and networking equipment such as MikroTik routers for your office or business. Specifications are matched to your needs, and pricing is given through a quotation.",
+        items: ["Work computers & laptops", "MikroTik routers & networking gear", "Specifications matched to your needs"],
       },
     },
   },
@@ -264,9 +286,34 @@ export function getServices(lang: Locale) {
  * slice when closed, so the subject (laptop, palette card, device, faces) has
  * to sit in that slice rather than at the photo's centre.
  */
+/**
+ * Desktop home cards: the open card shows only a strip of its photo above the
+ * blue panel, so the portrait images (design, IoT) are anchored to the bottom
+ * overflow, which is where the phone mockup and the monitoring card sit.
+ */
+export const SERVICE_FOCUS_WIDE: Record<string, string> = {
+  "digital-engineering": "36% 50%",
+  "creative-design": "40% 100%",
+  "iot-hardware": "8% 100%",
+  support: "55% 50%",
+};
+
+/**
+ * The small 4:3 thumbnails on the home "Layanan Kami" cards. Each subject sits
+ * near the middle of its photo (laptop + phone, the brand tablet and swatches,
+ * the sensor with its monitoring card), so the crop stays centred on it; the
+ * strip anchors above would cut the portrait ones down to their empty bottoms.
+ */
+export const SERVICE_FOCUS_THUMB: Record<string, string> = {
+  "digital-engineering": "55% 42%",
+  "creative-design": "50% 50%",
+  "iot-hardware": "50% 47%",
+  support: "50% 50%",
+};
+
 export const SERVICE_FOCUS: Record<string, string> = {
   "digital-engineering": "36% 50%",
-  "creative-design": "34% 50%",
-  "iot-hardware": "12% 50%",
+  "creative-design": "40% 58%",
+  "iot-hardware": "8% 50%",
   support: "55% 50%",
 };

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { getPortfolio, portfolioSlugs } from "@/data/portfolio";
 import { getServices } from "@/data/services";
 import { getWhatsAppUrl, siteConfig } from "@/config/site";
@@ -10,26 +10,28 @@ import { portfolioCopy } from "@/content/portfolio-page";
 import JsonLd from "@/components/seo/JsonLd";
 import PageBanner from "@/components/ui/PageBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Reveal, { RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { BlurText, FlipIn, Reveal, RevealGroup, RevealItem } from "@/components/motion/Entrance";
 import { breadcrumbSchema, caseStudySchema } from "@/lib/schema";
 import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import { type Locale, localePath, locales, ogLocale } from "@/lib/i18n";
+import { ProjectCard } from "./PortfolioClient";
+import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 /**
- * Server-rendered case study.
+ * Server-rendered case study, one static page per project in both languages:
+ * `/portfolio/[slug]` and `/en/portfolio/[slug]`. The route files in app/(id)
+ * and app/(en)/en only bind the language and forward to the helpers below.
  *
- * The narrative for each project used to exist only inside a client-side dialog,
- * so none of it reached the HTML and none of it had a URL. Every project now has
- * a static page a crawler can index and a salesperson can paste into a chat, in
- * both languages: `/portfolio/[slug]` and `/en/portfolio/[slug]`.
- *
- * The route files in app/(id) and app/(en)/en only bind the language and
- * forward to the helpers below.
- *
- * Cargon layout: page banner (title, breadcrumb, summary, type badge), one wide
- * screenshot frame, the story beside a sticky facts card, the WhatsApp ask in
- * a brand-blue panel right after the outcome, then more screens and related
- * projects under centred section headers.
+ * Agenciex case-study layout:
+ *   banner      the project name is the page's one H1, the summary its lede
+ *   meta row    client / year / category / services / technology, label over
+ *               value under thin rules
+ *   hero        the laptop mockup, whole, on a huge rounded tinted panel
+ *   story       numbered text blocks (challenge, solution, outcome), each
+ *               followed by one full-width rounded screenshot
+ *   scope       the sub-services the project used, as tinted cards
+ *   more work   the next two projects as the list page's cards
+ *   CTA         the blue panel with the page's one conversation button
  */
 
 /** Every published slug, in both language trees. */
@@ -73,13 +75,25 @@ export function caseStudyMetadata(lang: Locale, slug: string): Metadata {
   };
 }
 
+/** One full-width rounded screenshot between story blocks. */
+function Screen({ src, alt }: { src: string; alt: string }) {
+  return (
+    <Reveal scaleFrom={0.92} distance={0} className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.75rem] bg-(--agx-tint) md:aspect-[16/9]">
+      <Image src={src} alt={alt} fill sizes="(min-width: 1344px) 1264px, calc(100vw - 40px)" className="object-cover object-top" />
+    </Reveal>
+  );
+}
+
 export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: string }) {
   const project = getProject(lang, slug);
   if (!project) notFound();
 
   const copy = portfolioCopy[lang];
   const href = (path: string) => localePath(lang, path);
-  const related = getPortfolio(lang).filter((item) => item.slug !== project.slug).slice(0, 3);
+  const portfolio = getPortfolio(lang);
+  const position = portfolio.findIndex((item) => item.slug === project.slug);
+  // "Next project" in list order, wrapping round, so every case study leads on.
+  const next = [1, 2].map((step) => portfolio[(position + step) % portfolio.length]).filter((item) => item.slug !== project.slug);
 
   // "DEV-WEB // DSG-UI" -> the actual sub-services those codes refer to.
   const codes = project.serviceCode.split("//").map((code) => code.trim()).filter(Boolean);
@@ -88,9 +102,8 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
       .filter((sub) => codes.includes(sub.code))
       .map((sub) => ({ ...sub, pillarId: pillar.id, pillarName: pillar.shortName })),
   );
-  const gallery = project.galleryImages.length ? project.galleryImages : [project.coverImage];
-  const [leadImage, ...moreImages] = gallery;
   const isClient = project.type === "client";
+  const typeLabel = isClient ? copy.caseStudy.badgeClient : project.type === "product" ? copy.caseStudy.badgeProduct : copy.caseStudy.badgePrototype;
   const facts = [
     { label: copy.caseStudy.factClient, value: project.client },
     { label: copy.caseStudy.factYear, value: project.year },
@@ -98,8 +111,27 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
     { label: copy.caseStudy.factServices, value: project.serviceTags.join(" · ") },
   ];
 
+  // The story, numbered; each block is followed by the next screenshot.
+  const blocks: { id: string; title: string; body: string; note?: string }[] = [
+    { id: "tantangan", title: copy.caseStudy.challengeHeading, body: project.challenge },
+    { id: "solusi", title: copy.caseStudy.solutionHeading, body: project.solution },
+    ...(project.impact
+      ? [{
+          id: "hasil",
+          title: copy.impact,
+          body: project.impact,
+          // Says where the line comes from: a client's own records, or our use
+          // of our own prototype — never the same claim for both.
+          note: isClient ? copy.caseStudy.impactNoteClient(project.client, project.year) : copy.caseStudy.impactNotePrototype(project.year),
+        }]
+      : []),
+  ];
+  const screens = project.galleryImages;
+  const leftover = screens.slice(blocks.length);
+  const total = screens.length + 1;
+
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen flex flex-col bg-white">
+    <main id="main-content" tabIndex={-1} className="flex min-h-screen flex-col">
       <JsonLd
         data={[
           caseStudySchema(project, lang),
@@ -110,222 +142,159 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         ]}
       />
 
-      {/* Banner: the project is the page's one display line; the badge says what kind of work it was. */}
+      {/* The banner's pill names the kind of work; the project name is the H1. */}
       <PageBanner
         lang={lang}
         title={project.title}
+        badge={typeLabel}
         crumbs={[{ name: "Portfolio", path: "/portfolio" }, { name: project.title }]}
         lede={project.summary}
-      >
-        <span className="badge-pill">
-          {isClient ? copy.caseStudy.badgeClient : project.type === "product" ? copy.caseStudy.badgeProduct : copy.caseStudy.badgePrototype} · {project.year}
-        </span>
-      </PageBanner>
+      />
 
-      <section className="section-standard px-4 md:px-12 bg-white">
-        <div className="max-w-[72rem] mx-auto">
-          {/* The system itself first: one wide frame, zooming out into place. */}
-          <Reveal scaleFrom={0.92} distance={0} className="rounded-3xl bg-surface p-3 md:p-5 shadow-card">
-            <div className="img-zoom relative aspect-[16/10] md:aspect-[16/8] w-full overflow-hidden rounded-2xl bg-white">
-              <Image
-                src={leadImage}
-                alt={copy.imageAlt(project.title, 1, gallery.length)}
-                fill
-                preload
-                sizes="(min-width: 1152px) 1112px, calc(100vw - 32px)"
-                className="object-contain p-2 md:p-4"
-              />
-            </div>
+      {/* Meta row and hero picture. */}
+      <section aria-label={copy.caseStudy.factsHeading} className="pb-4">
+        <div className="agx-wrap">
+          <RevealGroup className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+            {facts.map((fact) => (
+              <RevealItem key={fact.label} className="border-t border-line pt-4">
+                <dl>
+                  <dt className="text-sm text-body">{fact.label}</dt>
+                  <dd className="mt-1.5 text-[1.0625rem] font-medium leading-snug text-ink [overflow-wrap:anywhere]">{fact.value}</dd>
+                </dl>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          <Reveal className="mt-6 border-t border-line pt-4">
+            <dl>
+              <dt className="text-sm text-body">{copy.caseStudy.techHeading}</dt>
+              <dd className="mt-3">
+                <ul className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <li key={tag} className="rounded-full border border-line bg-white px-3.5 py-1.5 text-sm text-ink">{tag}</li>
+                  ))}
+                </ul>
+              </dd>
+            </dl>
           </Reveal>
 
-          {/*
-            The story beside the facts. The page's one solid button sits
-            straight after the outcome: that is the moment a reader decides
-            whether they want the same thing.
-          */}
-          <div className="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            <div className="lg:col-span-8 space-y-12">
-              <Reveal direction="left" className="space-y-3">
-                <h2 className="type-subhead text-ink">{copy.caseStudy.challengeHeading}</h2>
-                <p className="type-body text-body max-w-[68ch]">{project.challenge}</p>
-              </Reveal>
-
-              <Reveal direction="left" className="space-y-3">
-                <h2 className="type-subhead text-ink">{copy.caseStudy.solutionHeading}</h2>
-                <p className="type-body text-body max-w-[68ch]">{project.solution}</p>
-              </Reveal>
-
-              {project.impact && (
-                <Reveal direction="left" className="space-y-3">
-                  <h2 className="type-subhead text-ink">{copy.impact}</h2>
-                  <p className="flex items-start gap-3 max-w-[60ch]">
-                    <CheckCircle2 aria-hidden="true" className="mt-1 h-6 w-6 shrink-0 text-brand" />
-                    <span className="type-lede font-medium text-ink">{project.impact}</span>
-                  </p>
-                  {/* Says where the line comes from: a client's own records, or
-                      our use of our own prototype — never the same claim for both. */}
-                  <p className="type-small text-body max-w-[68ch]">
-                    {isClient
-                      ? copy.caseStudy.impactNoteClient(project.client, project.year)
-                      : copy.caseStudy.impactNotePrototype(project.year)}
-                  </p>
-                </Reveal>
-              )}
-
-              {/* The ask, in the brand blue: Cargon's highlighted panel. */}
-              <Reveal>
-              <aside aria-labelledby="diskusi-serupa" className="rounded-3xl bg-brand p-7 md:p-10 text-white shadow-lift">
-                <h2 id="diskusi-serupa" className="type-subhead text-white">
-                  {copy.caseStudy.sidebarTitle}
-                </h2>
-                <p className="type-body text-white max-w-[60ch] mt-3">
-                  {copy.caseStudy.sidebarBody}
-                </p>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 mt-7">
-                  <a
-                    href={getWhatsAppUrl(copy.whatsappSimilar(project.title), lang, { service: (lang === "id" ? "Sistem seperti " : "A system like ") + project.title })}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-wa-primary=""
-                    className="btn btn-lg btn-primary-light"
-                  >
-                    {copy.discussSimilar}
-                    <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
-                  </a>
-                  <Link href={href("/services")} className="btn btn-lg btn-secondary-light">
-                    {copy.caseStudy.relatedServices}
-                    <ArrowRight aria-hidden="true" className="w-4 h-4" />
-                  </Link>
-                </div>
-              </aside>
-              </Reveal>
-
-              {scope.length > 0 && (
-                <Reveal direction="left" className="space-y-5">
-                  <h2 className="type-subhead text-ink">{copy.caseStudy.scopeHeading}</h2>
-                  <p className="type-body text-body max-w-[68ch]">{copy.caseStudy.scopeIntro(scope.length)}</p>
-                  <ul className="fit-grid fit-md-2 [--g:1.25rem]">
-                    {scope.map((sub) => (
-                      <li key={sub.code} className="group flex flex-col rounded-3xl bg-white p-6 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 hover:-translate-y-1 hover:shadow-lift">
-                        <span className="type-meta text-brand">{sub.pillarName}</span>
-                        <h3 className="type-card-title text-ink mt-1.5">{sub.name}</h3>
-                        <p className="type-body-card text-body mt-2">{sub.description}</p>
-                        <ul className="mt-4 space-y-2">
-                          {sub.items.map((item) => (
-                            <li key={item} className="flex items-start gap-2 type-small text-ink">
-                              <CheckCircle2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                        <Link href={href(`/services#${sub.pillarId}`)} className="text-link text-brand mt-auto pt-3">
-                          {copy.caseStudy.seeService(sub.pillarName)}
-                          <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
-              )}
-            </div>
-
-            {/* Facts card: who, when, what kind of work, with what. */}
-            <Reveal direction="right" className="lg:col-span-4 lg:sticky lg:top-32">
-              <aside aria-labelledby="ringkasan-proyek" className="rounded-3xl bg-surface p-7 md:p-8">
-                <h2 id="ringkasan-proyek" className="type-card-title-lg text-ink">{copy.caseStudy.factsHeading}</h2>
-                <dl className="mt-6 divide-y divide-line">
-                  {facts.map((fact) => (
-                    <div key={fact.label} className="py-3.5 first:pt-0">
-                      <dt className="type-meta text-body">{fact.label}</dt>
-                      <dd className="type-body-card font-semibold text-ink mt-0.5">{fact.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <div className="mt-6 pt-6 border-t border-line">
-                  <h3 className="type-label text-ink">{copy.caseStudy.techHeading}</h3>
-                  <ul className="flex flex-wrap gap-2 mt-3">
-                    {project.tags.map((tag) => (
-                      <li key={tag} className="rounded-full bg-brand-soft px-3 py-1.5 type-meta text-brand">
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </aside>
-            </Reveal>
-          </div>
+          <Reveal scaleFrom={0.92} distance={0} className="relative isolate mt-12 aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-(--agx-tint) md:mt-16 md:aspect-[16/9]">
+            <span aria-hidden="true" className="absolute -left-[10%] -top-[20%] -z-10 aspect-square w-[55%] rounded-full bg-(--agx-tint-2)" />
+            <Image
+              src={project.coverImage}
+              alt={copy.coverAlt(project.title, project.client)}
+              fill
+              preload
+              sizes="(min-width: 1344px) 1264px, calc(100vw - 40px)"
+              className="object-contain p-6 md:p-14"
+            />
+          </Reveal>
         </div>
       </section>
 
-      {/* More screens of the same system, when there are any. */}
-      {moreImages.length > 0 && (
-        <section className="section-support px-4 md:px-12 bg-surface">
-          <div className="max-w-[72rem] mx-auto">
-            <SectionHeading badge={copy.caseStudy.galleryBadge} title={copy.caseStudy.galleryHeading} intro={copy.caseStudy.galleryIntro} />
-            <RevealGroup className="fit-grid mt-12 fit-md-2" stagger={0.12}>
-              {moreImages.map((image, index) => (
-                <RevealItem key={image} scaleFrom={0.94}>
-                  <figure className="img-zoom relative aspect-[16/10] w-full overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-line">
-                    <Image
-                      src={image}
-                      alt={copy.imageAlt(project.title, index + 2, gallery.length)}
-                      fill
-                      sizes="(min-width: 1152px) 540px, (min-width: 768px) 50vw, 100vw"
-                      className="object-contain p-3"
-                    />
-                  </figure>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-          </div>
-        </section>
-      )}
+      {/* The story: numbered blocks, alternating sides, each followed by a screen. */}
+      <section aria-label={lang === "id" ? "Cerita proyek" : "Project story"} className="agx-section">
+        <div className="agx-wrap flex flex-col gap-12 md:gap-16">
+          {blocks.map((block, index) => (
+            <div key={block.id} className="flex flex-col gap-12 md:gap-16">
+              <SectionHeading
+                id={block.id}
+                align="left"
+                badge={String(index + 1).padStart(2, "0")}
+                title={block.title}
+                intro={block.body}
+                className={index % 2 ? "lg:ml-auto" : ""}
+              >
+                {block.note ? <p className="text-sm text-body">{block.note}</p> : undefined}
+              </SectionHeading>
+              {screens[index] && <Screen src={screens[index]} alt={copy.imageAlt(project.title, index + 2, total)} />}
+            </div>
+          ))}
+          {leftover.map((src, index) => (
+            <Screen key={src} src={src} alt={copy.imageAlt(project.title, blocks.length + index + 2, total)} />
+          ))}
+        </div>
+      </section>
 
-      {/* Related work keeps case studies interlinked rather than orphaned. */}
-      {related.length > 0 && (
-        <section className={`section-standard px-4 md:px-12 ${moreImages.length > 0 ? "bg-white" : "bg-surface"}`}>
-          <div className="max-w-[72rem] mx-auto">
-            <SectionHeading badge={copy.caseStudy.relatedBadge} title={copy.caseStudy.relatedHeading} intro={copy.caseStudy.relatedIntro} />
-            <RevealGroup className="fit-grid mt-12 fit-md-2 fit-lg-3" stagger={0.1}>
-              {related.map((item) => (
-                <RevealItem key={item.slug} className="h-full">
-                  <Link
-                    href={href(`/portfolio/${item.slug}`)}
-                    className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 hover:-translate-y-1.5 hover:shadow-lift"
-                  >
-                    <div className="img-zoom relative aspect-[16/10] w-full border-b border-line bg-surface">
-                      <Image
-                        src={item.galleryImages[0] ?? item.coverImage}
-                        alt={copy.coverAlt(item.title, item.client)}
-                        fill
-                        sizes="(min-width: 1152px) 370px, (min-width: 768px) 50vw, 100vw"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <span className="type-meta text-body">{item.serviceTags.join(" · ")}</span>
-                      <h3 className="type-card-title text-ink mt-2 transition-colors duration-300 group-hover:text-brand">{item.title}</h3>
-                      <p className="type-body-card text-body mt-2 line-clamp-2">{item.summary}</p>
-                      {/* The whole card is the link; this only names where it goes. */}
-                      <span className="text-link text-brand mt-auto pt-3">
-                        {copy.readCaseStudy}
-                        <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                      </span>
-                    </div>
+      {/* What the work consisted of, linked to the services that offer it. */}
+      {scope.length > 0 && (
+        <section aria-labelledby="cakupan" className="agx-section !pt-0">
+          <div className="agx-wrap">
+            <SectionHeading id="cakupan" align="left" badge={copy.caseStudy.factServices} title={copy.caseStudy.scopeHeading} intro={copy.caseStudy.scopeIntro(scope.length)} />
+            <RevealGroup className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2" stagger={0.1}>
+              {scope.map((sub) => (
+                <RevealItem key={sub.code} className="agx-card flex flex-col">
+                  <span className="text-sm font-medium text-brand">{sub.pillarName}</span>
+                  <h3 className="mt-2 text-[clamp(1.375rem,1.1rem+0.9vw,1.875rem)] font-medium leading-tight tracking-[-0.03em] text-ink">{sub.name}</h3>
+                  <p className="mt-3 text-body">{sub.description}</p>
+                  <ul className="mt-5 space-y-2.5">
+                    {sub.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-[0.9375rem] text-ink">
+                        <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand" strokeWidth={2.5} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={href(`/services#${sub.pillarId}`)} className="text-link group mt-auto inline-flex min-h-11 items-center gap-2 pt-5 text-ink hover:text-brand">
+                    {copy.caseStudy.seeService(sub.pillarName)}
+                    <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </RevealItem>
               ))}
             </RevealGroup>
-            <div className="mt-12 flex justify-center">
-              <Link href={href("/portfolio")} className="btn btn-secondary">
-                {copy.allPortfolio}
-                <ArrowRight aria-hidden="true" className="w-4 h-4" />
-              </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Next projects: the list page's cards keep case studies interlinked. */}
+      {next.length > 0 && (
+        <section aria-labelledby="proyek-lainnya" className="agx-section !pt-0">
+          <div className="agx-wrap">
+            <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+              <SectionHeading id="proyek-lainnya" align="left" badge={copy.caseStudy.relatedBadge} title={copy.caseStudy.relatedHeading} intro={copy.caseStudy.relatedIntro} />
+              <Reveal className="shrink-0">
+                <Link href={href("/portfolio")} className="btn btn-dark">
+                  <span>{copy.allPortfolio}</span>
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </Reveal>
+            </div>
+            <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 md:mt-16 md:grid-cols-12 lg:gap-x-10">
+              {next.map((item, index) => (
+                <ProjectCard key={item.slug} lang={lang} project={item} index={index} />
+              ))}
             </div>
           </div>
         </section>
       )}
+
+      {/* The ask: the page's one solid button, WhatsApp. */}
+      <section aria-labelledby="diskusi-serupa" className="pb-12 md:pb-16">
+        <div className="agx-wrap">
+          <Reveal scaleFrom={0.97} className="agx-cta">
+            <div className="flex max-w-3xl flex-col items-start gap-6">
+              <FlipIn id="diskusi-serupa" className="agx-h2 !text-white">{copy.caseStudy.sidebarTitle}</FlipIn>
+              <BlurText className="agx-lede !text-white/85">{copy.caseStudy.sidebarBody}</BlurText>
+              <div className="flex w-full flex-col items-stretch gap-3 pt-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+                <a
+                  href={getWhatsAppUrl(copy.whatsappSimilar(project.title), lang, { service: (lang === "id" ? "Sistem seperti " : "A system like ") + project.title })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-wa-primary=""
+                  className="btn btn-lg btn-primary-light"
+                >
+                  <WhatsAppIcon size={18} />
+                  <span>{copy.discussSimilar}</span>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+                <Link href={href("/services")} className="btn btn-lg btn-secondary-light">
+                  <span>{copy.caseStudy.relatedServices}</span>
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </main>
   );
 }
-
