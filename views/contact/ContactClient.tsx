@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import FitImage from "@/components/ui/FitImage";
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig, siteText, buildWhatsAppMessage, getWhatsAppUrlFromText, whatsappUrl } from "@/config/site";
 import { contactCopy } from "@/content/contact-page";
@@ -178,7 +178,7 @@ export default function ContactClient({ lang }: { lang: Locale }) {
         <div className="agx-wrap">
           <FlyIn side="left">
             <div className="agx-photo relative aspect-[4/3] sm:aspect-[16/8] lg:aspect-[16/6]">
-              <FitImage src="/images/pdf/desk-contact-v2.webp" sizes="(min-width: 1344px) 1264px, 100vw" />
+              <Image src="/images/contact/desk.webp" alt="" fill sizes="(min-width: 1344px) 1264px, 100vw" className="object-cover" style={{ objectPosition: "50% 55%" }} />
             </div>
           </FlyIn>
 

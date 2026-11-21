@@ -60,11 +60,12 @@ export default function AboutClient({ lang }: { lang: Locale }) {
         </ul>
       </PageBanner>
 
-      {/* One large photograph across the column, flying in with the scroll. */}
+      {/* The team photograph across the column, flying in with the scroll. It is ~2.4:1 with all five
+          people edge to edge on white, so it is shown whole (contain on white) instead of cropped on phones. */}
       <div className="agx-wrap">
-        <FlyIn className="relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
-          <div className="agx-photo h-full w-full">
-            <Image src="/images/about-studio.webp" alt={copy.studio.imageAlt} fill sizes="(min-width: 1344px) 80rem, 100vw" className="object-cover" />
+        <FlyIn className="relative aspect-[16/9] lg:aspect-[21/9]">
+          <div className="agx-photo h-full w-full bg-white">
+            <Image src="/images/about-team.webp" alt={copy.studio.imageAlt} fill sizes="(min-width: 1344px) 80rem, 100vw" style={{ objectFit: "contain" }} />
           </div>
         </FlyIn>
       </div>

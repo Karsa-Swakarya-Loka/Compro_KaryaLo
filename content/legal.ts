@@ -133,7 +133,7 @@ export const termsCopy: Localized<LegalPageCopy & { stepsHeading: string }> = {
       },
       {
         heading: "Tahapan Pengerjaan",
-        body: "Proyek mengikuti lima tahap: pemetaan kebutuhan dan perancangan sistem, purwarupa dan validasi awal, pengembangan dengan demo berkala, pengujian mutu dan keamanan, serta serah terima. Klien dapat meninjau kemajuan melalui hasil kerja setiap tahap dan akses ke lingkungan uji coba selama pengembangan.",
+        body: "Proyek mengikuti lima tahap: pemetaan kebutuhan dan perancangan sistem, demo dan uji coba awal, pengembangan dengan demo berkala, pengujian mutu dan keamanan, serta serah terima. Klien dapat meninjau kemajuan melalui hasil kerja setiap tahap dan akses ke lingkungan uji coba selama pengembangan.",
       },
       {
         heading: "Termin Pembayaran",
@@ -145,7 +145,7 @@ export const termsCopy: Localized<LegalPageCopy & { stepsHeading: string }> = {
       },
       {
         heading: "Garansi & Dukungan",
-        body: "Garansi perbaikan bug berlaku sesuai durasi dan cakupan dalam SPK untuk fungsi yang tidak berjalan sebagaimana disepakati. Garansi tidak mencakup fitur baru, perubahan ruang lingkup, atau kerusakan akibat modifikasi oleh pihak lain setelah serah terima.",
+        body: "Garansi perbaikan error berlaku sesuai durasi dan cakupan dalam SPK untuk fungsi yang tidak berjalan sebagaimana disepakati. Garansi tidak mencakup fitur baru, perubahan ruang lingkup, atau kerusakan akibat modifikasi oleh pihak lain setelah serah terima.",
       },
       {
         heading: "Kerahasiaan",
@@ -190,7 +190,7 @@ export const termsCopy: Localized<LegalPageCopy & { stepsHeading: string }> = {
       },
       {
         heading: "Warranty & Support",
-        body: "The bug-fix warranty follows the duration and coverage defined in the SPK for functions that do not operate as agreed. It excludes new features, scope changes, and damage caused by third-party modifications after handover.",
+        body: "The error-fix warranty follows the duration and coverage defined in the SPK for functions that do not operate as agreed. It excludes new features, scope changes, and damage caused by third-party modifications after handover.",
       },
       {
         heading: "Confidentiality",

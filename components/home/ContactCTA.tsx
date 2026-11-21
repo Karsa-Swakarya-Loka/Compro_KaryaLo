@@ -16,7 +16,8 @@ import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 /** `showAbout={false}` on the About page itself, where the secondary link would point to the page you are on. */
 export default function ContactCTA({ lang, showAbout = true }: { lang: Locale; showAbout?: boolean }) {
   const copy = homeCopy[lang].cta;
-  const phrases = [siteText[lang].tagline, ...homeCopy[lang].team.capabilities];
+  // Each phrase gets its own full stop in the band; drop any it already has (the tagline does), or it reads "..".
+  const phrases = [siteText[lang].tagline, ...homeCopy[lang].team.capabilities].map((p) => p.replace(/\.+$/, ""));
   const loop = [...phrases, ...phrases];
 
   return (

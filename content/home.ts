@@ -153,7 +153,7 @@ export const homeCopy: Localized<HomeCopy> = {
       problems: "Kebutuhan Bisnis",
       process: "Cara Kerja",
       trust: "Legalitas",
-      faq: "FAQ",
+      faq: "Tanya Jawab",
     },
     slider: {
       label: "Contoh proyek KaryaLo",
@@ -164,84 +164,84 @@ export const homeCopy: Localized<HomeCopy> = {
     studio: {
       imageAlt: "Ruang studio KaryaLo dengan meja kerja pengembangan software",
       commitments: [
-        { figure: "7-14", label: "hari kerja untuk purwarupa awal" },
-        { count: 100, suffix: "%", label: "kepemilikan kode proyek khusus sesuai SPK" },
+        { figure: "7-14", label: "hari kerja untuk demo pertama" },
+        { count: 100, suffix: "%", label: "kepemilikan kode proyek khusus sesuai kontrak kerja" },
         { count: 3, label: "bidang keahlian dalam satu tim" },
       ],
     },
     hero: {
-      category: "IT Agency · Software, Desain, Foto & Video, IoT & Hardware",
+      category: "IT Agency · Software, Desain, Foto & Video, IoT & Perangkat Keras",
       badge: "IT Agency",
-      headline: { lead: "Tim IT Anda,", accent: "Tanpa Harus Merekrut." },
-      audience: "Software, desain, foto & video, IoT, dan perangkat keras dalam satu tim.",
+      headline: { lead: "Teknologi Tepat,", accent: "Bisnis Tumbuh Lebih Cepat." },
+      audience: "Software, desain, foto & video, hingga IoT, ditangani satu tim profesional.",
       primaryCta: "Diskusikan kebutuhan Anda",
     },
     principles: {
-      title: "Cara Kami Bermitra",
+      title: "Prinsip Kerja Sama Kami",
       intro:
-        "Sebagai IT agency yang menjadi mitra jangka panjang, kami menyelaraskan kebutuhan teknologi dengan tujuan bisnis Anda. Empat prinsip berikut menjadi dasar setiap kerja sama.",
+        "Setiap proyek kami mulai dengan mempelajari bisnis Anda, sebelum satu baris kode ditulis. Empat prinsip berikut menjaga agar sistem yang kami bangun benar-benar dipakai oleh tim Anda.",
       items: [
         {
           icon: "learn",
-          title: "Memahami Bisnis Anda",
+          title: "Berangkat dari Kebutuhan Bisnis",
           description:
-            "Kami mempelajari alur kerja, tantangan, dan prioritas tim Anda untuk menentukan solusi serta ruang lingkup yang tepat.",
+            "Kami mempelajari alur kerja, kendala, dan prioritas tim Anda, lalu membangun fitur yang memang dibutuhkan.",
         },
         {
           icon: "open",
           title: "Terbuka di Setiap Tahap",
           description:
-            "Tinjau perkembangan proyek melalui demo mingguan dan akses uji coba. Kami menyampaikan kemajuan, kendala, dan langkah berikutnya secara terbuka.",
+            "Setiap minggu Anda melihat demo dan dapat mencoba versi uji coba. Kendala kami sampaikan begitu ditemukan.",
         },
         {
           icon: "maintain",
-          title: "Dibangun untuk Dirawat",
+          title: "Mudah Dirawat dan Dikembangkan",
           description:
-            "Kami menyusun sistem dengan struktur yang jelas dan dokumentasi yang mendukung pemeliharaan serta pengembangan berikutnya.",
+            "Struktur yang rapi dan dokumentasi yang lengkap menjadikan sistem mudah dipelihara dan dikembangkan, baik oleh kami maupun tim lain.",
         },
         {
           icon: "own",
-          title: "Kepemilikan yang Jelas",
+          title: "Hasil Kerja Sepenuhnya Milik Anda",
           description:
-            "Kode sumber, file desain, dan skema perangkat untuk proyek khusus diserahkan sesuai SPK setelah serah terima dan pembayaran selesai.",
+            "Kode sumber, file desain, dan rancangan rangkaian perangkat proyek khusus diserahkan kepada Anda sesuai kontrak kerja, setelah serah terima dan pelunasan.",
         },
       ],
     },
     services: {
       title: "Software, Desain, dan IoT dalam Satu Tim",
       intro:
-        "Pilih layanan sesuai kebutuhan atau gabungkan beberapa bidang dalam satu proyek yang terkoordinasi.",
+        "Anda tidak perlu mengelola banyak vendor. Pilih layanan yang Anda butuhkan, atau gabungkan beberapa bidang dalam satu proyek.",
       fieldLabel: "Bidang",
       detailLink: "Lihat detail layanan",
-      supportTitle: "Dukungan setelah peluncuran",
-      supportBody: "Jaga sistem Anda melalui pemantauan server, pembaruan keamanan, pencadangan rutin, dan pengembangan sesuai paket bulanan atau tahunan.",
+      supportTitle: "Pendampingan setelah peluncuran",
+      supportBody: "Pemantauan server, pembaruan keamanan, pencadangan data rutin, dan pengembangan fitur melalui paket bulanan atau tahunan.",
       supportLink: "Lihat layanan pendamping",
-      productsTitle: "Mulai dengan platform yang tersedia",
-      productsBody: "Dashboard laporan, toko online, dan sistem voucher yang bisa dipasang dengan merek Anda sendiri.",
+      productsTitle: "Implementasi lebih cepat dengan platform siap pakai",
+      productsBody: "Dashboard laporan, toko online, dan sistem voucher yang siap digunakan dengan merek perusahaan Anda.",
       productsLink: "Lihat platform KaryaLo",
     },
     problems: {
-      title: "Solusi untuk Tantangan Operasional Anda",
+      title: "Tantangan yang Sering Menghambat Operasional",
       intro:
-        "Temukan kebutuhan yang sesuai dengan bisnis Anda. Pelajari solusi yang dapat kami bangun dan lihat contoh proyek terkait yang tersedia.",
+        "Temukan kondisi yang paling sesuai dengan bisnis Anda, beserta solusi yang dapat kami bangun dan contoh proyek terkait.",
       fieldLabel: "Bidang",
       builds: "Yang kami bangun",
       discuss: "Diskusikan kebutuhan ini",
-      notListed: "Memiliki kebutuhan lain? Kami siap membantu menentukan prioritas dan langkah awalnya.",
+      notListed: "Tantangan Anda belum tercantum? Sampaikan kepada kami, dan kami bantu menentukan prioritas penanganannya.",
       whatsapp: "Diskusikan kebutuhan Anda",
     },
     team: {
-      title: "Berkomunikasi Langsung dengan Tim Pelaksana",
+      title: "Komunikasi Langsung dengan Tim Pelaksana",
       body:
-        "KaryaLo adalah merek layanan PT Karsa Swakarya Loka yang berbasis di Kota Bekasi. Pengembang software, desainer, dan teknisi perangkat berkolaborasi dalam satu tim untuk menjaga keselarasan setiap bagian proyek Anda.",
+        "Pengembang, desainer, dan teknisi perangkat KaryaLo bekerja dalam satu tim di Kota Bekasi, dan Anda berbicara langsung dengan mereka tanpa perantara. KaryaLo adalah merek layanan PT Karsa Swakarya Loka.",
       profileLink: "Lihat profil perusahaan",
       capabilitiesTitle: "Keahlian tim kami",
       capabilities: [
         "Arah bisnis & kemitraan",
-        "Arsitektur & kualitas teknis",
+        "Rancangan sistem & kualitas teknis",
         "Pengembangan web & mobile",
-        "Desain UI/UX & identitas merek",
-        "Perangkat IoT & firmware",
+        "Desain tampilan aplikasi & identitas merek",
+        "Perangkat IoT & pemrogramannya",
         "Administrasi, kontrak & keuangan proyek",
       ],
       stackTitle: "Teknologi yang kami gunakan",
@@ -254,27 +254,27 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     testimonials: { title: "Pengalaman Klien Kami", projectLink: "Lihat proyek" },
     process: {
-      title: "Lima Tahap Pengerjaan",
+      title: "Lima Tahap Kerja yang Transparan",
       intro:
-        "Setiap tahap memiliki hasil kerja, jadwal, dan titik evaluasi yang jelas. Perubahan ruang lingkup dan biaya dibahas sebelum pekerjaan tambahan dimulai.",
+        "Setiap tahap memiliki hasil kerja, jadwal, dan titik evaluasi yang jelas. Perubahan ruang lingkup dan biaya selalu disepakati sebelum pekerjaan tambahan dimulai.",
       bannerBadge: "Validasi Sebelum Pengembangan",
-      bannerTitle: "Tinjau Alur Sistem Sebelum Pengembangan Dimulai",
+      bannerTitle: "Uji Alur Sistem Sebelum Satu Baris Kode Ditulis",
       bannerBody:
-        "Purwarupa awal disiapkan dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati. Tim Anda dapat meninjau alur dan memberi masukan sebelum pengembangan dilanjutkan.",
+        "Dalam 7-14 hari kerja, Anda menerima demo interaktif sesuai ruang lingkup yang disepakati. Tim Anda dapat mengujinya dan memberi masukan sebelum pengembangan dimulai, saat perubahan masih mudah dilakukan.",
       stage: "Tahap",
       youGet: "Yang Anda terima:",
     },
     coverage: {
       title: "Dari Bekasi, Melayani Seluruh Indonesia",
       body:
-        "Studio dan bengkel perangkat kami berlokasi di Jatisampurna, Kota Bekasi. Kami melayani pertemuan langsung di Jabodetabek dan kerja sama daring di seluruh Indonesia. Kunjungan untuk pemasangan dan kalibrasi IoT disesuaikan dengan kebutuhan proyek.",
+        "Studio dan bengkel perangkat kami berlokasi di Jatisampurna, Kota Bekasi. Kami melayani pertemuan langsung di Jabodetabek dan kolaborasi daring di seluruh Indonesia. Kunjungan pemasangan dan penyetelan perangkat IoT dijadwalkan sesuai kebutuhan proyek.",
       modesTitle: "Metode kolaborasi",
       modes: ["Tatap muka", "Daring", "Kombinasi keduanya"],
       engagementsTitle: "Bentuk kerja sama",
       engagements: [
         {
           title: "Per proyek",
-          body: "Ruang lingkup, jadwal, dan termin pembayaran ditetapkan dalam SPK, dengan serah terima resmi pada akhir proyek.",
+          body: "Ruang lingkup, jadwal, dan tahap pembayaran ditetapkan dalam kontrak kerja, dengan serah terima resmi pada akhir proyek.",
         },
         {
           title: "Pendampingan berkala",
@@ -284,7 +284,7 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     trust: {
       title: "Legalitas Perusahaan yang Dapat Diverifikasi",
-      intro: "Dokumen perusahaan tersedia untuk mendukung verifikasi vendor dan proses pengadaan Anda.",
+      intro: "Sebelum bekerja sama dengan vendor baru, Anda tentu perlu memeriksa legalitasnya. Seluruh dokumen perusahaan kami tersedia untuk verifikasi vendor dan proses pengadaan Anda.",
       cards: [
         {
           title: "PT Karsa Swakarya Loka",
@@ -301,7 +301,7 @@ export const homeCopy: Localized<HomeCopy> = {
           title: "Invoice Resmi & Rekening Perusahaan",
           detail: "Belum PKP: tagihan tanpa PPN",
           description:
-            "Setiap termin dilengkapi invoice resmi atas nama PT Karsa Swakarya Loka. Pembayaran dilakukan melalui rekening perusahaan.",
+            "Setiap tahap pembayaran dilengkapi invoice resmi atas nama PT Karsa Swakarya Loka. Pembayaran dilakukan melalui rekening perusahaan.",
         },
         {
           title: "Perjanjian Kerahasiaan",
@@ -310,38 +310,38 @@ export const homeCopy: Localized<HomeCopy> = {
             "Kami menjaga kerahasiaan dokumen, data, dan rencana bisnis Anda. NDA dapat disepakati sebelum pembahasan teknis dimulai.",
         },
       ],
-      bannerTitle: "Lengkapi Proses Pendaftaran Vendor Anda",
-      bannerBody: "Ajukan permintaan salinan SK Kementerian Hukum, NPWP, NIB, dan profil perusahaan dalam format PDF.",
+      bannerTitle: "Siap Mendukung Pendaftaran Vendor Anda",
+      bannerBody: "Ajukan permintaan salinan PDF SK Kementerian Hukum, NPWP, NIB, dan profil perusahaan untuk melengkapi berkas pengadaan Anda.",
       bannerCta: "Minta dokumen legal",
       bannerMessage: "Halo KaryaLo, kami butuh dokumen legal dan NIB PT Karsa Swakarya Loka untuk proses pendaftaran vendor.",
     },
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
       intro:
-        "Informasi tentang proses kerja sama, kepemilikan kode, pembayaran, garansi, dan dokumen perusahaan.",
-      askLead: "Pertanyaan Anda tidak ada di sini?",
-      askBody: "Jadwalkan sesi daring selama 30 menit untuk membahas kebutuhan Anda bersama tim kami.",
+        "Informasi ringkas mengenai proses kerja sama, kepemilikan kode, pembayaran, garansi, dan dokumen perusahaan.",
+      askLead: "Memiliki pertanyaan lain?",
+      askBody: "Jadwalkan konsultasi daring 30 menit bersama tim kami, tanpa biaya dan tanpa kewajiban melanjutkan.",
       askCta: "Tanya via WhatsApp",
     },
     advantage: {
-      title: "Tujuan kami: sistem yang benar-benar dipakai tim Anda.",
-      intro: "Bukan sekadar selesai diserahkan. Karena itu kami bekerja seperti tim IT Anda sendiri, dari rancangan sampai dirawat.",
+      title: "Sistem yang benar-benar dipakai tim Anda.",
+      intro: "Banyak sistem selesai dibangun, namun akhirnya ditinggalkan karena tidak sesuai dengan cara kerja tim. Karena itu kami mendampingi Anda dari perancangan sampai pemeliharaan setelah serah terima.",
       othersLabel: "Vendor IT pada umumnya",
       usLabel: "Bersama KaryaLo",
       rows: [
-        { topic: "Pengerjaan", others: "Bisa dialihkan ke pihak lain", us: "Dikerjakan tim inti sendiri, tidak dioper" },
-        { topic: "Sebelum kode ditulis", others: "Hasil baru terlihat setelah pengembangan berjalan", us: "Purwarupa yang bisa diklik dalam 7-14 hari kerja" },
-        { topic: "Ruang lingkup", others: "Batas kerja sering tidak tertulis", us: "Batas kerja & serah terima tertulis di SPK" },
-        { topic: "Kepemilikan", others: "Kode & file desain tetap di vendor", us: "Kode & file desain proyek khusus milik Anda sesuai SPK" },
+        { topic: "Pengerjaan", others: "Bisa dialihkan ke pihak lain", us: "Dikerjakan langsung oleh tim inti kami" },
+        { topic: "Sebelum kode ditulis", others: "Hasil baru terlihat setelah pengembangan berjalan", us: "Demo yang bisa langsung diklik dalam 7-14 hari kerja" },
+        { topic: "Ruang lingkup", others: "Batas kerja sering tidak tertulis", us: "Batas kerja & serah terima tertulis di kontrak kerja" },
+        { topic: "Kepemilikan", others: "Kode & file desain tetap di vendor", us: "Kode & file desain proyek khusus milik Anda sesuai kontrak kerja" },
         { topic: "Bidang", others: "Software, desain, dan IoT dari vendor berbeda", us: "Software, desain & IoT dalam satu tim" },
         { topic: "Setelah rilis", others: "Selesai saat serah terima", us: "Perawatan & pendampingan setelah peluncuran" },
       ],
       link: "Kenali tim & cara kerja kami",
     },
     cta: {
-      title: "Mulai dengan Kebutuhan Bisnis Anda",
+      title: "Wujudkan Rencana Digital Bisnis Anda",
       body:
-        "Diskusikan rencana pengembangan sistem, penyempurnaan aplikasi, atau pemantauan IoT Anda. Kami membantu memetakan prioritas dan ruang lingkup awal tanpa kewajiban melanjutkan proyek.",
+        "Baik sistem baru, penyempurnaan aplikasi, maupun pemantauan IoT, sampaikan kebutuhan Anda. Kami bantu memetakan prioritas dan ruang lingkup awal, tanpa kewajiban melanjutkan proyek.",
       primary: "Diskusikan kebutuhan Anda",
       secondary: "Kenali KaryaLo",
       officeLabel: "Kantor & Studio",
@@ -368,83 +368,83 @@ export const homeCopy: Localized<HomeCopy> = {
     studio: {
       imageAlt: "The KaryaLo studio with software development workstations",
       commitments: [
-        { figure: "7-14", label: "working days for an initial prototype" },
-        { count: 100, suffix: "%", label: "ownership of custom project code under the SPK" },
+        { figure: "7-14", label: "working days to your first demo" },
+        { count: 100, suffix: "%", label: "ownership of your custom project code, set out in the contract" },
         { count: 3, label: "areas of expertise in one team" },
       ],
     },
     hero: {
       category: "IT Agency · Software, Design, Photo & Video, IoT & Hardware",
       badge: "IT Agency",
-      headline: { lead: "Your IT Team,", accent: "Without the Recruitment." },
-      audience: "Software, design, photo & video, IoT and hardware in one team.",
+      headline: { lead: "The Right Technology,", accent: "Faster Business Growth." },
+      audience: "Software, design, photo & video, through to IoT, handled by one professional team.",
       primaryCta: "Discuss your project",
     },
     principles: {
-      title: "How We Partner",
+      title: "Our Partnership Principles",
       intro:
-        "As an IT agency and long-term partner, we align technology decisions with your business goals. These four principles guide every engagement.",
+        "We start every project by learning how your business runs, before any code is written. These four principles keep what we build in daily use by your team.",
       items: [
         {
           icon: "learn",
-          title: "Your Business Comes First",
+          title: "Your Business First",
           description:
-            "We study your workflows, challenges, and priorities to define the right solution and scope for your team.",
+            "We study your workflows, challenges, and priorities, then build the features your team actually needs.",
         },
         {
           icon: "open",
           title: "Open at Every Stage",
           description:
-            "Review progress through weekly demos and a test environment. We communicate completed work, issues, and next steps openly.",
+            "Each week you see a demo and can try the online test version. We tell you about issues as soon as we find them.",
         },
         {
           icon: "maintain",
-          title: "Built to Be Maintained",
+          title: "Easy to Maintain and Extend",
           description:
-            "We build clearly structured, documented systems to support ongoing maintenance and future development.",
+            "Clean structure and complete documentation keep the system easy to maintain and extend, by us or by another team.",
         },
         {
           icon: "own",
-          title: "Clear Ownership",
+          title: "The Work Is Fully Yours",
           description:
-            "Custom project source code, design files, and device schematics are transferred under the work agreement once handover and payment are complete.",
+            "Custom project source code, design files, and device circuit designs are handed to you under the contract once handover and payment are complete.",
         },
       ],
     },
     services: {
       title: "Software, Design, and IoT in One Team",
-      intro: "Choose the expertise you need or combine services within one coordinated project.",
+      intro: "You don't need to manage several vendors. Choose the service you need, or combine several fields in one project.",
       fieldLabel: "Field",
       detailLink: "See service details",
-      supportTitle: "Support beyond launch",
-      supportBody: "Maintain your systems with server monitoring, security updates, routine backups, and development through a monthly or annual plan.",
+      supportTitle: "Support after launch",
+      supportBody: "Server monitoring, security updates, routine data backups, and feature development through a monthly or annual plan.",
       supportLink: "See support services",
-      productsTitle: "Start with an existing platform",
-      productsBody: "A reporting dashboard, an online store, and a voucher system you can run under your own brand.",
+      productsTitle: "Faster rollout with a ready-made platform",
+      productsBody: "A reporting dashboard, an online store, and a voucher system ready to run under your company's brand.",
       productsLink: "See KaryaLo platforms",
     },
     problems: {
-      title: "Solutions for Everyday Operational Challenges",
+      title: "Challenges That Slow Operations Down",
       intro:
-        "Explore needs that match your business, the solutions we can build, and related projects where available.",
+        "Find the situation closest to your business, with the solution we can build and related project examples.",
       fieldLabel: "Field",
       builds: "What we build",
       discuss: "Discuss this need",
-      notListed: "Have a different requirement? We can help identify your priorities and the right place to start.",
+      notListed: "Your challenge isn't listed? Tell us, and we will help you prioritise what to address first.",
       whatsapp: "Discuss your project",
     },
     team: {
-      title: "Work Directly with Your Project Team",
+      title: "Direct Communication with Your Project Team",
       body:
-        "KaryaLo is the service brand of PT Karsa Swakarya Loka, based in Bekasi, Indonesia. Our software developers, designers, and device engineers collaborate as one team to keep every part of your project aligned.",
+        "KaryaLo's developers, designers, and device engineers work as one team in Bekasi, and you talk to them directly, with no middlemen. KaryaLo is the service brand of PT Karsa Swakarya Loka.",
       profileLink: "See the company profile",
       capabilitiesTitle: "Our team's expertise",
       capabilities: [
         "Business direction & partnerships",
-        "Architecture & technical quality",
+        "System design & technical quality",
         "Web & mobile development",
-        "UI/UX design & brand identity",
-        "IoT devices & firmware",
+        "App design & brand identity",
+        "IoT devices & their programming",
         "Project administration, contracts & finance",
       ],
       stackTitle: "Technology we use",
@@ -457,27 +457,27 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     testimonials: { title: "What Our Clients Say", projectLink: "See the project" },
     process: {
-      title: "Five Stages of Work",
+      title: "Five Transparent Stages of Work",
       intro:
-        "Each stage has defined deliverables, a schedule, and review points. Changes to scope and cost are discussed before additional work begins.",
+        "Each stage has clear outputs, a schedule, and review points. Changes to scope and cost are always agreed before additional work begins.",
       bannerBadge: "Validate Before Development",
-      bannerTitle: "Review the Workflow Before Development Begins",
+      bannerTitle: "Test the Workflow Before a Line of Code Is Written",
       bannerBody:
-        "An initial prototype is prepared in 7-14 working days within the agreed scope. Your team can review the workflow and provide feedback before development continues.",
+        "Within 7-14 working days you receive a clickable demo for the agreed scope. Your team can test it and give feedback before development begins, while changes are still easy to make.",
       stage: "Stage",
       youGet: "What you receive:",
     },
     coverage: {
       title: "Based in Bekasi, Serving All of Indonesia",
       body:
-        "Our studio and device workshop are in Jatisampurna, Bekasi. We offer in-person meetings across Greater Jakarta and remote collaboration throughout Indonesia. IoT installation and calibration visits are arranged according to project needs.",
+        "Our studio and device workshop are in Jatisampurna, Bekasi. We offer in-person meetings across Greater Jakarta and remote collaboration throughout Indonesia. IoT installation and set-up visits are scheduled around your project.",
       modesTitle: "Ways to collaborate",
       modes: ["In person", "Remote", "Hybrid"],
       engagementsTitle: "How we engage",
       engagements: [
         {
           title: "Per project",
-          body: "Scope, schedule, and payment milestones are defined in the work agreement (SPK), with a formal handover at completion.",
+          body: "Scope, schedule, and payment stages are set out in the contract, with a formal handover at completion.",
         },
         {
           title: "Ongoing support",
@@ -487,7 +487,7 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     trust: {
       title: "Company Credentials You Can Verify",
-      intro: "Company documents are available to support vendor verification and your procurement process.",
+      intro: "Before you work with a new vendor, you will want to check its legal standing. All our company documents are available for your vendor verification and procurement process.",
       cards: [
         {
           title: "PT Karsa Swakarya Loka",
@@ -504,7 +504,7 @@ export const homeCopy: Localized<HomeCopy> = {
           title: "Formal Invoices & Company Account",
           detail: "Not VAT-registered: no VAT on our bills",
           description:
-            "Each payment milestone is supported by a formal invoice from PT Karsa Swakarya Loka. Payments are made to the company bank account.",
+            "Each payment stage comes with a formal invoice from PT Karsa Swakarya Loka. Payments are made to the company bank account.",
         },
         {
           title: "Non-Disclosure Agreement",
@@ -513,38 +513,38 @@ export const homeCopy: Localized<HomeCopy> = {
             "We treat your documents, data, and business plans as confidential. An NDA can be agreed before technical discussions begin.",
         },
       ],
-      bannerTitle: "Complete Your Vendor Registration",
-      bannerBody: "Request PDF copies of our Ministry of Law decree, tax ID (NPWP), business ID (NIB), and company profile.",
+      bannerTitle: "Ready to Support Your Vendor Registration",
+      bannerBody: "Request PDF copies of our Ministry of Law decree, tax ID (NPWP), business ID (NIB), and company profile to complete your file.",
       bannerCta: "Request legal documents",
       bannerMessage: "Hello KaryaLo, we need the legal documents and NIB of PT Karsa Swakarya Loka for our vendor registration.",
     },
     faq: {
       title: "Frequently Asked Questions",
       intro:
-        "Information about our working process, code ownership, payments, warranties, and company documentation.",
-      askLead: "Your question isn't here?",
-      askBody: "Arrange a 30-minute online consultation to discuss your requirements with our team.",
+        "Concise answers on our engagement process, code ownership, payments, warranties, and company documents.",
+      askLead: "Have another question?",
+      askBody: "Schedule a 30-minute online consultation with our team, free of charge and with no obligation to proceed.",
       askCta: "Ask on WhatsApp",
     },
     advantage: {
-      title: "Our goal: systems your team actually uses.",
-      intro: "Not just delivered and left behind. That is why we work like your own IT team, from the first plan to ongoing care.",
+      title: "Systems your team actually uses.",
+      intro: "Many systems are built, then abandoned because they do not fit how the team works. That is why we stay with you from design through to maintenance after handover.",
       othersLabel: "The usual IT vendor",
       usLabel: "With KaryaLo",
       rows: [
-        { topic: "Who builds it", others: "Work may be passed to other parties", us: "Built by our own core team, never handed off" },
-        { topic: "Before any code", others: "You see results only once development is underway", us: "A clickable prototype in 7-14 working days" },
-        { topic: "Scope", others: "Boundaries are often left unwritten", us: "Scope and handover written into the SPK" },
-        { topic: "Ownership", others: "Code and design files stay with the vendor", us: "Custom-project code and design files are yours under the SPK" },
+        { topic: "Who builds it", others: "Work may be passed to other parties", us: "Built in-house by our own core team" },
+        { topic: "Before any code", others: "You see results only once development is underway", us: "A clickable demo in 7-14 working days" },
+        { topic: "Scope", others: "Boundaries are often left unwritten", us: "Scope and handover written into the contract" },
+        { topic: "Ownership", others: "Code and design files stay with the vendor", us: "Custom-project code and design files are yours, per the contract" },
         { topic: "Fields", others: "Software, design and IoT from different vendors", us: "Software, design & IoT in one team" },
         { topic: "After launch", others: "The job ends at handover", us: "Maintenance and support after launch" },
       ],
       link: "Meet the team & how we work",
     },
     cta: {
-      title: "Start with Your Business Needs",
+      title: "Bring Your Digital Plans to Life",
       body:
-        "Discuss a new system, improvements to an existing application, or IoT monitoring. We will help define your priorities and initial scope, with no obligation to proceed.",
+        "Whether it is a new system, an application upgrade, or IoT monitoring, tell us what you need. We will help map your priorities and initial scope, with no obligation to proceed.",
       primary: "Discuss your project",
       secondary: "Get to know KaryaLo",
       officeLabel: "Office & Studio",

@@ -43,27 +43,27 @@ const servicesId: ServicePillar[] = [
     codePrefix: "DEV",
     name: "Pengembangan Software & Aplikasi",
     shortName: "Software & Aplikasi",
-    focus: "Website, aplikasi, dan sistem internal yang dirancang untuk mendukung operasional harian serta perkembangan bisnis Anda.",
+    focus: "Website, aplikasi, dan sistem internal untuk operasional harian bisnis Anda, yang tetap bisa dikembangkan saat bisnis bertumbuh.",
     image: "/images/pdf/acc-dev.webp",
     imageAlt: "Laptop di atas meja kantor menampilkan dashboard laporan kinerja perusahaan, dengan ponsel dan buku catatan di sampingnya.",
     subServices: [
       {
         code: "DEV-WEB",
         name: "Website & Aplikasi Web",
-        description: "Pengembangan website perusahaan, aplikasi operasional, dan platform berlangganan dengan perhatian pada kecepatan akses, kemudahan penggunaan, serta optimasi mesin pencari.",
-        items: ["Website perusahaan dengan optimasi SEO", "Aplikasi web yang dapat dipasang di ponsel", "Platform berlangganan (SaaS)"]
+        description: "Website perusahaan, aplikasi operasional, dan platform berlangganan yang cepat dibuka, mudah dipakai, dan mudah ditemukan di Google.",
+        items: ["Website perusahaan yang mudah ditemukan di Google", "Aplikasi web yang dapat dipasang di ponsel", "Platform berlangganan untuk pelanggan Anda"]
       },
       {
         code: "DEV-APP",
         name: "Aplikasi Mobile",
-        description: "Pengembangan aplikasi Android dan iOS dari satu basis kode untuk mendukung tim lapangan, transaksi kasir, dan pencatatan persediaan.",
+        description: "Satu kali pengembangan menghasilkan aplikasi Android dan iOS sekaligus, untuk tim lapangan, transaksi kasir, dan pencatatan persediaan.",
         items: ["Aplikasi Android & iOS", "Aplikasi tim lapangan", "Kasir & pencatatan stok"]
       },
       {
         code: "DEV-ENT",
         name: "Sistem Internal & Integrasi",
-        description: "Satukan data dan proses melalui dashboard bisnis, integrasi pembayaran, serta koneksi antarsistem yang mendukung alur kerja perusahaan Anda.",
-        items: ["Dashboard laporan bisnis", "Integrasi pembayaran", "Integrasi antarsistem (API)"]
+        description: "Dashboard bisnis, integrasi pembayaran, dan koneksi antarsistem agar data dan proses kerja perusahaan Anda ada di satu tempat.",
+        items: ["Dashboard laporan bisnis", "Integrasi pembayaran", "Menghubungkan sistem yang sudah ada"]
       }
     ]
   },
@@ -73,33 +73,33 @@ const servicesId: ServicePillar[] = [
     codePrefix: "DSG",
     name: "Desain, Identitas Merek, Foto & Video",
     shortName: "Desain & Kreatif",
-    focus: "Desain produk digital, identitas merek, serta foto dan video yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda.",
+    focus: "Desain produk digital, identitas merek, serta foto dan video, agar pesan bisnis Anda jelas, produk mudah dipakai, dan tampilan merek seragam.",
     image: "/images/pdf/design-brand-v4.webp",
-    imageAlt: "Tampilan aplikasi KaryaLo di layar tablet, dengan contoh palet warna biru, huruf, dan deretan ikon antarmuka di sampingnya.",
+    imageAlt: "Tampilan aplikasi KaryaLo di layar tablet, dengan contoh palet warna biru, huruf, dan deretan ikon aplikasi di sampingnya.",
     subServices: [
       {
         code: "DSG-UI",
-        name: "Desain UI/UX Produk Digital",
-        description: "Perancangan alur pengguna, purwarupa interaktif di Figma, dan penyempurnaan antarmuka untuk membantu pengguna menyelesaikan tugas dengan lebih mudah.",
-        items: ["Purwarupa Figma interaktif", "Panduan komponen antarmuka", "Perancangan ulang aplikasi"]
+        name: "Desain Tampilan & Alur Aplikasi (UI/UX)",
+        description: "Kami merancang alur pengguna, membuat demo interaktif di Figma, dan merapikan tampilan agar pengguna lebih mudah menyelesaikan tugasnya.",
+        items: ["Demo interaktif (Figma)", "Panduan elemen tampilan", "Perancangan ulang aplikasi"]
       },
       {
         code: "DSG-BRD",
         name: "Identitas Merek & Materi Perusahaan",
-        description: "Bangun identitas perusahaan yang konsisten melalui logo, panduan warna dan tipografi, dokumen bisnis, serta profil perusahaan.",
-        items: ["Logo & panduan merek", "Kop surat, kartu nama, invoice", "Company profile & pitch deck"]
+        description: "Logo, panduan warna dan tipografi, dokumen bisnis, dan profil perusahaan dengan identitas yang seragam di semua materi.",
+        items: ["Logo & panduan merek", "Kop surat, kartu nama, invoice", "Profil perusahaan & materi presentasi"]
       },
       {
         code: "DSG-MKT",
         name: "Materi Promosi & Presentasi",
-        description: "Materi komunikasi yang membantu menjelaskan produk dan menyampaikan penawaran, mulai dari template media sosial hingga infografis dan presentasi bisnis.",
-        items: ["Template media sosial", "Infografis penjelas produk", "Deck presentasi penjualan"]
+        description: "Template media sosial, infografis, dan presentasi bisnis untuk menjelaskan produk dan menyampaikan penawaran Anda.",
+        items: ["Template media sosial", "Infografis penjelas produk", "Materi presentasi penjualan"]
       },
       {
         code: "DSG-MED",
         name: "Fotografi & Videografi",
-        description: "Produksi foto dan video untuk kebutuhan bisnis, seperti foto produk, dokumentasi kegiatan, profil perusahaan, dan materi promosi, sejalan dengan identitas merek Anda.",
-        items: ["Foto produk & profil perusahaan", "Video company profile & promosi", "Dokumentasi kegiatan usaha"]
+        description: "Foto dan video untuk produk, dokumentasi kegiatan, profil perusahaan, dan promosi, dengan gaya yang sesuai identitas merek Anda.",
+        items: ["Foto produk & profil perusahaan", "Video profil perusahaan & promosi", "Dokumentasi kegiatan usaha"]
       }
     ]
   },
@@ -115,15 +115,15 @@ const servicesId: ServicePillar[] = [
     subServices: [
       {
         code: "IOT-HW",
-        name: "Perakitan Perangkat & Purwarupa",
-        description: "Perancangan perangkat pemantauan sesuai kebutuhan, mencakup pemilihan komponen, integrasi sensor dan GPS, serta pembuatan casing cetak 3D.",
-        items: ["Purwarupa perangkat pemantauan", "Integrasi sensor & GPS", "Rangkaian & casing khusus"]
+        name: "Perakitan Perangkat & Uji Coba",
+        description: "Kami merancang perangkat pemantauan sesuai kebutuhan Anda: memilih komponen, memasang sensor dan GPS, hingga membuat casing cetak 3D.",
+        items: ["Perangkat pemantauan uji coba", "Integrasi sensor & GPS", "Rangkaian & casing khusus"]
       },
       {
         code: "IOT-FW",
         name: "Program Perangkat & Pengiriman Data",
-        description: "Pengembangan firmware untuk mengelola pengiriman data, keamanan komunikasi, dan konsumsi daya dengan mempertimbangkan kondisi jaringan di lokasi.",
-        items: ["Pengiriman data terenkripsi", "Koneksi jarak jauh & hemat daya", "Pengolahan data di perangkat"]
+        description: "Program perangkat kami sesuaikan dengan kondisi jaringan di lokasi, agar data terkirim aman, koneksi stabil, dan baterai lebih awet.",
+        items: ["Pengiriman data yang aman", "Koneksi jarak jauh & hemat daya", "Data diolah langsung di perangkat"]
       },
       {
         code: "IOT-PLT",
@@ -149,50 +149,50 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
   "digital-engineering": {
     name: "Software & Application Development",
     shortName: "Software & Apps",
-    focus: "Websites, applications, and internal systems designed to support daily operations and your business's development.",
+    focus: "Websites, applications, and internal systems for your daily operations, which can be extended as your business grows.",
     imageAlt: "A laptop on an office desk showing a company performance dashboard, with a phone and a notebook beside it.",
     subServices: {
       "DEV-WEB": {
         name: "Websites & Web Applications",
-        description: "Company websites, operational web applications, and subscription platforms developed with a focus on performance, usability, and search engine optimisation.",
-        items: ["Company websites with SEO optimisation", "Installable mobile web apps", "Subscription platforms (SaaS)"],
+        description: "Company websites, operational web applications, and subscription platforms that load fast, are easy to use, and are easy to find on Google.",
+        items: ["Company websites that are easy to find on Google", "Installable mobile web apps", "Subscription platforms for your customers"],
       },
       "DEV-APP": {
         name: "Mobile Applications",
-        description: "Android and iOS applications built from a single codebase to support field teams, point-of-sale transactions, and inventory management.",
+        description: "One build produces both Android and iOS apps, for field teams, point-of-sale transactions, and inventory records.",
         items: ["Android & iOS apps", "Field team apps", "Point of sale & inventory"],
       },
       "DEV-ENT": {
         name: "Internal Systems & Integration",
-        description: "Connect data and workflows through business dashboards, payment integrations, and connections between your existing systems.",
-        items: ["Business reporting dashboards", "Payment integration", "System integration (APIs)"],
+        description: "Business dashboards, payment integrations, and links between systems, so your company's data and workflows sit in one place.",
+        items: ["Business reporting dashboards", "Payment integration", "Connecting your existing systems"],
       },
     },
   },
   "creative-design": {
     name: "Design, Brand Identity, Photo & Video",
     shortName: "Design & Creative",
-    focus: "Digital product design, brand identity, photo and video that clarify your message, improve usability, and create a consistent business presence.",
-    imageAlt: "A KaryaLo app design on a tablet screen, beside a blue colour palette, a type sample and a row of interface icons.",
+    focus: "Digital product design, brand identity, photo and video, so your message is clear, your product is easy to use, and your brand looks consistent.",
+    imageAlt: "A KaryaLo app design on a tablet screen, beside a blue colour palette, a type sample and a row of app icons.",
     subServices: {
       "DSG-UI": {
-        name: "Digital Product UI/UX Design",
-        description: "User flows, interactive Figma prototypes, and interface improvements that help people complete their tasks more easily.",
-        items: ["Interactive Figma prototypes", "Interface component guide", "Redesign of existing apps"],
+        name: "App Screen & Flow Design (UI/UX)",
+        description: "We map user flows, build clickable Figma demos, and tidy up screens so people can finish their tasks more easily.",
+        items: ["Clickable demos (Figma)", "Screen element guide", "Redesign of existing apps"],
       },
       "DSG-BRD": {
         name: "Brand Identity & Company Materials",
-        description: "Build a consistent company identity through logos, colour and typography guidelines, business stationery, and company profiles.",
+        description: "Logos, colour and typography guidelines, business stationery, and company profiles that share one consistent identity.",
         items: ["Logo & brand guidelines", "Letterheads, business cards, invoices", "Company profile & pitch deck"],
       },
       "DSG-MKT": {
         name: "Marketing & Presentation Materials",
-        description: "Communication materials that explain your products and present your offer, from social media templates to infographics and business presentations.",
+        description: "Social media templates, infographics, and business presentations that explain your products and present your offer.",
         items: ["Social media templates", "Product explainer infographics", "Sales presentation decks"],
       },
       "DSG-MED": {
         name: "Photography & Videography",
-        description: "Photo and video production for business needs such as product photos, event documentation, company profiles, and promotional material, in line with your brand identity.",
+        description: "Photo and video for products, event documentation, company profiles, and promotion, in a style that matches your brand identity.",
         items: ["Product & company profile photography", "Company profile & promo videos", "Business activity documentation"],
       },
     },
@@ -204,14 +204,14 @@ const servicesEn: Record<ServicePillar["id"], PillarText> = {
     imageAlt: "A white sensor device with an antenna on a table, beside a Field Monitoring dashboard card showing temperature, humidity and a normal status.",
     subServices: {
       "IOT-HW": {
-        name: "Device Assembly & Prototyping",
-        description: "Custom monitoring device design, including component selection, sensor and GPS integration, and 3D-printed enclosures.",
-        items: ["Monitoring device prototypes", "Sensor & GPS fitting", "Custom circuits & enclosures"],
+        name: "Device Assembly & Test Units",
+        description: "We design monitoring devices to your needs: choosing components, fitting sensors and GPS, and making 3D-printed enclosures.",
+        items: ["Test monitoring devices", "Sensor & GPS fitting", "Custom circuits & enclosures"],
       },
       "IOT-FW": {
-        name: "Device Firmware & Data Transmission",
-        description: "Firmware development for data transmission, communication security, and power management, taking local network conditions into account.",
-        items: ["Encrypted data transmission", "Long-range, low-power connectivity", "On-device data processing"],
+        name: "Device Programming & Data Sending",
+        description: "We program each device for the network conditions at your site, so data is sent securely, connections stay stable, and batteries last longer.",
+        items: ["Secure data sending", "Long-range, low-power connectivity", "Data processed on the device"],
       },
       "IOT-PLT": {
         name: "Monitoring Dashboard & Alerts",
@@ -255,7 +255,7 @@ export const supportServicesData: Localized<SupportService[]> = {
       id: "scoping",
       name: "Pemetaan Kebutuhan Sebelum Proyek",
       description:
-        "Tentukan langkah awal melalui pemetaan proses kerja, prioritas bisnis, dan kebutuhan pengguna. Kami memberikan rekomendasi solusi serta gambaran ruang lingkup tanpa kewajiban melanjutkan proyek.",
+        "Sebelum proyek dimulai, kami memetakan proses kerja, prioritas bisnis, dan kebutuhan pengguna Anda, lalu memberi rekomendasi serta gambaran ruang lingkup. Anda tidak wajib melanjutkan ke proyek.",
       items: ["Pemetaan proses kerja saat ini", "Rekomendasi solusi & teknologi", "Gambaran ruang lingkup & tahapan"],
     },
   ],
@@ -271,7 +271,7 @@ export const supportServicesData: Localized<SupportService[]> = {
       id: "scoping",
       name: "Project Discovery & Scoping",
       description:
-        "Define your starting point by reviewing workflows, business priorities, and user needs. We recommend an approach and outline an initial scope, with no obligation to proceed.",
+        "Before a project starts, we map your workflows, business priorities, and user needs, then recommend an approach and outline the initial scope. You are under no obligation to proceed.",
       items: ["Current workflow assessment", "Solution & technology recommendations", "Initial scope & delivery stages"],
     },
   ],

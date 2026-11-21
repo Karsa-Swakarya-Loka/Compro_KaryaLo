@@ -30,7 +30,7 @@ export const industriesData: Localized<IndustryItem[]> = {
     {
       id: "retail",
       name: "Ritel & E-commerce",
-      problem: "Data persediaan di toko online, kasir, dan gudang belum terhubung, sementara laporan penjualan harus direkap dari beberapa sumber.",
+      problem: "Data persediaan di toko online, kasir, dan gudang belum terhubung, jadi laporan penjualan harus direkap dari beberapa sumber.",
       build: ["Toko online yang tersambung ke gudang", "Kasir dan pencatatan stok", "Dashboard penjualan harian"],
       pillars: ["digital-engineering", "creative-design"],
       proof: ["alina-omnichannel-retail", "karyalo-saas-storefront"],
@@ -40,14 +40,14 @@ export const industriesData: Localized<IndustryItem[]> = {
       id: "corporate",
       name: "Perusahaan Jasa & Korporat",
       problem: "Website belum menyampaikan kapabilitas perusahaan dengan jelas, dan proses persetujuan dokumen internal masih bergantung pada percakapan grup.",
-      build: ["Website perusahaan & company profile", "Alur persetujuan dokumen digital", "Identitas merek & materi penawaran"],
+      build: ["Website & profil perusahaan", "Alur persetujuan dokumen digital", "Identitas merek & materi penawaran"],
       pillars: ["digital-engineering", "creative-design"],
       proof: ["hij-corporate-profile", "karyalo-executive-analytics"],
     },
     {
       id: "digital-products",
       name: "Produk Digital & Pembayaran",
-      problem: "Volume transaksi meningkat, sementara verifikasi pembayaran manual memperlambat pemrosesan dan menyulitkan pemantauan status pesanan.",
+      problem: "Volume transaksi terus naik, dan verifikasi pembayaran secara manual memperlambat pemrosesan serta menyulitkan pemantauan status pesanan.",
       build: ["Sistem transaksi yang berjalan otomatis", "Integrasi pembayaran QRIS, VA & e-wallet", "Laporan penjualan & margin harian"],
       pillars: ["digital-engineering"],
       proof: ["deliastore-topup", "karyalo-digital-topup"],
@@ -82,7 +82,7 @@ export const industriesData: Localized<IndustryItem[]> = {
     {
       id: "retail",
       name: "Retail & E-commerce",
-      problem: "Inventory data across the online store, point of sale, and warehouse is disconnected, while sales reports must be compiled from multiple sources.",
+      problem: "Inventory data across the online store, point of sale, and warehouse is disconnected, so sales reports have to be compiled from several sources.",
       build: ["An online store connected to the warehouse", "Point of sale and stock records", "A daily sales dashboard"],
       pillars: ["digital-engineering", "creative-design"],
       proof: ["alina-omnichannel-retail", "karyalo-saas-storefront"],
@@ -99,7 +99,7 @@ export const industriesData: Localized<IndustryItem[]> = {
     {
       id: "digital-products",
       name: "Digital Products & Payments",
-      problem: "Transaction volumes are growing, while manual payment checks slow processing and make order status harder to track.",
+      problem: "Transaction volumes keep growing, and checking payments by hand slows processing and makes order status harder to track.",
       build: ["Automated transaction processing", "QRIS, virtual account & e-wallet payments", "Daily sales & margin reports"],
       pillars: ["digital-engineering"],
       proof: ["deliastore-topup", "karyalo-digital-topup"],

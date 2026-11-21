@@ -20,6 +20,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Do not advertise the framework version.
   poweredByHeader: false,
+  // Dev only: lets phones and other devices on the local network load dev
+  // assets and HMR. The wildcard keeps working when the LAN IP changes.
+  allowedDevOrigins: ["192.168.*.*"],
   experimental: {
     // Two root layouts (one per language) leave no single layout to render an
     // unmatched URL in; app/global-not-found.tsx covers that case.

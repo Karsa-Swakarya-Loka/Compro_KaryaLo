@@ -4,8 +4,8 @@ import type { Locale } from "@/lib/i18n";
 
 const LABEL: Record<Locale, { button: string; link: string; fileHint: string }> = {
   id: {
-    button: "Unduh Company Profile",
-    link: "Unduh Company Profile (PDF)",
+    button: "Unduh Profil Perusahaan",
+    link: "Unduh Profil Perusahaan (PDF)",
     fileHint: "PDF, 10 halaman",
   },
   en: {

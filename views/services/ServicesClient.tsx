@@ -4,8 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowDown,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Lock,
+  RotateCw,
   CheckCircle2,
   Cpu,
   Gauge,
@@ -21,9 +24,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { getServices, supportServicesData, SERVICE_FOCUS_THUMB, type SupportService } from "@/data/services";
-import FitImage from "@/components/ui/FitImage";
 import { getPortfolio } from "@/data/portfolio";
-import { getWhatsAppUrl, whatsappUrl } from "@/config/site";
+import { getWhatsAppUrl, siteConfig, whatsappUrl } from "@/config/site";
 import { IOT_PILLAR_ID, servicesPageCopy } from "@/content/services-page";
 import { homeCopy } from "@/content/home";
 import { type Locale, localePath } from "@/lib/i18n";
@@ -65,11 +67,50 @@ const SUB_ICONS: Record<string, LucideIcon> = {
   "IOT-PLT": Gauge,
 };
 
-/* Existing photographs for the support panels; decoration, not evidence. */
-const SUPPORT_IMAGES: Record<SupportService["id"], string> = {
-  maintenance: "/images/pdf/desk-contact-v2.webp",
-  scoping: "/images/process-blueprint.webp",
+/*
+  Landscape photographs chosen for the frames they fill on this page, so each
+  one covers its box edge to edge instead of floating over a blurred copy of
+  itself. Stock photos under the Unsplash License; decoration, not evidence.
+*/
+const SUPPORT_IMAGES: Record<SupportService["id"], { src: string; position: string }> = {
+  maintenance: { src: "/images/services/maintenance.webp", position: "55% 50%" },
+  scoping: { src: "/images/services/scoping.webp", position: "50% 45%" },
 };
+
+/* Per-field photo on this page; a field not listed keeps its image from data/services.ts. */
+const PILLAR_PHOTOS: Record<string, { src: string; position: string }> = {
+  "creative-design": { src: "/images/services/design-studio.webp", position: "40% 50%" },
+  "iot-hardware": { src: "/images/services/iot-lab.webp", position: "55% 50%" },
+};
+
+/** `/images/portofolio/alina-store.webp` → `/images/band/alina-store-768.webp`, the hero band's copy. */
+function bandTexture(src: string) {
+  const name = src.split("/").pop()!.replace(/\.webp$/, "");
+  return `/images/band/${name}-768.webp`;
+}
+
+/*
+  The related-work hover preview, drawn as the same macOS browser window as the
+  home hero's project cards (`.mac-window`): tab, address bar, then the
+  project's first screenshot whole in a 16:9 viewport.
+*/
+function MacThumb({ title, url, src }: { title: string; url: string; src: string }) {
+  return (
+    <span className="mac-window block">
+      <span className="mac-tabs">
+        <span className="mac-lights"><i /><i data-c="y" /><i data-c="g" /></span>
+        <span className="mac-tab"><span className="mac-favicon" /><span className="mac-tab-title">{title}</span></span>
+      </span>
+      <span className="mac-toolbar">
+        <ArrowLeft /><ArrowRight /><RotateCw />
+        <span className="mac-url"><Lock /><span>{url}</span></span>
+      </span>
+      <span className="mac-viewport block">
+        <Image src={src} alt="" fill sizes="416px" className="!object-contain" />
+      </span>
+    </span>
+  );
+}
 
 /* Icons pair with the guarantees by position; the copy module stays icon-free. */
 const GUARANTEE_ICONS = [Layers, ShieldCheck];
@@ -134,9 +175,10 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
 
       {/* One large photograph across the column, flying in with the scroll. */}
       <div className="agx-wrap">
-        <FlyIn className="relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
+        {/* 16:9 on phones (not 4:3): the photo is ~2.4:1 and a 4:3 crop cut off the people at either end. */}
+        <FlyIn className="relative aspect-[16/9] lg:aspect-[21/9]">
           <div className="agx-photo h-full w-full">
-            <FitImage src="/images/pdf/team-process-v2.webp" sizes="(min-width: 1344px) 80rem, 100vw" />
+            <Image src="/images/services/team-hero-v2.webp" alt="" fill sizes="(min-width: 1344px) 80rem, 100vw" className="object-cover" style={{ objectPosition: "50% 50%" }} />
           </div>
         </FlyIn>
       </div>
@@ -226,7 +268,14 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                 </div>
                 <FlyIn side={reversed ? "left" : "right"} className="relative aspect-[4/3]">
                   <div className="agx-photo h-full w-full">
-                    <FitImage src={pillar.image} alt={pillar.imageAlt} sizes="(min-width: 1024px) 40rem, 100vw" />
+                    <Image
+                      src={PILLAR_PHOTOS[pillar.id]?.src ?? pillar.image}
+                      alt={PILLAR_PHOTOS[pillar.id] ? "" : pillar.imageAlt}
+                      fill
+                      sizes="(min-width: 1024px) 40rem, 100vw"
+                      className="object-cover"
+                      style={{ objectPosition: PILLAR_PHOTOS[pillar.id]?.position ?? "50% 50%" }}
+                    />
                   </div>
                 </FlyIn>
               </div>
@@ -283,7 +332,11 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                           <span className="hidden md:inline">{project.title}</span>
                           <ArrowUpRight aria-hidden="true" className="h-5 w-5 justify-self-end text-ink transition-transform duration-500 group-hover:rotate-45 group-hover:text-brand" />
                           <span className="agx-row-thumb" aria-hidden="true">
-                            <Image src={project.galleryImages[0] ?? project.coverImage} alt="" fill sizes="208px" className="object-cover object-top" />
+                            <MacThumb
+                              title={project.title}
+                              url={(project.liveUrl ?? `${siteConfig.url}/portfolio/${project.slug}`).replace(/^https?:\/\//, "")}
+                              src={project.galleryImages[0] ? bandTexture(project.galleryImages[0]) : project.coverImage}
+                            />
                           </span>
                         </Link>
                       </li>
@@ -364,7 +417,14 @@ export default function ServicesClient({ lang }: { lang: Locale }) {
                     </a>
                   </div>
                   <div className="agx-panel-media">
-                    <FitImage src={SUPPORT_IMAGES[service.id]} sizes="(min-width: 900px) 45vw, 100vw" />
+                    <Image
+                      src={SUPPORT_IMAGES[service.id].src}
+                      alt=""
+                      fill
+                      sizes="(min-width: 900px) 45vw, 100vw"
+                      className="object-cover"
+                      style={{ objectPosition: SUPPORT_IMAGES[service.id].position }}
+                    />
                     <span className="agx-panel-tag">{supportTags[service.id]}</span>
                   </div>
                 </div>

@@ -254,7 +254,9 @@ export default function Navbar({ lang }: { lang: Locale }) {
             aria-controls="site-menu"
             aria-label={open ? copy.closeMenu : copy.openMenu}
           >
-            {open ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
+            {/* Both icons stay mounted; CSS turns one out and the other in (.agx-menu-toggle). */}
+            <Menu aria-hidden="true" size={20} className="agx-toggle-icon agx-toggle-icon--open" />
+            <X aria-hidden="true" size={20} className="agx-toggle-icon agx-toggle-icon--close" />
           </button>
         </div>
       </header>
@@ -275,7 +277,7 @@ export default function Navbar({ lang }: { lang: Locale }) {
             <div className="agx-menu-inner">
               <ul>
                 {navLinks.map((link, index) => (
-                  <li key={link.href}>
+                  <li key={link.href} className="agx-menu-item" style={{ "--i": index } as React.CSSProperties}>
                     <Link href={link.href} className="agx-menu-link" aria-current={isCurrent(link.base) ? "page" : undefined} onClick={() => setOpen(false)}>
                       <small>{String(index + 1).padStart(2, "0")}</small>
                       {link.label}
@@ -283,7 +285,7 @@ export default function Navbar({ lang }: { lang: Locale }) {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col items-start gap-5">
+              <div className="agx-menu-item flex flex-col items-start gap-5" style={{ "--i": navLinks.length } as React.CSSProperties}>
                 <LanguageSwitch lang={lang} path={neutralPath} />
                 <a href={whatsappUrl(lang)} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg" onClick={() => setOpen(false)}>
                   <WhatsAppIcon size={18} />

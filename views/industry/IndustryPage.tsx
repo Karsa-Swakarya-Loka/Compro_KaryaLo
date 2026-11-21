@@ -30,14 +30,20 @@ import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
  * Server-rendered: only the motion wrappers are client components.
  */
 
-/* Illustration per industry. A missing entry just renders no photo. */
-const IMAGES: Record<string, { src: string; position?: string }> = {
-  retail: { src: "/images/industry/retail.webp", position: "50% 30%" },
-  corporate: { src: "/images/industry/corporate.webp", position: "50% 35%" },
-  "digital-products": { src: "/images/industry/digital-products.webp", position: "55% 45%" },
-  distribution: { src: "/images/industry/distribution.webp", position: "60% 45%" },
-  manufacturing: { src: "/images/industry/manufacturing.webp", position: "40% 40%" },
-  property: { src: "/images/industry/property.webp", position: "55% 45%" },
+/*
+  Illustration per industry. A missing entry just renders no photo.
+  On desktop the frame is portrait (~470×730), so a landscape photo covering it
+  is drawn far wider than the column: `wide` asks for a larger file so it stays sharp.
+  The 2026-11-20 photos are all 16:9, so `position` picks the slice that keeps the
+  person and what they are working with in the portrait frame.
+*/
+const IMAGES: Record<string, { src: string; position?: string; wide?: boolean }> = {
+  retail: { src: "/images/industry/retail-v2.webp", position: "30% 50%", wide: true },
+  corporate: { src: "/images/industry/corporate-v2.webp", position: "41% 50%", wide: true },
+  "digital-products": { src: "/images/industry/digital-products-v2.webp", position: "73% 50%", wide: true },
+  distribution: { src: "/images/industry/distribution-v2.webp", position: "73% 50%", wide: true },
+  manufacturing: { src: "/images/industry/manufacturing-v2.webp", position: "84% 50%", wide: true },
+  property: { src: "/images/industry/property-v2.webp", position: "76% 50%", wide: true },
 };
 
 /** Small uppercase label over its content. */
@@ -128,7 +134,7 @@ export default function IndustryPage({ lang }: { lang: Locale }) {
                               src={image.src}
                               alt=""
                               fill
-                              sizes="(min-width: 1024px) 34vw, 100vw"
+                              sizes={image.wide ? "(min-width: 1024px) 75rem, 100vw" : "(min-width: 1024px) 50vw, 100vw"}
                               className="object-cover"
                               style={{ objectPosition: image.position }}
                             />

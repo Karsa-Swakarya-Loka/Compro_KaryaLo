@@ -34,7 +34,7 @@ const testimonialsId: Testimonial[] = [
   {
     id: "hij",
     quote:
-      "Kami butuh website yang bisa langsung dikirim ke calon mitra tanpa harus menjelaskan panjang lebar. Hasilnya rapi, cepat dibuka, dan cerita perusahaan kami tersampaikan. Prosesnya jelas dari awal sampai serah terima.",
+      "Kami butuh website yang bisa langsung dikirim ke calon mitra tanpa harus menjelaskan panjang lebar. Hasilnya rapi dan cepat dibuka, dan calon mitra bisa membaca sendiri cerita perusahaan kami. Prosesnya jelas dari awal sampai serah terima.",
     name: "",
     role: "Owner",
     company: "PT HIJ",
@@ -47,7 +47,7 @@ const quotesEn: Record<string, string> = {
   alina:
     "Stock in the online store and in the warehouse used to differ, so every order had to be checked by hand before it shipped. Since the systems were connected, orders go straight through and stock discrepancies have almost stopped. Every stage was explained in language we understood.",
   hij:
-    "We needed a website we could send straight to prospective partners without long explanations. The result is tidy, quick to open, and tells our company's story. The process was clear from start to handover.",
+    "We needed a website we could send straight to prospective partners without long explanations. The site is tidy and quick to open, and partners can read our company's story for themselves. The process was clear from start to handover.",
 };
 
 export const testimonialsData: Localized<Testimonial[]> = {

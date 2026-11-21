@@ -136,7 +136,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         data={[
           caseStudySchema(project, lang),
           breadcrumbSchema(lang, [
-            { name: "Portfolio", path: "/portfolio" },
+            { name: lang === "id" ? "Portofolio" : "Portfolio", path: "/portfolio" },
             { name: project.title, path: `/portfolio/${project.slug}` },
           ]),
         ]}
@@ -147,7 +147,7 @@ export default function CaseStudyPage({ lang, slug }: { lang: Locale; slug: stri
         lang={lang}
         title={project.title}
         badge={typeLabel}
-        crumbs={[{ name: "Portfolio", path: "/portfolio" }, { name: project.title }]}
+        crumbs={[{ name: lang === "id" ? "Portofolio" : "Portfolio", path: "/portfolio" }, { name: project.title }]}
         lede={project.summary}
       />
 

@@ -51,8 +51,6 @@ const CARD_RADIUS = 26;
 const UI_FONT = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif';
 
 const imageCache = new Map<string, HTMLImageElement>();
-// The band picks up where it was when visitors come back to the page.
-let savedRot: number | null = null;
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
   ctx.beginPath();
@@ -254,8 +252,9 @@ export default function TwistBand({
     canvas.style.display = "block";
     canvas.style.width = "100%";
     canvas.style.height = "100%";
+    // Shown in one step, not faded: its first frame is drawn in the preview's exact pose, so a
+    // swap is invisible, while two half-transparent bands crossfading read as a double image.
     canvas.style.opacity = "0";
-    canvas.style.transition = "opacity 0.45s ease";
     canvas.setAttribute("aria-hidden", "true");
     mount.appendChild(canvas);
 
@@ -265,6 +264,7 @@ export default function TwistBand({
     const reveal = () => {
       if (revealed) return;
       revealed = true;
+      revealAt = performance.now();
       canvas.style.opacity = "1";
       readyRef.current?.();
     };
@@ -421,7 +421,10 @@ export default function TwistBand({
 
     const baseTilt = (tilt * Math.PI) / 180;
     const idleSpeed = reduced ? 0 : (autoSpeed / 100) * 0.06;
-    let rot = savedRot ?? 0;
+    // Always start from the pose of the static preview (rot 0, sway at t 0), so swapping the
+    // still for the 3D is invisible. Resuming an earlier angle would make the band jump.
+    let rot = 0;
+    let revealAt = 0;
     let vel = -idleSpeed;
     let idle = -idleSpeed; // starts right → left, then follows the last drag
     let dragDx = 0;
@@ -640,6 +643,16 @@ export default function TwistBand({
         lastT = 0;
         return;
       }
+      // Until the canvas is shown, hold the preview's pose: no spin, no sway. Covers that arrived
+      // still get drawn, so the first visible frame matches the still exactly.
+      if (!revealed) {
+        if (dirty) {
+          apply(0, true);
+          dirty = false;
+        }
+        if (performance.now() - lastResize > 150) reveal();
+        return;
+      }
       if (!dragging) {
         updateHover();
         // Momentum eases back to the idle spin, or to a stop while a card is hovered.
@@ -651,18 +664,17 @@ export default function TwistBand({
       // pointer) and nothing else changing, the last frame is still correct, so skip the GPU work.
       const moving = dragging || Math.abs(vel) > 1e-5 || Math.abs(tiltOffset) > 1e-4 || !reduced;
       if (moving || dirty) {
-        apply(t);
+        // Sway time counts from the reveal, so it continues smoothly from the preview's pose.
+        apply(t - revealAt);
         dirty = false;
         adapt(t);
       }
-      if (!revealed && pendingCovers <= 0 && performance.now() - lastResize > 150) reveal();
     };
     for (let i = 0; i < 6; i++) apply(0, true);
     raf = requestAnimationFrame(loop);
 
     return () => {
       disposed = true;
-      savedRot = rot;
       window.clearTimeout(revealTimer);
       cancelAnimationFrame(raf);
       ro.disconnect();

@@ -12,6 +12,16 @@ import { motion } from "motion/react";
 import Reveal, { REVEAL_VIEWPORT, revealVariants } from "@/components/motion/Reveal";
 import { FlipIn } from "@/components/motion/Entrance";
 
+/* Focal point per photo for the 16:9 showcase frame. The 2026-11-20 photos are 16:9 themselves, so they sit centred. */
+const PHOTO_POSITION: Record<IndustryItem["id"], string> = {
+  retail: "50% 50%",
+  corporate: "50% 50%",
+  "digital-products": "50% 50%",
+  distribution: "50% 50%",
+  manufacturing: "50% 50%",
+  property: "50% 50%",
+};
+
 const ICONS: Record<IndustryItem["id"], LucideIcon> = {
   retail: ShoppingBag,
   corporate: Landmark,
@@ -105,7 +115,7 @@ export default function IndustriesSection({ lang }: { lang: Locale }) {
 
           <div key={current.id} id="ind-panel" role="tabpanel" aria-labelledby={`ind-tab-${current.id}`} className="agx-ind-card agx-swap">
             <div className="agx-ind-photo">
-              <Image src={`/images/industry/${current.id}.webp`} alt="" fill sizes="(min-width: 1024px) 44vw, 100vw" className="object-cover" />
+              <Image src={`/images/industry/${current.id}-v2.webp`} alt="" fill sizes="(min-width: 1024px) 44vw, 100vw" className="object-cover" style={{ objectPosition: PHOTO_POSITION[current.id] }} />
               <div className="agx-ind-photo-tag">
                 <span className="agx-ind-photo-icon" aria-hidden="true"><Icon size={18} /></span>
                 <span>{current.name}</span>
