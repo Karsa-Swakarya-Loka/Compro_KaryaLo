@@ -5,9 +5,10 @@ import type { Localized } from "@/lib/i18n";
  * floating WhatsApp button, the skip link and the 404.
  *
  * The navbar is fixed at six entries in this order — Beranda, Tentang Kami,
- * Services, Portfolio, Industri, Kontak — per the founder's decision of
- * 2026-10-15. "Services" and "Portfolio" stay in English in the Indonesian
- * navbar on purpose; body copy still says "layanan" and "portofolio".
+ * Layanan, Portofolio, Industri, Kontak — per the founder's decision of
+ * 2026-10-15. On 2026-11-20 the owner asked for "Layanan" and "Portofolio"
+ * in the Indonesian navbar too (they had stayed in English), so the
+ * Indonesian site no longer mixes in English labels.
  */
 export const commonCopy: Localized<{
   nav: { href: string; label: string }[];
@@ -43,8 +44,8 @@ export const commonCopy: Localized<{
     nav: [
       { href: "/", label: "Beranda" },
       { href: "/about", label: "Tentang Kami" },
-      { href: "/services", label: "Services" },
-      { href: "/portfolio", label: "Portfolio" },
+      { href: "/services", label: "Layanan" },
+      { href: "/portfolio", label: "Portofolio" },
       { href: "/industry", label: "Industri" },
       { href: "/contact", label: "Kontak" },
     ],

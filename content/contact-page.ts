@@ -102,7 +102,7 @@ export const contactCopy: Localized<{
       previewLabel: "Pratinjau pesan WhatsApp",
       previewStatus: "Pesan siap ditinjau. Belum ada pesan yang dikirim.",
       continueToWhatsapp: "Lanjutkan ke WhatsApp",
-      sentStatus: "Brief Anda sudah kami terima di support@karyalo.com.",
+      sentStatus: "Ringkasan proyek Anda sudah kami terima di support@karyalo.com.",
       sentHint: "Tim kami akan membalas lewat email. Untuk respons lebih cepat, Anda juga dapat melanjutkan ke WhatsApp.",
       previewHint: "WhatsApp akan terbuka di tab baru. Pesan baru dikirim setelah Anda menekan Kirim di WhatsApp.",
       message: {
@@ -129,7 +129,7 @@ export const contactCopy: Localized<{
       cards: [
         {
           title: "Tantangan dan tujuan proyek",
-          body: "Jelaskan kondisi saat ini, kendala utama, dan hasil yang ingin dicapai. Informasi ini membantu kami menentukan prioritas solusi.",
+          body: "Jelaskan kondisi saat ini, kendala utama, dan hasil yang ingin dicapai, agar kami tahu bagian mana yang perlu dikerjakan lebih dulu.",
         },
         {
           title: "Target waktu peluncuran",
@@ -217,7 +217,7 @@ export const contactCopy: Localized<{
       cards: [
         {
           title: "Challenges and project goals",
-          body: "Describe your current situation, main challenges, and intended outcomes. This helps us identify the priorities for your solution.",
+          body: "Describe your current situation, main challenges, and the outcome you want, so we know which part to tackle first.",
         },
         {
           title: "Target launch date",

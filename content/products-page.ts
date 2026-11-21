@@ -35,7 +35,7 @@ export const productsPageCopy: Localized<{
     license: {
       heading: "Gunakan platform siap pakai",
       body:
-        "Gunakan platform yang tersedia sebagai dasar solusi Anda. Tampilan, konfigurasi, dan integrasi dapat disesuaikan dengan cakupan lisensi serta kebutuhan implementasi yang disepakati.",
+        "Mulai dari platform yang sudah berjalan. Tampilan, konfigurasi, dan integrasi dapat disesuaikan dengan cakupan lisensi serta kebutuhan implementasi yang disepakati.",
     },
     bespoke: {
       heading: "Pengembangan khusus",
@@ -54,7 +54,7 @@ export const productsPageCopy: Localized<{
     caseStudy: "Lihat detail pengembangan",
     callout: {
       badge: "Lisensi",
-      heading: "Hadirkan Platform dengan Identitas Bisnis Anda",
+      heading: "Jalankan Platform dengan Merek Bisnis Anda",
       body:
         "Diskusikan penggunaan merek perusahaan, pemasangan di server Anda, dan penyesuaian alur kerja. Cakupan penggunaan, dukungan, dan lisensi ditetapkan sebelum implementasi.",
       cta: "Diskusikan opsi lisensi",
@@ -76,7 +76,7 @@ export const productsPageCopy: Localized<{
     license: {
       heading: "Use a ready-made platform",
       body:
-        "Use an existing platform as the foundation for your solution. Branding, configuration, and integrations can be tailored to the agreed licence scope and implementation requirements.",
+        "Start from a platform that already works. Branding, configuration, and integrations can be tailored to the agreed licence scope and implementation requirements.",
     },
     bespoke: {
       heading: "Custom development",
@@ -95,7 +95,7 @@ export const productsPageCopy: Localized<{
     caseStudy: "View development details",
     callout: {
       badge: "Licensing",
-      heading: "Make the Platform Part of Your Brand",
+      heading: "Run the Platform Under Your Brand",
       body:
         "Discuss your company branding, installation on your own servers, and workflow customisation. Usage rights, support, and licensing are defined before implementation.",
       cta: "Ask about licensing",

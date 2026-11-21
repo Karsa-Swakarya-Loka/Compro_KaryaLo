@@ -38,7 +38,7 @@ export default function PortfolioPage({ lang }: { lang: Locale }) {
       <PageBanner
         lang={lang}
         title={<>{copy.index.titleLead} <span className="text-brand">{copy.index.titleAccent}</span></>}
-        crumbs={[{ name: "Portfolio" }]}
+        crumbs={[{ name: lang === "id" ? "Portofolio" : "Portfolio" }]}
         lede={copy.index.intro}
       />
 

@@ -153,7 +153,7 @@ export const homeCopy: Localized<HomeCopy> = {
       problems: "Kebutuhan Bisnis",
       process: "Cara Kerja",
       trust: "Legalitas",
-      faq: "FAQ",
+      faq: "Tanya Jawab",
     },
     slider: {
       label: "Contoh proyek KaryaLo",
@@ -170,7 +170,7 @@ export const homeCopy: Localized<HomeCopy> = {
       ],
     },
     hero: {
-      category: "IT Agency · Software, Desain, Foto & Video, IoT & Hardware",
+      category: "IT Agency · Software, Desain, Foto & Video, IoT & Perangkat Keras",
       badge: "IT Agency",
       headline: { lead: "Teknologi Tepat,", accent: "Bisnis Tumbuh Lebih Cepat." },
       audience: "Software, desain, foto & video, hingga IoT, ditangani satu tim profesional.",
@@ -179,19 +179,19 @@ export const homeCopy: Localized<HomeCopy> = {
     principles: {
       title: "Prinsip Kerja Sama Kami",
       intro:
-        "Setiap proyek kami mulai dari pemahaman bisnis, bukan dari kode. Empat prinsip berikut memastikan solusi yang kami bangun benar-benar digunakan dan memberi nilai bagi perusahaan Anda.",
+        "Setiap proyek kami mulai dengan mempelajari bisnis Anda, sebelum satu baris kode ditulis. Empat prinsip berikut menjaga agar sistem yang kami bangun benar-benar dipakai oleh tim Anda.",
       items: [
         {
           icon: "learn",
           title: "Berangkat dari Kebutuhan Bisnis",
           description:
-            "Kami mempelajari alur kerja, kendala, dan prioritas tim Anda agar solusi yang dibangun tepat sasaran, bukan sekadar kaya fitur.",
+            "Kami mempelajari alur kerja, kendala, dan prioritas tim Anda, lalu membangun fitur yang memang dibutuhkan.",
         },
         {
           icon: "open",
           title: "Terbuka di Setiap Tahap",
           description:
-            "Demo mingguan dan akses uji coba memastikan Anda selalu mengetahui perkembangan proyek. Setiap kendala kami sampaikan sejak dini, bukan di akhir proyek.",
+            "Setiap minggu Anda melihat demo dan dapat mencoba versi uji coba. Kendala kami sampaikan begitu ditemukan.",
         },
         {
           icon: "maintain",
@@ -210,7 +210,7 @@ export const homeCopy: Localized<HomeCopy> = {
     services: {
       title: "Software, Desain, dan IoT dalam Satu Tim",
       intro:
-        "Tanpa perlu mengelola banyak vendor. Pilih layanan yang Anda butuhkan, atau gabungkan beberapa bidang dalam satu proyek yang terkoordinasi.",
+        "Anda tidak perlu mengelola banyak vendor. Pilih layanan yang Anda butuhkan, atau gabungkan beberapa bidang dalam satu proyek.",
       fieldLabel: "Bidang",
       detailLink: "Lihat detail layanan",
       supportTitle: "Pendampingan setelah peluncuran",
@@ -233,7 +233,7 @@ export const homeCopy: Localized<HomeCopy> = {
     team: {
       title: "Komunikasi Langsung dengan Tim Pelaksana",
       body:
-        "Tanpa perantara berlapis. Pengembang, desainer, dan teknisi perangkat KaryaLo bekerja dalam satu tim di Kota Bekasi, sehingga setiap bagian proyek Anda tetap selaras. KaryaLo adalah merek layanan PT Karsa Swakarya Loka.",
+        "Pengembang, desainer, dan teknisi perangkat KaryaLo bekerja dalam satu tim di Kota Bekasi, dan Anda berbicara langsung dengan mereka tanpa perantara. KaryaLo adalah merek layanan PT Karsa Swakarya Loka.",
       profileLink: "Lihat profil perusahaan",
       capabilitiesTitle: "Keahlian tim kami",
       capabilities: [
@@ -260,7 +260,7 @@ export const homeCopy: Localized<HomeCopy> = {
       bannerBadge: "Validasi Sebelum Pengembangan",
       bannerTitle: "Uji Alur Sistem Sebelum Satu Baris Kode Ditulis",
       bannerBody:
-        "Dalam 7-14 hari kerja, Anda menerima demo interaktif sesuai ruang lingkup yang disepakati. Tim Anda dapat mengujinya dan memberi masukan sebelum pengembangan dimulai, sehingga risiko salah arah dapat ditekan sejak awal.",
+        "Dalam 7-14 hari kerja, Anda menerima demo interaktif sesuai ruang lingkup yang disepakati. Tim Anda dapat mengujinya dan memberi masukan sebelum pengembangan dimulai, saat perubahan masih mudah dilakukan.",
       stage: "Tahap",
       youGet: "Yang Anda terima:",
     },
@@ -284,7 +284,7 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     trust: {
       title: "Legalitas Perusahaan yang Dapat Diverifikasi",
-      intro: "Bermitra dengan vendor baru membutuhkan kepastian. Seluruh dokumen perusahaan kami tersedia untuk mendukung verifikasi vendor dan proses pengadaan Anda.",
+      intro: "Sebelum bekerja sama dengan vendor baru, Anda tentu perlu memeriksa legalitasnya. Seluruh dokumen perusahaan kami tersedia untuk verifikasi vendor dan proses pengadaan Anda.",
       cards: [
         {
           title: "PT Karsa Swakarya Loka",
@@ -324,12 +324,12 @@ export const homeCopy: Localized<HomeCopy> = {
       askCta: "Tanya via WhatsApp",
     },
     advantage: {
-      title: "Tujuan kami: sistem yang benar-benar dipakai tim Anda.",
-      intro: "Banyak sistem selesai dibangun, namun akhirnya ditinggalkan karena tidak sesuai dengan cara kerja tim. Karena itu kami mendampingi sejak perancangan hingga pemeliharaan, tidak berhenti di serah terima.",
+      title: "Sistem yang benar-benar dipakai tim Anda.",
+      intro: "Banyak sistem selesai dibangun, namun akhirnya ditinggalkan karena tidak sesuai dengan cara kerja tim. Karena itu kami mendampingi Anda dari perancangan sampai pemeliharaan setelah serah terima.",
       othersLabel: "Vendor IT pada umumnya",
       usLabel: "Bersama KaryaLo",
       rows: [
-        { topic: "Pengerjaan", others: "Bisa dialihkan ke pihak lain", us: "Dikerjakan tim inti sendiri, tidak dioper" },
+        { topic: "Pengerjaan", others: "Bisa dialihkan ke pihak lain", us: "Dikerjakan langsung oleh tim inti kami" },
         { topic: "Sebelum kode ditulis", others: "Hasil baru terlihat setelah pengembangan berjalan", us: "Demo yang bisa langsung diklik dalam 7-14 hari kerja" },
         { topic: "Ruang lingkup", others: "Batas kerja sering tidak tertulis", us: "Batas kerja & serah terima tertulis di kontrak kerja" },
         { topic: "Kepemilikan", others: "Kode & file desain tetap di vendor", us: "Kode & file desain proyek khusus milik Anda sesuai kontrak kerja" },
@@ -383,19 +383,19 @@ export const homeCopy: Localized<HomeCopy> = {
     principles: {
       title: "Our Partnership Principles",
       intro:
-        "Every project starts with understanding your business, not with code. These four principles ensure what we build is actually used and delivers value to your company.",
+        "We start every project by learning how your business runs, before any code is written. These four principles keep what we build in daily use by your team.",
       items: [
         {
           icon: "learn",
           title: "Your Business First",
           description:
-            "We study your workflows, challenges, and priorities so the solution hits the target rather than simply adding features.",
+            "We study your workflows, challenges, and priorities, then build the features your team actually needs.",
         },
         {
           icon: "open",
           title: "Open at Every Stage",
           description:
-            "Weekly demos and an online test version keep you informed throughout. We raise issues early, not at the end of the project.",
+            "Each week you see a demo and can try the online test version. We tell you about issues as soon as we find them.",
         },
         {
           icon: "maintain",
@@ -413,7 +413,7 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     services: {
       title: "Software, Design, and IoT in One Team",
-      intro: "No need to manage multiple vendors. Choose the service you need, or combine several in one coordinated project.",
+      intro: "You don't need to manage several vendors. Choose the service you need, or combine several fields in one project.",
       fieldLabel: "Field",
       detailLink: "See service details",
       supportTitle: "Support after launch",
@@ -436,7 +436,7 @@ export const homeCopy: Localized<HomeCopy> = {
     team: {
       title: "Direct Communication with Your Project Team",
       body:
-        "No layers of middlemen. KaryaLo's developers, designers, and device engineers work as one team in Bekasi, so every part of your project stays aligned. KaryaLo is the service brand of PT Karsa Swakarya Loka.",
+        "KaryaLo's developers, designers, and device engineers work as one team in Bekasi, and you talk to them directly, with no middlemen. KaryaLo is the service brand of PT Karsa Swakarya Loka.",
       profileLink: "See the company profile",
       capabilitiesTitle: "Our team's expertise",
       capabilities: [
@@ -463,7 +463,7 @@ export const homeCopy: Localized<HomeCopy> = {
       bannerBadge: "Validate Before Development",
       bannerTitle: "Test the Workflow Before a Line of Code Is Written",
       bannerBody:
-        "Within 7-14 working days you receive a clickable demo for the agreed scope. Your team can test it and give feedback before development begins, reducing the risk of going in the wrong direction.",
+        "Within 7-14 working days you receive a clickable demo for the agreed scope. Your team can test it and give feedback before development begins, while changes are still easy to make.",
       stage: "Stage",
       youGet: "What you receive:",
     },
@@ -487,7 +487,7 @@ export const homeCopy: Localized<HomeCopy> = {
     },
     trust: {
       title: "Company Credentials You Can Verify",
-      intro: "Partnering with a new vendor requires certainty. All our company documents are available to support your vendor verification and procurement process.",
+      intro: "Before you work with a new vendor, you will want to check its legal standing. All our company documents are available for your vendor verification and procurement process.",
       cards: [
         {
           title: "PT Karsa Swakarya Loka",
@@ -527,12 +527,12 @@ export const homeCopy: Localized<HomeCopy> = {
       askCta: "Ask on WhatsApp",
     },
     advantage: {
-      title: "Our goal: systems your team actually uses.",
-      intro: "Many systems are built, then abandoned because they do not fit how the team works. That is why we support you from design through maintenance, not just until handover.",
+      title: "Systems your team actually uses.",
+      intro: "Many systems are built, then abandoned because they do not fit how the team works. That is why we stay with you from design through to maintenance after handover.",
       othersLabel: "The usual IT vendor",
       usLabel: "With KaryaLo",
       rows: [
-        { topic: "Who builds it", others: "Work may be passed to other parties", us: "Built by our own core team, never handed off" },
+        { topic: "Who builds it", others: "Work may be passed to other parties", us: "Built in-house by our own core team" },
         { topic: "Before any code", others: "You see results only once development is underway", us: "A clickable demo in 7-14 working days" },
         { topic: "Scope", others: "Boundaries are often left unwritten", us: "Scope and handover written into the contract" },
         { topic: "Ownership", others: "Code and design files stay with the vendor", us: "Custom-project code and design files are yours, per the contract" },

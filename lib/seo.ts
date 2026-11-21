@@ -99,7 +99,7 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
         title: "Layanan IT Agency: Software, Desain, Foto/Video & IoT",
         description:
           "Pengembangan website dan aplikasi, desain UI/UX, identitas merek, foto dan video, IoT, serta pengadaan komputer dan perangkat jaringan MikroTik untuk bisnis Anda.",
-        breadcrumb: "Services",
+        breadcrumb: "Layanan",
       },
       en: {
         title: "IT Agency Services: Software, Design, Photo/Video & IoT",
@@ -118,7 +118,7 @@ export const routeSeo: Record<RouteKey, RouteSeo> = {
         title: "Portofolio Proyek Software, Web & Desain",
         description:
           "Jelajahi proyek klien, produk KaryaLo, dan proyek internal: website perusahaan, toko online, ERP, dashboard, serta sistem transaksi digital.",
-        breadcrumb: "Portfolio",
+        breadcrumb: "Portofolio",
       },
       en: {
         title: "Software, Web & Design Portfolio",

@@ -41,7 +41,7 @@ export const servicesPageCopy: Localized<{
       title: "Satu Mitra untuk",
       titleAccent: "Software, Desain & IoT",
       lede:
-        "Website, aplikasi, identitas merek, hingga perangkat pemantauan, seluruhnya ditangani satu tim yang terintegrasi. Anda cukup berkoordinasi dengan satu mitra, dan setiap layanan berangkat dari tujuan bisnis Anda.",
+        "Website, aplikasi, identitas merek, hingga perangkat pemantauan dikerjakan oleh satu tim. Anda cukup berkoordinasi dengan satu mitra, dan setiap pekerjaan dimulai dari tujuan bisnis Anda.",
     },
     pillarNavLabel: "Pilih layanan",
     supportNavLabel: "Layanan Pendamping",
@@ -50,13 +50,13 @@ export const servicesPageCopy: Localized<{
       badge: "Layanan Kami",
       title: "Tiga Bidang Keahlian, Satu Mitra",
       intro:
-        "Pengembang, desainer, dan teknisi perangkat bekerja dalam satu tim, sehingga setiap hasil kerja saling selaras. Pilih layanan yang paling sesuai dengan prioritas bisnis Anda.",
+        "Pengembang, desainer, dan teknisi perangkat bekerja dalam satu tim, jadi desain, aplikasi, dan perangkat yang kami buat bisa langsung dipakai bersama. Pilih layanan sesuai prioritas bisnis Anda.",
       more: "Lihat rincian",
     },
     includedLabel: "Cakupan layanan",
     discuss: (shortName) => `Diskusikan ${shortName}`,
     discussMessage: (pillarName) => `Halo Tim KaryaLo, kami ingin berkonsultasi mengenai layanan ${pillarName}.`,
-    sendBrief: "Kirim brief proyek",
+    sendBrief: "Kirim ringkasan proyek",
     proofHeading: "Proyek terkait",
     proofMore: "Lihat selengkapnya",
     projectType: { client: "Proyek klien", product: "Produk KaryaLo", prototype: "Proyek internal" },
@@ -83,8 +83,8 @@ export const servicesPageCopy: Localized<{
     guaranteesTitle: "Dirancang untuk Penggunaan Jangka Panjang",
     guarantees: [
       {
-        title: "Siap Tumbuh Bersama Bisnis Anda",
-        description: "Teknologi yang umum digunakan dan struktur yang terdokumentasi memudahkan pemeliharaan serta pengembangan sistem seiring pertumbuhan bisnis.",
+        title: "Mudah Dirawat dan Dikembangkan",
+        description: "Kami memakai teknologi yang umum digunakan dan mendokumentasikan struktur sistem, sehingga sistem mudah dirawat dan dikembangkan saat bisnis Anda bertumbuh.",
       },
       {
         title: "Garansi Setelah Rilis",
@@ -97,7 +97,7 @@ export const servicesPageCopy: Localized<{
       title: "One Partner for",
       titleAccent: "Software, Design & IoT",
       lede:
-        "Websites, apps, brand identity, through to monitoring devices, all handled by one integrated team. You coordinate with a single partner, and every service starts from your business goals.",
+        "Websites, apps, brand identity, and monitoring devices are all built by one team. You coordinate with a single partner, and every job starts from your business goals.",
     },
     pillarNavLabel: "Choose a service",
     supportNavLabel: "Supporting Services",
@@ -106,7 +106,7 @@ export const servicesPageCopy: Localized<{
       badge: "Our Services",
       title: "Three Areas of Expertise, One Partner",
       intro:
-        "Developers, designers, and device engineers work in one team, so everything we deliver fits together. Choose the service that best fits your business priorities.",
+        "Developers, designers, and device engineers work in one team, so the designs, apps, and devices we build work together from the start. Choose the service that fits your business priorities.",
       more: "See details",
     },
     includedLabel: "What's included",
@@ -139,8 +139,8 @@ export const servicesPageCopy: Localized<{
     guaranteesTitle: "Designed for Long-Term Use",
     guarantees: [
       {
-        title: "Ready to Grow With Your Business",
-        description: "Widely used technology and a documented structure keep the system easy to maintain and extend as your business grows.",
+        title: "Easy to Maintain and Extend",
+        description: "We use widely adopted technology and document the system's structure, so it stays easy to maintain and extend as your business grows.",
       },
       {
         title: "Warranty After Release",

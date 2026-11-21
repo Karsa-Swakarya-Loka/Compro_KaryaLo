@@ -1,0 +1,567 @@
+## content/about.ts
+- "Bisnis yang sedang tumbuh membutuhkan teknologi yang menopang, bukan menambah beban. KaryaLo menyatukan software, desain, foto dan video, IoT, serta pengadaan perangkat keras dalam satu tim, dan mendampingi Anda sejak perencanaan hingga sistem benar-benar digunakan."
++ "Bisnis yang sedang tumbuh butuh teknologi yang meringankan pekerjaan. KaryaLo menyatukan software, desain, foto dan video, IoT, serta pengadaan perangkat keras dalam satu tim, dan mendampingi Anda dari perencanaan sampai sistem dipakai sehari-hari."
+
+## content/about.ts
+- "Menjadi mitra teknologi yang dipercaya perusahaan di Indonesia untuk mengembangkan solusi digital yang bermanfaat, mudah digunakan, dan mendukung pertumbuhan bisnis."
++ "Menjadi mitra teknologi yang dipercaya perusahaan di Indonesia untuk membangun sistem digital yang mudah digunakan dan membantu bisnis tumbuh."
+
+## content/about.ts
+- "Mengintegrasikan keahlian software, desain, dan IoT untuk menghasilkan solusi yang selaras."
++ "Menggabungkan pekerjaan software, desain, dan IoT dalam satu tim agar setiap bagian proyek saling cocok."
+
+## content/about.ts
+- "Mendukung keberlanjutan sistem melalui pemeliharaan dan pengembangan setelah peluncuran."
++ "Merawat dan terus mengembangkan sistem klien setelah peluncuran."
+
+## content/about.ts
+- "Lima fungsi dalam tim inti KaryaLo, masing-masing dengan tanggung jawab yang jelas, menjaga kualitas teknis, desain, dan pelaksanaan proyek Anda."
++ "Tim inti KaryaLo terbagi dalam lima fungsi. Masing-masing memegang bagian tertentu dari proyek Anda, dari sisi teknis dan desain sampai pelaksanaan."
+
+## content/about.ts
+- "Menetapkan arah perusahaan, mengelola hubungan klien, dan memastikan setiap proyek memiliki penanggung jawab yang jelas."
++ "Menetapkan arah perusahaan, mengelola hubungan klien, dan menunjuk penanggung jawab untuk setiap proyek."
+
+## content/about.ts
+- "Mengelola kontrak, invoice, dan administrasi proyek untuk mendukung kerja sama yang tertib dan terdokumentasi."
++ "Mengelola kontrak, invoice, dan administrasi proyek agar setiap kerja sama tercatat rapi."
+
+## content/about.ts
+- "A growing business needs technology that carries the load, not adds to it. KaryaLo brings software, design, photo and video, IoT, and hardware supply into one team, and stays with you from planning until the system is genuinely in use."
++ "A growing business needs technology that makes the work lighter. KaryaLo brings software, design, photo and video, IoT, and hardware supply into one team, and stays with you from planning until the system is in daily use."
+
+## content/about.ts
+- "To be the technology partner Indonesian companies trust to develop practical, accessible digital solutions that support business growth."
++ "To be the technology partner Indonesian companies trust to build digital systems that are easy to use and help the business grow."
+
+## content/about.ts
+- "Combine software, design, and IoT expertise to create coordinated solutions."
++ "Bring software, design, and IoT work into one team so every part of a project fits together."
+
+## content/about.ts
+- "Support systems beyond launch through ongoing maintenance and development."
++ "Maintain and keep developing client systems after launch."
+
+## content/about.ts
+- "Five functions in KaryaLo's core team, each with clear responsibilities, look after the technical quality, design, and delivery of your project."
++ "KaryaLo's core team is split into five functions. Each one owns a defined part of your project, from engineering and design to delivery."
+
+## content/about.ts
+- "Sets the company's direction, looks after client relationships, and makes sure every project has a clear owner."
++ "Sets the company's direction, looks after client relationships, and assigns an owner to every project."
+
+## content/about.ts
+- "Designs app screens, brand identities, and communication materials so products are easy to use and consistent."
++ "Designs app screens, brand identities, and communication materials that are easy to understand and consistent across channels."
+
+## content/about.ts
+- "Manages contracts, invoices, and project administration to keep every engagement organised and documented."
++ "Manages contracts, invoices, and project administration so every engagement is properly recorded."
+
+## content/contact-page.ts
+- "Brief Anda sudah kami terima di support@karyalo.com."
++ "Ringkasan proyek Anda sudah kami terima di support@karyalo.com."
+
+## content/contact-page.ts
+- "Jelaskan kondisi saat ini, kendala utama, dan hasil yang ingin dicapai. Informasi ini membantu kami menentukan prioritas solusi."
++ "Jelaskan kondisi saat ini, kendala utama, dan hasil yang ingin dicapai, agar kami tahu bagian mana yang perlu dikerjakan lebih dulu."
+
+## content/contact-page.ts
+- "Describe your current situation, main challenges, and intended outcomes. This helps us identify the priorities for your solution."
++ "Describe your current situation, main challenges, and the outcome you want, so we know which part to tackle first."
+
+## content/home.ts
+- "Setiap proyek kami mulai dari pemahaman bisnis, bukan dari kode. Empat prinsip berikut memastikan solusi yang kami bangun benar-benar digunakan dan memberi nilai bagi perusahaan Anda."
++ "Setiap proyek kami mulai dengan mempelajari bisnis Anda, sebelum satu baris kode ditulis. Empat prinsip berikut menjaga agar sistem yang kami bangun benar-benar dipakai oleh tim Anda."
+
+## content/home.ts
+- "Kami mempelajari alur kerja, kendala, dan prioritas tim Anda agar solusi yang dibangun tepat sasaran, bukan sekadar kaya fitur."
++ "Kami mempelajari alur kerja, kendala, dan prioritas tim Anda, lalu membangun fitur yang memang dibutuhkan."
+
+## content/home.ts
+- "Demo mingguan dan akses uji coba memastikan Anda selalu mengetahui perkembangan proyek. Setiap kendala kami sampaikan sejak dini, bukan di akhir proyek."
++ "Setiap minggu Anda melihat demo dan dapat mencoba versi uji coba. Kendala kami sampaikan begitu ditemukan."
+
+## content/home.ts
+- "Tanpa perlu mengelola banyak vendor. Pilih layanan yang Anda butuhkan, atau gabungkan beberapa bidang dalam satu proyek yang terkoordinasi."
++ "Anda tidak perlu mengelola banyak vendor. Pilih layanan yang Anda butuhkan, atau gabungkan beberapa bidang dalam satu proyek."
+
+## content/home.ts
+- "Tanpa perantara berlapis. Pengembang, desainer, dan teknisi perangkat KaryaLo bekerja dalam satu tim di Kota Bekasi, sehingga setiap bagian proyek Anda tetap selaras. KaryaLo adalah merek layanan PT Karsa Swakarya Loka."
++ "Pengembang, desainer, dan teknisi perangkat KaryaLo bekerja dalam satu tim di Kota Bekasi, dan Anda berbicara langsung dengan mereka tanpa perantara. KaryaLo adalah merek layanan PT Karsa Swakarya Loka."
+
+## content/home.ts
+- "Dalam 7-14 hari kerja, Anda menerima demo interaktif sesuai ruang lingkup yang disepakati. Tim Anda dapat mengujinya dan memberi masukan sebelum pengembangan dimulai, sehingga risiko salah arah dapat ditekan sejak awal."
++ "Dalam 7-14 hari kerja, Anda menerima demo interaktif sesuai ruang lingkup yang disepakati. Tim Anda dapat mengujinya dan memberi masukan sebelum pengembangan dimulai, saat perubahan masih mudah dilakukan."
+
+## content/home.ts
+- "Bermitra dengan vendor baru membutuhkan kepastian. Seluruh dokumen perusahaan kami tersedia untuk mendukung verifikasi vendor dan proses pengadaan Anda."
++ "Sebelum bekerja sama dengan vendor baru, Anda tentu perlu memeriksa legalitasnya. Seluruh dokumen perusahaan kami tersedia untuk verifikasi vendor dan proses pengadaan Anda."
+
+## content/home.ts
+- "Banyak sistem selesai dibangun, namun akhirnya ditinggalkan karena tidak sesuai dengan cara kerja tim. Karena itu kami mendampingi sejak perancangan hingga pemeliharaan, tidak berhenti di serah terima."
++ "Banyak sistem selesai dibangun, namun akhirnya ditinggalkan karena tidak sesuai dengan cara kerja tim. Karena itu kami mendampingi Anda dari perancangan sampai pemeliharaan setelah serah terima."
+
+## content/home.ts
+- "Dikerjakan tim inti sendiri, tidak dioper"
++ "Dikerjakan langsung oleh tim inti kami"
+
+## content/home.ts
+- "Every project starts with understanding your business, not with code. These four principles ensure what we build is actually used and delivers value to your company."
++ "We start every project by learning how your business runs, before any code is written. These four principles keep what we build in daily use by your team."
+
+## content/home.ts
+- "We study your workflows, challenges, and priorities so the solution hits the target rather than simply adding features."
++ "We study your workflows, challenges, and priorities, then build the features your team actually needs."
+
+## content/home.ts
+- "Weekly demos and an online test version keep you informed throughout. We raise issues early, not at the end of the project."
++ "Each week you see a demo and can try the online test version. We tell you about issues as soon as we find them."
+
+## content/home.ts
+- "No need to manage multiple vendors. Choose the service you need, or combine several in one coordinated project."
++ "You don't need to manage several vendors. Choose the service you need, or combine several fields in one project."
+
+## content/home.ts
+- "No layers of middlemen. KaryaLo's developers, designers, and device engineers work as one team in Bekasi, so every part of your project stays aligned. KaryaLo is the service brand of PT Karsa Swakarya Loka."
++ "KaryaLo's developers, designers, and device engineers work as one team in Bekasi, and you talk to them directly, with no middlemen. KaryaLo is the service brand of PT Karsa Swakarya Loka."
+
+## content/home.ts
+- "Within 7-14 working days you receive a clickable demo for the agreed scope. Your team can test it and give feedback before development begins, reducing the risk of going in the wrong direction."
++ "Within 7-14 working days you receive a clickable demo for the agreed scope. Your team can test it and give feedback before development begins, while changes are still easy to make."
+
+## content/home.ts
+- "Partnering with a new vendor requires certainty. All our company documents are available to support your vendor verification and procurement process."
++ "Before you work with a new vendor, you will want to check its legal standing. All our company documents are available for your vendor verification and procurement process."
+
+## content/home.ts
+- "Many systems are built, then abandoned because they do not fit how the team works. That is why we support you from design through maintenance, not just until handover."
++ "Many systems are built, then abandoned because they do not fit how the team works. That is why we stay with you from design through to maintenance after handover."
+
+## content/home.ts
+- "Built by our own core team, never handed off"
++ "Built in-house by our own core team"
+
+## content/industry.ts
+- "Solusi yang Memahami"
++ "Sistem yang Mengikuti"
+
+## content/industry.ts
+- "Toko online, distributor, pabrik, dan pengelola gedung punya cara kerja yang berbeda. Karena itu software, desain, dan perangkat IoT yang kami bangun selalu mengikuti alur kerja Anda, bukan sebaliknya."
++ "Toko online, distributor, pabrik, dan pengelola gedung punya cara kerja yang berbeda. Karena itu software, desain, dan perangkat IoT yang kami bangun disesuaikan dengan alur kerja Anda."
+
+## content/industry.ts
+- "Temukan industri Anda dan solusi yang dapat kami bangun. Proyek terkait ditautkan langsung melalui studi kasus, produk, atau proyek internal."
++ "Pilih industri Anda untuk melihat apa yang dapat kami bangun. Proyek terkait ditautkan ke studi kasus, produk, atau proyek internal."
+
+## content/industry.ts
+- "Solusi Sesuai Kebutuhan Operasional"
++ "Apa yang Kami Bangun per Industri"
+
+## content/industry.ts
+- "Solusi yang dapat dikembangkan"
++ "Yang dapat kami bangun"
+
+## content/industry.ts
+- "Studi kasus untuk industri ini belum tersedia. Pendekatan awal kami mencakup pemetaan kebutuhan dan uji coba demo bersama tim Anda."
++ "Studi kasus untuk industri ini belum tersedia. Kami mulai dengan memetakan kebutuhan, lalu menguji demo bersama tim Anda."
+
+## content/industry.ts
+- "Sampaikan proses kerja dan tantangan bisnis Anda. Kami akan membantu menilai kebutuhan dan menyusun ruang lingkup awal yang relevan, tanpa kewajiban melanjutkan proyek."
++ "Sampaikan proses kerja dan tantangan bisnis Anda. Kami akan membantu menilai kebutuhan dan menyusun ruang lingkup awal, tanpa kewajiban melanjutkan proyek."
+
+## content/industry.ts
+- "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai pengembangan sistem yang mendukung proses kerja perusahaan kami."
++ "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai pengembangan sistem untuk proses kerja perusahaan kami."
+
+## content/industry.ts
+- "Solutions Built Around"
++ "Systems Built Around"
+
+## content/industry.ts
+- "Online shops, distributors, factories, and building managers all work differently. So the software, design, and IoT we build always follows your workflow, not the other way round."
++ "Online shops, distributors, factories, and building managers all work differently. So we fit the software, design, and IoT we build to your workflow."
+
+## content/industry.ts
+- "Find your industry and the solutions we can build. Related work is linked directly through case studies, products, or internal projects."
++ "Pick your industry to see what we can build. Related work links to a case study, product, or internal project."
+
+## content/industry.ts
+- "Solutions for Your Operational Needs"
++ "What We Build for Each Industry"
+
+## content/industry.ts
+- "Potential solutions"
++ "What we can build"
+
+## content/industry.ts
+- "A case study for this industry is not yet available. Our initial approach includes mapping your needs and trying out a demo with your team."
++ "A case study for this industry is not yet available. We start by mapping your needs, then test a demo with your team."
+
+## content/industry.ts
+- "Share your workflows and business challenges. We will help assess your needs and define a relevant initial scope, with no obligation to proceed."
++ "Share your workflows and business challenges. We will help assess your needs and define an initial scope, with no obligation to proceed."
+
+## content/portfolio-page.ts
+- "Lihat bagaimana tantangan bisnis nyata diwujudkan menjadi sistem yang digunakan. Setiap studi kasus menguraikan kebutuhan awal, pendekatan solusi, dan cakupan pekerjaan."
++ "Lihat bagaimana masalah bisnis klien diwujudkan menjadi sistem yang dipakai sehari-hari. Setiap studi kasus menguraikan kebutuhan awal, pendekatan solusi, dan cakupan pekerjaan."
+
+## content/portfolio-page.ts
+- "Dari toko online dan sistem operasional hingga website perusahaan, tinjau langsung hasil kerja kami melalui proyek klien dan proyek internal yang telah dikembangkan."
++ "Tinjau langsung proyek klien dan proyek internal kami, mulai dari toko online dan sistem operasional sampai website perusahaan."
+
+## content/portfolio-page.ts
+- "See how real business challenges became systems in daily use. Each case study outlines the initial needs, our approach, and the scope of work."
++ "See how clients' business problems became systems in daily use. Each case study outlines the initial needs, our approach, and the scope of work."
+
+## content/portfolio-page.ts
+- "From online stores and operational systems to company websites, review our work first-hand through client and internal projects."
++ "Review our client and internal projects first-hand, from online stores and operational systems to company websites."
+
+## content/products-page.ts
+- "Gunakan platform yang tersedia sebagai dasar solusi Anda. Tampilan, konfigurasi, dan integrasi dapat disesuaikan dengan cakupan lisensi serta kebutuhan implementasi yang disepakati."
++ "Mulai dari platform yang sudah berjalan. Tampilan, konfigurasi, dan integrasi dapat disesuaikan dengan cakupan lisensi serta kebutuhan implementasi yang disepakati."
+
+## content/products-page.ts
+- "Hadirkan Platform dengan Identitas Bisnis Anda"
++ "Jalankan Platform dengan Merek Bisnis Anda"
+
+## content/products-page.ts
+- "Use an existing platform as the foundation for your solution. Branding, configuration, and integrations can be tailored to the agreed licence scope and implementation requirements."
++ "Start from a platform that already works. Branding, configuration, and integrations can be tailored to the agreed licence scope and implementation requirements."
+
+## content/products-page.ts
+- "Make the Platform Part of Your Brand"
++ "Run the Platform Under Your Brand"
+
+## content/services-page.ts
+- "Website, aplikasi, identitas merek, hingga perangkat pemantauan, seluruhnya ditangani satu tim yang terintegrasi. Anda cukup berkoordinasi dengan satu mitra, dan setiap layanan berangkat dari tujuan bisnis Anda."
++ "Website, aplikasi, identitas merek, hingga perangkat pemantauan dikerjakan oleh satu tim. Anda cukup berkoordinasi dengan satu mitra, dan setiap pekerjaan dimulai dari tujuan bisnis Anda."
+
+## content/services-page.ts
+- "Pengembang, desainer, dan teknisi perangkat bekerja dalam satu tim, sehingga setiap hasil kerja saling selaras. Pilih layanan yang paling sesuai dengan prioritas bisnis Anda."
++ "Pengembang, desainer, dan teknisi perangkat bekerja dalam satu tim, jadi desain, aplikasi, dan perangkat yang kami buat bisa langsung dipakai bersama. Pilih layanan sesuai prioritas bisnis Anda."
+
+## content/services-page.ts
+- "Siap Tumbuh Bersama Bisnis Anda"
++ "Mudah Dirawat dan Dikembangkan"
+
+## content/services-page.ts
+- "Teknologi yang umum digunakan dan struktur yang terdokumentasi memudahkan pemeliharaan serta pengembangan sistem seiring pertumbuhan bisnis."
++ "Kami memakai teknologi yang umum digunakan dan mendokumentasikan struktur sistem, sehingga sistem mudah dirawat dan dikembangkan saat bisnis Anda bertumbuh."
+
+## content/services-page.ts
+- "Websites, apps, brand identity, through to monitoring devices, all handled by one integrated team. You coordinate with a single partner, and every service starts from your business goals."
++ "Websites, apps, brand identity, and monitoring devices are all built by one team. You coordinate with a single partner, and every job starts from your business goals."
+
+## content/services-page.ts
+- "Developers, designers, and device engineers work in one team, so everything we deliver fits together. Choose the service that best fits your business priorities."
++ "Developers, designers, and device engineers work in one team, so the designs, apps, and devices we build work together from the start. Choose the service that fits your business priorities."
+
+## content/services-page.ts
+- "Ready to Grow With Your Business"
++ "Easy to Maintain and Extend"
+
+## content/services-page.ts
+- "Widely used technology and a documented structure keep the system easy to maintain and extend as your business grows."
++ "We use widely adopted technology and document the system's structure, so it stays easy to maintain and extend as your business grows."
+
+## data/industries.ts
+- "Data persediaan di toko online, kasir, dan gudang belum terhubung, sementara laporan penjualan harus direkap dari beberapa sumber."
++ "Data persediaan di toko online, kasir, dan gudang belum terhubung, jadi laporan penjualan harus direkap dari beberapa sumber."
+
+## data/industries.ts
+- "Volume transaksi meningkat, sementara verifikasi pembayaran manual memperlambat pemrosesan dan menyulitkan pemantauan status pesanan."
++ "Volume transaksi terus naik, dan verifikasi pembayaran secara manual memperlambat pemrosesan serta menyulitkan pemantauan status pesanan."
+
+## data/industries.ts
+- "Inventory data across the online store, point of sale, and warehouse is disconnected, while sales reports must be compiled from multiple sources."
++ "Inventory data across the online store, point of sale, and warehouse is disconnected, so sales reports have to be compiled from several sources."
+
+## data/industries.ts
+- "Transaction volumes are growing, while manual payment checks slow processing and make order status harder to track."
++ "Transaction volumes keep growing, and checking payments by hand slows processing and makes order status harder to track."
+
+## data/portfolio.ts
+- "Integrasi toko online dan sistem pengelolaan pesanan untuk menyelaraskan transaksi pelanggan dengan pencatatan persediaan gudang."
++ "Toko online dan sistem pengelolaan pesanan yang terhubung dengan pencatatan stok gudang, sehingga pesanan pelanggan tercatat sesuai persediaan."
+
+## data/portfolio.ts
+- "Kami mengembangkan etalase belanja yang dioptimalkan untuk kecepatan akses serta panel pengelolaan pesanan yang terhubung dengan gudang. Tim dapat mengikuti status pesanan dari pembayaran hingga penyerahan kepada kurir."
++ "Kami membuat etalase belanja yang cepat dibuka dan panel pengelolaan pesanan yang terhubung dengan gudang. Tim dapat mengikuti status pesanan dari pembayaran hingga penyerahan kepada kurir."
+
+## data/portfolio.ts
+- "Waktu pemrosesan pesanan berkurang sekitar 40%, disertai berkurangnya selisih pencatatan stok gudang."
++ "Waktu pemrosesan pesanan berkurang sekitar 40%, dan selisih pencatatan stok gudang ikut berkurang."
+
+## data/portfolio.ts
+- "Website profil perusahaan yang menyampaikan kapabilitas HIJ melalui informasi terstruktur, desain profesional, dan akses yang nyaman di berbagai perangkat."
++ "Website profil perusahaan yang menjelaskan kapabilitas HIJ dengan susunan informasi yang rapi dan tetap nyaman dibuka di ponsel maupun komputer."
+
+## data/portfolio.ts
+- "HIJ membutuhkan kehadiran digital yang mencerminkan profesionalisme perusahaan dan memudahkan calon mitra mempelajari layanannya, termasuk melalui ponsel."
++ "HIJ membutuhkan website yang tampil profesional dan memudahkan calon mitra mempelajari layanannya, termasuk melalui ponsel."
+
+## data/portfolio.ts
+- "Kami menyusun struktur informasi, memperkuat konsistensi visual, dan mengoptimalkan performa halaman. Animasi digunakan secara terukur untuk mendukung penyampaian informasi."
++ "Kami menyusun struktur informasi, menyeragamkan tampilan visual, dan mempercepat pemuatan halaman. Animasi dipakai secukupnya, hanya untuk membantu pembaca mengikuti isi."
+
+## data/portfolio.ts
+- "Kami mengembangkan sistem dengan bagian penjualan, perencanaan, produksi, logistik, dan keuangan. Dashboard menyediakan ringkasan 7, 30, atau 90 hari, dilengkapi pemindaian QR, pelacakan tahapan produksi, panduan penggunaan, dan portal pelanggan."
++ "Kami mengembangkan sistem dengan bagian penjualan, perencanaan, produksi, logistik, dan keuangan. Dashboard menampilkan ringkasan 7, 30, atau 90 hari. Sistem ini juga memiliki pemindaian QR, pelacakan tahapan produksi, panduan penggunaan, dan portal pelanggan."
+
+## data/portfolio.ts
+- "Kami mengembangkan website berbahasa Inggris dan Indonesia dengan alur informasi yang menghubungkan profil, layanan, keunggulan, dan hubungan dengan grup. Riwayat perusahaan, peta jaringan kota, lokasi kantor, serta formulir kontak melengkapi informasi bagi calon klien."
++ "Kami mengembangkan website berbahasa Inggris dan Indonesia dengan alur informasi yang menghubungkan profil, layanan, keunggulan, dan hubungan dengan grup. Website juga memuat riwayat perusahaan, peta jaringan kota, lokasi kantor, dan formulir kontak untuk calon klien."
+
+## data/portfolio.ts
+- "Produk KaryaLo untuk penjualan top-up game, pulsa, paket data, token PLN, dan e-money. Platform mengintegrasikan pembayaran DOKU, pengiriman otomatis, promosi, serta program poin pelanggan."
++ "Produk KaryaLo untuk penjualan top-up game, pulsa, paket data, token PLN, dan e-money, dengan pembayaran DOKU, pengiriman otomatis, promosi, dan program poin pelanggan."
+
+## data/portfolio.ts
+- "Kami menyatukan data dalam dashboard dengan hierarki informasi yang jelas. Tampilan menyesuaikan ukuran layar dan dapat dipasang di layar utama ponsel untuk memudahkan akses."
++ "Kami menyatukan data dalam dashboard dengan hierarki informasi yang jelas. Tampilan menyesuaikan ukuran layar dan dapat dipasang di layar utama ponsel."
+
+## data/portfolio.ts
+- "Transaksi yang masuk bersamaan dan keterlambatan notifikasi pembayaran memerlukan pengelolaan antrean agar setiap pesanan dapat ditindaklanjuti dengan tepat."
++ "Pesanan bisa masuk bersamaan dan notifikasi pembayaran bisa terlambat, sehingga sistem perlu antrean untuk memproses setiap pesanan dengan tepat."
+
+## data/portfolio.ts
+- "Kami menyusun pemrosesan terpisah untuk setiap pesanan, dengan verifikasi pembayaran otomatis dan notifikasi kepada pembeli. Pendekatan ini mendukung pengelolaan transaksi secara terstruktur."
++ "Kami menyusun pemrosesan terpisah untuk setiap pesanan, dengan verifikasi pembayaran otomatis dan notifikasi kepada pembeli."
+
+## data/portfolio.ts
+- "Demo ini menghubungkan antrean pesanan, verifikasi pembayaran, dan notifikasi dalam satu alur pemrosesan."
++ "Dalam demo ini, antrean pesanan, verifikasi pembayaran, dan notifikasi berjalan dalam satu alur."
+
+## data/portfolio.ts
+- "An integrated online store and order management system that aligns customer transactions with warehouse inventory records."
++ "An online store and order management system linked to the warehouse stock records, so customer orders are recorded against actual inventory."
+
+## data/portfolio.ts
+- "We developed a storefront optimised for loading performance and an order management panel connected to the warehouse. The team can track each order from payment through to courier pickup."
++ "We built a fast-loading storefront and an order management panel connected to the warehouse. The team can track each order from payment through to courier pickup."
+
+## data/portfolio.ts
+- "Order processing time decreased by approximately 40%, alongside fewer warehouse inventory discrepancies."
++ "Order processing time fell by about 40%, and warehouse stock discrepancies fell too."
+
+## data/portfolio.ts
+- "A company profile website presenting HIJ's capabilities through structured information, professional design, and a layout that works on any screen."
++ "A company profile website that sets out HIJ's capabilities in a clear structure and reads well on phones and desktops."
+
+## data/portfolio.ts
+- "HIJ needed a digital presence that reflected its professionalism and helped prospective partners understand its services, including on mobile devices."
++ "HIJ needed a website that looked professional and made it easy for prospective partners to learn about its services, including on a phone."
+
+## data/portfolio.ts
+- "We structured the information, strengthened visual consistency, and optimised page performance. Purposeful animation supports the presentation of content."
++ "We structured the information, made the visuals consistent, and sped up page loading. Animation is used sparingly, only where it helps readers follow the content."
+
+## data/portfolio.ts
+- "We developed a system with sales, planning, production, logistics, and finance sections. The dashboard provides 7, 30, or 90-day summaries, supported by QR scanning, production stage tracking, user guidance, and a customer portal."
++ "We developed a system with sales, planning, production, logistics, and finance sections. The dashboard shows 7, 30, or 90-day summaries. The system also has QR scanning, production stage tracking, user guidance, and a customer portal."
+
+## data/portfolio.ts
+- "We developed an English and Indonesian website linking the company profile, services, strengths, and group relationship through a clear information structure. Company history, a city network map, office details, and a contact form complete the experience."
++ "We developed an English and Indonesian website linking the company profile, services, strengths, and group relationship through a clear information structure. The site also has the company history, a city network map, office locations, and a contact form for prospective clients."
+
+## data/portfolio.ts
+- "A KaryaLo product for game top-ups, mobile credit, data packages, electricity tokens, and e-money. The platform integrates DOKU payments, automated delivery, promotions, and customer rewards."
++ "A KaryaLo product selling game top-ups, mobile credit, data packages, electricity tokens, and e-money, with DOKU payments, automated delivery, promotions, and customer rewards."
+
+## data/portfolio.ts
+- "We brought the data into a dashboard with a clear information hierarchy. The screens adapt to any device and can be added to a phone's home screen for convenient access."
++ "We brought the data into a dashboard with a clear information hierarchy. The screens adapt to any device and can be added to a phone's home screen."
+
+## data/portfolio.ts
+- "Concurrent transactions and delayed payment notifications require queue management so each order can be processed appropriately."
++ "Orders can arrive at the same time and payment notifications can arrive late, so the system needs a queue to process each order correctly."
+
+## data/portfolio.ts
+- "We designed independent processing for each order, with automated payment verification and buyer notifications. This approach supports structured transaction management."
++ "We set up separate processing for each order, with automated payment verification and buyer notifications."
+
+## data/portfolio.ts
+- "The demo connects order queues, payment verification, and notifications within one processing workflow."
++ "In this demo, order queues, payment verification, and notifications run in one flow."
+
+## data/problems.ts
+- "A company website with clear information, a professional look, fast loading, and strong visibility on Google."
++ "A company website with clear information and a professional look that loads fast and is easy to find on Google."
+
+## data/problems.ts
+- "A dashboard that unifies data from your systems on one screen, so reports are ready without re-keying."
++ "A dashboard that brings data from your systems onto one screen, so reports are ready without re-keying."
+
+## data/process.ts
+- "Memastikan solusi yang dibangun sesuai kebutuhan bisnis Anda."
++ "Kami pahami dulu kebutuhan bisnis Anda sebelum merancang sistem."
+
+## data/process.ts
+- "Dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati, kami menyiapkan demo interaktif di Figma atau perangkat uji coba untuk proyek IoT. Tinjauan bersama membantu memastikan kebutuhan telah dipahami sebelum tahap pengembangan berikutnya."
++ "Dalam 7-14 hari kerja sesuai ruang lingkup yang disepakati, kami menyiapkan demo interaktif di Figma atau perangkat uji coba untuk proyek IoT. Kami meninjaunya bersama tim Anda untuk mengecek apakah kebutuhan sudah kami pahami dengan benar sebelum masuk ke tahap pengembangan."
+
+## data/process.ts
+- "Pengembangan dibagi menjadi target mingguan. Fitur yang selesai bisa langsung dicoba di versi uji coba online untuk ditinjau bersama, sehingga masukan dan penyesuaian dapat dibahas secara berkala."
++ "Pengembangan dibagi menjadi target mingguan. Fitur yang selesai bisa langsung Anda coba di versi uji coba online, lalu masukan Anda kami bahas bersama setiap minggu."
+
+## data/process.ts
+- "Memastikan sistem andal sebelum digunakan dalam operasional."
++ "Sistem diuji lebih dulu sebelum dipakai dalam operasional."
+
+## data/process.ts
+- "Kami menguji ketahanan sistem saat diakses banyak pengguna, memeriksa keamanan, dan memastikan tampilan rapi di berbagai ukuran layar sesuai kebutuhan proyek. Untuk IoT, perangkat disetel langsung di lokasi pemasangan. Hasilnya dicoba dan disetujui bersama tim Anda."
++ "Kami menguji ketahanan sistem saat diakses banyak pengguna, memeriksa keamanan, dan mengecek tampilan di berbagai ukuran layar sesuai kebutuhan proyek. Untuk IoT, perangkat disetel langsung di lokasi pemasangan. Hasilnya dicoba dan disetujui bersama tim Anda."
+
+## data/process.ts
+- "Ensure the solution matches your business needs."
++ "We learn what your business needs before designing the system."
+
+## data/process.ts
+- "Within 7-14 working days, subject to the agreed scope, we prepare a clickable demo in Figma, or a test device for IoT projects. Joint reviews confirm requirements before the next development stage."
++ "Within 7-14 working days, subject to the agreed scope, we prepare a clickable demo in Figma, or a test device for IoT projects. We review it with your team to check that we have understood the requirements before development starts."
+
+## data/process.ts
+- "Development is organised into weekly targets. Completed features are available to try in an online test version for joint review, allowing feedback and adjustments to be discussed regularly."
++ "Development is organised into weekly targets. Completed features go into an online test version for you to try, and we go through your feedback together each week."
+
+## data/process.ts
+- "Confirm the system is reliable before it enters daily operations."
++ "The system is tested before it goes into daily operations."
+
+## data/products.ts
+- "Satukan indikator operasional dan laporan perusahaan dalam tampilan yang terstruktur. Dashboard dapat diakses melalui desktop atau dipasang di layar utama ponsel untuk memudahkan pemantauan."
++ "Indikator operasional dan laporan perusahaan tampil di satu dashboard. Dashboard bisa dibuka di desktop atau dipasang di layar utama ponsel."
+
+## data/products.ts
+- "Platform toko online dengan katalog yang mudah dijelajahi, proses bayar yang ringkas, dan keranjang belanja tersimpan. Panel admin membantu tim Anda mengelola produk, promosi, dan persediaan."
++ "Platform toko online dengan katalog yang mudah dijelajahi, proses bayar yang ringkas, dan keranjang belanja tersimpan. Lewat panel admin, tim Anda mengelola produk, promosi, dan persediaan."
+
+## data/products.ts
+- "Halaman yang dioptimalkan untuk kecepatan akses"
++ "Halaman yang cepat dimuat"
+
+## data/products.ts
+- "Kelola pesanan, verifikasi pembayaran, dan pengiriman produk digital melalui satu alur otomatis. Integrasi pemasok dan laporan harian membantu tim memantau transaksi serta margin penjualan."
++ "Pesanan, verifikasi pembayaran, dan pengiriman produk digital berjalan dalam satu alur otomatis. Platform terhubung ke pemasok, dan laporan harian menunjukkan transaksi serta margin penjualan."
+
+## data/products.ts
+- "Bring operational indicators and company reports into a structured view. Access the dashboard on desktop or add it to your phone's home screen for convenient monitoring."
++ "Operational indicators and company reports sit in one dashboard. Open it on desktop or add it to your phone's home screen."
+
+## data/products.ts
+- "An online store platform with an accessible catalogue, a quick payment flow, and a saved shopping cart. The admin panel helps your team manage products, promotions, and inventory."
++ "An online store platform with an easy-to-browse catalogue, a quick payment flow, and a saved shopping cart. From the admin panel, your team manages products, promotions, and inventory."
+
+## data/products.ts
+- "Pages optimised for loading performance"
++ "Fast-loading pages"
+
+## data/products.ts
+- "Manage orders, payment verification, and digital product delivery through one automated workflow. Supplier integrations and daily reporting help your team track transactions and sales margins."
++ "Orders, payment verification, and digital product delivery run through one automated workflow. The platform connects to suppliers, and daily reports show transactions and sales margins."
+
+## data/services.ts
+- "Website, aplikasi, dan sistem internal yang dirancang untuk mendukung operasional harian serta perkembangan bisnis Anda."
++ "Website, aplikasi, dan sistem internal untuk operasional harian bisnis Anda, yang tetap bisa dikembangkan saat bisnis bertumbuh."
+
+## data/services.ts
+- "Pengembangan website perusahaan, aplikasi operasional, dan platform berlangganan dengan perhatian pada kecepatan akses, kemudahan penggunaan, serta mudah ditemukan di Google."
++ "Website perusahaan, aplikasi operasional, dan platform berlangganan yang cepat dibuka, mudah dipakai, dan mudah ditemukan di Google."
+
+## data/services.ts
+- "Pengembangan aplikasi Android dan iOS sekaligus dalam satu kali pengembangan untuk mendukung tim lapangan, transaksi kasir, dan pencatatan persediaan."
++ "Satu kali pengembangan menghasilkan aplikasi Android dan iOS sekaligus, untuk tim lapangan, transaksi kasir, dan pencatatan persediaan."
+
+## data/services.ts
+- "Satukan data dan proses melalui dashboard bisnis, integrasi pembayaran, serta koneksi antarsistem yang mendukung alur kerja perusahaan Anda."
++ "Dashboard bisnis, integrasi pembayaran, dan koneksi antarsistem agar data dan proses kerja perusahaan Anda ada di satu tempat."
+
+## data/services.ts
+- "Desain produk digital, identitas merek, serta foto dan video yang memperjelas komunikasi, memudahkan penggunaan, dan menjaga konsistensi bisnis Anda."
++ "Desain produk digital, identitas merek, serta foto dan video, agar pesan bisnis Anda jelas, produk mudah dipakai, dan tampilan merek seragam."
+
+## data/services.ts
+- "Perancangan alur pengguna, demo interaktif di Figma, dan penyempurnaan tampilan untuk membantu pengguna menyelesaikan tugas dengan lebih mudah."
++ "Kami merancang alur pengguna, membuat demo interaktif di Figma, dan merapikan tampilan agar pengguna lebih mudah menyelesaikan tugasnya."
+
+## data/services.ts
+- "Bangun identitas perusahaan yang konsisten melalui logo, panduan warna dan tipografi, dokumen bisnis, serta profil perusahaan."
++ "Logo, panduan warna dan tipografi, dokumen bisnis, dan profil perusahaan dengan identitas yang seragam di semua materi."
+
+## data/services.ts
+- "Materi komunikasi yang membantu menjelaskan produk dan menyampaikan penawaran, mulai dari template media sosial hingga infografis dan presentasi bisnis."
++ "Template media sosial, infografis, dan presentasi bisnis untuk menjelaskan produk dan menyampaikan penawaran Anda."
+
+## data/services.ts
+- "Produksi foto dan video untuk kebutuhan bisnis, seperti foto produk, dokumentasi kegiatan, profil perusahaan, dan materi promosi, sejalan dengan identitas merek Anda."
++ "Foto dan video untuk produk, dokumentasi kegiatan, profil perusahaan, dan promosi, dengan gaya yang sesuai identitas merek Anda."
+
+## data/services.ts
+- "Perancangan perangkat pemantauan sesuai kebutuhan, mencakup pemilihan komponen, integrasi sensor dan GPS, serta pembuatan casing cetak 3D."
++ "Kami merancang perangkat pemantauan sesuai kebutuhan Anda: memilih komponen, memasang sensor dan GPS, hingga membuat casing cetak 3D."
+
+## data/services.ts
+- "Pemrograman perangkat agar data terkirim dengan aman, koneksi tetap stabil, dan baterai lebih awet dengan mempertimbangkan kondisi jaringan di lokasi."
++ "Program perangkat kami sesuaikan dengan kondisi jaringan di lokasi, agar data terkirim aman, koneksi stabil, dan baterai lebih awet."
+
+## data/services.ts
+- "Websites, applications, and internal systems designed to support daily operations and your business's development."
++ "Websites, applications, and internal systems for your daily operations, which can be extended as your business grows."
+
+## data/services.ts
+- "Company websites, operational web applications, and subscription platforms developed with a focus on performance, usability, and search engine optimisation."
++ "Company websites, operational web applications, and subscription platforms that load fast, are easy to use, and are easy to find on Google."
+
+## data/services.ts
+- "Android and iOS applications built together in one go to support field teams, point-of-sale transactions, and inventory management."
++ "One build produces both Android and iOS apps, for field teams, point-of-sale transactions, and inventory records."
+
+## data/services.ts
+- "Connect data and workflows through business dashboards, payment integrations, and connections between your existing systems."
++ "Business dashboards, payment integrations, and links between systems, so your company's data and workflows sit in one place."
+
+## data/services.ts
+- "Digital product design, brand identity, photo and video that clarify your message, improve usability, and create a consistent business presence."
++ "Digital product design, brand identity, photo and video, so your message is clear, your product is easy to use, and your brand looks consistent."
+
+## data/services.ts
+- "User flows, clickable Figma demos, and screen improvements that help people complete their tasks more easily."
++ "We map user flows, build clickable Figma demos, and tidy up screens so people can finish their tasks more easily."
+
+## data/services.ts
+- "Build a consistent company identity through logos, colour and typography guidelines, business stationery, and company profiles."
++ "Logos, colour and typography guidelines, business stationery, and company profiles that share one consistent identity."
+
+## data/services.ts
+- "Communication materials that explain your products and present your offer, from social media templates to infographics and business presentations."
++ "Social media templates, infographics, and business presentations that explain your products and present your offer."
+
+## data/services.ts
+- "Photo and video production for business needs such as product photos, event documentation, company profiles, and promotional material, in line with your brand identity."
++ "Photo and video for products, event documentation, company profiles, and promotion, in a style that matches your brand identity."
+
+## data/services.ts
+- "Custom monitoring device design, including component selection, sensor and GPS integration, and 3D-printed enclosures."
++ "We design monitoring devices to your needs: choosing components, fitting sensors and GPS, and making 3D-printed enclosures."
+
+## data/services.ts
+- "Programming devices so data is sent securely, connections stay stable, and batteries last longer, taking local network conditions into account."
++ "We program each device for the network conditions at your site, so data is sent securely, connections stay stable, and batteries last longer."
+
+## data/services.ts
+- "Tentukan langkah awal melalui pemetaan proses kerja, prioritas bisnis, dan kebutuhan pengguna. Kami memberikan rekomendasi solusi serta gambaran ruang lingkup tanpa kewajiban melanjutkan proyek."
++ "Sebelum proyek dimulai, kami memetakan proses kerja, prioritas bisnis, dan kebutuhan pengguna Anda, lalu memberi rekomendasi serta gambaran ruang lingkup. Anda tidak wajib melanjutkan ke proyek."
+
+## data/services.ts
+- "Define your starting point by reviewing workflows, business priorities, and user needs. We recommend an approach and outline an initial scope, with no obligation to proceed."
++ "Before a project starts, we map your workflows, business priorities, and user needs, then recommend an approach and outline the initial scope. You are under no obligation to proceed."
+
+## data/testimonials.ts
+- "Kami butuh website yang bisa langsung dikirim ke calon mitra tanpa harus menjelaskan panjang lebar. Hasilnya rapi, cepat dibuka, dan cerita perusahaan kami tersampaikan. Prosesnya jelas dari awal sampai serah terima."
++ "Kami butuh website yang bisa langsung dikirim ke calon mitra tanpa harus menjelaskan panjang lebar. Hasilnya rapi dan cepat dibuka, dan calon mitra bisa membaca sendiri cerita perusahaan kami. Prosesnya jelas dari awal sampai serah terima."
+
+## data/testimonials.ts
+- "We needed a website we could send straight to prospective partners without long explanations. The result is tidy, quick to open, and tells our company's story. The process was clear from start to handover."
++ "We needed a website we could send straight to prospective partners without long explanations. The site is tidy and quick to open, and partners can read our company's story for themselves. The process was clear from start to handover."

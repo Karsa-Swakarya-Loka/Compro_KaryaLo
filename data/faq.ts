@@ -21,7 +21,7 @@ export const faqData: Localized<FAQItem[]> = {
     {
       id: "faq-foto-video",
       question: "Apakah KaryaLo menyediakan jasa fotografi dan videografi?",
-      answer: "Ya. Kami memproduksi foto produk, foto profil perusahaan, video company profile, dan dokumentasi kegiatan usaha. Hasilnya diselaraskan dengan identitas merek dan materi promosi Anda. Lingkup, lokasi, dan jadwal pengambilan gambar disepakati lewat penawaran."
+      answer: "Ya. Kami memproduksi foto produk, foto dan video profil perusahaan, serta dokumentasi kegiatan usaha. Hasilnya diselaraskan dengan identitas merek dan materi promosi Anda. Lingkup, lokasi, dan jadwal pengambilan gambar disepakati lewat penawaran."
     },
     {
       id: "faq-hardware-mikrotik",

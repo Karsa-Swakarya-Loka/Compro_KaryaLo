@@ -46,7 +46,7 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "IT Agency untuk",
       accent: "Bisnis yang Sedang Tumbuh",
       lede:
-        "Bisnis yang sedang tumbuh membutuhkan teknologi yang menopang, bukan menambah beban. KaryaLo menyatukan software, desain, foto dan video, IoT, serta pengadaan perangkat keras dalam satu tim, dan mendampingi Anda sejak perencanaan hingga sistem benar-benar digunakan.",
+        "Bisnis yang sedang tumbuh butuh teknologi yang meringankan pekerjaan. KaryaLo menyatukan software, desain, foto dan video, IoT, serta pengadaan perangkat keras dalam satu tim, dan mendampingi Anda dari perencanaan sampai sistem dipakai sehari-hari.",
       chips: ["Terdaftar di Kementerian Hukum RI", "NIB", "Kota Bekasi, Jawa Barat"],
     },
     studio: {
@@ -62,32 +62,32 @@ export const aboutCopy: Localized<AboutCopy> = {
       promiseLabel: "Kejelasan Kepemilikan dan Serah Terima",
       promiseBody:
         "Untuk proyek khusus, kode sumber, dokumentasi, dan file desain diserahkan sesuai kontrak kerja setelah serah terima dan pembayaran selesai. Kami melatih tim Anda untuk mengelola sistem serta menyediakan opsi pemeliharaan lanjutan.",
-      imageAlt: "Ruang studio KaryaLo dengan meja kerja pengembangan software",
+      imageAlt: "Lima anggota tim KaryaLo berpose di depan tulisan KaryaLo berukuran besar",
       cta: "Lihat layanan kami",
     },
     vision: {
       eyebrow: "Arah Kami",
       visionLabel: "Visi",
       vision:
-        "Menjadi mitra teknologi yang dipercaya perusahaan di Indonesia untuk mengembangkan solusi digital yang bermanfaat, mudah digunakan, dan mendukung pertumbuhan bisnis.",
+        "Menjadi mitra teknologi yang dipercaya perusahaan di Indonesia untuk membangun sistem digital yang mudah digunakan dan membantu bisnis tumbuh.",
       missionLabel: "Misi",
       missions: [
         "Merancang solusi berdasarkan proses kerja, kebutuhan pengguna, dan tujuan bisnis klien.",
         "Menjalankan proyek dengan ruang lingkup yang jelas, evaluasi berkala, dan komunikasi yang terbuka.",
-        "Mengintegrasikan keahlian software, desain, dan IoT untuk menghasilkan solusi yang selaras.",
+        "Menggabungkan pekerjaan software, desain, dan IoT dalam satu tim agar setiap bagian proyek saling cocok.",
         "Menyediakan serah terima, dokumentasi, dan pelatihan agar klien dapat mengelola hasil pekerjaan.",
-        "Mendukung keberlanjutan sistem melalui pemeliharaan dan pengembangan setelah peluncuran.",
+        "Merawat dan terus mengembangkan sistem klien setelah peluncuran.",
       ],
     },
     team: {
       title: "Siapa yang Mengerjakan Proyek Anda",
       intro:
-        "Lima fungsi dalam tim inti KaryaLo, masing-masing dengan tanggung jawab yang jelas, menjaga kualitas teknis, desain, dan pelaksanaan proyek Anda.",
+        "Tim inti KaryaLo terbagi dalam lima fungsi. Masing-masing memegang bagian tertentu dari proyek Anda, dari sisi teknis dan desain sampai pelaksanaan.",
       units: [
         {
           icon: "management",
           name: "Manajemen & Arah Bisnis",
-          body: "Menetapkan arah perusahaan, mengelola hubungan klien, dan memastikan setiap proyek memiliki penanggung jawab yang jelas.",
+          body: "Menetapkan arah perusahaan, mengelola hubungan klien, dan menunjuk penanggung jawab untuk setiap proyek.",
         },
         {
           icon: "engineering",
@@ -107,7 +107,7 @@ export const aboutCopy: Localized<AboutCopy> = {
         {
           icon: "admin",
           name: "Administrasi & Keuangan",
-          body: "Mengelola kontrak, invoice, dan administrasi proyek untuk mendukung kerja sama yang tertib dan terdokumentasi.",
+          body: "Mengelola kontrak, invoice, dan administrasi proyek agar setiap kerja sama tercatat rapi.",
         },
       ],
     },
@@ -147,7 +147,7 @@ export const aboutCopy: Localized<AboutCopy> = {
       title: "An IT Agency for",
       accent: "Growing Businesses",
       lede:
-        "A growing business needs technology that carries the load, not adds to it. KaryaLo brings software, design, photo and video, IoT, and hardware supply into one team, and stays with you from planning until the system is genuinely in use.",
+        "A growing business needs technology that makes the work lighter. KaryaLo brings software, design, photo and video, IoT, and hardware supply into one team, and stays with you from planning until the system is in daily use.",
       chips: ["Registered with the Indonesian Ministry of Law", "Business ID (NIB)", "Bekasi, West Java"],
     },
     studio: {
@@ -163,32 +163,32 @@ export const aboutCopy: Localized<AboutCopy> = {
       promiseLabel: "Clear Ownership and Handover",
       promiseBody:
         "For custom projects, the source code, documentation, and design files are handed over under the contract once handover and payment are complete. We train your team to manage the system and offer ongoing maintenance options.",
-      imageAlt: "The KaryaLo studio with software development workstations",
+      imageAlt: "Five members of the KaryaLo team posing in front of large KaryaLo lettering",
       cta: "See our services",
     },
     vision: {
       eyebrow: "Where We're Heading",
       visionLabel: "Vision",
       vision:
-        "To be the technology partner Indonesian companies trust to develop practical, accessible digital solutions that support business growth.",
+        "To be the technology partner Indonesian companies trust to build digital systems that are easy to use and help the business grow.",
       missionLabel: "Mission",
       missions: [
         "Design solutions around client workflows, user needs, and business goals.",
         "Deliver projects with a defined scope, regular reviews, and open communication.",
-        "Combine software, design, and IoT expertise to create coordinated solutions.",
+        "Bring software, design, and IoT work into one team so every part of a project fits together.",
         "Provide handover, documentation, and training so clients can manage the delivered work.",
-        "Support systems beyond launch through ongoing maintenance and development.",
+        "Maintain and keep developing client systems after launch.",
       ],
     },
     team: {
       title: "Who Works on Your Project",
       intro:
-        "Five functions in KaryaLo's core team, each with clear responsibilities, look after the technical quality, design, and delivery of your project.",
+        "KaryaLo's core team is split into five functions. Each one owns a defined part of your project, from engineering and design to delivery.",
       units: [
         {
           icon: "management",
           name: "Management & Business Direction",
-          body: "Sets the company's direction, looks after client relationships, and makes sure every project has a clear owner.",
+          body: "Sets the company's direction, looks after client relationships, and assigns an owner to every project.",
         },
         {
           icon: "engineering",
@@ -198,7 +198,7 @@ export const aboutCopy: Localized<AboutCopy> = {
         {
           icon: "design",
           name: "Design & Marketing",
-          body: "Designs app screens, brand identities, and communication materials so products are easy to use and consistent.",
+          body: "Designs app screens, brand identities, and communication materials that are easy to understand and consistent across channels.",
         },
         {
           icon: "iot",
@@ -208,7 +208,7 @@ export const aboutCopy: Localized<AboutCopy> = {
         {
           icon: "admin",
           name: "Administration & Finance",
-          body: "Manages contracts, invoices, and project administration to keep every engagement organised and documented.",
+          body: "Manages contracts, invoices, and project administration so every engagement is properly recorded.",
         },
       ],
     },

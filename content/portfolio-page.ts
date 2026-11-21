@@ -132,7 +132,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
       titleLead: "Dari Kebutuhan Bisnis",
       titleAccent: "Menjadi Solusi Digital",
       intro:
-        "Lihat bagaimana tantangan bisnis nyata diwujudkan menjadi sistem yang digunakan. Setiap studi kasus menguraikan kebutuhan awal, pendekatan solusi, dan cakupan pekerjaan.",
+        "Lihat bagaimana masalah bisnis klien diwujudkan menjadi sistem yang dipakai sehari-hari. Setiap studi kasus menguraikan kebutuhan awal, pendekatan solusi, dan cakupan pekerjaan.",
       badge: "Portofolio Kami",
       gridTitle: "Proyek Klien, Produk & Proyek Internal",
       counts: (total, clients, prototypes, products) =>
@@ -154,7 +154,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
         "Sampaikan kebutuhan data, pengguna, dan sistem yang Anda gunakan saat ini. Kami bantu menyusun ruang lingkup awal sebagai dasar perencanaan, tanpa kewajiban melanjutkan.",
       consultationWhatsapp: "Halo Tim KaryaLo, kami ingin berkonsultasi mengenai rencana pengembangan sistem perusahaan kami.",
       consultationPrimary: "Mulai diskusi",
-      consultationSecondary: "Kirim brief proyek",
+      consultationSecondary: "Kirim ringkasan proyek",
     },
     dialog: {
       headerClient: "Studi kasus klien",
@@ -203,7 +203,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
     },
     home: {
       heading: "Hasil Kerja yang Dapat Anda Tinjau",
-      intro: "Dari toko online dan sistem operasional hingga website perusahaan, tinjau langsung hasil kerja kami melalui proyek klien dan proyek internal yang telah dikembangkan.",
+      intro: "Tinjau langsung proyek klien dan proyek internal kami, mulai dari toko online dan sistem operasional sampai website perusahaan.",
       activeClient: "Proyek klien",
       featuredCta: "Lihat studi kasus Alina",
       seeCaseStudy: "Lihat studi kasus",
@@ -235,7 +235,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
       titleLead: "From Business Needs",
       titleAccent: "to Digital Solutions",
       intro:
-        "See how real business challenges became systems in daily use. Each case study outlines the initial needs, our approach, and the scope of work.",
+        "See how clients' business problems became systems in daily use. Each case study outlines the initial needs, our approach, and the scope of work.",
       badge: "Our Portfolio",
       gridTitle: "Client Projects, Products & Internal Projects",
       counts: (total, clients, prototypes, products) =>
@@ -306,7 +306,7 @@ export const portfolioCopy: Localized<PortfolioCopy> = {
     },
     home: {
       heading: "Work You Can Review",
-      intro: "From online stores and operational systems to company websites, review our work first-hand through client and internal projects.",
+      intro: "Review our client and internal projects first-hand, from online stores and operational systems to company websites.",
       activeClient: "Client project",
       featuredCta: "See the Alina case study",
       seeCaseStudy: "See the case study",

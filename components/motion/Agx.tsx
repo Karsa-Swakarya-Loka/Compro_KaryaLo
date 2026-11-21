@@ -12,7 +12,7 @@
  */
 
 import { useRef, type CSSProperties, type ElementType } from "react";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 
 export const AGX_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -25,9 +25,9 @@ export const AGX_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
  */
 export function Odometer({ value, className }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
-  const reduced = useReducedMotion();
-  const on = inView || reduced;
+  // Reduced motion is handled in CSS: reading it here made the server and client HTML differ,
+  // React kept the server's attributes, and the digits stayed at 0.
+  const on = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
   let digitIndex = 0;
   return (
     <span ref={ref} className={`agx-odo ${className ?? ""}`} aria-label={value} role="img" data-on={on ? "" : undefined}>
@@ -65,7 +65,8 @@ export function Odometer({ value, className }: { value: string; className?: stri
  */
 export function ScrollGiant({ text, className }: { text: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
+  // Reduced motion stops the slide in CSS (globals.css), not here: branching on it in render made
+  // the server and client HTML differ.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   // Centred on the screen (progress 0.5), "Extended IT Partner" sits whole at the left edge.
   const x = useTransform(scrollYProgress, [0, 1], ["22%", "-22%"]);
@@ -83,7 +84,7 @@ export function ScrollGiant({ text, className }: { text: string; className?: str
   );
   return (
     <div ref={ref} className={`agx-giant ${className ?? ""}`} aria-hidden="true">
-      <motion.div className="agx-giant-strip" style={reduced ? undefined : { x }}>
+      <motion.div className="agx-giant-strip" style={{ x }}>
         {phrase("a")}
         {phrase("b")}
       </motion.div>

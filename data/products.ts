@@ -29,7 +29,7 @@ const productsId: ProductItem[] = [
     image: "/images/prototype/karyalo-admin.webp",
     status: "Uji coba terbatas",
     summary:
-      "Satukan indikator operasional dan laporan perusahaan dalam tampilan yang terstruktur. Dashboard dapat diakses melalui desktop atau dipasang di layar utama ponsel untuk memudahkan pemantauan.",
+      "Indikator operasional dan laporan perusahaan tampil di satu dashboard. Dashboard bisa dibuka di desktop atau dipasang di layar utama ponsel.",
     features: [
       "Indikator kinerja dan pembaruan laporan otomatis",
       "Pengaturan akses berdasarkan peran pengguna",
@@ -42,12 +42,12 @@ const productsId: ProductItem[] = [
     title: "KaryaLo Storefront",
     tagline: "Pengalaman belanja yang praktis untuk pelanggan Anda",
     category: "Toko Online",
-    image: "/images/prototype/karyalo-store.webp",
+    image: "/images/portofolio/karyalo-store-home.webp",
     status: "Siap dipasang",
     summary:
-      "Platform toko online dengan katalog yang mudah dijelajahi, proses bayar yang ringkas, dan keranjang belanja tersimpan. Panel admin membantu tim Anda mengelola produk, promosi, dan persediaan.",
+      "Platform toko online dengan katalog yang mudah dijelajahi, proses bayar yang ringkas, dan keranjang belanja tersimpan. Lewat panel admin, tim Anda mengelola produk, promosi, dan persediaan.",
     features: [
-      "Halaman yang dioptimalkan untuk kecepatan akses",
+      "Halaman yang cepat dimuat",
       "Proses bayar yang ringkas dan keranjang tersimpan",
       "Pembayaran QRIS, transfer VA, dan e-wallet",
       "Panel pengelolaan produk, diskon, dan stok",
@@ -61,7 +61,7 @@ const productsId: ProductItem[] = [
     image: "/images/prototype/karyalo-topup.webp",
     status: "Siap dipasang",
     summary:
-      "Kelola pesanan, verifikasi pembayaran, dan pengiriman produk digital melalui satu alur otomatis. Integrasi pemasok dan laporan harian membantu tim memantau transaksi serta margin penjualan.",
+      "Pesanan, verifikasi pembayaran, dan pengiriman produk digital berjalan dalam satu alur otomatis. Platform terhubung ke pemasok, dan laporan harian menunjukkan transaksi serta margin penjualan.",
     features: [
       "Pengelolaan antrean transaksi otomatis",
       "Pembayaran terverifikasi otomatis",
@@ -80,7 +80,7 @@ const productsEn: Record<string, ProductText> = {
     category: "Dashboards & Reporting",
     status: "Limited trial",
     summary:
-      "Bring operational indicators and company reports into a structured view. Access the dashboard on desktop or add it to your phone's home screen for convenient monitoring.",
+      "Operational indicators and company reports sit in one dashboard. Open it on desktop or add it to your phone's home screen.",
     features: [
       "Performance indicators and automated report updates",
       "Role-based access controls",
@@ -94,9 +94,9 @@ const productsEn: Record<string, ProductText> = {
     category: "Online Store",
     status: "Ready to use",
     summary:
-      "An online store platform with an accessible catalogue, a quick payment flow, and a saved shopping cart. The admin panel helps your team manage products, promotions, and inventory.",
+      "An online store platform with an easy-to-browse catalogue, a quick payment flow, and a saved shopping cart. From the admin panel, your team manages products, promotions, and inventory.",
     features: [
-      "Pages optimised for loading performance",
+      "Fast-loading pages",
       "Quick payment flow with a saved cart",
       "QRIS, virtual account, and e-wallet payments",
       "A panel for managing products, discounts, and stock",
@@ -108,7 +108,7 @@ const productsEn: Record<string, ProductText> = {
     category: "Digital Transactions",
     status: "Ready to use",
     summary:
-      "Manage orders, payment verification, and digital product delivery through one automated workflow. Supplier integrations and daily reporting help your team track transactions and sales margins.",
+      "Orders, payment verification, and digital product delivery run through one automated workflow. The platform connects to suppliers, and daily reports show transactions and sales margins.",
     features: [
       "Automated transaction queue management",
       "Payments verified automatically",

@@ -661,16 +661,18 @@ main { background: transparent !important; }
 .btn-dark { background: var(--agx-ink); color: #fff; box-shadow: 0 14px 28px -16px rgb(11 26 74 / 0.6); }
 .btn-dark:hover { background: var(--color-brand); }
 .btn-secondary { background: rgb(255 255 255 / 0.85); border-color: var(--color-line); }
+/* Phones: inside a padded card a button is ~290px wide, so the desktop padding pushed labels like
+   "Diskusikan kebutuhan Anda" onto two lines. Tighter padding keeps them on one. */
+@media (max-width: 479.98px) {
+  .btn, .btn-lg { padding-inline: 1.125rem; gap: 0.5rem; font-size: 0.9375rem; }
+  .btn:has(> :is(svg, .arrow-swap):last-child) { padding-right: 1.125rem; }
+  .btn > span { text-wrap: balance; }
+}
 
 /* ═════════ Navigation (Agenciex template): logo · pill nav · outline CTA ═════════ */
 .nav-surface { position: fixed; inset-inline: 0; top: 0; z-index: 60; pointer-events: none; }
-/* Once the page scrolls, a frosted white bar sits behind the nav so the logo and links stay readable over dark sections. */
-.nav-surface::before {
-  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
-  background: rgb(255 255 255 / 0.82); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
-  border-bottom: 1px solid rgb(11 26 74 / 0.08); transition: opacity 300ms ease;
-}
-.nav-surface[data-scrolled]::before { opacity: 1; }
+/* No bar behind the nav, at the top or on scroll: the bar stays fully transparent and only the
+   rounded pieces (pill nav, language switch, WhatsApp pill, menu button) carry a background. */
 .agx-nav {
   position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem;
   max-width: 96rem; margin-inline: auto; padding: 1rem 1.25rem; transition: padding 400ms var(--ease-expo);
@@ -679,7 +681,15 @@ main { background: transparent !important; }
 .agx-nav { z-index: 60; }
 .agx-nav > * { pointer-events: auto; }
 .nav-surface[data-scrolled] .agx-nav { padding-block: 0.75rem; }
-.agx-logo { display: inline-flex; align-items: center; gap: 0.6rem; justify-self: start; }
+/* The logo sits in the same glass pill as the nav, so it stays readable with no bar behind it. */
+.agx-logo {
+  display: inline-flex; align-items: center; gap: 0.6rem; justify-self: start;
+  min-height: 3.6rem; /* the pill nav's height: 44px links + 6px padding + 1px border, each side */
+  padding: 0.375rem 1.25rem 0.375rem 0.875rem; border-radius: 999px;
+  background: rgb(255 255 255 / 0.7); border: 1px solid rgb(35 35 35 / 0.1);
+  -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+}
+@media (max-width: 767px) { .agx-logo { min-height: 2.75rem; padding: 0.25rem 1rem 0.25rem 0.75rem; } .agx-logo img { height: 1.75rem; } .agx-logo-word { font-size: 1.25rem; } }
 .agx-logo-word { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--color-ink); }
 .agx-logo-word span { color: var(--color-brand); }
 /* The template's outline "Get in touch" button */
@@ -715,6 +725,11 @@ main { background: transparent !important; }
   box-shadow: 0 10px 30px -18px rgb(11 26 74 / 0.45); transition: background-color 250ms, color 250ms;
 }
 .agx-round:hover { background: var(--color-brand); color: #fff; }
+/* Menu button: the bars turn out and the cross turns in (and back), stacked in one cell. */
+.agx-menu-toggle > .agx-toggle-icon { grid-area: 1 / 1; transition: transform 280ms var(--ease-expo), opacity 280ms var(--ease-expo); }
+.agx-toggle-icon--close { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+.agx-menu-toggle[aria-expanded="true"] .agx-toggle-icon--open { opacity: 0; transform: rotate(90deg) scale(0.6); }
+.agx-menu-toggle[aria-expanded="true"] .agx-toggle-icon--close { opacity: 1; transform: none; }
 .agx-nav .lang-switch { background: rgb(255 255 255 / 0.92); border: 1px solid var(--color-line); }
 @media (max-width: 767px) { .agx-nav .lang-switch { display: none; } .agx-pill span.agx-pill-label { display: none; } .agx-pill { padding: 0; width: 2.75rem; justify-content: center; } }
 
@@ -733,6 +748,13 @@ main { background: transparent !important; }
 }
 .agx-menu-link small { font-size: 0.875rem; font-weight: 500; letter-spacing: 0; color: var(--color-brand); font-variant-numeric: tabular-nums; }
 .agx-menu-link:hover, .agx-menu-link[aria-current="page"] { color: var(--color-brand); transform: translateX(0.75rem); }
+/* The menu's links cascade in one after another as the sheet opens (--i set per item in Navbar.tsx). */
+.agx-menu-item { animation: agx-menu-item-in 600ms var(--ease-expo) both; animation-delay: calc(80ms + var(--i, 0) * 50ms); }
+@keyframes agx-menu-item-in { from { opacity: 0; transform: translate3d(0, 1.25rem, 0); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .agx-menu-item { animation: none; }
+  .agx-menu-toggle > .agx-toggle-icon { transition: none; }
+}
 
 /* ═════════ Hero: headline, then the Agenciex template's twist band (TwistBand.tsx), on the ribbon background ═════════ */
 .agx-hero { position: relative; overflow: hidden; padding-bottom: 2rem; }
@@ -764,10 +786,11 @@ main { background: transparent !important; }
   background: radial-gradient(50% 50% at 50% 50%, rgb(11 26 74 / 0.10) 0%, rgb(11 26 74 / 0.035) 50%, transparent 100%);
 }
 .agx-twist-mount { position: absolute; inset: 0; }
-/* The still of the band (TwistBandLazy): in the HTML from the first paint, faded out once the 3D is drawn. */
-.agx-twist-poster { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.6s ease; }
+/* The still of the band (TwistBandLazy): in the HTML from the first paint, hidden in the same frame the
+   3D appears. The 3D's first frame is drawn in the still's pose; a crossfade would show two bands at once. */
+.agx-twist-poster { position: absolute; inset: 0; pointer-events: none; }
 .agx-twist-poster img { width: 100%; height: 100%; object-fit: contain; }
-.agx-twist[data-ready] .agx-twist-poster { opacity: 0; }
+.agx-twist[data-ready] .agx-twist-poster { visibility: hidden; }
 .agx-twist-pill {
   position: absolute; left: 0; top: 0; z-index: 4; opacity: 0; pointer-events: none; white-space: nowrap;
   padding: 10px 28px; border-radius: 999px; background: #fff; color: var(--color-ink);
@@ -776,7 +799,7 @@ main { background: transparent !important; }
 }
 
 /* Stat cards: solid brand, rounded, the number light with a raised suffix */
-.agx-stats { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
+.agx-stats { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (min-width: 900px) { .agx-stats { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
 .agx-stat {
   display: flex; align-items: center; gap: 0.9rem; padding: 1.5rem 1.4rem; border-radius: 1.25rem; color: #fff;
@@ -785,6 +808,11 @@ main { background: transparent !important; }
 .agx-stat-num { font-size: clamp(2.25rem, 1.6rem + 2vw, 3.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .agx-stat-num sup { font-size: 0.4em; font-weight: 500; vertical-align: top; position: relative; top: 0.1em; margin-left: 0.1em; }
 .agx-stat-label { font-size: 0.9375rem; font-weight: 500; line-height: 1.3; }
+/* Phones: a half-width card is too narrow for number and label side by side, so stack them. */
+@media (max-width: 639px) {
+  .agx-stat { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 0.6rem; padding: 1.15rem 1.1rem; }
+  .agx-stat-label { font-size: 0.875rem; }
+}
 
 /* ═════════ About: tilted photographs ═════════ */
 .agx-collage { position: relative; display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 3rem; }
@@ -942,7 +970,11 @@ main { background: transparent !important; }
   position: absolute; top: 1rem; right: 1rem; z-index: 1; max-width: 12rem; padding: 1.1rem 1.2rem; border-radius: 1rem; color: #fff; font-size: 1.0625rem; line-height: 1.3;
   background: rgb(27 95 209 / 0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
 }
-@media (max-width: 767px) { .agx-panel { position: relative; top: auto !important; min-height: 0; } }
+@media (max-width: 767px) {
+  .agx-panel { position: relative; top: auto !important; min-height: 0; }
+  /* Phones: a small pill in the bottom corner instead of a large card over the top of the screenshot. */
+  .agx-panel-tag { top: auto; right: auto; left: 0.75rem; bottom: 0.75rem; max-width: calc(100% - 1.5rem); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 500; }
+}
 
 /* ═════════ Projects: the ruled table ═════════ */
 .agx-table { margin-top: 3rem; border-top: 1px solid var(--color-line); }
@@ -954,7 +986,8 @@ main { background: transparent !important; }
 .agx-row:hover { background: var(--agx-tint); padding-inline: 1.5rem; color: var(--color-ink); }
 .agx-row strong { font-weight: 500; color: var(--color-ink); }
 .agx-row-thumb {
-  position: absolute; right: 7rem; top: 50%; z-index: 3; width: 13rem; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 1rem; pointer-events: none;
+  /* Holds a `.mac-window` (the home hero's browser card), sized by its own width: the container drives its `cqw` unit. */
+  position: absolute; right: 7rem; top: 50%; z-index: 3; width: 16rem; container-type: inline-size; border-radius: 0.75rem; pointer-events: none;
   opacity: 0; transform: translateY(-50%) rotate(-4deg) scale(0.9); transition: opacity 300ms, transform 500ms var(--ease-expo); box-shadow: 0 24px 40px -22px rgb(11 26 74 / 0.6);
 }
 .agx-row:hover .agx-row-thumb { opacity: 1; transform: translateY(-50%) rotate(-3deg) scale(1); }
@@ -969,6 +1002,15 @@ main { background: transparent !important; }
 .agx-band-strip.alt .agx-band-track { animation-direction: reverse; }
 .agx-band-track span { padding-right: 3.5rem; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem); font-weight: 500; letter-spacing: -0.03em; }
 .agx-band-strip.alt { overflow: hidden; }
+/* Phones: at 3° the two strips' ends part by only ~10px on a 390px screen, so the light strip hid
+   entirely behind the blue one. A steeper tilt and slimmer strips open the same X as on desktop. */
+@media (max-width: 767px) {
+  .agx-bands { padding-block: 3.5rem 4rem; }
+  .agx-band-strip { padding-block: 0.8rem; }
+  .agx-band-strip.main { transform: rotate(-6deg); }
+  .agx-band-strip.alt { left: -10%; right: -10%; transform: translateY(-50%) rotate(6deg); }
+  .agx-band-track span { font-size: 1.5rem; padding-right: 2.25rem; }
+}
 
 /* ═════════ FAQ, problems, trust ═════════ */
 .agx-faq-item { border-radius: 1.5rem; background: var(--agx-tint); transition: background-color 250ms; }
@@ -1084,7 +1126,11 @@ main .type-section-title, main .type-section-title-lg { font-weight: 500; letter
 .agx-odo-col > span { display: block; height: 1em; line-height: 1; }
 .agx-odo[data-on] .agx-odo-col { transform: translateY(calc(var(--d) * -1em)); }
 @media (scripting: none) { .agx-odo-col { transform: translateY(calc(var(--d) * -1em)); } }
-@media (prefers-reduced-motion: reduce) { .agx-odo-col { transition: none; } }
+/* Reduced motion: show the final digits straight away (decided in CSS, so server and client HTML agree). */
+@media (prefers-reduced-motion: reduce) {
+  .agx-odo-col { transition: none; transform: translateY(calc(var(--d) * -1em)); }
+  .agx-giant-strip { transform: none !important; } /* ScrollGiant: no scroll-linked slide */
+}
 
 /* A swapped panel (industry detail) arrives the template's way: blur and rise. */
 .agx-swap { animation: agx-swap 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
@@ -1093,7 +1139,8 @@ main .type-section-title, main .type-section-title-lg { font-weight: 500; letter
 /* ═════════ Home: why KaryaLo comparison, the five stages at a glance ═════════ */
 .agx-compare { border-collapse: collapse; text-align: left; }
 .agx-compare th, .agx-compare td { padding: 1.1rem 1rem; vertical-align: top; border-bottom: 1px solid var(--color-line); }
-.agx-compare thead th { padding-top: 0; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-body); }
+/* Both column headers get the same top padding the tinted KaryaLo cap needs, so they share one baseline. */
+.agx-compare thead th { padding-top: 1rem; vertical-align: bottom; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-body); }
 .agx-compare thead th.agx-compare-us { color: var(--color-brand); }
 .agx-compare tbody th { width: 24%; font-size: 1rem; font-weight: 500; color: var(--color-ink); }
 .agx-compare td { width: 38%; font-size: 0.9375rem; line-height: 1.55; color: var(--color-body); }
@@ -1102,12 +1149,29 @@ main .type-section-title, main .type-section-title-lg { font-weight: 500; letter
 .agx-compare tbody tr:last-child td.agx-compare-us { border-radius: 0 0 1rem 1rem; }
 .agx-compare-cell { display: flex; align-items: flex-start; gap: 0.6rem; }
 .agx-compare-cell svg { margin-top: 0.2rem; }
+/* Phones: each row becomes a small "versus" card. The topic on top, then the two answers side by
+   side, each naming its column (the header row is hidden), so it still reads as a comparison. */
 @media (max-width: 640px) {
   .agx-compare thead { display: none; }
-  .agx-compare, .agx-compare tbody, .agx-compare tr, .agx-compare th, .agx-compare td { display: block; width: 100%; }
-  .agx-compare tr { padding-block: 0.75rem; border-bottom: 1px solid var(--color-line); }
-  .agx-compare th, .agx-compare td { border: 0; padding: 0.3rem 0; }
-  .agx-compare td.agx-compare-us { padding: 0.6rem 0.8rem; border-radius: 0.75rem; }
+  .agx-compare, .agx-compare tbody { display: block; width: 100%; }
+  .agx-compare tr {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem;
+    margin-bottom: 0.75rem; padding: 1rem; border: 1px solid var(--color-line); border-radius: 1.25rem; background: #fff;
+  }
+  /* width: auto also beats the desktop column widths (24% / 38%), which are more specific. */
+  .agx-compare tbody th, .agx-compare td { display: block; width: auto; border: 0; }
+  .agx-compare tbody th { grid-column: 1 / -1; padding: 0 0 0.25rem; font-size: 1rem; font-weight: 600; }
+  .agx-compare td { padding: 0.75rem; border-radius: 0.9rem; font-size: 0.875rem; line-height: 1.45; background: #F3F5F9; }
+  .agx-compare td.agx-compare-us, .agx-compare tbody tr:last-child td.agx-compare-us { padding: 0.75rem; border-radius: 0.9rem; }
+  /* min-height = two label lines: "Vendor IT pada umumnya" wraps, "Bersama KaryaLo" does not, and
+     without it the two answers started at different heights. */
+  .agx-compare td::before {
+    content: attr(data-label); display: block; min-height: 2.6em; margin-bottom: 0.45rem;
+    font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.3; color: var(--color-body);
+  }
+  .agx-compare td.agx-compare-us::before { color: var(--color-brand); }
+  .agx-compare-cell { gap: 0.4rem; }
+  .agx-compare-cell svg { margin-top: 0.12rem; } /* centred on the first 14px line */
 }
 .agx-step { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1.25rem; align-items: center; padding: 1.5rem 0.5rem; border-bottom: 1px solid var(--color-line); }
 .agx-step p { grid-column: 2; }

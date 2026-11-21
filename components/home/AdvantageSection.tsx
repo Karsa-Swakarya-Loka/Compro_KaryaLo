@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Minus } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import { homeCopy } from "@/content/home";
 import { type Locale, localePath } from "@/lib/i18n";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
@@ -45,13 +45,14 @@ export default function AdvantageSection({ lang }: { lang: Locale }) {
                 {adv.rows.map((row) => (
                   <RevealItem as="tr" key={row.topic}>
                     <th scope="row">{row.topic}</th>
-                    <td>
+                    {/* data-label: on phones the header row is hidden, so each cell names its own column. */}
+                    <td data-label={adv.othersLabel}>
                       <span className="agx-compare-cell">
-                        <Minus aria-hidden="true" className="h-4 w-4 shrink-0 text-body/60" />
+                        <X aria-hidden="true" className="h-4 w-4 shrink-0 text-[#D93F3F]" strokeWidth={2.5} />
                         {row.others}
                       </span>
                     </td>
-                    <td className="agx-compare-us">
+                    <td className="agx-compare-us" data-label={adv.usLabel}>
                       <span className="agx-compare-cell">
                         <Check aria-hidden="true" className="h-4 w-4 shrink-0 text-brand" />
                         {row.us}
